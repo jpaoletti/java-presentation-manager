@@ -1,0 +1,42 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>jpaoletti.jpm</groupId>
+    <artifactId>java-presentation-manager</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>java-presentation-manager</name>
+    <url>http://maven.apache.org</url>
+    
+    <licenses>
+        <license>
+            <name>GNU AFFERO GENERAL PUBLIC LICENSE v3</name>
+            <url>http://www.opensource.org/licenses/agpl-v3.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>jpaoletti</id>
+            <name>Jeronimo Paoletti</name>
+            <email>jeronimo.paoletti@gmail.com</email>
+            <timezone>-3</timezone>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>modules/jpm-core</module>
+        <module>modules/jpm-hibernate</module>
+        <module>modules/jpm-struts1</module>
+        <module>modules/jpm-test</module>
+    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
