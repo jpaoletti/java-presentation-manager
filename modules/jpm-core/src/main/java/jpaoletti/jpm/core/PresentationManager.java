@@ -44,50 +44,50 @@ public class PresentationManager extends Observable {
         this.cfg = cfg;
         error = false;
 
-        final StringBuilder evt = new StringBuilder();
-        evt.append("Presentation Manager activated");
+        final StringBuilder log = new StringBuilder();
+        log.append("Presentation Manager activated\n");
         try {
-            evt.append(TAB + "<configuration>");
+            log.append(TAB + "<configuration>\n");
 
             try {
                 Class.forName(getDefaultDataAccess());
-                logItem(evt, "Default Data Access", getDefaultDataAccess(), "*");
+                logItem(log, "Default Data Access", getDefaultDataAccess(), "*");
             } catch (Exception e) {
-                logItem(evt, "Default Data Access", getDefaultDataAccess(), "?");
+                logItem(log, "Default Data Access", getDefaultDataAccess(), "?");
             }
 
-            logItem(evt, "Template", getTemplate(), "*");
-            logItem(evt, "Menu", getMenu(), "*");
-            logItem(evt, "Application version", getAppversion(), "*");
-            logItem(evt, "Title", getTitle(), "*");
-            logItem(evt, "Subtitle", getSubtitle(), "*");
-            logItem(evt, "Contact", getContact(), "*");
-            logItem(evt, "Login Required", Boolean.toString(isLoginRequired()), "*");
-            logItem(evt, "Default Converter", getDefaultConverterClass(), "*");
+            logItem(log, "Template", getTemplate(), "*");
+            logItem(log, "Menu", getMenu(), "*");
+            logItem(log, "Application version", getAppversion(), "*");
+            logItem(log, "Title", getTitle(), "*");
+            logItem(log, "Subtitle", getSubtitle(), "*");
+            logItem(log, "Contact", getContact(), "*");
+            logItem(log, "Login Required", Boolean.toString(isLoginRequired()), "*");
+            logItem(log, "Default Converter", getDefaultConverterClass(), "*");
 
             persistenceManager = cfg.getProperty("persistence-manager", "jpaoletti.jpm.core.PersistenceManagerVoid");
             try {
                 newInstance(persistenceManager);
-                logItem(evt, "Persistance Manager", persistenceManager, "*");
+                logItem(log, "Persistance Manager", persistenceManager, "*");
             } catch (Exception e) {
                 error = true;
-                logItem(evt, "Persistance Manager", persistenceManager, "?");
+                logItem(log, "Persistance Manager", persistenceManager, "?");
             }
-            evt.append(TAB + "<configuration>\n");
+            log.append(TAB + "<configuration>\n");
 
-            loadEntities(evt);
-            loadMonitors(evt);
-            loadConverters(evt);
-            loadLocations(evt);
+            loadEntities(log);
+            loadMonitors(log);
+            loadConverters(log);
+            loadLocations(log);
             createSessionChecker();
         } catch (Exception exception) {
             error(exception);
             error = true;
         }
         if (error) {
-            evt.append("error: One or more errors were found. Unable to start jPM");
+            log.append("error: One or more errors were found. Unable to start jPM");
         }
-        info(evt);
+        info(log);
         return !error;
     }
 
@@ -125,9 +125,9 @@ public class PresentationManager extends Observable {
         return getCfg().getProperty("default-converter");
     }
 
-    private void loadMonitors(StringBuilder evt) {
+    private void loadMonitors(StringBuilder log) {
         PMParser parser = new MonitorParser();
-        evt.append(TAB + "<monitors>\n");
+        log.append(TAB + "<monitors>\n");
         Map<Object, Monitor> result = new HashMap<Object, Monitor>();
         String[] ss = getAll("monitor");
         for (Integer i = 0; i < ss.length; i++) {
@@ -139,14 +139,14 @@ public class PresentationManager extends Observable {
                 Thread thread = new Thread(m);
                 m.setThread(thread);
                 thread.start();
-                logItem(evt, m.getId(), m.getSource().getClass().getName(), "*");
+                logItem(log, m.getId(), m.getSource().getClass().getName(), "*");
             } catch (Exception exception) {
                 error(exception);
-                logItem(evt, ss[i], null, "!");
+                logItem(log, ss[i], null, "!");
             }
         }
         monitors = result;
-        evt.append(TAB + "</monitors>\n");
+        log.append(TAB + "</monitors>\n");
     }
 
     /**
@@ -156,27 +156,27 @@ public class PresentationManager extends Observable {
      * @param s2 Extra description
      * @param symbol Status symbol
      */
-    public static void logItem(StringBuilder sb, String s1, String s2, String symbol) {
-        sb.append(String.format("%s%s(%s) %-25s %s", TAB, TAB, symbol, s1, (s2 != null) ? s2 : ""));
+    public static void logItem(StringBuilder log, String s1, String s2, String symbol) {
+        log.append(String.format("%s%s(%s) %-25s %s\n", TAB, TAB, symbol, s1, (s2 != null) ? s2 : ""));
     }
 
-    private void loadLocations(StringBuilder sb) {
-        sb.append(TAB + "<locations>");
-        MenuItemLocationsParser parser = new MenuItemLocationsParser("jpm-locations.xml");
+    private void loadLocations(StringBuilder log) {
+        log.append(TAB + "<locations>\n");
+        MenuItemLocationsParser parser = new MenuItemLocationsParser(log, "jpm-locations.xml");
         locations = parser.getLocations();
         if (locations == null || locations.isEmpty()) {
-            sb.append(TAB + TAB + ERR + "No location defined!\n");
+            log.append(TAB + TAB + ERR + "No location defined!\n");
             error = true;
         }
         if (parser.hasError()) {
             error = true;
         }
-        sb.append(TAB + "</locations>\n");
+        log.append(TAB + "</locations>\n");
     }
 
-    private void loadEntities(StringBuilder sb) {
+    private void loadEntities(StringBuilder log) {
         EntityParser parser = new EntityParser();
-        sb.append(TAB + "<entities>\n");
+        log.append(TAB + "<entities>\n");
         if (entities == null) {
             entities = new HashMap<Object, Entity>();
         } else {
@@ -191,22 +191,22 @@ public class PresentationManager extends Observable {
                     entities.put(e.getId(), e);
                     entities.put(i, e);
                     if (e.isWeak()) {
-                        logItem(sb, e.getId(), e.getClazz(), "\u00b7");
+                        logItem(log, e.getId(), e.getClazz(), "\u00b7");
                     } else {
-                        logItem(sb, e.getId(), e.getClazz(), "*");
+                        logItem(log, e.getId(), e.getClazz(), "*");
                     }
 
                 } catch (ClassNotFoundException cnte) {
-                    logItem(sb, e.getId(), e.getClazz(), "?");
+                    logItem(log, e.getId(), e.getClazz(), "?");
                     error = true;
                 }
             } catch (Exception exception) {
                 error(exception);
-                logItem(sb, ss[i], "???", "!");
+                logItem(log, ss[i], "???", "!");
                 error = true;
             }
         }
-        sb.append(TAB + "</entities>\n");
+        log.append(TAB + "</entities>\n");
     }
 
     /**
