@@ -1,5 +1,6 @@
 package jpaoletti.jpm;
 
+import jpaoletti.jpm.util.ResourceManager;
 import java.io.InputStream;
 import java.util.Properties;
 import jpaoletti.jpm.core.PresentationManager;
@@ -19,14 +20,20 @@ public class InitTest {
 
     @Test
     public void jPMInitialization() throws Exception {
-        final InputStream is = getClass().getResourceAsStream("/jpm-config.xml");
+        final InputStream is = ResourceManager.getInputStream("jpm-config.xml");
         final Properties properties = new Properties();
         properties.loadFromXML(is);
         PresentationManager.pm = new PresentationManager();
         final PresentationManager pm = PresentationManager.getPm();
-        assertTrue(pm.initialize(properties));
-        assertEquals(2, pm.getEntities().size());
-        assertEquals(1, pm.getLocations().size());
+        assertTrue("jPM Initialization process",pm.initialize(properties));
+        assertEquals("We have 1 entity and its asociated",
+                2, pm.getEntities().size());
+        assertEquals("We have 1 test location",
+                1, pm.getLocations().size());
+        assertEquals("We have 1 external converters test file",
+                1, pm.getExternalConverters().size());
+        assertEquals("We have 4 external converters in the converter file",
+                4, pm.getExternalConverters().get(0).getConverters().size());
     }
 
     @BeforeClass
