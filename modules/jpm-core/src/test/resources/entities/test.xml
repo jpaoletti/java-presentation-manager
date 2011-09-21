@@ -18,7 +18,6 @@
     <field id="amount" width="100" display="all" align="right">
         <converters>
             <econverter id="show-cash" />
-            <converter class="jpaoletti.jpm.struts.converter.EditDecimalConverter" operations="add edit" />
         </converters>
     </field>
     <field id="date" width="70" display="all">
@@ -32,18 +31,8 @@
             <econverter id="show-datetime" />
         </converters>
     </field>
-    <field id="active" width="30" display="all" align="center">
-        <converters>
-            <converter class="jpaoletti.jpm.struts.converter.ShowBooleanConverter" operations="list show" />
-            <converter class="jpaoletti.jpm.struts.converter.EditBooleanConverter" operations="add edit" />
-        </converters>
-    </field>
-    <field id="key" width="150" >
-        <converters>
-            <converter class="jpaoletti.jpm.struts.converter.ShowLocalizedStringConverter" operations="show list" />
-            <econverter id="edit-50-string" operations="add edit" />
-        </converters>
-    </field>
+    <field id="active" width="30" display="all" align="center" />
+    <field id="key" width="150" />
     <field id="size" width="50" >
         <converters>
             <econverter id="show-cm" operations="show list" />
