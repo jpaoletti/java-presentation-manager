@@ -1,4 +1,4 @@
-package jpaoletti.jpm.struts.actions;
+package jpaoletti.jpm;
 
 import java.io.IOException;
 import java.util.Map;
