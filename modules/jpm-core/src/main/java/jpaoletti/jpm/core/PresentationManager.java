@@ -162,7 +162,7 @@ public class PresentationManager extends Observable {
 
     private void loadLocations(StringBuilder sb) {
         sb.append(TAB + "<locations>");
-        MenuItemLocationsParser parser = new MenuItemLocationsParser("cfg/pm.locations.xml");
+        MenuItemLocationsParser parser = new MenuItemLocationsParser("jpm-locations.xml");
         locations = parser.getLocations();
         if (locations == null || locations.isEmpty()) {
             sb.append(TAB + TAB + ERR + "No location defined!\n");
@@ -554,7 +554,7 @@ public class PresentationManager extends Observable {
     }
 
     public String getMenu() {
-        return cfg.getProperty("menu", "cfg/pm.menu.xml");
+        return cfg.getProperty("menu", "jpm-menu.xml");
     }
 
     public boolean isHideableHeader() {
