@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+    <form-beans>
+    </form-beans>
+    <global-forwards>
+        <forward name="denied" path="/denied.jsp"/>
+        <forward name="failure" path="/error.jsp"/>
+        <forward name="login" path="/pages/login.jsp"/>
+    </global-forwards>
+    <action-mappings>
+        <action path="/get_list" type="jpaoletti.jpm.struts.actions.GetListAction" />
+
+        <action path="/list" type="jpaoletti.jpm.struts.actions.ListAction" scope="request">
+            <forward name="success" path="/pages/list.jsp"/>
+        </action>
+
+        <action path="/filter" type="jpaoletti.jpm.struts.actions.FilterAction" validate="false">
+            <forward name="success" path="/list.do" redirect="true"/>
+            <forward name="continue" path="/pages/filter.jsp"/>
+            <forward name="failure" path="/pages/filter.jsp"/>
+        </action>
+
+        <action path="/add" type="jpaoletti.jpm.struts.actions.AddAction" validate="false">
+            <forward name="success" path="/list.do" redirect="true"/>
+            <forward name="continue" path="/pages/std-display.jsp"/>
+            <forward name="failure" path="/pages/std-display.jsp"/>
+        </action>
+
+        <action path="/delete" type="jpaoletti.jpm.struts.actions.DeleteAction">
+            <forward name="success" path="/list.do" redirect="true"/>
+            <forward name="failure" path="/pages/list.jsp" />
+        </action>
+
+        <action path="/clearfilter" type="jpaoletti.jpm.struts.actions.ClearFilterAction">
+            <forward name="success" path="/list.do" redirect="true"/>
+            <forward name="failure" path="/pages/list.jsp" />
+        </action>
+
+        <action path="/login" type="jpaoletti.jpm.struts.actions.LoginAction">
+            <forward name="success" redirect="true" path="/pages/login.jsp"/>
+            <forward name="failure" redirect="false" path="/pages/login.jsp"/>
+            <forward name="changePassword" redirect="true" path="/pages/login.jsp"/>
+        </action>
+
+        <action path="/logout" type="jpaoletti.jpm.struts.actions.LogoutAction">
+            <forward name="success" redirect="true" path="/pages/logout.jsp"/>
+        </action>
+
+        <action path="/show" type="jpaoletti.jpm.struts.actions.ShowAction" >
+            <forward name="success" path="/pages/std-display.jsp" />
+            <forward name="failure" path="/pages/std-display.jsp"/>
+        </action>
+
+        <action path="/edit" type="jpaoletti.jpm.struts.actions.EditAction" validate="false">
+            <forward name="success" path="/show.do" redirect="true"/>
+            <forward name="continue" path="/pages/std-display.jsp"/>
+            <forward name="failure" path="/pages/std-display.jsp"/>
+        </action>
+
+        <action path="/selectItem" type="jpaoletti.jpm.struts.actions.SelectItemAction" >
+            <forward name="success" path="/pages/void.jsp" />
+        </action>
+
+        <action path="/report" type="jpaoletti.jpm.struts.actions.ReportAction">
+            <forward name="success" path="/pages/showreport.jsp"/>
+            <forward name="continue" path="/pages/filterreport.jsp"/>
+            <forward name="failure" path="/pages/filterreport.jsp"/>
+        </action>
+
+        <action path="/monitor" type="jpaoletti.jpm.struts.actions.MonitorAction">
+            <forward name="success" path="/pages/monitor.jsp" redirect="true"/>
+            <forward name="failure" path="/pages/monitor.jsp" />
+            <forward name="monitor_cont" path="/pages/monitor_cont.jsp" />
+        </action>
+    </action-mappings>
+</struts-config>
