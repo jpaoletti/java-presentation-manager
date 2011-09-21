@@ -1,13 +1,9 @@
-<%-- Created on : 02/04/2009, 22:22:00 --%>
-<%@ tag description="This tag encapsulates a standard html page"
-        pageEncoding="UTF-8" import="jpaoletti.jpm.struts.PMStrutsService" %>
+<%@ tag description="This tag encapsulates a standard html page" pageEncoding="UTF-8" %>
 <%@ tag import="jpaoletti.jpm.struts.PMEntitySupport"%>
-<%@ tag import="jpaoletti.jpm.core.*"%>
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="pm" %>
 <%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
 <%@ attribute name="title" required="true"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -26,7 +22,7 @@
         <% try{ %>
         <jsp:doBody />
         <% }catch(Exception e){
-            PresentationManager.getPm().error(e);
+            jpaoletti.jpm.core.PresentationManager.getPm().error(e);
         %>
         <pmfn:message key="pm.page.error"/>
         <%} %>
