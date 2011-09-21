@@ -439,17 +439,17 @@ public class PresentationManager extends Observable {
     }
 
     private void loadConverters(StringBuilder evt) {
-        PMParser parser = new ExternalConverterParser();
+        final PMParser parser = new ExternalConverterParser();
         evt.append(TAB + "<external-converters>\n");
         externalConverters = new ArrayList<ExternalConverters>();
-        String[] ss = getAll("external-converters");
+        final String[] ss = getAll("external-converters");
         for (Integer i = 0; i < ss.length; i++) {
             try {
-                ExternalConverters ec = (ExternalConverters) parser.parseFile(ss[i]);
-                externalConverters.add(ec);
+                final ExternalConverters ec = (ExternalConverters) parser.parseFile(ss[i]);
+                getExternalConverters().add(ec);
                 logItem(evt, ss[i], null, "*");
             } catch (Exception exception) {
-                error(exception);
+                error(exception);exception.printStackTrace();
                 logItem(evt, ss[i], null, "!");
             }
         }
@@ -457,13 +457,20 @@ public class PresentationManager extends Observable {
     }
 
     public Converter findExternalConverter(String id) {
-        for (ExternalConverters ecs : externalConverters) {
+        for (ExternalConverters ecs : getExternalConverters()) {
             ConverterWrapper w = ecs.getWrapper(id);
             if (w != null) {
                 return w.getConverter();
             }
         }
         return null;
+    }
+
+    /**
+     * Getter for the list of external converters
+     */
+    public List<ExternalConverters> getExternalConverters() {
+        return externalConverters;
     }
 
     /**

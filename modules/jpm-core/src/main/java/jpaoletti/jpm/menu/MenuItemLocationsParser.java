@@ -8,6 +8,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import jpaoletti.jpm.core.PresentationManager;
+import jpaoletti.jpm.util.ResourceManager;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -32,10 +33,11 @@ public final class MenuItemLocationsParser extends DefaultHandler {
      */
     public MenuItemLocationsParser(StringBuilder log, String conf) {
         this.setConf(conf);
-        init(log);
+        this.log = log;
+        init();
     }
 
-    private void init(StringBuilder log) {
+    private void init() {
         locations = new HashMap<String, MenuItemLocation>();
         error = false;
         parseConfig();
@@ -45,7 +47,7 @@ public final class MenuItemLocationsParser extends DefaultHandler {
         try {
             final SAXParserFactory dbf = SAXParserFactory.newInstance();
             final SAXParser db = dbf.newSAXParser();
-            final InputStream is = getClass().getClassLoader().getResourceAsStream(conf);
+            final InputStream is = ResourceManager.getInputStream(conf);
             db.parse(is, this);
         } catch (Exception e) {
             PresentationManager.pm.error(e);
@@ -66,7 +68,7 @@ public final class MenuItemLocationsParser extends DefaultHandler {
             String id = attributes.getValue("id");
             String clazz = attributes.getValue("class");
             try {
-                locations.put(id, (MenuItemLocation) PresentationManager.pm.newInstance(clazz));
+                locations.put(id, (MenuItemLocation) PresentationManager.getPm().newInstance(clazz));
                 PresentationManager.logItem(log, id, clazz, "*");
             } catch (Exception e) {
                 PresentationManager.logItem(log, id, clazz, "!");
