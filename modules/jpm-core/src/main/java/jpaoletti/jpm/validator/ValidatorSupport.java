@@ -7,7 +7,7 @@ import java.util.Properties;
  * attributes in the configuration file.
  * <pre>
  * {@code
- * <!DOCTYPE entity SYSTEM "cfg/entity.dtd">
+ * <!DOCTYPE entity SYSTEM "entity.dtd">
  * <operation>
  *     <validator class="SomeValidator">
  *         <properties>

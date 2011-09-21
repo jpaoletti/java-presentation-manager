@@ -86,7 +86,7 @@ public class Field extends PMCoreObject {
         if (getPresentationManager().getDefaultConverter() == null) {
             Converter c = new GenericConverter();
             Properties properties = new Properties();
-            properties.put("filename", "cfg/converters/show.tostring.converter");
+            properties.put("filename", "converters/show.tostring.converter");
             c.setProperties(properties);
             return c;
         } else {

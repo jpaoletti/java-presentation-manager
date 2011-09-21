@@ -12,7 +12,7 @@ import java.util.Map;
  * <pre>
  * {@code
  * <?xml version='1.0' ?>
- * <!DOCTYPE entity SYSTEM "cfg/entity.dtd">
+ * <!DOCTYPE entity SYSTEM "entity.dtd">
  * <entity id="entity_id" clazz="the.entity.Class" cached="true/false">
  *     <auditable>false</auditable>
  *     ...
