@@ -28,6 +28,11 @@
     <dependencies>
         <dependency>
             <groupId>jpaoletti.jpm</groupId>
+            <artifactId>jpm-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jpaoletti.jpm</groupId>
             <artifactId>jpm-struts1</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>war</type>
