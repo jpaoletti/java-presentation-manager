@@ -1,5 +1,6 @@
 package jpaoletti.jpm.menu;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public final class MenuItemLocationsParser extends DefaultHandler {
     private String conf;
     private Map<String, MenuItemLocation> locations;
     private boolean error = false;
-    private StringBuilder sb;
+    private StringBuilder log;
 
     /**
      * Constructor for the parser
@@ -29,23 +30,23 @@ public final class MenuItemLocationsParser extends DefaultHandler {
      * @param evt Event for log
      * @param conf Configuration filename
      */
-    public MenuItemLocationsParser(String conf) {
+    public MenuItemLocationsParser(StringBuilder log, String conf) {
         this.setConf(conf);
-        init();
+        init(log);
     }
 
-    private void init() {
+    private void init(StringBuilder log) {
         locations = new HashMap<String, MenuItemLocation>();
         error = false;
-        sb =  new StringBuilder();
         parseConfig();
     }
 
     private void parseConfig() {
         try {
-            SAXParserFactory dbf = SAXParserFactory.newInstance();
-            SAXParser db = dbf.newSAXParser();
-            db.parse(conf, this);
+            final SAXParserFactory dbf = SAXParserFactory.newInstance();
+            final SAXParser db = dbf.newSAXParser();
+            final InputStream is = getClass().getClassLoader().getResourceAsStream(conf);
+            db.parse(is, this);
         } catch (Exception e) {
             PresentationManager.pm.error(e);
         }
@@ -66,9 +67,9 @@ public final class MenuItemLocationsParser extends DefaultHandler {
             String clazz = attributes.getValue("class");
             try {
                 locations.put(id, (MenuItemLocation) PresentationManager.pm.newInstance(clazz));
-                PresentationManager.logItem(sb, id, clazz, "*");
+                PresentationManager.logItem(log, id, clazz, "*");
             } catch (Exception e) {
-                PresentationManager.logItem(sb, id, clazz, "!");
+                PresentationManager.logItem(log, id, clazz, "!");
                 error = true;
             }
         }
