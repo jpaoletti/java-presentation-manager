@@ -1,5 +1,4 @@
 <?xml version='1.0'?>
-<!DOCTYPE entity SYSTEM "entity.dtd">
 <entity id="complexclass1" clazz="jpaoletti.jpm.model.ComplexClass1" extendz="simpleclass">
     <dataAccess class="jpaoletti.jpm.ui.DataAccessComplexClass1" />
     <order>id description amount date datetime active key </order>

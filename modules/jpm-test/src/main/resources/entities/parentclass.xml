@@ -1,5 +1,4 @@
 <?xml version='1.0'?>
-<!DOCTYPE entity SYSTEM "entity.dtd">
 <entity id="parentclass" clazz="jpaoletti.jpm.model.ParentClass" extendz="simpleclass">
     <dataAccess class="jpaoletti.jpm.ui.DataAccessParentClass" />
     <order>id description </order>

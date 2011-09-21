@@ -1,5 +1,4 @@
 <?xml version='1.0'?>
-<!DOCTYPE entity SYSTEM "entity.dtd">
 <entity id="weakclass" clazz="jpaoletti.jpm.model.WeakClass">
     <dataAccess class="jpaoletti.jpm.ui.DataAccessWeakClass" />
     <owner>
