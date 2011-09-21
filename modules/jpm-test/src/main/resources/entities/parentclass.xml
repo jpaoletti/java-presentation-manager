@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<!DOCTYPE entity SYSTEM "entity.dtd">
+<entity id="parentclass" clazz="jpaoletti.jpm.model.ParentClass" extendz="simpleclass">
+    <dataAccess class="jpaoletti.jpm.ui.DataAccessParentClass" />
+    <order>id description </order>
+    <operations>
+        <operation id="list" enabled="true" scope="item" display="all" >
+            <properties>
+                <property name="operation-column-width" value="1px" />
+            </properties>
+        </operation>
+        <operation id="show" enabled="true" scope="item" display="edit list" />
+        <operation id="add" enabled="true" scope="general" display="all" >
+            <validator class="jpaoletti.jpm.ui.validators.SimpleClassUniqueIdValidator"/>
+        </operation>
+        <operation id="edit" enabled="true" scope="item" display="edit show list" />
+        <operation id="delete" enabled="true" scope="item" display="edit show list" confirm="true"/>
+    </operations>
+    <field id="weaks" display="show edit">
+        <converters>
+            <converter class="jpaoletti.jpm.struts.converter.WeakConverter" operations="show edit" >
+                <properties>
+                    <property name="weak-entity" value="weakclass" />
+                </properties>
+            </converter>
+        </converters>
+    </field>
+</entity>

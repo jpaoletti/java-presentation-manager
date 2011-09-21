@@ -1,0 +1,27 @@
+<?xml version='1.0'?>
+<!DOCTYPE entity SYSTEM "entity.dtd">
+<entity id="weakclass" clazz="jpaoletti.jpm.model.WeakClass">
+    <dataAccess class="jpaoletti.jpm.ui.DataAccessWeakClass" />
+    <owner>
+        <entityId>parentclass</entityId>
+        <entityProperty>weaks</entityProperty>
+        <localProperty>parent</localProperty>
+        <entityCollectionClass>java.util.ArrayList</entityCollectionClass>
+    </owner>
+    <operations>
+        <operation id="list" enabled="true" scope="item" display="all">
+            <properties>
+                <property name="operation-column-width" value="1px" />
+            </properties>
+        </operation>
+        <operation id="show" enabled="true" scope="item" display="edit list" />
+        <operation id="add" enabled="true" scope="general" display="all" />
+        <operation id="edit" enabled="true" scope="item" display="edit show list" />
+        <operation id="delete" enabled="true" scope="item" display="edit show list" confirm="true"/>
+    </operations>
+    <field id="description">
+        <converters>
+            <econverter id="edit-50-string"/>
+        </converters>
+    </field>
+</entity>

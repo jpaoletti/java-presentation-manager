@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<!DOCTYPE entity SYSTEM "entity.dtd">
+<entity id="complexclass2" clazz="jpaoletti.jpm.model.ComplexClass2" extendz="simpleclass">
+    <dataAccess class="jpaoletti.jpm.ui.DataAccessComplexClass2" />
+    <order>id description </order>
+    <highlights>
+        <highlight field="id" value="3" style="yellow" scope="instance" />
+        <highlight field="id" value="4" style="blue" scope="property" />
+    </highlights>
+    <operations>
+        <operation id="list" enabled="true" scope="item">
+            <properties>
+                <property name="operation-column-width" value="1px" />
+            </properties>
+        </operation>
+        <operation id="show" enabled="true" scope="item" display="edit list" />
+        <operation id="add" enabled="true" scope="general">
+            <validator class="jpaoletti.jpm.ui.validators.SimpleClassUniqueIdValidator"/>
+        </operation>
+        <operation id="edit" enabled="true" scope="item" display="edit show list" />
+        <operation id="delete" enabled="true" scope="item" display="edit show list" confirm="true"/>
+    </operations>
+
+    <field id="simpleClass" display="edit show add list">
+        <converters>
+            <converter class="jpaoletti.jpm.struts.converter.EditSingleAggregationConverter" operations="add edit">
+                <properties>
+                    <property name="entity" value="simpleclass" />
+                </properties>
+            </converter>
+        </converters>
+    </field>
+    <field id="simpleClasses" display="edit show add">
+        <converters>
+            <converter class="jpaoletti.jpm.struts.converter.ShowCollectionConverter" operations="show" />
+            <converter class="jpaoletti.jpm.struts.converter.EditCollectionConverter" operations="add edit">
+                <properties>
+                    <property name="entity" value="simpleclass" />
+                    <property name="collection-class" value="java.util.ArrayList" />
+                </properties>
+            </converter>
+        </converters>
+    </field>
+</entity>
