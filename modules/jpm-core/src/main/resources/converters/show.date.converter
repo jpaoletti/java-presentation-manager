@@ -1,0 +1,7 @@
+String visualize(){
+    return (value==null)?"":(new java.text.SimpleDateFormat (converter.getConfig("format", "MM/dd/yyyy"))).format(value);
+}
+
+Object build(){
+    return "IgnoreConvertionException";
+}

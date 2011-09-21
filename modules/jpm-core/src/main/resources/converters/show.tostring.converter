@@ -1,0 +1,6 @@
+String visualize(){
+    return (value==null)?"-":value.toString();
+}
+Object build(){
+    return "IgnoreConvertionException";
+}
