@@ -1,0 +1,1 @@
+<%@attribute name = "message" required="true" type="jpaoletti.jpm.core.message.Message" %> { "type": "${message.type}", "entity": "${message.entity.id}", "field": "${message.field.id}", "text": "<%= jpaoletti.jpm.core.PresentationManager.getMessage(message.getKey(), message.getArgs()) %>"}

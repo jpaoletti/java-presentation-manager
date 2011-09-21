@@ -1,0 +1,1 @@
+<a href="${es.context_path}/${ctx.map.other_operation}.do?pmid=${ctx.map.other_entity}&identified=${ctx.map.identified}">${ctx.map.display}</a>

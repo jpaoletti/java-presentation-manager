@@ -10,7 +10,7 @@
     
     <filter>
         <filter-name>GeneralFilter</filter-name>
-        <filter-class>org.jpos.ee.pm.struts.actions.GeneralFilter</filter-class>
+        <filter-class>jpaoletti.jpm.struts.actions.GeneralFilter</filter-class>
     </filter>
     
     <filter-mapping>
@@ -51,4 +51,3 @@
         <location>/404.jsp</location>
     </error-page>
 </web-app>
-

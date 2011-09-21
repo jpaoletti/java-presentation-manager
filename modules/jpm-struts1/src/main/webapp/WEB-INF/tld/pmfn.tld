@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+  version="2.0">
+
+    <description>PM 1.0 functions library</description>
+    <display-name>Presentation Manager functions</display-name>
+    <tlib-version>1.0</tlib-version>
+    <short-name>pmfn</short-name>
+
+    <function>
+        <description>
+          Builds an icon set with the operations of an item inside a list
+        </description>
+        <name>listItemOperations</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String listItemOperations(jpaoletti.jpm.struts.PMStrutsContext, jpaoletti.jpm.util.DisplacedList, java.lang.Object)
+        </function-signature>
+        <example>
+            ${pmfn:listItemOperations(ctx, contents, item)}
+        </example>
+    </function>
+
+    <function>
+        <description>
+          Return a css class name for a highlight
+        </description>
+        <name>highlight</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String highlight(jpaoletti.jpm.core.Entity, jpaoletti.jpm.core.Field, java.lang.Object, java.lang.Object)
+        </function-signature>
+        <example>
+            class="${pmfn:highlight(entity,field,item,fieldValue)}"
+        </example>
+    </function>
+
+    <function>
+        <description>
+          Return an img html with a tooltip for a field
+        </description>
+        <name>tooltip</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String tooltip(jpaoletti.jpm.core.Entity, jpaoletti.jpm.core.Field)
+        </function-signature>
+        <example>
+            ${pmfn:tooltip(entity, field)}
+        </example>
+    </function>
+
+    <function>
+        <description>
+          Return the row number as HTML
+        </description>
+        <name>rowNumber</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String rowNumber(jpaoletti.jpm.core.PaginatedList, java.lang.Object)
+        </function-signature>
+        <example>
+            class="${pmfn:highlight(entity,field,item,fieldValue)}"
+        </example>
+    </function>
+
+    <function>
+        <description>Return the list of fields for the entity that must be shown on the operation id</description>
+        <name>displayedFields</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            java.util.List displayedFields(jpaoletti.jpm.core.Entity, java.lang.String)
+        </function-signature>
+    </function>
+
+    <tag>
+        <description>Display an internationalized message</description>
+        <name>message</name>
+        <tag-class>jpaoletti.jpm.struts.tags.MessageTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>key</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The message key of the requested message</description>
+        </attribute>
+        <attribute>
+            <name>arg0</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>First parametric replacement value, if any</description>
+        </attribute>
+        <attribute>
+            <name>arg1</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Second parametric replacement value, if any.</description>
+        </attribute>
+        <attribute>
+            <name>arg2</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Third parametric replacement value, if any.</description>
+        </attribute>
+        <attribute>
+            <name>arg3</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Fourth parametric replacement value, if any.</description>
+        </attribute>
+        <attribute>
+            <name>arg4</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Fifth parametric replacement value, if any.</description>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Display an operation bar</description>
+        <name>operations</name>
+        <tag-class>jpaoletti.jpm.struts.tags.OperationsTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>ctx</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The context</description>
+        </attribute>
+        <attribute>
+            <name>operations</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>Optional operations object. If not defined, one from context is used</description>
+        </attribute>
+        <attribute>
+            <name>labels</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>If true, labels are shown</description>
+        </attribute>
+    </tag>
+    <tag>
+        <description>Display a navigation list of links</description>
+        <name>navigation</name>
+        <tag-class>jpaoletti.jpm.struts.tags.NavigationTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>container</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The entity container</description>
+        </attribute>
+    </tag>
+    <tag>
+        <description>Display the system menu</description>
+        <name>menu</name>
+        <tag-class>jpaoletti.jpm.struts.tags.MenuTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>pmsession</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The session</description>
+        </attribute>
+    </tag>
+    <tag>
+        <description>Display a converted item</description>
+        <name>converted-item</name>
+        <tag-class>jpaoletti.jpm.struts.tags.ConvertedItemTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>ctx</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The context</description>
+        </attribute>
+        <attribute>
+            <name>entityContainer</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The container of the entity. Context one is used if none is provided</description>
+        </attribute>
+        <attribute>
+            <name>operation</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The operation where the item is being converted. Context one is used if none is provided</description>
+        </attribute>
+        <attribute>
+            <name>field</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The field of the item</description>
+        </attribute>
+        <attribute>
+            <name>item</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The entity instance. If not defined, selected instance is used</description>
+        </attribute>
+        <attribute>
+            <name>fieldValue</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The field value. If not defined, its calculated by reflection using item and field</description>
+        </attribute>
+    </tag>
+    <tag>
+        <description>Evaluates the body content only if field is displayed for the operation</description>
+        <name>displays</name>
+        <tag-class>jpaoletti.jpm.struts.tags.DisplaysTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>operation</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The operation where the field wants to be displayed. May be not defined but operationId must be defined then</description>
+        </attribute>
+        <attribute>
+            <name>operationId</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The operation id where the field wants to be displayed. May be not defined but operation must be defined then</description>
+        </attribute>
+        <attribute>
+            <name>field</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The field to check if must be displayed</description>
+        </attribute>
+    </tag>
+</taglib>

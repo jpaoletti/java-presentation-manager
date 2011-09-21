@@ -1,0 +1,1 @@
+${ctx.map.void_text}
