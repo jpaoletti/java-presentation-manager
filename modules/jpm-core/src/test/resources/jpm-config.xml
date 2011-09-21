@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="debug">true</entry>
+    <entry key="appversion">1.1.0</entry>
+    <entry key="login-required">false</entry>
+    <entry key="ignore-db">true</entry>
+    <entry key="template">default</entry>
+
+    <!-- External Converters -->
+    <entry key="external-converters">jpm-econverters.xml</entry>
+    
+    <!-- Busissnes Entities -->
+
+    <entry key="entity">entities/test.xml</entry>
+
+    <!-- Monitors -->
+</properties>

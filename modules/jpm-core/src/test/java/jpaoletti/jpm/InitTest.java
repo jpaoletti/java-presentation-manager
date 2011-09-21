@@ -1,6 +1,7 @@
 package jpaoletti.jpm;
 
 import java.io.InputStream;
+import java.util.Properties;
 import jpaoletti.jpm.core.PresentationManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -17,11 +18,15 @@ public class InitTest {
     }
 
     @Test
-    public void jPMInitialization() {
+    public void jPMInitialization() throws Exception {
         final InputStream is = getClass().getResourceAsStream("/jpm-config.xml");
-        
+        final Properties properties = new Properties();
+        properties.loadFromXML(is);
         PresentationManager.pm = new PresentationManager();
-        PresentationManager.getPm().initialize(null);
+        final PresentationManager pm = PresentationManager.getPm();
+        assertTrue(pm.initialize(properties));
+        assertEquals(2, pm.getEntities().size());
+        assertEquals(1, pm.getLocations().size());
     }
 
     @BeforeClass
