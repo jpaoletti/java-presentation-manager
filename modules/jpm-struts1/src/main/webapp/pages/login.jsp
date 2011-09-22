@@ -2,12 +2,12 @@
 <pm:page title="login">
     <c:if test="${not empty pmsession}">
         <script type="text/javascript" charset="utf-8">
-            parent.location = "/";
+            parent.location = "${es.context_path}";
         </script>
     </c:if>
     <c:if test="${not empty reload}">
         <script type="text/javascript" charset="utf-8">
-            parent.location = "/";
+            parent.location = "${es.context_path}";
         </script>
     </c:if>
     <c:if test="${empty pmsession}">
