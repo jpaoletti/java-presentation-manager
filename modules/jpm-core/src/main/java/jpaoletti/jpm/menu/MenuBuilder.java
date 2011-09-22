@@ -3,6 +3,7 @@ package jpaoletti.jpm.menu;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import jpaoletti.jpm.core.PresentationManager;
+import jpaoletti.jpm.util.ResourceManager;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -30,10 +31,10 @@ public class MenuBuilder extends DefaultHandler {
     }
 
     private MenuList parseConfig(String conf) {
-        SAXParserFactory dbf = SAXParserFactory.newInstance();
+        final SAXParserFactory dbf = SAXParserFactory.newInstance();
         try {
-            SAXParser db = dbf.newSAXParser();
-            db.parse(conf, this);
+            final SAXParser db = dbf.newSAXParser();
+            db.parse(ResourceManager.getInputStream(conf), this);
             return menu;
         } catch (Exception e) {
             PresentationManager.pm.error(e);
