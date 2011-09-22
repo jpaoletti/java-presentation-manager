@@ -1,11 +1,20 @@
 package jpaoletti.jpm.core;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Observable;
+import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import jpaoletti.jpm.converter.*;
 import jpaoletti.jpm.core.monitor.Monitor;
 import jpaoletti.jpm.menu.*;
 import jpaoletti.jpm.parser.*;
 import jpaoletti.jpm.security.core.PMSecurityConnector;
+import jpaoletti.jpm.util.Properties;
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**
@@ -39,9 +48,10 @@ public class PresentationManager extends Observable {
      * @param service Bean
      * @return
      */
-    public boolean initialize(Properties cfg) {
+    public boolean initialize(final String configurationFilename) throws Exception {
         notifyObservers();
-        this.cfg = cfg;
+        final MainParser mainParser = new MainParser();
+        this.cfg = (Properties) mainParser.parseFile(configurationFilename);
         error = false;
 
         final StringBuilder log = new StringBuilder();
@@ -128,13 +138,13 @@ public class PresentationManager extends Observable {
     private void loadMonitors(StringBuilder log) {
         PMParser parser = new MonitorParser();
         log.append(TAB + "<monitors>\n");
-        Map<Object, Monitor> result = new HashMap<Object, Monitor>();
-        String[] ss = getAll("monitor");
-        for (Integer i = 0; i < ss.length; i++) {
+        final Map<Object, Monitor> result = new HashMap<Object, Monitor>();
+        final List<String> monitorNames = getAll("monitor");
+        for (String monitorName : monitorNames) {
             try {
-                Monitor m = (Monitor) parser.parseFile(ss[i]);
+                final Monitor m = (Monitor) parser.parseFile(monitorName);
                 result.put(m.getId(), m);
-                result.put(i, m);
+                result.put(monitorNames.indexOf(monitorName), m);
                 m.getSource().init();
                 Thread thread = new Thread(m);
                 m.setThread(thread);
@@ -142,7 +152,7 @@ public class PresentationManager extends Observable {
                 logItem(log, m.getId(), m.getSource().getClass().getName(), "*");
             } catch (Exception exception) {
                 error(exception);
-                logItem(log, ss[i], null, "!");
+                logItem(log, monitorName, null, "!");
             }
         }
         monitors = result;
@@ -182,14 +192,14 @@ public class PresentationManager extends Observable {
         } else {
             entities.clear();
         }
-        String[] ss = getAll("entity");
-        for (Integer i = 0; i < ss.length; i++) {
+        final List<String> ss = getAll("entity");
+        for (String s : ss) {
             try {
-                Entity e = (Entity) parser.parseFile(ss[i]);
+                Entity e = (Entity) parser.parseFile(s);
                 try {
                     Class.forName(e.getClazz());
                     entities.put(e.getId(), e);
-                    entities.put(i, e);
+                    entities.put(ss.indexOf(s), e);
                     if (e.isWeak()) {
                         logItem(log, e.getId(), e.getClazz(), "\u00b7");
                     } else {
@@ -202,7 +212,7 @@ public class PresentationManager extends Observable {
                 }
             } catch (Exception exception) {
                 error(exception);
-                logItem(log, ss[i], "???", "!");
+                logItem(log, s, "???", "!");
                 error = true;
             }
         }
@@ -442,15 +452,16 @@ public class PresentationManager extends Observable {
         final PMParser parser = new ExternalConverterParser();
         evt.append(TAB + "<external-converters>\n");
         externalConverters = new ArrayList<ExternalConverters>();
-        final String[] ss = getAll("external-converters");
-        for (Integer i = 0; i < ss.length; i++) {
+        final List<String> ss = getAll("external-converters");
+        for (String s : ss) {
             try {
-                final ExternalConverters ec = (ExternalConverters) parser.parseFile(ss[i]);
+                final ExternalConverters ec = (ExternalConverters) parser.parseFile(s);
                 getExternalConverters().add(ec);
-                logItem(evt, ss[i], null, "*");
+                logItem(evt, s, null, "*");
             } catch (Exception exception) {
-                error(exception);exception.printStackTrace();
-                logItem(evt, ss[i], null, "!");
+                error(exception);
+                exception.printStackTrace();
+                logItem(evt, s, null, "!");
             }
         }
         evt.append(TAB + "</external-converters>\n");
@@ -542,7 +553,7 @@ public class PresentationManager extends Observable {
             @Override
             public void run() {
                 synchronized (sessions) {
-                    List<String> toRemove = new ArrayList<String>();
+                    final List<String> toRemove = new ArrayList<String>();
                     for (Map.Entry<String, PMSession> entry : sessions.entrySet()) {
                         if (entry.getValue().getLastAccess().getTime() + timeout < System.currentTimeMillis()) {
                             toRemove.add(entry.getKey());
@@ -618,17 +629,7 @@ public class PresentationManager extends Observable {
         return securityConnector;
     }
 
-    protected String[] getAll(String name) {
-        String[] ret;
-        final Object obj = cfg.get(name);
-        if (obj instanceof String[]) {
-            ret = (String[]) obj;
-        } else if (obj instanceof String) {
-            ret = new String[1];
-            ret[0] = (String) obj;
-        } else {
-            ret = new String[0];
-        }
-        return ret;
+    protected List<String> getAll(String name) {
+        return cfg.getAll(name);
     }
 }

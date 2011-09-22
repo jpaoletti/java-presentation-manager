@@ -2,7 +2,6 @@ package jpaoletti.jpm.parser;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.JDomDriver;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import jpaoletti.jpm.util.ResourceManager;
