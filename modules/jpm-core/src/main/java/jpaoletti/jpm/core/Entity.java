@@ -144,7 +144,7 @@ public class Entity extends PMCoreObject {
      * @throws PMException
      */
     public List<?> getList(PMContext ctx) throws PMException {
-        EntityFilter filter = (this.equals(ctx.getEntity())) ? ctx.getEntityContainer().getFilter() : null;
+        final EntityFilter filter = (ctx != null && this.equals(ctx.getEntity())) ? ctx.getEntityContainer().getFilter() : null;
         return getList(ctx, filter, null, null, null);
     }
 
