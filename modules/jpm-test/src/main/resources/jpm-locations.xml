@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locations>
+       <location id="pmstruts" class="jpaoletti.jpm.struts.MenuItemLocationStruts"/>
+       <location id="external" class="jpaoletti.jpm.struts.MenuItemLocationExternal"/>
+</locations>

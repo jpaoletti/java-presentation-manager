@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation-manager>
+    <property name="debug" value="true"/>
+    <property name="appversion" value="1.0.0"/>
+    <property name="login-required" value="false"/>
+    <property name="ignore-db" value="true"/>
+    <property name="template" value="default"/>
+    <property name="copyright" value="Jeronimo Paoletti"/>
+
+    <!-- External Converters -->
+    <property name="external-converters" value="jpm-econverters.xml"/>
+
+    <!-- Busissnes Entities -->
+
+    <property name="entity" value="entities/simpleclass.xml"/>
+    <property name="entity" value="entities/complexclass1.xml"/>
+    <property name="entity" value="entities/complexclass2.xml"/>
+    <property name="entity" value="entities/weakclass.xml"/>
+    <property name="entity" value="entities/parentclass.xml"/>
+
+    <!-- Monitors -->
+</presentation-manager>

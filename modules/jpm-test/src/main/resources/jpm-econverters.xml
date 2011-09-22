@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<external-converters>
+    <external-converter id="edit-50-string">
+        <converter class="jpaoletti.jpm.struts.converter.EditStringConverter" operations="add edit">
+            <properties>
+                <property name="max-length" value="50" />
+            </properties>
+        </converter>
+    </external-converter>
+    
+    <external-converter id="edit-long">
+        <converter class="jpaoletti.jpm.struts.converter.EditLongConverter" operations="add" />
+    </external-converter>
+
+    <external-converter id="show-cash">
+        <converter class="jpaoletti.jpm.core.converter.GenericConverter" operations="show list" >
+            <properties>
+                <property name="filename" value="converters/show.decimal.converter" />
+                <property name="prefix" value="U$S " />
+                <property name="suffix" value=" .-" />
+                <property name="format" value="#0.##" />
+            </properties>
+        </converter>
+    </external-converter>
+    <external-converter id="edit-date">
+        <converter class="jpaoletti.jpm.struts.converter.EditDateConverter" operations="add edit">
+            <properties>
+                <property name="format" value="dd/MM/yyyy" />
+            </properties>
+        </converter>
+    </external-converter>
+    
+    <external-converter id="show-date">
+        <converter class="jpaoletti.jpm.core.converter.GenericConverter" operations="list show" >
+            <properties>
+                <property name="filename" value="converters/show.date.converter" />
+                <property name="format" value="dd/MM/yyyy" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="show-datetime">
+        <converter class="jpaoletti.jpm.core.converter.GenericConverter" operations="all" >
+            <properties>
+                <property name="filename" value="converters/show.date.converter" />
+                <property name="format" value="dd/MM/yyyy HH:mm:ss" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="show-cm">
+        <converter class="jpaoletti.jpm.core.converter.GenericConverter" operations="show list" >
+            <properties>
+                <property name="filename" value="converters/show.tostring.converter" />
+                <property name="suffix" value=" cm" />
+            </properties>
+        </converter>
+    </external-converter>
+</external-converters>
