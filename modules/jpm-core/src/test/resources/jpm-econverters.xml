@@ -29,11 +29,12 @@
         </converter>
     </external-converter>
 
-    <external-converter id="show-cm">
+    <external-converter id="tostring">
         <converter class="jpaoletti.jpm.converter.GenericConverter" operations="show list" >
             <properties>
                 <property name="filename" value="converters/show.tostring.converter" />
-                <property name="suffix" value=" cm" />
+                <property name="prefix" value="PRE " />
+                <property name="suffix" value=" SUF" />
             </properties>
         </converter>
     </external-converter>

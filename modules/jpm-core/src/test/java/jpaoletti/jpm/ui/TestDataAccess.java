@@ -8,6 +8,7 @@ import jpaoletti.jpm.core.EntityFilter;
 import jpaoletti.jpm.core.ListSort;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
+import jpaoletti.jpm.model.JPMTest;
 
 /**
  * Test Data Access
@@ -19,7 +20,14 @@ import jpaoletti.jpm.core.PMException;
  */
 public class TestDataAccess implements DataAccess {
 
+    private static final List<JPMTest> contents = new ArrayList<JPMTest>();
     private Entity entity;
+
+    static {
+        contents.add(new JPMTest(1L, "One", 1, true));
+        contents.add(new JPMTest(2L, "Two", 2, false));
+        contents.add(new JPMTest(3L, "Three", 3, false));
+    }
 
     @Override
     public void setEntity(Entity entity) {
@@ -38,16 +46,17 @@ public class TestDataAccess implements DataAccess {
 
     @Override
     public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
-        return new ArrayList<Object>();
+        return contents;
     }
 
     @Override
     public Long count(PMContext ctx) throws PMException {
-        return 0L;
+        return new Long(contents.size());
     }
 
     @Override
     public void delete(PMContext ctx, Object object) throws PMException {
+        contents.remove((JPMTest) object);
     }
 
     @Override
@@ -56,6 +65,7 @@ public class TestDataAccess implements DataAccess {
 
     @Override
     public void add(PMContext ctx, Object instance) throws PMException {
+        contents.add((JPMTest) instance);
     }
 
     @Override
