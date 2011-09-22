@@ -8,9 +8,8 @@ import bsh.BshClassManager;
 import bsh.EvalError;
 import bsh.Interpreter;
 import bsh.UtilEvalError;
-import java.io.File;
-import java.io.FileInputStream;
 import jpaoletti.jpm.core.PresentationManager;
+import jpaoletti.jpm.util.ResourceManager;
 
 /**
  * A generic converter that uses a beanbash based xml for excecution.
@@ -40,7 +39,7 @@ public class GenericConverter extends Converter {
                 }
             }
             final Converter c = ctx.getField().getDefaultConverter();
-            if (c != null) {
+            if (c != null && !(c instanceof GenericConverter)) {
                 ctx.setFieldValue(res);
                 return (String) c.visualize(ctx);
             } else {
@@ -97,9 +96,8 @@ public class GenericConverter extends Converter {
      */
     public void readFile(String filename) throws ConverterException {
         try {
-            final File file = new File(filename);
             content = "";
-            final InputStream input = new FileInputStream(file);
+            final InputStream input = ResourceManager.getInputStream(filename);
             while (input.available() > 0) {
                 content = content + (char) input.read();
             }
