@@ -5,4 +5,3 @@
 <c:if test="${ctx.entityExist}">
     <bean:define id="entity" name="ctx" property="entity" toScope="request" type="jpaoletti.jpm.core.Entity" />
 </c:if>
-<bean:define id="messages" name="org.apache.struts.action.MESSAGE" type="org.apache.struts.util.MessageResources" toScope="application"/>
