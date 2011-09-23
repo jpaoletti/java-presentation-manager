@@ -13,7 +13,7 @@
     </external-converter>
 
     <external-converter id="show-cash">
-        <converter class="jpaoletti.jpm.core.converter.GenericConverter" operations="show list" >
+        <converter class="jpaoletti.jpm.converter.GenericConverter" operations="show list" >
             <properties>
                 <property name="filename" value="converters/show.decimal.converter" />
                 <property name="prefix" value="U$S " />
@@ -31,7 +31,7 @@
     </external-converter>
     
     <external-converter id="show-date">
-        <converter class="jpaoletti.jpm.core.converter.GenericConverter" operations="list show" >
+        <converter class="jpaoletti.jpm.converter.GenericConverter" operations="list show" >
             <properties>
                 <property name="filename" value="converters/show.date.converter" />
                 <property name="format" value="dd/MM/yyyy" />
@@ -40,7 +40,7 @@
     </external-converter>
 
     <external-converter id="show-datetime">
-        <converter class="jpaoletti.jpm.core.converter.GenericConverter" operations="all" >
+        <converter class="jpaoletti.jpm.converter.GenericConverter" operations="all" >
             <properties>
                 <property name="filename" value="converters/show.date.converter" />
                 <property name="format" value="dd/MM/yyyy HH:mm:ss" />
@@ -49,7 +49,7 @@
     </external-converter>
 
     <external-converter id="show-cm">
-        <converter class="jpaoletti.jpm.core.converter.GenericConverter" operations="show list" >
+        <converter class="jpaoletti.jpm.converter.GenericConverter" operations="show list" >
             <properties>
                 <property name="filename" value="converters/show.tostring.converter" />
                 <property name="suffix" value=" cm" />
