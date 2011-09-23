@@ -26,7 +26,7 @@ public class Converters extends PMCoreObject {
         if (getExternalConverters() != null) {
             for (ExternalConverter ecs : getExternalConverters()) {
                 final Converter c = PresentationManager.getPm().findExternalConverter(ecs.getId());
-                if (check(c, (ecs.getOperations() == null) ? c.getOperations() : ecs.getOperations(), operId)) {
+                if (c != null && check(c, (ecs.getOperations() == null) ? c.getOperations() : ecs.getOperations(), operId)) {
                     //TODO Add override of properties.
                     return c;
                 }
