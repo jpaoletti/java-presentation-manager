@@ -4,9 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jpaoletti.jpm.core.DataAccess;
 import jpaoletti.jpm.core.Entity;
-import jpaoletti.jpm.core.EntityFilter;
 import jpaoletti.jpm.core.ListSort;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMCoreConstants;
@@ -23,7 +21,7 @@ import org.hibernate.criterion.Restrictions;
 /**
  * Data access using an hibernate session
  */
-public class DataAccessDB implements DataAccess, PMCoreConstants {
+public class DataAccess implements jpaoletti.jpm.core.DataAccess, PMCoreConstants {
 
     private Entity entity;
 
@@ -76,7 +74,7 @@ public class DataAccessDB implements DataAccess, PMCoreConstants {
     }
 
     @Override
-    public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+    public List<?> list(PMContext ctx, jpaoletti.jpm.core.EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
         //We use the filter only if the entity we use is the container one.
         final Criteria list = createCriteria(ctx, getEntity(), filter, sort);
         if (count != null) {
@@ -109,14 +107,13 @@ public class DataAccessDB implements DataAccess, PMCoreConstants {
 
     @Override
     public Long count(PMContext ctx) throws PMException {
-        final EntityFilter filter = ctx.getEntityContainer().getFilter();
-        final Criteria count = createCriteria(ctx, getEntity(), filter, null);
+        final Criteria count = createCriteria(ctx, getEntity(), ctx.getEntityContainer().getFilter(), null);
         count.setProjection(Projections.rowCount());
         count.setMaxResults(1);
         return (Long) count.uniqueResult();
     }
 
-    protected Criteria createCriteria(PMContext ctx, Entity entity, EntityFilter filter, ListSort sort) throws PMException {
+    protected Criteria createCriteria(PMContext ctx, Entity entity, jpaoletti.jpm.core.EntityFilter filter, ListSort sort) throws PMException {
         final List<String> aliases = new ArrayList<String>();
         Criteria c;
         try {
@@ -163,7 +160,7 @@ public class DataAccessDB implements DataAccess, PMCoreConstants {
         }
 
         if (filter != null) {
-            c = ((DBEntityFilter) filter).applyFilters(c, aliases);
+            c = ((EntityFilter) filter).applyFilters(c, aliases);
         }
         //Weak entities must filter the parent
         if (entity.isWeak()) {
@@ -191,7 +188,7 @@ public class DataAccessDB implements DataAccess, PMCoreConstants {
 
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
-        return new DBEntityFilter();
+        return new EntityFilter();
     }
 
     @Override

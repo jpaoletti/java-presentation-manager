@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import jpaoletti.jpm.core.Entity;
-import jpaoletti.jpm.core.EntityFilter;
 import jpaoletti.jpm.core.Field;
 import jpaoletti.jpm.core.PMException;
 import org.hibernate.Criteria;
@@ -13,12 +12,12 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
 
-public class DBEntityFilter extends EntityFilter {
+public class EntityFilter extends jpaoletti.jpm.core.EntityFilter {
 
     private List<Criterion> filters;
     private Entity entity;
 
-    public DBEntityFilter() {
+    public EntityFilter() {
         super();
         this.setFilters(new ArrayList<Criterion>());
     }

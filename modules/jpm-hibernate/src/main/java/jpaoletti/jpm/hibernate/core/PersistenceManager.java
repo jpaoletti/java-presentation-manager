@@ -2,12 +2,11 @@ package jpaoletti.jpm.hibernate.core;
 
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
-import jpaoletti.jpm.core.PersistenceManager;
 import jpaoletti.jpm.core.PresentationManager;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class DBPersistenceManager implements PersistenceManager<Session> {
+public class PersistenceManager implements jpaoletti.jpm.core.PersistenceManager<Session> {
 
     private Session session;
 
