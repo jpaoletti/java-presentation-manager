@@ -1,13 +1,9 @@
 package jpaoletti.jpm.struts.converter;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.Entity;
+import jpaoletti.jpm.core.EntityContainer;
 import jpaoletti.jpm.core.PMContext;
-import jpaoletti.jpm.core.PMException;
-import jpaoletti.jpm.struts.PMStrutsContext;
 
 /**
  * Converter for weak entities.
@@ -24,9 +20,12 @@ public class WeakConverter extends StrutsEditConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
+        final String weakEntityId = getConfig("weak-entity");
+        final EntityContainer weakContainer = ctx.getEntityContainer(weakEntityId);
+        final Entity weak = weakContainer.getEntity();
         final StringBuilder sb = new StringBuilder();
         sb.append("weak_converter.jsp?weakid=");
-        sb.append(getConfig("weak-entity"));
+        sb.append(weakEntityId);
         sb.append("&showlist=");
         sb.append(getConfig("show-list", "true"));
         sb.append("&showbutton=");
@@ -36,26 +35,9 @@ public class WeakConverter extends StrutsEditConverter {
         sb.append("&buttontext=");
         sb.append(getConfig("button-text", "pm.struts.weak.converter.edit"));
 
+        ctx.put("weakContainer", weakContainer);
+        ctx.put("weak", weak);
+        ctx.put("woperation", weak.getOperations().getOperation("list"));
         return super.visualize(sb.toString());
-    }
-
-    public static Collection getCollection(PMStrutsContext ctx) throws PMException {
-        final Collection collection = (Collection) ctx.getPresentationManager().get(ctx.getSelected().getInstance(), ctx.getRequest().getParameter("property"));
-        final List<Object> result = new ArrayList<Object>();
-        final Entity entity = getEntity(ctx);
-        if (entity == null) {
-            ctx.getPresentationManager().error("Weak entity not found");
-            throw new ConverterException("pm.struts.entity.not.found");
-        }
-        if (collection != null) {
-            for (Object object : collection) {
-                result.add(entity.getDataAccess().refresh(ctx, object));
-            }
-        }
-        return result;
-    }
-
-    public static Entity getEntity(PMStrutsContext ctx) {
-        return ctx.getPresentationManager().getEntity((String) ctx.getRequest().getParameter("weakid"));
     }
 }
