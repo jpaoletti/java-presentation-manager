@@ -390,6 +390,9 @@ public class PresentationManager extends Observable {
      * @param o Object to log
      */
     public void error(Object o) {
+        if (o instanceof Throwable) {
+            ((Throwable) o).printStackTrace();
+        }
         System.err.println(o);
     }
 
