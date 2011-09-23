@@ -1,5 +1,7 @@
 package jpaoletti.jpm.model;
 
+import java.util.Date;
+
 /**
  * Test model class
  *
@@ -13,12 +15,14 @@ public class JPMTest {
     private Long id;
     private String string;
     private Integer integer;
+    private Date date;
     private Boolean bool;
 
-    public JPMTest(Long id, String string, Integer integer, Boolean bool) {
+    public JPMTest(Long id, String string, Integer integer, Date date, Boolean bool) {
         this.id = id;
         this.string = string;
         this.integer = integer;
+        this.date = date;
         this.bool = bool;
     }
 
@@ -55,5 +59,13 @@ public class JPMTest {
 
     public void setString(String string) {
         this.string = string;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

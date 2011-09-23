@@ -1,6 +1,9 @@
 package jpaoletti.jpm.ui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import jpaoletti.jpm.core.DataAccess;
 import jpaoletti.jpm.core.Entity;
@@ -24,9 +27,12 @@ public class TestDataAccess implements DataAccess {
     private Entity entity;
 
     static {
-        contents.add(new JPMTest(1L, "One", 1, true));
-        contents.add(new JPMTest(2L, "Two", 2, false));
-        contents.add(new JPMTest(3L, "Three", 3, false));
+        try {
+            contents.add(new JPMTest(1L, "One", 1, new SimpleDateFormat("yyyy-MM-dd").parse("2011-01-20"), true));
+        } catch (ParseException ex) {
+        }
+        contents.add(new JPMTest(2L, "Two", 2, new Date(), false));
+        contents.add(new JPMTest(3L, "Three", 3, new Date(), false));
     }
 
     @Override

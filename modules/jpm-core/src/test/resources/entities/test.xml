@@ -22,5 +22,10 @@
             <econverter id="tostring" />
         </converters>
     </field>
+    <field id="date" display="all">
+        <converters>
+            <econverter id="show-date" />
+        </converters>
+    </field>
     <field id="bool" display="all" />
 </entity>

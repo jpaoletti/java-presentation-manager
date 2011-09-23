@@ -38,8 +38,8 @@ public class InitTest {
                 1, pm.getExternalConverters().size());
         assertEquals("We must have 4 external converters in the converter file",
                 4, pm.getExternalConverters().get(0).getConverters().size());
-        assertEquals("We must have 4 fields in test entity",
-                4, getTestEntity().getAllFields().size());
+        assertEquals("We must have 5 fields in test entity",
+                5, getTestEntity().getAllFields().size());
     }
 
     @Test
@@ -68,6 +68,22 @@ public class InitTest {
         final String res = (String) field.visualize(ctx, operation, getTestEntity());
         assertEquals("Converted item must be 'PRE 1 SUF'",
                 res, "PRE 1 SUF");
+    }
+
+    @Test
+    public void genericDateConverter() throws Exception {
+        dataAccess();
+        final Field field = getTestEntity().getFieldById("date");
+        assertNotNull("Field 'date' must exist in test entity",
+                field);
+        final Operation operation = getTestEntity().getOperations().getOperation("show");
+        assertNotNull("Operation 'show' must be defined in test entity",
+                operation);
+        final PMContext ctx = new PMContext();
+        ctx.setEntityInstance(item1);
+        final String res = (String) field.visualize(ctx, operation, getTestEntity());
+        assertEquals("Converted item must be '20/01/2011'",
+                res, "20/01/2011");
     }
 
     @BeforeClass
