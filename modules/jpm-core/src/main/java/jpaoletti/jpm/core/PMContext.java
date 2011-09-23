@@ -55,7 +55,6 @@ public class PMContext {
         if (persistenceManager == null) {
             try {
                 persistenceManager = getPresentationManager().newPersistenceManager();
-                persistenceManager.init(this);
             } catch (Exception ex) {
                 getPresentationManager().error(ex);
                 throw new ConnectionNotFoundException();
