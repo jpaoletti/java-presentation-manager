@@ -6,6 +6,9 @@
     <property name="ignore-db" value="true"/>
     <property name="template" value="default"/>
     <property name="copyright" value="Jeronimo Paoletti"/>
+    
+    <property name="default-converter" 
+              value="jpaoletti.jpm.struts.converter.DefaultStrutsConverter"/>
 
     <!-- External Converters -->
     <property name="external-converters" value="jpm-econverters.xml"/>
