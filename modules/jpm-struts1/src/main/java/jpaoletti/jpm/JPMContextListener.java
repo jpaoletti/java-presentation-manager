@@ -1,7 +1,5 @@
 package jpaoletti.jpm;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import jpaoletti.jpm.core.PresentationManager;
@@ -18,10 +16,8 @@ public class JPMContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        try {
+        if (!PresentationManager.isActive()) {
             PresentationManager.start("jpm-config.xml");
-        } catch (Exception ex) {
-            Logger.getLogger(JPMContextListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

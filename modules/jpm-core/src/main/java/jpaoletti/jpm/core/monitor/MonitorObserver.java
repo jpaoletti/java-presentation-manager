@@ -23,9 +23,9 @@ public class MonitorObserver implements Observer {
      */
     public MonitorObserver(Monitor monitor) {
         super();
-        this.setMonitor(monitor);
+        this.monitor = monitor;
         monitor.addObserver(this);
-        setLines(new ArrayList<String>());
+        this.lines = new ArrayList<String>();
     }
 
     /**
@@ -33,6 +33,7 @@ public class MonitorObserver implements Observer {
      * @param o
      * @param arg
      */
+    @Override
     public void update(Observable o, Object arg) {
         if (arg instanceof String) {
             lines.add((String) arg);
@@ -42,7 +43,7 @@ public class MonitorObserver implements Observer {
         }
         if (arg instanceof Exception) {
             Exception e = (Exception) arg;
-            PresentationManager.pm.error(e);
+            PresentationManager.getPm().error(e);
             lines.add(e.getMessage());
         }
     }

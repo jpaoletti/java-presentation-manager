@@ -30,7 +30,7 @@ public class DataAccessComplexClass2 extends DataAccessTest {
                 list.add(o);
             }
         } catch (PMException ex) {
-            PresentationManager.pm.error(ex);
+            PresentationManager.getPm().error(ex);
         }
     }
 }

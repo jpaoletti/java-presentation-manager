@@ -44,7 +44,7 @@ public class PMContext {
      * @return
      */
     public PresentationManager getPresentationManager() {
-        return PresentationManager.pm;
+        return PresentationManager.getPm();
     }
 
     /**

@@ -23,7 +23,6 @@ public final class MenuItemLocationsParser extends DefaultHandler {
     private String conf;
     private Map<String, MenuItemLocation> locations;
     private boolean error = false;
-    private StringBuilder log;
 
     /**
      * Constructor for the parser
@@ -31,9 +30,8 @@ public final class MenuItemLocationsParser extends DefaultHandler {
      * @param evt Event for log
      * @param conf Configuration filename
      */
-    public MenuItemLocationsParser(StringBuilder log, String conf) {
+    public MenuItemLocationsParser(String conf) {
         this.setConf(conf);
-        this.log = log;
         init();
     }
 
@@ -50,7 +48,7 @@ public final class MenuItemLocationsParser extends DefaultHandler {
             final InputStream is = ResourceManager.getInputStream(conf);
             db.parse(is, this);
         } catch (Exception e) {
-            PresentationManager.pm.error(e);
+            PresentationManager.getPm().error(e);
         }
     }
 
@@ -69,9 +67,9 @@ public final class MenuItemLocationsParser extends DefaultHandler {
             String clazz = attributes.getValue("class");
             try {
                 locations.put(id, (MenuItemLocation) PresentationManager.getPm().newInstance(clazz));
-                PresentationManager.logItem(log, id, clazz, "*");
+                PresentationManager.getPm().logItem("[MenuItemLocation] " + id, clazz, "*");
             } catch (Exception e) {
-                PresentationManager.logItem(log, id, clazz, "!");
+                PresentationManager.getPm().logItem("[MenuItemLocation] " + id, clazz, "!");
                 error = true;
             }
         }

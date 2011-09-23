@@ -59,6 +59,6 @@ public class MenuItem extends Menu{
      * @param value The location value*/
     public void parseLocation(String location, String value) {
         setLocation_value(value);
-        setLocation(PresentationManager.pm.getLocation(location));
+        setLocation(PresentationManager.getPm().getLocation(location));
     }    
 }

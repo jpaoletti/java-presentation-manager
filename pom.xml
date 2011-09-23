@@ -7,7 +7,14 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>java-presentation-manager</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/jpaoletti/java-presentation-manager</url>
+    <description>
+        Java Presentation Manager is a CRUD system with extended tools 
+        to fast build an administrative and monitoring web site based in xml 
+        definition files, with data source and interface independece so you can 
+        define your model in xml terms and choose the data sources and 
+        visualization that you like most.
+    </description>
     
     <licenses>
         <license>
@@ -24,19 +31,12 @@
             <timezone>-3</timezone>
         </developer>
     </developers>
-
+    
     <modules>
         <module>modules/jpm-core</module>
         <module>modules/jpm-hibernate</module>
+        <module>modules/jpm-jpos</module>
         <module>modules/jpm-struts1</module>
         <module>modules/jpm-test</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>

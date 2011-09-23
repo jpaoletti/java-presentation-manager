@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presentation-manager>
-    <property name="debug" value="true"/>
-    <property name="appversion" value="1.1.0"/>
+    <property name="appversion" value="1.0.0"/>
+    <property name="logger" value="jpm"/>
     <property name="login-required" value="false"/>
     <property name="ignore-db" value="true"/>
     <property name="template" value="default"/>

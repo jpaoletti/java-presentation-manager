@@ -15,6 +15,7 @@ import jpaoletti.jpm.menu.*;
 import jpaoletti.jpm.parser.*;
 import jpaoletti.jpm.security.core.PMSecurityConnector;
 import jpaoletti.jpm.util.Properties;
+import org.apache.log4j.Logger;
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**
@@ -23,14 +24,13 @@ import org.apache.commons.beanutils.PropertyUtils;
  */
 public class PresentationManager extends Observable {
 
+    /** Singleton */
+    private static PresentationManager instance;
     /**  Hash value for parameter encrypt  */
     public static String HASH = "abcde54321poiuy96356abcde54321poiuy96356";
-    /** Singleton */
-    public static PresentationManager pm;
     private static Long sessionIdSeed = 0L;
     private Properties cfg;
-    private static final String TAB = "    ";
-    private static final String ERR = " ==>";
+    private Logger logger;
     private Map<Object, Entity> entities;
     private Map<String, MenuItemLocation> locations;
     private Map<Object, Monitor> monitors;
@@ -44,68 +44,82 @@ public class PresentationManager extends Observable {
     /**
      * Initialize the Presentation Manager singleton
      * @param configurationFilename File name for a configuration file
+     * @param log a PrintStream for logs
+     * 
      * @return true if initialization was success, false otherwies
      */
-    public static boolean start(final String configurationFilename) throws Exception {
-        pm = new PresentationManager();
-        return pm.initialize(configurationFilename);
+    public static boolean start(final String configurationFilename) {
+        try {
+            if (instance == null) {
+                instance = new PresentationManager();
+            }
+            final boolean result = instance.initialize(configurationFilename);
+            if (!result) {
+                instance = null;
+            }
+            return result;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    /**
+     * @return true if jpm is active
+     */
+    public static boolean isActive() {
+        return instance != null;
     }
 
     /**
      * Initialize the Presentation Manager.
-     * @param configurationFilename File name for a configuration file
+     * 
+     * @param cfgFilename File name for a configuration file
+     * @param log a PrintStream for logs
+     * 
      * @return true if initialization was success, false otherwies
      */
-    public boolean initialize(final String configurationFilename) throws Exception {
+    public boolean initialize(final String cfgFilename) throws Exception {
         notifyObservers();
-        final MainParser mainParser = new MainParser();
-        this.cfg = (Properties) mainParser.parseFile(configurationFilename);
+        this.cfg = (Properties) new MainParser().parseFile(cfgFilename);
+        logger = Logger.getLogger(getCfg().getProperty("logger", "jPM"));
         error = false;
-
-        final StringBuilder log = new StringBuilder();
-        log.append("Presentation Manager activated\n");
         try {
-            log.append(TAB + "<configuration>\n");
-
             try {
                 Class.forName(getDefaultDataAccess());
-                logItem(log, "Default Data Access", getDefaultDataAccess(), "*");
+                logItem("Default Data Access", getDefaultDataAccess(), "*");
             } catch (Exception e) {
-                logItem(log, "Default Data Access", getDefaultDataAccess(), "?");
+                logItem("Default Data Access", getDefaultDataAccess(), "?");
             }
 
-            logItem(log, "Template", getTemplate(), "*");
-            logItem(log, "Menu", getMenu(), "*");
-            logItem(log, "Application version", getAppversion(), "*");
-            logItem(log, "Title", getTitle(), "*");
-            logItem(log, "Subtitle", getSubtitle(), "*");
-            logItem(log, "Contact", getContact(), "*");
-            logItem(log, "Login Required", Boolean.toString(isLoginRequired()), "*");
-            logItem(log, "Default Converter", getDefaultConverterClass(), "*");
+            logItem("Template", getTemplate(), "*");
+            logItem("Menu", getMenu(), "*");
+            logItem("Application version", getAppversion(), "*");
+            logItem("Title", getTitle(), "*");
+            logItem("Subtitle", getSubtitle(), "*");
+            logItem("Contact", getContact(), "*");
+            logItem("Login Required", Boolean.toString(isLoginRequired()), "*");
+            logItem("Default Converter", getDefaultConverterClass(), "*");
 
             persistenceManager = cfg.getProperty("persistence-manager", "jpaoletti.jpm.core.PersistenceManagerVoid");
             try {
                 newInstance(persistenceManager);
-                logItem(log, "Persistance Manager", persistenceManager, "*");
+                logItem("Persistance Manager", persistenceManager, "*");
             } catch (Exception e) {
                 error = true;
-                logItem(log, "Persistance Manager", persistenceManager, "?");
+                logItem("Persistance Manager", persistenceManager, "?");
             }
-            log.append(TAB + "<configuration>\n");
-
-            loadEntities(log);
-            loadMonitors(log);
-            loadConverters(log);
-            loadLocations(log);
+            loadEntities();
+            loadMonitors();
+            loadConverters();
+            loadLocations();
             createSessionChecker();
         } catch (Exception exception) {
             error(exception);
             error = true;
         }
         if (error) {
-            log.append("error: One or more errors were found. Unable to start jPM");
+            error("error: One or more errors were found. Unable to start jPM");
         }
-        info(log);
         return !error;
     }
 
@@ -125,27 +139,12 @@ public class PresentationManager extends Observable {
         return cfg.getProperty("appversion", "1.0.0");
     }
 
-    /**
-     * If debug flag is active, create a debug information log
-     * 
-     * @param invoquer The invoquer of the debug
-     * @param o Object to log
-     */
-    public void debug(Object invoquer, Object o) {
-        if (!isDebug()) {
-            return;
-        }
-        System.out.println("[" + invoquer.getClass().getName() + "]");
-        System.out.println(o);
-    }
-
     protected String getDefaultConverterClass() {
         return getCfg().getProperty("default-converter");
     }
 
-    private void loadMonitors(StringBuilder log) {
+    private void loadMonitors() {
         PMParser parser = new MonitorParser();
-        log.append(TAB + "<monitors>\n");
         final Map<Object, Monitor> result = new HashMap<Object, Monitor>();
         final List<String> monitorNames = getAll("monitor");
         for (String monitorName : monitorNames) {
@@ -157,14 +156,13 @@ public class PresentationManager extends Observable {
                 Thread thread = new Thread(m);
                 m.setThread(thread);
                 thread.start();
-                logItem(log, m.getId(), m.getSource().getClass().getName(), "*");
+                logItem("[Monitor] " + m.getId(), m.getSource().getClass().getName(), "*");
             } catch (Exception exception) {
                 error(exception);
-                logItem(log, monitorName, null, "!");
+                logItem("[Monitor] " + monitorName, null, "!");
             }
         }
         monitors = result;
-        log.append(TAB + "</monitors>\n");
     }
 
     /**
@@ -174,27 +172,23 @@ public class PresentationManager extends Observable {
      * @param s2 Extra description
      * @param symbol Status symbol
      */
-    public static void logItem(StringBuilder log, String s1, String s2, String symbol) {
-        log.append(String.format("%s%s(%s) %-25s %s\n", TAB, TAB, symbol, s1, (s2 != null) ? s2 : ""));
+    public void logItem(String s1, String s2, String symbol) {
+        info(String.format("(%s) %-25s %s", symbol, s1, (s2 != null) ? s2 : ""));
     }
 
-    private void loadLocations(StringBuilder log) {
-        log.append(TAB + "<locations>\n");
-        MenuItemLocationsParser parser = new MenuItemLocationsParser(log, "jpm-locations.xml");
+    private void loadLocations() {
+        MenuItemLocationsParser parser = new MenuItemLocationsParser("jpm-locations.xml");
         locations = parser.getLocations();
         if (locations == null || locations.isEmpty()) {
-            log.append(TAB + TAB + ERR + "No location defined!\n");
-            error = true;
+            warn("No locations defined!");
         }
         if (parser.hasError()) {
             error = true;
         }
-        log.append(TAB + "</locations>\n");
     }
 
-    private void loadEntities(StringBuilder log) {
+    private void loadEntities() {
         EntityParser parser = new EntityParser();
-        log.append(TAB + "<entities>\n");
         if (entities == null) {
             entities = new HashMap<Object, Entity>();
         } else {
@@ -209,22 +203,21 @@ public class PresentationManager extends Observable {
                     entities.put(e.getId(), e);
                     entities.put(ss.indexOf(s), e);
                     if (e.isWeak()) {
-                        logItem(log, e.getId(), e.getClazz(), "\u00b7");
+                        logItem("[Entity] " + e.getId(), e.getClazz(), "\u00b7");
                     } else {
-                        logItem(log, e.getId(), e.getClazz(), "*");
+                        logItem("[Entity] " + e.getId(), e.getClazz(), "*");
                     }
 
                 } catch (ClassNotFoundException cnte) {
-                    logItem(log, e.getId(), e.getClazz(), "?");
+                    logItem("[Entity] " + e.getId(), e.getClazz(), "?");
                     error = true;
                 }
             } catch (Exception exception) {
                 error(exception);
-                logItem(log, s, "???", "!");
+                logItem("[Entity] " + s, "???", "!");
                 error = true;
             }
         }
-        log.append(TAB + "</entities>\n");
     }
 
     /**
@@ -367,23 +360,39 @@ public class PresentationManager extends Observable {
      * @return
      */
     public static PresentationManager getPm() {
-        return pm;
+        return instance;
     }
 
     /* Loggin helpers*/
+    /**
+     * If debug flag is active, create a debug information log
+     * 
+     * @param invoquer The invoquer of the debug
+     * @param o Object to log
+     */
+    public void debug(Object invoquer, Object o) {
+        if (logger.isDebugEnabled()) {
+            logger.debug("[" + invoquer.getClass().getName() + "] " + o);
+        }
+    }
+
     /**
      * Generate an info entry on the local logger
      * @param o Object to log
      */
     public void info(Object o) {
-        System.out.println(o);
+        logger.info(o);
     }
 
     /**Generate a warn entry on the local logger
      * @param o Object to log
      */
     public void warn(Object o) {
-        System.out.println(o);
+        if (o instanceof Throwable) {
+            logger.warn(o, (Throwable) o);
+        } else {
+            logger.warn(o);
+        }
     }
 
     /**Generate an error entry on the local logger
@@ -391,9 +400,10 @@ public class PresentationManager extends Observable {
      */
     public void error(Object o) {
         if (o instanceof Throwable) {
-            ((Throwable) o).printStackTrace();
+            logger.error(o, (Throwable) o);
+        } else {
+            logger.error(o);
         }
-        System.err.println(o);
     }
 
     /* Helpers for bean management */
@@ -459,23 +469,20 @@ public class PresentationManager extends Observable {
         }
     }
 
-    private void loadConverters(StringBuilder evt) {
+    private void loadConverters() {
         final PMParser parser = new ExternalConverterParser();
-        evt.append(TAB + "<external-converters>\n");
         externalConverters = new ArrayList<ExternalConverters>();
         final List<String> ss = getAll("external-converters");
         for (String s : ss) {
             try {
                 final ExternalConverters ec = (ExternalConverters) parser.parseFile(s);
                 getExternalConverters().add(ec);
-                logItem(evt, s, null, "*");
+                logItem("[ExternalConverter] " + s, null, "*");
             } catch (Exception exception) {
                 error(exception);
-                exception.printStackTrace();
-                logItem(evt, s, null, "!");
+                logItem("[ExternalConverter] " + s, null, "!");
             }
         }
-        evt.append(TAB + "</external-converters>\n");
     }
 
     public Converter findExternalConverter(String id) {

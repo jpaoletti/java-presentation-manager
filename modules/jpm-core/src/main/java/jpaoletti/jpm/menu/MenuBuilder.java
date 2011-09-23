@@ -37,7 +37,7 @@ public class MenuBuilder extends DefaultHandler {
             db.parse(ResourceManager.getInputStream(conf), this);
             return menu;
         } catch (Exception e) {
-            PresentationManager.pm.error(e);
+            PresentationManager.getPm().error(e);
         }
         return null;
     }

@@ -17,7 +17,7 @@ public abstract class PMCoreObject implements PMCoreConstants {
      */
     public void debug(String s) {
         if (getDebug()) {
-            PresentationManager.pm.debug(this, s);
+            PresentationManager.getPm().debug(this, s);
         }
     }
 

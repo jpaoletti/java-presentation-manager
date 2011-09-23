@@ -1,5 +1,6 @@
 package jpaoletti.jpm;
 
+import org.apache.log4j.BasicConfigurator;
 import java.util.List;
 import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.Field;
@@ -29,7 +30,7 @@ public class InitTest {
         final PresentationManager pm = getPm();
 
         assertTrue("jPM Initialization process",
-                pm.initialize("jpm-config.xml"));
+                PresentationManager.isActive());
         assertEquals("We must have 1 entity and its asociated",
                 2, pm.getEntities().size());
         assertEquals("We must have 1 test location",
@@ -88,6 +89,7 @@ public class InitTest {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        BasicConfigurator.configure();
     }
 
     @AfterClass
@@ -95,7 +97,7 @@ public class InitTest {
     }
 
     protected PresentationManager getPm() throws Exception {
-        if (PresentationManager.getPm() == null) {
+        if (!PresentationManager.isActive()) {
             PresentationManager.start("jpm-config.xml");
         }
         return PresentationManager.getPm();
