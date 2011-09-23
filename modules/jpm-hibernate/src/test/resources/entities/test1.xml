@@ -1,0 +1,6 @@
+<?xml version='1.0'?>
+<entity id="test1" clazz="jpaoletti.jpm.hibernate.model.Test1">
+    <operations/>
+    <field id="id" display="all" />
+    <field id="description" display="all" />
+</entity>

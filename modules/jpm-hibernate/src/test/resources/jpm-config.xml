@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation-manager>
+    <property name="debug" value="true"/>
+    <property name="appversion" value="1.0.0"/>
+    <property name="login-required" value="false"/>
+    <property name="ignore-db" value="false"/>
+    <property name="template" value="default"/>
+    <property name="persistence-manager" value="jpaoletti.jpm.hibernate.core.PersistenceManager"/>
+    <property name="default-data-access" value="jpaoletti.jpm.hibernate.core.DataAccess"/>
+    
+    <property name="entity" value="entities/test1.xml" />
+</presentation-manager>
