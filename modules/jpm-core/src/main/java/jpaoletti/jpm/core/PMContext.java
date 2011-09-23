@@ -420,4 +420,8 @@ public class PMContext {
         }
         return false;
     }
+
+    public Map<String, Object> getMap() {
+        return contents;
+    }
 }
