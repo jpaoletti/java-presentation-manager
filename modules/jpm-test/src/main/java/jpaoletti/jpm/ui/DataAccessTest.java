@@ -31,7 +31,9 @@ public abstract class DataAccessTest implements DataAccess {
             fill();
         }
         List result = new ArrayList(list);
-        Collections.sort(result, new TestComparator(sort.getFieldId(), sort.isAsc()));
+        if (sort != null) {
+            Collections.sort(result, new TestComparator(sort.getFieldId(), sort.isAsc()));
+        }
         int f = (from == null) ? 0 : from;
         int c = (int) ((count == null) ? count(ctx) : count);
         System.out.println(String.format("count: %d ; c: %d, f: %d", count(ctx), c, f));
