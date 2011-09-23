@@ -26,8 +26,7 @@ public class InitTest {
 
     @Test
     public void jPMInitialization() throws Exception {
-        PresentationManager.pm = new PresentationManager();
-        final PresentationManager pm = PresentationManager.getPm();
+        final PresentationManager pm = getPm();
 
         assertTrue("jPM Initialization process",
                 pm.initialize("jpm-config.xml"));
@@ -67,7 +66,7 @@ public class InitTest {
         final PMContext ctx = new PMContext();
         ctx.setEntityInstance(item1);
         final String res = (String) field.visualize(ctx, operation, getTestEntity());
-        assertEquals("Converted item must be 'PRE 1 SUF'", 
+        assertEquals("Converted item must be 'PRE 1 SUF'",
                 res, "PRE 1 SUF");
     }
 
@@ -79,7 +78,14 @@ public class InitTest {
     public static void tearDownClass() throws Exception {
     }
 
-    protected Entity getTestEntity() {
-        return PresentationManager.getPm().getEntity("jpmtest");
+    protected PresentationManager getPm() throws Exception {
+        if (PresentationManager.getPm() == null) {
+            PresentationManager.start("jpm-config.xml");
+        }
+        return PresentationManager.getPm();
+    }
+
+    protected Entity getTestEntity() throws Exception {
+        return getPm().getEntity("jpmtest");
     }
 }

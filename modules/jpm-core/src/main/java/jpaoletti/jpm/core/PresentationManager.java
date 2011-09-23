@@ -42,11 +42,19 @@ public class PresentationManager extends Observable {
     private PMSecurityConnector securityConnector;
 
     /**
-     * Initialize the Presentation Manager
-     * @param cfg Configuration from bean
-     * @param log Logger from bean
-     * @param service Bean
-     * @return
+     * Initialize the Presentation Manager singleton
+     * @param configurationFilename File name for a configuration file
+     * @return true if initialization was success, false otherwies
+     */
+    public static boolean start(final String configurationFilename) throws Exception {
+        pm = new PresentationManager();
+        return pm.initialize(configurationFilename);
+    }
+
+    /**
+     * Initialize the Presentation Manager.
+     * @param configurationFilename File name for a configuration file
+     * @return true if initialization was success, false otherwies
      */
     public boolean initialize(final String configurationFilename) throws Exception {
         notifyObservers();

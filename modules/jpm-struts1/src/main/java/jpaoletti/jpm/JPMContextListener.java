@@ -19,9 +19,7 @@ public class JPMContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
-            PresentationManager.pm = new PresentationManager();
-            final PresentationManager pm = PresentationManager.getPm();
-            pm.initialize("jpm-config.xml");
+            PresentationManager.start("jpm-config.xml");
         } catch (Exception ex) {
             Logger.getLogger(JPMContextListener.class.getName()).log(Level.SEVERE, null, ex);
         }
