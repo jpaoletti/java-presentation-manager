@@ -473,9 +473,10 @@ table.display th.jpm-list-operation-bar{
     text-align: center;
     width: 1px;
     font-weight: normal;
+    padding: 1px 7px 1px 7px;
 }
 
-.operationspopup img{
+table.display th.jpm-list-operation-bar img{
     vertical-align: middle;
 }
 

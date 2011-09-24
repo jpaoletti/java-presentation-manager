@@ -12,9 +12,9 @@
     </c:if>
     <c:if test="${empty pmsession}">
         <div id="login">
-            <h2 class="title"><pmfn:message key="login"/> </h2>
+            <h2 class="title"><pmfn:message key="login"/></h2>
             <div class="content ui-widget">
-                <form class="ui-widget-content" action="${es.context_path}/login.do" method="POST">
+                <form class="ui-widget-header" action="${es.context_path}/login.do" method="POST">
                     <fieldset>
                         <c:if test="${pm.loginRequired}">
                             <p>
@@ -39,7 +39,7 @@
                                            tabindex="2" />
                                 </label>
                             </p>
-                        </c:if>
+                        </c:if><br/>
                         <button class="submit"><pmfn:message key="login.sign.in" /></button>
                     </fieldset>
                 </form>
