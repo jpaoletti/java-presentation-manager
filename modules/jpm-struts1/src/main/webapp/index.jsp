@@ -1,12 +1,6 @@
 <%@include file="inc/tag-libs.jsp" %>
-<script type="text/javascript" charset="utf-8">
-    function loadPage(url){
-        var mf = window.frames["mainframe"];
-        mf.location = url;
-        $(mf).focus();
-    }
-</script>
 <c:if test="${not empty pm}">
+    <style type="text/css">body{height: 100%;}</style>
     <pm:page title="titles.index" >
         <script type="text/javascript" src="js/expand.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
@@ -62,13 +56,11 @@
                         </div>
                     </c:if>
                     <c:if test="${empty pmsession}">
-                        <iframe id="mainframe" name="mainframe" frameborder="0"  width="100%" height="75%" src="${es.context_path}/pages/login.jsp" >
-                        </iframe>
+                        <iframe id="mainframe" name="mainframe" frameborder="0"  src="${es.context_path}/pages/login.jsp"></iframe>
                     </c:if>
 
                     <c:if test="${not empty pmsession}">
-                        <iframe id="mainframe" name="mainframe" frameborder="0"  width="100%" height="75%" src="${es.context_path}/${es.welcomePage}">
-                        </iframe>
+                        <iframe id="mainframe" name="mainframe" frameborder="0"  src="${es.context_path}/${es.welcomePage}"></iframe>
                     </c:if>
                 </div>
             </div>

@@ -1,21 +1,32 @@
-* {
+*{
+    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
+}
+
+html{
     margin: 0;
     padding: 0;
 }
 
-html{
-    height: 100%;
+body,table,td,th,p,div,form,label,caption,a{
+    font-size: 10px;
 }
 
 body {
-    font: normal small Arial, Helvetica, sans-serif;
-    background: #DDDDDD;
+    margin: 0;
+    padding: 0;
+    background: #F7F7F7;
     color: #111;
-    height: 100%;
+}
+
+form{
+    overflow: auto;
+    width: auto;
 }
 
 fieldset {
     border: none;
+    width: auto;
+    overflow: auto;
 }
 
 legend {
@@ -24,12 +35,12 @@ legend {
 
 h1.title , h2.title , h3.title  {
     margin: 0;
-    color: #11A6D4;
+    color: #2779AA;
 }
 
 h2.title  {
     margin-bottom: .5em;
-    font-size: 1.8em;
+    font-size: 1.6em;
 }
 
 h3.title {
@@ -42,9 +53,6 @@ p, blockquote, ul, ol {
     line-height: 1.8em;
 }
 
-blockquote {
-}
-
 ul {
     margin-left: 2em;
     list-style: square;
@@ -54,7 +62,6 @@ ol {
     margin-left: 2em;
     list-style: lower-roman;
 }
-
 
 a {
     color: #EA672E;
@@ -69,6 +76,105 @@ img {
     border: none;
 }
 
+/******************************************************************************/
+
+table.std-table{
+    text-align: left;
+    border-collapse: collapse;
+}
+
+table.std-table th{
+    background: url("images/ui-bg_highlight-soft_100_deedf7_1x100.png") repeat-x scroll 50% 50% #DEEDF7;
+    border: 1px solid #AED0EA;
+    color: #222222;
+    font-weight: bold;
+    min-width: 150px;
+    font-size: 1.1em;
+    padding: 2px 2px 2px 5px;
+}
+
+table.std-table td{
+    min-width: 175px;
+    padding: 2px 2px 2px 6px;
+    /*    background: #e8edff;*/
+    background-color: white;
+    color: #669;
+    border: 1px solid #AED0EA;
+}
+table.std-table tr:hover td{
+    background: #d0dafd;
+    color: #339;
+}
+
+table.std-table tfoot tr td{
+    background: #ddd;
+}
+
+table.pagination{
+    border-width:1px;
+    border-color:#888888;
+    border-style:solid;
+    text-align: center;
+    width: 75%;
+}
+table.sort_table{
+    border-width:1px;
+    border-color:#888888;
+    border-style:solid;
+    text-align: center;
+    float: left;
+    width: 25%;
+}
+
+/******************************************************************************/
+/** Buttons **/
+.button {
+    background-position: 4px;
+    background-repeat:no-repeat;
+    text-indent:15px;
+    min-width:75px;
+}
+
+a:hover {
+    background-color:#F3F3E9;
+    color:#737373;
+}
+
+.add {
+    background:url(img/add.gif) no-repeat 10px 8px;
+}
+.delete {
+    background:url(img/delete.gif) no-repeat 10px 8px;
+}
+.user {
+    background:url(img/user.gif) no-repeat 10px 8px;
+}
+.alert {
+    background:url(img/alert.gif) no-repeat 10px 8px;
+}
+.msg {
+    background:url(img/msg.gif) no-repeat 10px 8px;
+}
+.download {
+    background:url(img/download.gif) no-repeat 10px 8px;
+}
+.show {
+    background:url(img/show.gif) no-repeat 10px 8px;
+}
+.edit {
+    background:url(img/edit.gif) no-repeat 10px 8px;
+}
+.info {
+    background:url(img/info.gif) no-repeat 10px 8px;
+}
+.list {
+    background:url(img/list.gif) no-repeat 10px 8px;
+}
+.clearfilter{
+    background:url(img/clearfilter.gif) no-repeat 10px 8px;
+}
+
+/******************************************************************************/
 /* Index styles */
 
 .show_hide_btn {
@@ -88,11 +194,17 @@ img {
     height: 10px;
 }
 
+#mainframe{
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
 .index_layout{
     position: relative;
     min-height: 100%;
     height: auto !important;
-    height: 100%;
 }
 
 .index_layout_header{
@@ -101,53 +213,24 @@ img {
 
 .index_layout_content{
     margin: 0 auto;
-    padding: 20px 0;
-    padding-bottom: 15px;
+    padding: 20px 0px 15px;
     height: 82%;
 }
 
 .index_layout_footer{
-    background: #F7F7F7;
+    background: #414141;
+    color: white;
     width: 100%;
     position: absolute;
     bottom: 1px !important;
-    bottom: -1px;
 }
-
-.red{
-    color: red;
-}
-
-/* Boxed Style */
 
 .boxed {
     margin-bottom: 1em;
-    /*background: #F7F7F7 url(images/img07.gif) repeat-x;
-	border: 1px solid #CCCCCC;*/
-}
-
-.boxed .title {
-    height: 29px;
-    text-transform: uppercase;
-    font-size: 1.2em;
-    color: #777777;
-    margin: 0px 0px 5px 5px;
 }
 
 .boxed .content {
     padding: 10px;
-}
-
-#operation_bar {
-    border: 1px solid #888888;
-    height:22px;
-    margin:0 0 0 10px;
-    padding:5px;
-    width:auto;
-}
-
-.operationspopup{
-    /*float:left;*/
 }
 
 #page-container{
@@ -168,7 +251,6 @@ img {
     margin: 0 auto;
     border-bottom:  2px solid black;
     margin: 0px 0px 1px 0px;
-    background: #F7F7F7;
 }
 
 /* Header > Logo */
@@ -178,7 +260,7 @@ img {
 }
 
 #logo h1 {
-    font-size: 2em;
+    font-size: 3em;
 }
 
 #logo h2 {
@@ -191,10 +273,9 @@ img {
     color: black;
 }
 
-/* Header > Top Menu */
-
 #topmenu {
     float: right;
+    margin-right: 20px;
 }
 
 #topmenu ul {
@@ -236,14 +317,6 @@ img {
     background: url(images/img05.gif) no-repeat left center;
 }
 
-/* Content */
-
-#content {
-    margin: 0 auto;
-    padding: 20px 0;
-    padding-bottom: 15px;
-}
-
 /* Content > Main */
 
 #main {
@@ -251,98 +324,25 @@ img {
     width: 460px;
 }
 
-/* Content > Main > Example */
-
-#example {
-}
-
-/* Content > Main > Welcome */
-
 #welcome {
     margin: 0 0 3em 0;
     padding: 10px 0 1.5em 0;
     border-bottom: 1px solid #CCCCCC;
 }
 
-/* Content > Sidebar */
-
-#sidebar {
-    float: right;
-    width: 220px;
-}
-
-/* Content > Sidebar > Login */
-
 #login {
     width: 220px;
+    margin: 30px;
 }
 
 #login label {
     display: block;
 }
 
-#login #username, #login #password {
-    width: 180px;
-    margin-bottom: .5em;
-    padding: 2px 5px;
-    border: 1px solid #CCCCCC;
-    font: normal small Arial, Helvetica, sans-serif;
-    color: #999999;
-}
-
-#login #submit {
-    float: right;
-    width: 60px;
-    margin-right: 7px;
-    border: 1px solid #CCCCCC;
-    border-top-color: #FFFFFF;
-    border-left-color: #FFFFFF;
-    font: normal small Arial, Helvetica, sans-serif;
-}
-
 #login p {
     margin: 0;
     padding-top: .2em;
-    font-size: x-small;
 }
-
-/* Content > Sidebar > Updates*/
-
-#updates {
-}
-
-#updates ul {
-    margin: 0;
-    list-style: none;
-}
-
-#updates li {
-    margin-bottom: 1em;
-}
-
-#updates h3 {
-    margin: 0;
-    padding: 0 0 0 10px;
-    background: url(images/img09.gif) no-repeat left center;
-    font-size: x-small;
-}
-
-#updates p {
-    margin: 0;
-    padding: 0 0 0 10px;
-    line-height: normal;
-    font-size: .85em;
-}
-
-#updates a {
-    text-decoration: none;
-}
-
-/* Content > Sidebar > Partners*/
-
-#partners {
-}
-
 
 /* Footer > Legal */
 
@@ -384,19 +384,7 @@ img {
 
 #appversion{
     float: left;
-    font-size: 80%;
-    color: graytext;
     padding: 5px;
-}
-
-.red{
-    background-color: red;
-    color: white;
-}
-
-.green{
-    background-color: lime;
-    color: black;
 }
 
 #status{
@@ -457,15 +445,10 @@ img {
     padding: 12px;
 }
 
-.jqmOverlay { background-color: #000; }
-
-/* Fixed posistioning emulation for IE6
-     Star selector used to hide definition from browsers other than IE6
-     For valid CSS, use a conditional include instead */
-* html .jqmWindow {
-    position: absolute;
-    top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');
+.jqmOverlay {
+    background-color: #000;
 }
+
 
 .monitor_window{
     height: 80%;
@@ -474,9 +457,30 @@ img {
     background-color: #ECF8E0;
     color:navy;
 }
+
 #navigation_bar{
     padding: 3px;
     margin:3px;
+}
+
+#operations_bar{
+    margin: 0px 5px 0px 5px;
+}
+
+table.display th.jpm-list-operation-bar{
+    color:gray; 
+    white-space: nowrap;
+    text-align: center;
+    width: 1px;
+    font-weight: normal;
+}
+
+.operationspopup img{
+    vertical-align: middle;
+}
+
+.jpm-list-operation-col{
+    width: 1px;
 }
 
 .tooltip{
@@ -517,19 +521,19 @@ img {
     padding-left: 50px;
 }
 
-#box-table-a td.pm_message_ERROR{
+table.std-table td.pm_message_ERROR{
     background-color: pink;
     border-right: red solid thick;
     border-bottom: red solid thin;
     color: red;
 }
-#box-table-a td.pm_message_WARN{
+table.std-table td.pm_message_WARN{
     background-color: yellow;
     border-right: orange solid thick;
     border-bottom: orange solid thin;
 }
 
-#box-table-a td.pm_message_INFO{
+table.std-table td.pm_message_INFO{
     background-color: lightcyan;
     border-right: blue solid thick;
     border-bottom: blue solid thin;
@@ -539,4 +543,21 @@ img {
 .operation_cell{
     color:gray;
     white-space: nowrap;
+}
+
+a.pagination span.ui-button-text{
+    padding-bottom: 0.1em;
+    padding-top: 0.1em;
+}
+
+/*** TEST STYLES FOR HIGHLIGHT **/
+
+.red{
+    background-color: red;
+    color: white;
+}
+
+.green{
+    background-color: lime;
+    color: black;
 }

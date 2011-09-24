@@ -1,6 +1,15 @@
 <%@include file="../inc/inc-full.jsp" %>
 <c:if test="${param.showbutton}">
-    <a href="${es.context_path}/list.do?pmid=${param.weakid}" class='button edit' > &nbsp;&nbsp; <pmfn:message key="${param.buttontext}" /></a>
+    <button id="weak${param.f}" class="button"><pmfn:message key="${param.buttontext}" /></button>
+    <script type="text/javascript">
+        PM_register(function(){
+            $("#weak${param.f}").button({
+                icons:{primary:'ui-icon-extlink'}
+            }).click(function(){
+                loadPage("${es.context_path}/list.do?pmid=${param.weakid}");
+            });
+        });
+    </script>
 </c:if>
 <c:if test="${param.showlist}">
     <div class="boxed">

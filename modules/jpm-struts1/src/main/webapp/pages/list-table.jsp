@@ -2,19 +2,19 @@
 <table id="list" class="display" >
     <thead>
         <tr>
-            <th scope="col" style="width:${ctx.entityContainer.list.operationColWidth}">&nbsp;</th>
+            <th scope="col" class="jpm-list-operation-col" style="width:${ctx.entityContainer.list.operationColWidth}">&nbsp;</th>
             <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><c:if test="${not empty field.width}"><th scope="col" style='width:${field.width}px;'></c:if><c:if test="${empty field.width}"><th scope="col"></c:if><pm:field-name entity="${entity}" field="${field}" /></th></c:forEach>
         </tr>
     </thead>
     <tbody id="list_body" >
         <c:forEach var="item" items="${contents}" varStatus="status" >
             <tr class="${pmfn:highlight(entity,null,item,null)}">
-                <td style="color:gray; white-space: nowrap;">
+                <th scope="row" class="jpm-list-operation-bar">
                     <c:if test="${ctx.entityContainer.list.hasSelectedScope}">
                         <input type="checkbox" id="selected_item" value="${fn:indexOf(contents,item)}" onchange="selectItem(this.value);" ${(fn:contains(ctx.entityContainer.selectedIndexes,fn:indexOf(contents,item)))?'checked':''} />
                     </c:if>
                     ${pmfn:rowNumber(ctx.entityContainer.list,item)}&nbsp;${pmfn:listItemOperations(ctx, contents, item)}
-                </td>
+                </th>
                 <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><td align="${field.align}"><pmfn:converted-item ctx="${ctx}" operation="${operation}" item="${item}" field="${field}" /></td>
                 </c:forEach>
             </tr>
@@ -23,10 +23,15 @@
     <tfoot>
         <c:if test="${ctx.entityContainer.list.searchable}">
             <tr>
-                <th><input type="hidden" name="search" class="search_init" /></th>
-                    <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
-                    <th><input type="text" name="search_<pm:field-name entity="${entity}" field="${field}" />" value="<pmfn:message key="list.input.search"/>" class="search_init" /></th>
-                    </c:forEach>
+                <th id="first_footer"></th>
+                <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
+                    <th>
+                        <input type="text" 
+                               name="search_<pm:field-name entity="${entity}" field="${field}" />" 
+                               value="<pmfn:message key="list.input.search"/>" class="search_init"
+                               />
+                    </th>
+                </c:forEach>
             </tr>
         </c:if>
     </tfoot>
@@ -39,5 +44,12 @@
         $(".confirmable_true").bind('click',function(){
             return confirm("<pmfn:message key='pm.operation.confirm.question' />");
         });
+        asInitVals["searchall"] = "<pmfn:message key='list.search.all' />";
+        asInitVals["search"] = "<pmfn:message key="list.input.search"/>";
+        $('#first_footer').append( $('#list_wrapper>#list_filter') );
+        $('#list_filter input')
+            .val("<pmfn:message key='list.search.all' />")
+            .addClass("search_init")
+            .attr("size","7");
     });
 </script>

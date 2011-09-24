@@ -1,5 +1,5 @@
-var oTable;
 var asInitVals = new Array();
+var oTable;
 var n = 0;
 	
 PM_register(function() {
@@ -31,25 +31,28 @@ PM_register(function() {
         $("tfoot input").keyup( function () {
             /* Filter on the column (the index) of this element */
             oTable.fnFilter( this.value, $("tfoot input").index(this)+n );
-        } );
+        });
 			
-        $("tfoot input").each( function (i) {
-            asInitVals[i+n] = this.value;
-        } );
-			
-        $("tfoot input").focus( function () {
+        $("tfoot input, #list_filter input").focus( function () {
             if ( this.className == "search_init" ){
                 this.className = "";
                 this.value = "";
             }
-        } );
+        });
 			
         $("tfoot input").blur( function (i) {
             if ( this.value == "" )	{
                 this.className = "search_init";
-                this.value = asInitVals[$("tfoot input").index(this)+n];
+                this.value = asInitVals["search"];
             }
-        } );
+        });
+
+        $("#list_filter input").blur( function (i) {
+            if ( this.value == "" )	{
+                this.className = "search_init";
+                this.value = asInitVals["searchall"];
+            }
+        });
     }
 			
 } );

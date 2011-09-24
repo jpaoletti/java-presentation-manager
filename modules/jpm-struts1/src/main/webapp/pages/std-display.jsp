@@ -4,12 +4,12 @@
     <div id="add" class="boxed">
         <pm:std-header ctx="${ctx}" />
         <c:if test="${not empty ctx.selected}">
-            <pm:std-form contextPath="${es.context_path}" entity="${ctx.entity}" operation="${ctx.operation}" editable="${ctx.map.editable}">
-                <table id="box-table-a">
+            <pm:std-form contextPath="${es.context_path}" entity="${ctx.entity}" operation="${ctx.operation}" editable="${ctx.map.editable}" resetable="true">
+                <table class="std-table">
                     <tbody id="list_body" >
                         <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
                             <tr>
-                                <th scope="row" width="175px">
+                                <th scope="row">
                                     <pm:field-name entity="${entity}" field="${field}" />
                                 </th>
                                 <td>

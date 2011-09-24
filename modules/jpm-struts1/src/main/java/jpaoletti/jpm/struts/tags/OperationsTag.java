@@ -3,7 +3,6 @@ package jpaoletti.jpm.struts.tags;
 import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
-import javax.servlet.jsp.JspWriter;
 import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.Operation;
 import jpaoletti.jpm.core.Operations;
@@ -21,6 +20,14 @@ import jpaoletti.jpm.struts.PMStrutsConstants;
  * @version v1.2
  *
  */
+/**
+ * Display an html div bar with the operations
+ *
+ * @author jpaoletti
+ * @since 15/09/2011
+ * @version v1.2
+ *
+ */
 public class OperationsTag extends PMTags {
 
     private boolean labels = true;
@@ -30,16 +37,34 @@ public class OperationsTag extends PMTags {
     @Override
     public int doStartTag() throws JspException {
         try {
+            final StringBuilder script = new StringBuilder("<script type='text/javascript'>\n");
+            script.append("PM_register(function(){\n");
+            script.append("    $('#jpm_btn_back').click(function(){\n");
+            script.append("        history.back();\n");
+            script.append("    }).button({\n");
+            script.append("        text: false, icons: {primary: 'ui-icon-arrowthickstop-1-w'}\n");
+            script.append("    });\n");
+            script.append("    $('#jpm_btn_refresh').click(function(){\n");
+            script.append("        location.reload(true);\n");
+            script.append("    }).button({\n");
+            script.append("        text: false, icons: {primary: 'ui-icon-refresh'}\n");
+            script.append("    });\n");
+
             if (getOperations() != null && getOperations().getOperations() != null && !getOperations().getOperations().isEmpty()) {
-                pageContext.getOut().println("<div id='operation_bar'>");
+                println("<div class='ui-widget-header ui-corner-all'>");
+                println("<button id='jpm_btn_back'>" + PresentationManager.getMessage("pm.title.back") + "</button>");
+                println("<button id='jpm_btn_refresh'>" + PresentationManager.getMessage("pm.title.refresh") + "</button>");
+
                 for (Operation operation : getOperations().getOperations()) {
                     if (getPmsession().getUser().hasPermission(operation.getPerm())) {
-                        processOperation(pageContext.getOut(), operation);
+                        processOperation(operation, script);
                     }
                 }
-                pageContext.getOut().println("</div>");
+                println("</div>");
+                script.append("\n});</script>");
+                println(script);
             } else {
-                pageContext.getOut().print("");
+                print("");
             }
         } catch (Exception ex) {
             throw new JspTagException("OperationsTag: " + ex.getMessage());
@@ -64,13 +89,9 @@ public class OperationsTag extends PMTags {
         return ctx.getPmsession();
     }
 
-    private void processOperation(JspWriter out, Operation operation) throws IOException {
+    private void processOperation(Operation operation, StringBuilder script) throws IOException {
         final String opid = operation.getId();
-
-        final String onclick = (operation.getConfirm())
-                ? "onclick=\"return confirm('" + PresentationManager.getMessage("pm.operation.confirm.question", "operation." + opid, "pm.entity." + getEntity().getId()) + "');\""
-                : "";
-        final String style = "background-image:url(" + getContextPath() + "/templates/" + getTemplate() + "/img/" + opid + ".gif);";
+        final String jqItem = "    $('#operation" + opid + "')";
         final String item = getCtx().getString(OperationCommandSupport.PM_ITEM);
         final String hreff = (operation.getUrl() != null)
                 ? operation.getUrl()
@@ -78,11 +99,23 @@ public class OperationsTag extends PMTags {
                 + "?pmid=" + getEntity().getId()
                 + ((item != null) ? "&item=" + item : "");
 
-        out.print("<a href='" + hreff + "' class='button' style=" + style + " id='operation" + opid + "' " + onclick + ">&nbsp;");
-        if (isLabels()) {
-            out.print(PresentationManager.getMessage("operation." + opid, "pm.entity." + getEntity().getId()));
+        script.append(jqItem);
+        script.append(".click(function(){");
+        if (operation.getConfirm()) {
+            final String question = PresentationManager.getMessage("pm.operation.confirm.question", "operation." + opid, "pm.entity." + getEntity().getId());
+            script.append("if(!confirm('").append(question).append("')) return false;\n");
         }
-        out.println("</a>");
+        script.append("loadPage('").append(hreff).append("');");
+        script.append("});\n");
+        script.append(jqItem);
+        script.append(".button();");
+
+        final String style = "\"background: url('" + getContextPath() + "/templates/" + getTemplate() + "/img/" + opid + ".gif') 5% 50% no-repeat;\"";
+        print("<button class='button' style=" + style + " id='operation" + opid + "'>&nbsp;");
+        if (isLabels()) {
+            print(PresentationManager.getMessage("operation." + opid, "pm.entity." + getEntity().getId()));
+        }
+        println("</button>");
     }
 
     public boolean isLabels() {

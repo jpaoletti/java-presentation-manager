@@ -5,7 +5,7 @@
 <div id="header">
     <pm:topmenu />
     <div id="logo">
-        <h1 class="title"><a href="${es.context_path}"><pmfn:message key="${pm.title}"/></a></h1>
+        <h1 class="title"><pmfn:message key="${pm.title}"/></h1>
         <h2 class="title"><pmfn:message key="${pm.subtitle}"/></h2>
     </div>
     <c:if test="${not empty pmsession.user}">

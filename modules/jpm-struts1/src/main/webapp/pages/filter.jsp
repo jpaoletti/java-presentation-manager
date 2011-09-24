@@ -2,12 +2,12 @@
 <pm:page title="titles.filter">
     <div id="add" class="boxed">
         <pm:std-header ctx="${ctx}" />
-        <pm:std-form contextPath="${es.context_path}" entity="${ctx.entity}" operation="${ctx.operation}" editable="true">
-            <table id="box-table-a">
+        <pm:std-form contextPath="${es.context_path}" entity="${ctx.entity}" operation="${ctx.operation}" editable="true" resetable="true">
+            <table class="std-table">
                 <tbody id="list_body" >
                     <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
                         <tr>
-                            <th scope="row" width="175px">
+                            <th scope="row">
                                 <pm:field-name entity="${entity}" field="${field}" />
                             </th>
                             <td>

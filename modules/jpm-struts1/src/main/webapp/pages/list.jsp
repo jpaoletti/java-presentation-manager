@@ -13,7 +13,7 @@
                 var sortable = false;
                 var paginable = false;
                 var texts = new Array(
-                "<pmfn:message key='list.search.all' />" ,
+                "" ,
                 "<pmfn:message key='list.first' />" ,
                 "<pmfn:message key='list.last' />" ,
                 "<pmfn:message key='list.next' />" ,

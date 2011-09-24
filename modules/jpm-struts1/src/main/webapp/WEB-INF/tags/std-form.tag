@@ -5,20 +5,23 @@
 <%@attribute name = "entity" required="true" type="jpaoletti.jpm.core.Entity" %>
 <%@attribute name = "operation" required="true" type="jpaoletti.jpm.core.Operation" %>
 <%@attribute name = "editable" required="true" type="java.lang.Boolean"  %>
-<c:if test="${editable}">
-    <form action="${contextPath}/${operation.id}.do?pmid=${entity.id}"  accept-charset="UTF-8" >
-        <input type="hidden" name="finish" value="yes" />
-        <fieldset>
-            <div class="content">
+<%@attribute name = "resetable" required="false" type="java.lang.Boolean"  %>
+<div class="content ui-widget">
+    <c:if test="${editable}">
+        <form action="${contextPath}/${operation.id}.do?pmid=${entity.id}"  accept-charset="UTF-8" >
+            <input type="hidden" name="finish" value="yes" />
+            <fieldset>
                 <jsp:doBody />
-                <input type="submit" id="${entity.id}_submit" value="<pmfn:message key="pm.struts.form.submit"/>" />
-                <input type="reset" id="${entity.id}_submit" value="<pmfn:message key="pm.struts.form.reset" />" />
-            </div>
-        </fieldset>
-    </form>
-</c:if>
-<c:if test="${not editable}">
-    <div class="content">
+                <br/>
+                <button class="submit" type="submit" id="${entity.id}_submit"><pmfn:message key="pm.struts.form.submit"/></button>
+                <c:if test="${resetable}">
+                    &nbsp;&nbsp;
+                    <button class="reset" type="submit" id="${entity.id}_reset"><pmfn:message key="pm.struts.form.reset"/></button>
+                </c:if>
+            </fieldset>
+        </form>
+    </c:if>
+    <c:if test="${not editable}">
         <jsp:doBody />
-    </div>
-</c:if>
+    </c:if>
+</div>
