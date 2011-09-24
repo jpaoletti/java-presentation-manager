@@ -3,7 +3,6 @@ package jpaoletti.jpm.core;
 import java.util.HashSet;
 import java.util.Set;
 
-
 /**
  * @author jpaoletti
  * 
@@ -32,10 +31,10 @@ public class EntityContainer {
      */
     public EntityContainer(Entity entity, String sid) {
         super();
-        setEntity(entity);
-        setSid(sid);
-        setId(buildId(sid, entity.getId()));
-        setSelectedNew(false);
+        this.entity = entity;
+        this.sid = sid;
+        this.id = buildId(entity.getId());
+        this.selectedNew = false;
     }
 
     /**
@@ -45,7 +44,7 @@ public class EntityContainer {
      * @param eid The entity id
      * @return The resulting string
      */
-    public static String buildId(String sid, String eid) {
+    public static String buildId(String eid) {
         //return sid.substring(0,20) + eid.hashCode() + sid.substring(20);
         return eid;
     }
@@ -209,5 +208,4 @@ public class EntityContainer {
     public void setOperation(Operation operation) {
         this.operation = operation;
     }
-
 }

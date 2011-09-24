@@ -24,10 +24,13 @@ import org.apache.commons.beanutils.PropertyUtils;
  */
 public class PresentationManager extends Observable {
 
+    private static final String DEFAULT_CONVERTER = "default-converter";
+    private static final String PERSISTENCE_MANAGER = "persistence-manager";
+    private static final String SECURITY_CONNECTOR = "security-connector";
+    private static final String HASH = "abcde54321poiuy96356abcde54321poiuy96356"; //TODO
     /** Singleton */
     private static PresentationManager instance;
     /**  Hash value for parameter encrypt  */
-    public static String HASH = "abcde54321poiuy96356abcde54321poiuy96356";
     private static Long sessionIdSeed = 0L;
     private Properties cfg;
     private Logger logger;
@@ -99,10 +102,22 @@ public class PresentationManager extends Observable {
             logItem("Title", getTitle(), "*");
             logItem("Subtitle", getSubtitle(), "*");
             logItem("Contact", getContact(), "*");
-            logItem("Login Required", Boolean.toString(isLoginRequired()), "*");
             logItem("Default Converter", getDefaultConverterClass(), "*");
 
-            persistenceManager = cfg.getProperty("persistence-manager", "jpaoletti.jpm.core.PersistenceManagerVoid");
+            final String _securityConnector = getCfg().getProperty(SECURITY_CONNECTOR);
+            if (_securityConnector != null) {
+                try {
+                    securityConnector = (PMSecurityConnector) newInstance(_securityConnector);
+                    logItem("Security Connector", _securityConnector, "*");
+                } catch (Exception e) {
+                    error = true;
+                    logItem("Security Connector", _securityConnector, "?");
+                }
+            } else {
+                securityConnector = null;
+            }
+
+            persistenceManager = cfg.getProperty(PERSISTENCE_MANAGER, "jpaoletti.jpm.core.PersistenceManagerVoid");
             try {
                 newInstance(persistenceManager);
                 logItem("Persistance Manager", persistenceManager, "*");
@@ -142,7 +157,7 @@ public class PresentationManager extends Observable {
     }
 
     protected String getDefaultConverterClass() {
-        return getCfg().getProperty("default-converter");
+        return getCfg().getProperty(DEFAULT_CONVERTER);
     }
 
     private void loadMonitors() {
@@ -292,7 +307,7 @@ public class PresentationManager extends Observable {
     private Entity lookupEntity(String sid) {
         for (Integer i = 0; i < getEntities().size(); i++) {
             Entity e = getEntities().get(i);
-            if (e != null && sid.compareTo(EntityContainer.buildId(HASH, e.getId())) == 0) {
+            if (e != null && sid.compareTo(EntityContainer.buildId(e.getId())) == 0) {
                 return getEntity(e.getId());
             }
         }
@@ -338,7 +353,7 @@ public class PresentationManager extends Observable {
      * @return
      */
     public boolean isLoginRequired() {
-        return "true".equalsIgnoreCase(cfg.getProperty("login-required", "true"));
+        return securityConnector != null;
     }
 
     /**

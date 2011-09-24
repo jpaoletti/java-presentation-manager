@@ -2,10 +2,12 @@
 <presentation-manager>
     <property name="appversion" value="1.0.0"/>
     <property name="logger" value="jpm"/>
-    <property name="login-required" value="false"/>
     <property name="ignore-db" value="true"/>
     <property name="template" value="default"/>
 
+    <property name="security-connector" 
+              value="jpaoletti.jpm.security.core.PMVoidSecurityConnector"/>
+              
     <!-- External Converters -->
     <property name="external-converters" value="jpm-econverters.xml"/>
     
