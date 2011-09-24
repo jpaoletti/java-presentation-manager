@@ -33,7 +33,9 @@ definition tools. The other modules are implementations of some of the core aspe
 the data access.
 
 The default visual implementation is based on Struts 1. This is going to change soon to a pure jsp implementation
-with a custom MVC system. To use it you need to use the following maven plugin:
+with a custom MVC system. <br/><br/>
+
+To use it you need to git clone or download the project, install at your local repo with maven and use the following maven plugin in your web project:
 <pre>
   ...
   &lt;build&gt;
@@ -76,6 +78,105 @@ Those are some screenshots with default template, in english.<br/><br/>
 <img class="screenshot" src="img/jpm_show.png" /><br/>
 <img class="screenshot" src="img/jpm_edit.png" /><br/>
 
+<h2>Configuration</h2>
+
+<p>
+How you get jPM configured? Its just a matter of some xml files. Detailed information can be found
+at <a href="https://github.com/jpaoletti/java-presentation-manager/wiki">our wiki page</a>
+</p>
+
+<h3>Sample Configuration File</h3>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;presentation-manager&gt;
+    &lt;property name="debug" value="true"/&gt;
+    &lt;property name="appversion" value="1.0.0"/&gt;
+    &lt;property name="ignore-db" value="true"/&gt;
+    &lt;property name="template" value="default"/&gt;
+    &lt;property name="copyright" value="Jeronimo Paoletti"/&gt;
+    
+    &lt;property name="default-converter" 
+              value="jpaoletti.jpm.struts.converter.DefaultStrutsConverter"/&gt;
+    
+    &lt;property name="security-connector" 
+              value="jpaoletti.jpm.security.core.PMVoidSecurityConnector"/&gt;
+
+    &lt;!-- External Converters --&gt;
+    &lt;property name="external-converters" value="jpm-econverters.xml"/&gt;
+
+    &lt;!-- Busissnes Entities --&gt;
+
+    &lt;property name="entity" value="entities/simpleclass.xml"/&gt;
+    &lt;property name="entity" value="entities/complexclass1.xml"/&gt;
+    &lt;property name="entity" value="entities/complexclass2.xml"/&gt;
+    &lt;property name="entity" value="entities/weakclass.xml"/&gt;
+    &lt;property name="entity" value="entities/parentclass.xml"/&gt;
+
+    &lt;!-- Monitors --&gt;
+&lt;/presentation-manager&gt;
+</pre>
+<h3>Sample Entity File</h3>
+<pre>
+&lt;?xml version='1.0'?&gt;
+&lt;entity id="complexclass1" 
+        clazz="jpaoletti.jpm.struts.test.model.ComplexClass1" 
+        extendz="simpleclass"&gt;
+    &lt;dataAccess class="jpaoletti.jpm.struts.test.ui.DataAccessComplexClass1" /&gt;
+    &lt;order&gt;id description amount date datetime active key &lt;/order&gt;
+    &lt;operations&gt;
+        &lt;operation id="list" enabled="true" scope="item"&gt;
+            &lt;properties&gt;
+                &lt;property name="operation-column-width" value="1px" /&gt;
+                &lt;property name="show-row-number" value="true" /&gt;
+            &lt;/properties&gt;
+        &lt;/operation&gt;
+        &lt;operation id="show" scope="item" display="edit list" /&gt;
+        &lt;operation id="add" scope="general" display="all" /&gt;
+        &lt;operation id="edit" scope="item" display="edit show list" /&gt;
+        &lt;operation id="delete" scope="item" display="edit show list" confirm="true"/&gt;
+    &lt;/operations&gt;
+
+    &lt;field id="amount" width="100" display="all" align="right"&gt;
+        &lt;converters&gt;
+            &lt;econverter id="show-cash" /&gt;
+            &lt;converter class="jpaoletti.jpm.struts.converter.EditDecimalConverter" 
+                       operations="add edit" /&gt;
+        &lt;/converters&gt;
+    &lt;/field&gt;
+    &lt;field id="date" width="70" display="all"&gt;
+        &lt;converters&gt;
+            &lt;econverter id="edit-date" operations="add edit" /&gt;
+            &lt;econverter id="show-date" operations="list show" /&gt;
+        &lt;/converters&gt;
+    &lt;/field&gt;
+    &lt;field id="datetime" width="130" display="all" &gt;
+        &lt;converters&gt;
+            &lt;econverter id="show-datetime" /&gt;
+        &lt;/converters&gt;
+    &lt;/field&gt;
+    &lt;field id="active" width="30" display="all" align="center"&gt;
+        &lt;converters&gt;
+            &lt;converter class="jpaoletti.jpm.struts.converter.ShowBooleanConverter" 
+                       operations="list show" /&gt;
+            &lt;converter class="jpaoletti.jpm.struts.converter.EditBooleanConverter" 
+                       operations="add edit" /&gt;
+        &lt;/converters&gt;
+    &lt;/field&gt;
+    &lt;field id="key" width="150" &gt;
+        &lt;converters&gt;
+            &lt;converter class="jpaoletti....ShowLocalizedStringConverter" 
+                       operations="show list" /&gt;
+            &lt;econverter id="edit-50-string" operations="add edit" /&gt;
+        &lt;/converters&gt;
+    &lt;/field&gt;
+    &lt;field id="size" width="75" &gt;
+        &lt;converters&gt;
+            &lt;econverter id="show-cm" operations="show list" /&gt;
+            &lt;econverter id="edit-long" operations="add edit" /&gt;
+        &lt;/converters&gt;
+    &lt;/field&gt;
+&lt;/entity&gt;
+</pre>
 
 <h2>License</h2>
 <pre>This program is free software: you can redistribute it and/or modify
