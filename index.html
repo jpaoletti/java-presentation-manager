@@ -2,32 +2,8 @@
 <html>
 <head>
   <meta charset='utf-8'>
-
   <title>jpaoletti/java-presentation-manager @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #ffffff;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #000000; }
-    h3 { text-align: center; color: #000000; }
-    a { color: #000000; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+  <link href="css/default.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -58,40 +34,51 @@ the data access.
 
 The default visual implementation is based on Struts 1. This is going to change soon to a pure jsp implementation
 with a custom MVC system. To use it you need to use the following maven plugin:
-
-```xml
+<pre>
   ...
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.1.1</version>
-        <configuration>
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+        &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+        &lt;version&gt;2.1.1&lt;/version&gt;
+        &lt;configuration&gt;
           ...
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
   ...
 
   ...
-  <dependencies>
-    <dependency>
-      <groupId>jpaoletti.jpm</groupId>
-      <artifactId>jpm-struts1</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <type>war</type>
-      <scope>runtime</scope>
-    </dependency>
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;jpaoletti.jpm&lt;/groupId&gt;
+      &lt;artifactId&gt;jpm-struts1&lt;/artifactId&gt;
+      &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+      &lt;type&gt;war&lt;/type&gt;
+      &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;/dependency&gt;
     ...
-  </dependencies>
+  &lt;/dependencies&gt;
   ...
   
-```
+</pre>
 For further reference check http://maven.apache.org/plugins/maven-war-plugin/overlays.html</p>
+
+<h2>Screenshots</h2>
+
+Those are some screenshots with default template, in english.<br/><br/>
+
+<img class="screenshot" src="img/jpm_login.png" /><br/>
+<img class="screenshot" src="img/jpm_welcome.png" /><br/>
+<img class="screenshot" src="img/jpm_list.png" /><br/>
+<img class="screenshot" src="img/jpm_show.png" /><br/>
+<img class="screenshot" src="img/jpm_edit.png" /><br/>
+
+
 <h2>License</h2>
-<p>This program is free software: you can redistribute it and/or modify
+<pre>This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
 published by the Free Software Foundation, either version 3 of the
 License, or (at your option) any later version.
@@ -102,13 +89,8 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-</p>
-<h2>Authors</h2>
-<p>Jeronimo Paoletti (jeronimo.paoletti@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Jeronimo Paoletti (jeronimo.paoletti@gmail.com)<br/>      </p>
-
+along with this program.  If not, see http://www.gnu.org/licenses/.
+</pre>
 
     <h2>Download</h2>
     <p>
