@@ -18,6 +18,15 @@ body {
     color: #111;
 }
 
+body.outer-index{
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: solid #414141 2px;
+}
+
 form{
     overflow: auto;
     width: auto;
@@ -222,7 +231,7 @@ a:hover {
     color: white;
     width: 100%;
     position: absolute;
-    bottom: 1px !important;
+    bottom: 0px !important;
 }
 
 .boxed {

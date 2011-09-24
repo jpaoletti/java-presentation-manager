@@ -1,7 +1,6 @@
 <%@include file="inc/tag-libs.jsp" %>
 <c:if test="${not empty pm}">
-    <style type="text/css">body{height: 100%;}</style>
-    <pm:page title="titles.index" >
+    <pm:page title="titles.index" bodyClass="outer-index">
         <script type="text/javascript" src="js/expand.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <script type="text/javascript">

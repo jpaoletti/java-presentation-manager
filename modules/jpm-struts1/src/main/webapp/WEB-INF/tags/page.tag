@@ -2,7 +2,8 @@
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %>
 <%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="pm" %>
-<%@ attribute name="title" required="true"%>
+<%@ attribute name="title" required="true" %>
+<%@ attribute name="bodyClass" required="false" %>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -18,7 +19,7 @@
         <script type="text/javascript" src="${es.context_path}/js/jquery.hotkeys.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery-ui-1.8.16.custom.min.js"></script>
     </head>
-    <body>
+    <body class="${bodyClass}">
         <% try {%>
         <jsp:doBody />
         <% } catch (Exception e) {
