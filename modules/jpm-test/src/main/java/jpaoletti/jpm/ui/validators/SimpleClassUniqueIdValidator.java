@@ -4,7 +4,7 @@ import java.util.List;
 import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.core.message.Message;
 import jpaoletti.jpm.core.message.MessageFactory;
-import jpaoletti.jpm.model.*;
+import jpaoletti.jpm.test.SimpleClass;
 import jpaoletti.jpm.validator.*;
 
 /**

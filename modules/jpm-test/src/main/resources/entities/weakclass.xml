@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
-<entity id="weakclass" clazz="jpaoletti.jpm.model.WeakClass">
-    <dataAccess class="jpaoletti.jpm.ui.DataAccessWeakClass" />
+<entity id="weakclass" clazz="jpaoletti.jpm.test.WeakClass">
+    <dataAccess class="jpaoletti.jpm.test.DataAccessWeakClass" />
     <owner>
         <entityId>parentclass</entityId>
         <entityProperty>weaks</entityProperty>

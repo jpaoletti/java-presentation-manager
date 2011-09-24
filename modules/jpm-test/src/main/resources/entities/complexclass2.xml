@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
-<entity id="complexclass2" clazz="jpaoletti.jpm.model.ComplexClass2" extendz="simpleclass">
-    <dataAccess class="jpaoletti.jpm.ui.DataAccessComplexClass2" />
+<entity id="complexclass2" clazz="jpaoletti.jpm.test.ComplexClass2" extendz="simpleclass">
+    <dataAccess class="jpaoletti.jpm.test.DataAccessComplexClass2" />
     <order>id description </order>
     <highlights>
         <highlight field="id" value="3" style="yellow" scope="instance" />
@@ -14,7 +14,7 @@
         </operation>
         <operation id="show" enabled="true" scope="item" display="edit list" />
         <operation id="add" enabled="true" scope="general">
-            <validator class="jpaoletti.jpm.ui.validators.SimpleClassUniqueIdValidator"/>
+            <validator class="jpaoletti.jpm.test.validators.SimpleClassUniqueIdValidator"/>
         </operation>
         <operation id="edit" enabled="true" scope="item" display="edit show list" />
         <operation id="delete" enabled="true" scope="item" display="edit show list" confirm="true"/>
