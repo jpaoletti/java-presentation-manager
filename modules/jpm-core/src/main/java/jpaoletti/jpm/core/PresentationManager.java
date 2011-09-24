@@ -59,6 +59,8 @@ public class PresentationManager extends Observable {
             }
             return result;
         } catch (Exception ex) {
+            instance = null;
+            Logger.getRootLogger().fatal("Unable to initialize jPM", ex);
             return false;
         }
     }
