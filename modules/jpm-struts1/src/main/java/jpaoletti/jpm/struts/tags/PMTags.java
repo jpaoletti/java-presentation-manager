@@ -29,7 +29,6 @@ public class PMTags extends TagSupport {
     public static String listItemOperations(PMStrutsContext ctx, DisplacedList list, Object item) {
         try {
             final StringBuilder sb = new StringBuilder();
-            sb.append("<span style='white-space: nowrap;' class='operationspopup'>");
             for (Operation itemOperation : ctx.getOperations(item, ctx.getOperation()).getOperations()) {
                 //If we have permission
                 if (ctx.getPmsession().getUser().hasPermission(itemOperation.getPerm())) {
@@ -60,7 +59,6 @@ public class PMTags extends TagSupport {
                     }
                 }
             }
-            sb.append("&nbsp;</span>");
             return sb.toString();
         } catch (PMException ex) {
             PresentationManager.getPm().error(ex);
