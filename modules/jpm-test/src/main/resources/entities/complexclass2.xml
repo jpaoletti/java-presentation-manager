@@ -13,9 +13,7 @@
             </properties>
         </operation>
         <operation id="show" enabled="true" scope="item" display="edit list" />
-        <operation id="add" enabled="true" scope="general">
-            <validator class="jpaoletti.jpm.test.validators.SimpleClassUniqueIdValidator"/>
-        </operation>
+        <operation id="add" enabled="true" scope="general"/>
         <operation id="edit" enabled="true" scope="item" display="edit show list" />
         <operation id="delete" enabled="true" scope="item" display="edit show list" confirm="true"/>
     </operations>
