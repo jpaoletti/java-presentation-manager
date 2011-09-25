@@ -1,5 +1,6 @@
 package jpaoletti.jpm.core.operations;
 
+import java.util.Set;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
 
@@ -23,7 +24,12 @@ public class SelectItemOperation extends OperationCommandSupport {
         final String _item = (String) ctx.getParameter("idx");
         if (_item != null) {
             final Integer item = Integer.parseInt(_item);
-            ctx.getEntityContainer().getSelectedIndexes().add(item);
+            final Set<Integer> selectedIndexes = ctx.getEntityContainer().getSelectedIndexes();
+            if (selectedIndexes.contains(item)) {
+                selectedIndexes.remove(item);
+            } else {
+                selectedIndexes.add(item);
+            }
         }
     }
 }
