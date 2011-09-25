@@ -54,10 +54,19 @@
                             primary: "ui-icon-arrowreturnthick-1-w"
                         }
                     });
+                    
+                    $( "#confirmationDialog" ).dialog({
+                        modal: true,
+                        bgiframe: true,
+                        width: 250,
+                        height: 150,
+                        autoOpen: false
+                    });
+
                     jQuery.each(PM_onLoadFunctions, function(){
                         this();
                     });
-
+                    
                     jQuery.each(msg_system, function(){
                         var cl = ".message_container";
                         jQuery(cl).addClass("pm_message_"+this.type);
@@ -78,5 +87,10 @@
                     });
                 });
         </script>
+        <div id="confirmationDialog" title="<pmfn:message key='pm.operation.confirm.title' />">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                <pmfn:message key='pm.operation.confirm.question' />
+            </p>
+        </div>
     </body>
 </html>

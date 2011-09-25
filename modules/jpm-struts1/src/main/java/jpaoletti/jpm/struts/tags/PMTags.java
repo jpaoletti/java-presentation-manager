@@ -55,11 +55,15 @@ public class PMTags extends TagSupport {
                         } else {
                             furl = getContextPath() + "/" + itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + list.indexOf(item);
                         }
-                        sb.append("<a class='confirmable_");
-                        sb.append(itemOperation.getConfirm());
-                        sb.append("' href='");
+                        sb.append("<a href=\"javascript:");
+                        if (itemOperation.getConfirm()) {
+                            sb.append("loadPageConfirm");
+                        } else {
+                            sb.append("loadPage");
+                        }
+                        sb.append("('");
                         sb.append(furl);
-                        sb.append("' id='operation");
+                        sb.append("')\" id='operation");
                         sb.append(itemOperation.getId());
                         sb.append("' title='");
                         sb.append(PresentationManager.getMessage("operation." + itemOperation.getId()));

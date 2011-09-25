@@ -61,7 +61,7 @@ public class OperationsTag extends PMTags {
                     }
                 }
             }
-            
+
             println("</div>");
             script.append("\n});</script>");
             println(script);
@@ -101,13 +101,12 @@ public class OperationsTag extends PMTags {
         script.append(jqItem);
         script.append(".click(function(){");
         if (operation.getConfirm()) {
-            final String question = PresentationManager.getMessage("pm.operation.confirm.question", "operation." + opid, "pm.entity." + getEntity().getId());
-            script.append("if(!confirm('").append(question).append("')) return false;\n");
+            script.append("loadPageConfirm");
+        } else {
+            script.append("loadPage");
         }
-        script.append("loadPage('").append(hreff).append("');");
-        script.append("});\n");
-        script.append(jqItem);
-        script.append(".button();");
+        script.append("('").append(hreff).append("');");
+        script.append("}).button();\n");
 
         final String style = "\"background: url('" + getContextPath() + "/templates/" + getTemplate() + "/img/" + opid + ".gif') 5% 50% no-repeat;\"";
         print("<button class='button' style=" + style + " id='operation" + opid + "'>&nbsp;");

@@ -1,3 +1,4 @@
+<%@page contentType="application/x-javascript" %>
 <%@include file="../inc/tag-libs.jsp" %>
 var pmid = "${param.pmid}";
 var searchable = "${param.searchable}" == "true";
@@ -70,10 +71,6 @@ PM_register(function() {
         onShow:function(hash){
             hash.w.css('opacity',0.88).show();
         }
-    });
-    
-    $(".confirmable_true").bind('click',function(){
-        return confirm("<pmfn:message key='pm.operation.confirm.question' />");
     });
     
     $('#first_footer').append( $('#list_wrapper>#list_filter') );

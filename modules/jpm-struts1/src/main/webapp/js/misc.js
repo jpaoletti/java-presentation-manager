@@ -20,6 +20,21 @@ function loadPage(url){
     $(mf).focus();
 }
 
+/**
+ * Loads a page on main frame asking first
+ **/
+function loadPageConfirm(url){
+    $("#confirmationDialog").dialog('option', 'buttons', {
+        "Confirm" : function() {
+            loadPage(url);
+        },
+        "Cancel" : function() {
+            $(this).dialog("close");
+        }
+    });
+    $("#confirmationDialog").dialog("open");
+}
+
 function paginate(i){
     $("#page").val(i);
     $("#listform").submit();
