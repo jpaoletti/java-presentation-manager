@@ -572,6 +572,11 @@ a.pagination span.ui-button-text{
     padding-top: 0.1em;
 }
 
+.dialog-icon{
+    float:left; margin:0 7px 20px 0;
+}
+
+
 /*** TEST STYLES FOR HIGHLIGHT **/
 
 .red{

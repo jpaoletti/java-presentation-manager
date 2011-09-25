@@ -88,7 +88,7 @@
                 });
         </script>
         <div id="confirmationDialog" title="<pmfn:message key='pm.operation.confirm.title' />">
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+            <p><span class="ui-icon ui-icon-alert dialog-icon"></span>
                 <pmfn:message key='pm.operation.confirm.question' />
             </p>
         </div>
