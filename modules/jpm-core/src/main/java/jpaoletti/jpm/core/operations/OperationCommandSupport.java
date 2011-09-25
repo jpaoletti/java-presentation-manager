@@ -41,7 +41,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         configureEntityContainer(ctx);
         configureSelected(ctx);
         operation = configureOperations(ctx);
-        if (operation.getPerm() != null && !ctx.getUser().hasPermission(operation.getPerm())) {
+        if (operation != null && operation.getPerm() != null && !ctx.getUser().hasPermission(operation.getPerm())) {
             throw new NotAuthorizedException();
         }
         //Try to refresh selected object, if there is one
@@ -202,7 +202,6 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
                 ctx.getEntityContainer().setOwner(null);
             }
         }
-        //Work only on one item operations.
         if (ctx.hasEntityContainer()) {
             final Object item = (ctx.getSelected() == null) ? null : ctx.getSelected().getInstance();
             ctx.put(OPERATIONS, ctx.getEntity().getOperations().getOperationsFor(ctx, item, ctx.getOperation()));
