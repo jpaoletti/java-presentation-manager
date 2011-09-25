@@ -13,6 +13,7 @@
         <operation id="add" enabled="true" scope="general" display="all"/>
         <operation id="edit" enabled="true" scope="item" display="edit show list" />
         <operation id="delete" enabled="true" scope="item" display="edit show list" confirm="true"/>
+        <operation id="multidelete" enabled="true" scope="selected" display="list" confirm="true"/>
         <operation id="sort" scope="general" display="list" />
     </operations>
 

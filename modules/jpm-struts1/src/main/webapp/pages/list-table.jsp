@@ -10,10 +10,7 @@
         <c:forEach var="item" items="${contents}" varStatus="status" >
             <tr class="${pmfn:highlight(entity,null,item,null)}">
                 <th scope="row" class="jpm-list-operation-bar">
-                    <c:if test="${ctx.entityContainer.list.hasSelectedScope}">
-                        <input type="checkbox" id="selected_item" value="${fn:indexOf(contents,item)}" onchange="selectItem(this.value);" ${(fn:contains(ctx.entityContainer.selectedIndexes,fn:indexOf(contents,item)))?'checked':''} />
-                    </c:if>
-                    ${pmfn:rowNumber(ctx.entityContainer.list,item)}&nbsp;${pmfn:listItemOperations(ctx, contents, item)}
+                    ${pmfn:itemCheckbox(ctx,contents,item)}${pmfn:rowNumber(ctx.entityContainer.list,item)}${pmfn:listItemOperations(ctx, contents, item)}
                 </th>
                 <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><td align="${field.align}"><pmfn:converted-item ctx="${ctx}" operation="${operation}" item="${item}" field="${field}" /></td>
                 </c:forEach>
@@ -38,7 +35,7 @@
 </table>
 <script type="text/javascript" >
     function selectItem(i){
-        $.ajax({ url: "selectItem.do?pmid="+"${pmid}"+"&idx="+i});
+        $.ajax({ url: "${es.context_path}/selectItem.do?pmid="+"${entity.id}"+"&idx="+i});
     }
     PM_register(function(){
         $(".confirmable_true").bind('click',function(){

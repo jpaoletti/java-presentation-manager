@@ -32,6 +32,11 @@
             <forward name="failure" path="/pages/list.jsp" />
         </action>
 
+        <action path="/multidelete" type="jpaoletti.jpm.struts.actions.MultiDeleteAction">
+            <forward name="success" path="/list.do" redirect="true"/>
+            <forward name="failure" path="/pages/list.jsp" />
+        </action>
+
         <action path="/clearfilter" type="jpaoletti.jpm.struts.actions.ClearFilterAction">
             <forward name="success" path="/list.do" redirect="true"/>
             <forward name="failure" path="/pages/list.jsp" />

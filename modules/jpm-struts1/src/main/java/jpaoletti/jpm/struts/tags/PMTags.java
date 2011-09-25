@@ -26,6 +26,21 @@ import jpaoletti.jpm.util.DisplacedList;
  */
 public class PMTags extends TagSupport {
 
+    public static String itemCheckbox(PMStrutsContext ctx, DisplacedList list, Object item) throws PMException {
+        if (ctx.getEntityContainer().getList().isHasSelectedScope()) {
+            final StringBuilder input = new StringBuilder();
+            input.append("<input type='checkbox' ");
+            input.append("onchange='selectItem(").append(list.indexOf(item)).append(");'");
+            if (ctx.getEntityContainer().getSelectedIndexes().contains(list.indexOf(item))) {
+                input.append("checked");
+            }
+            input.append("/>");
+            return input.toString();
+        } else {
+            return "";
+        }
+    }
+
     public static String listItemOperations(PMStrutsContext ctx, DisplacedList list, Object item) {
         try {
             final StringBuilder sb = new StringBuilder();
@@ -77,7 +92,7 @@ public class PMTags extends TagSupport {
 
     public static String rowNumber(PaginatedList pmlist, Object item) {
         if (pmlist.isShowRowNumber()) {
-            return String.format("[%0" + pmlist.getListTotalDigits() + "d]", pmlist.getContents().indexOf(item));
+            return String.format("[%0" + pmlist.getListTotalDigits() + "d]&nbsp;", pmlist.getContents().indexOf(item));
         } else {
             return "";
         }

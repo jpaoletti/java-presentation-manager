@@ -61,8 +61,19 @@
         <function-signature>
             String rowNumber(jpaoletti.jpm.core.PaginatedList, java.lang.Object)
         </function-signature>
+    </function>
+
+    <function>
+        <description>
+          Return the checkbox for selected item scope
+        </description>
+        <name>itemCheckbox</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String itemCheckbox(jpaoletti.jpm.struts.PMStrutsContext, jpaoletti.jpm.util.DisplacedList, java.lang.Object)
+        </function-signature>
         <example>
-            class="${pmfn:highlight(entity,field,item,fieldValue)}"
+            ${pmfn:itemCheckbox(ctx, contents, item)}
         </example>
     </function>
 
