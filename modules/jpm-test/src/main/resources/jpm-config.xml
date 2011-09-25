@@ -9,6 +9,9 @@
     
     <property name="default-converter" 
               value="jpaoletti.jpm.struts.converter.DefaultStrutsConverter"/>
+              
+    <property name="security-connector" 
+              value="jpaoletti.jpm.security.core.PMVoidSecurityConnector"/>
 
     <!-- External Converters -->
     <property name="external-converters" value="jpm-econverters.xml"/>
