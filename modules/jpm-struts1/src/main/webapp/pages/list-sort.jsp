@@ -1,5 +1,5 @@
 <%@include file="../inc/tag-libs.jsp" %>
-<div id="sort_page" class="jqmWindow">
+<div id="sort_page" class="jqmWindow ui-corner-all ui-widget-header">
     <pmfn:message key='list.sort.field' /> <br/>
     <select name="order" onchange="this.form.submit();" >
         <c:forEach var="field" items="${pmfn:displayedFields(entity, 'sort')}">

@@ -33,20 +33,3 @@
         </c:if>
     </tfoot>
 </table>
-<script type="text/javascript" >
-    function selectItem(i){
-        $.ajax({ url: "${es.context_path}/selectItem.do?pmid="+"${entity.id}"+"&idx="+i});
-    }
-    PM_register(function(){
-        $(".confirmable_true").bind('click',function(){
-            return confirm("<pmfn:message key='pm.operation.confirm.question' />");
-        });
-        asInitVals["searchall"] = "<pmfn:message key='list.search.all' />";
-        asInitVals["search"] = "<pmfn:message key="list.input.search"/>";
-        $('#first_footer').append( $('#list_wrapper>#list_filter') );
-        $('#list_filter input')
-            .val("<pmfn:message key='list.search.all' />")
-            .addClass("search_init")
-            .attr("size","7");
-    });
-</script>

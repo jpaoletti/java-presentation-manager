@@ -455,7 +455,6 @@ a:hover {
 }
 .jqmWindow {
     display: none;
-
     position: fixed;
     top: 17%;
     left: 50%;
