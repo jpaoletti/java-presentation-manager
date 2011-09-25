@@ -63,14 +63,26 @@ PM_register(function() {
             this.form.submit();
     });
     
-    $('#operationsort')
-        .unbind('click')
-        .addClass('jqModal');
+    $( "#sortDialog" ).dialog({
+        modal: true,
+        bgiframe: true,
+        width: 250,
+        height: 150,
+        autoOpen: false
+    });
     
-    $('#sort_page').jqm({
-        onShow:function(hash){
-            hash.w.css('opacity',0.88).show();
-        }
+    $('#operationsort').unbind('click').click(function(){
+        $("#sortDialog").dialog('option', 'buttons', {
+            "Confirm" : function() {
+                $("#listform input[name=order]").val($("#dialogOrder").val());
+                $("#listform input[name=desc]").val($("#dialogDesc").val());
+                $("#listform").submit();
+            },
+            "Cancel" : function() {
+                $(this).dialog("close");
+            }
+        });
+        $("#sortDialog").dialog("open");
     });
     
     $('#first_footer').append( $('#list_wrapper>#list_filter') );

@@ -567,6 +567,15 @@ table.std-table td.pm_message_INFO{
     white-space: nowrap;
 }
 
+#sortDialog div.col1{
+    float: left; 
+    margin-top: 10px;
+}
+#sortDialog div.col2{
+    float: right; 
+    margin-top: 10px;
+}
+
 a.pagination span.ui-button-text{
     padding-bottom: 0.1em;
     padding-top: 0.1em;
