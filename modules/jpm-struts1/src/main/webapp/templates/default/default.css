@@ -393,7 +393,16 @@ a:hover {
 
 #appversion{
     float: left;
-    padding: 5px;
+    padding: 6px;
+}
+
+#poweredby{
+    float: right;
+    margin-right: 10px;
+    padding: 6px;
+}
+#poweredby a{
+    color: #2779AA;
 }
 
 #status{
