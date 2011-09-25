@@ -52,7 +52,7 @@ public class Operations extends PMCoreObject {
         for (Operation op : getOperations()) {
             if (op.isDisplayed(operation.getId()) && op.isEnabled() && !op.equals(operation)) {
                 if (op.getCondition() == null || op.getCondition().check(ctx, instance, op, operation.getId())) {
-                    if (instance != null || OperationScope.GENERAL.is(op.getScope())) {
+                    if (instance != null || OperationScope.GENERAL.is(op.getScope()) || OperationScope.SELECTED.is(op.getScope())) {
                         r.add(op);
                     }
                 }
