@@ -50,22 +50,21 @@ public class OperationsTag extends PMTags {
             script.append("        text: false, icons: {primary: 'ui-icon-refresh'}\n");
             script.append("    });\n");
 
-            if (getOperations() != null && getOperations().getOperations() != null && !getOperations().getOperations().isEmpty()) {
-                println("<div class='ui-widget-header ui-corner-all'>");
-                println("<button id='jpm_btn_back'>" + PresentationManager.getMessage("pm.title.back") + "</button>");
-                println("<button id='jpm_btn_refresh'>" + PresentationManager.getMessage("pm.title.refresh") + "</button>");
+            println("<div class='ui-widget-header ui-corner-all'>");
+            println("<button id='jpm_btn_back'>" + PresentationManager.getMessage("pm.title.back") + "</button>");
+            println("<button id='jpm_btn_refresh'>" + PresentationManager.getMessage("pm.title.refresh") + "</button>");
 
+            if (getOperations() != null && getOperations().getOperations() != null && !getOperations().getOperations().isEmpty()) {
                 for (Operation operation : getOperations().getOperations()) {
                     if (getPmsession().getUser().hasPermission(operation.getPerm())) {
                         processOperation(operation, script);
                     }
                 }
-                println("</div>");
-                script.append("\n});</script>");
-                println(script);
-            } else {
-                print("");
             }
+            
+            println("</div>");
+            script.append("\n});</script>");
+            println(script);
         } catch (Exception ex) {
             throw new JspTagException("OperationsTag: " + ex.getMessage());
         }
