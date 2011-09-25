@@ -9,10 +9,10 @@ MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
 
 GRANT ALL PRIVILEGES ON `jpm_test` . * TO 'jpm'@'%';
 
-CREATE TABLE `jpm_test`.`test1` (
+CREATE TABLE `jpm_test`.`simpleclass` (
     `id` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     `description` VARCHAR( 255 ) NULL
 ) ENGINE = InnoDB;
 
-INSERT INTO `jpm_test`.`test1` (`id`, `description`) VALUES ('1', 'T1');
-INSERT INTO `jpm_test`.`test1` (`id`, `description`) VALUES ('2', 'T2');
+INSERT INTO `jpm_test`.`simpleclass` (`id`, `description`) VALUES ('1', 'T1');
+INSERT INTO `jpm_test`.`simpleclass` (`id`, `description`) VALUES ('2', 'T2');

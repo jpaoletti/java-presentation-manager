@@ -8,5 +8,5 @@
     <property name="persistence-manager" value="jpaoletti.jpm.hibernate.core.PersistenceManager"/>
     <property name="default-data-access" value="jpaoletti.jpm.hibernate.core.DataAccess"/>
     
-    <property name="entity" value="entities/test1.xml" />
+    <property name="entity" value="entities/simpleclass.xml" />
 </presentation-manager>

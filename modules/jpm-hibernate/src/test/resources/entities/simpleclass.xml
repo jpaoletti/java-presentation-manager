@@ -1,5 +1,5 @@
 <?xml version='1.0'?>
-<entity id="test1" clazz="jpaoletti.jpm.hibernate.model.Test1">
+<entity id="simpleclass" clazz="jpaoletti.jpm.test.SimpleClass">
     <operations/>
     <field id="id" display="all" />
     <field id="description" display="all" />
