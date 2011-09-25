@@ -2,7 +2,7 @@
 <entity id="simpleclass" clazz="jpaoletti.jpm.test.SimpleClass">
     <dataAccess class="jpaoletti.jpm.test.DataAccessSimpleClass" />
     <operations>
-        <operation id="list" enabled="true" scope="item" display="all" >
+        <operation id="list" enabled="true" scope="general" display="all" >
             <properties>
                 <property name="operation-column-width" value="1px" />
                 <property name="sort-field" value="description" />

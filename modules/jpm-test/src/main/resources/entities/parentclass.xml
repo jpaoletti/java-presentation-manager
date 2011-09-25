@@ -3,7 +3,7 @@
     <dataAccess class="jpaoletti.jpm.test.DataAccessParentClass" />
     <order>id description </order>
     <operations>
-        <operation id="list" enabled="true" scope="item" display="all" >
+        <operation id="list" enabled="true" scope="general" display="all" >
             <properties>
                 <property name="operation-column-width" value="1px" />
             </properties>
