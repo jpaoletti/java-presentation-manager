@@ -5,13 +5,18 @@ import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
 
 /**
- *
+ * Delete operation. Call dataAccess.delete
+ * 
  * @author jpaoletti
  */
 public class DeleteOperation extends OperationCommandSupport {
 
     public DeleteOperation(String operationId) {
         super(operationId);
+    }
+
+    public DeleteOperation() {
+        super("delete");
     }
 
     @Override
@@ -29,12 +34,7 @@ public class DeleteOperation extends OperationCommandSupport {
                 collection.remove(instance);
             }
         }
-        try {
-            ctx.getEntity().getDataAccess().delete(ctx, instance);
-        } catch (Exception e) {
-            ctx.getPresentationManager().error(e);
-            throw new PMException("pm.cant.delete");
-        }
+        ctx.getEntity().getDataAccess().delete(ctx, instance);
         ctx.getEntityContainer().setSelected(null);
     }
 }
