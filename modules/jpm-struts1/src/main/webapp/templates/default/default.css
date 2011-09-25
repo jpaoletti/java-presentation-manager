@@ -404,6 +404,10 @@ a:hover {
 #poweredby a{
     color: #2779AA;
 }
+#poweredby a:hover{
+    text-decoration: none;
+    background-color: transparent;
+}
 
 #status{
     width: 300px;
