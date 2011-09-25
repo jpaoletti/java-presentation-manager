@@ -22,10 +22,9 @@ public class ListManager {
         String sortfield = ctx.getOperation().getConfig("sort-field");
         String sortdirection = ctx.getOperation().getConfig("sort-direction");
         if (sortfield != null) {
-            pmlist.getSort().setFieldId(sortfield);// setOrder(sortfield);
+            pmlist.getSort().setFieldId(sortfield);
             if (sortdirection != null && sortdirection.toLowerCase().compareTo("desc") == 0) {
                 pmlist.getSort().setDirection(ListSort.SortDirection.DESC);
-                //pmlist.setDesc(true);
             }
         }
         return pmlist;
