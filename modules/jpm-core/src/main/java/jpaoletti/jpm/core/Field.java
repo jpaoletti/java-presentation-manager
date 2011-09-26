@@ -35,7 +35,8 @@ public class Field extends PMCoreObject {
     private ArrayList<Validator> validators;
     private Converters converters;
     private String defaultValue;
-    private String align; //left right center          
+    private String align; //left right center
+    private Entity entity;
 
     /**
      * Default constructor
@@ -274,5 +275,13 @@ public class Field extends PMCoreObject {
      */
     public void setProperty(String property) {
         this.property = property;
+    }
+
+    public Entity getEntity() {
+        return entity;
+    }
+
+    public void setEntity(Entity entity) {
+        this.entity = entity;
     }
 }

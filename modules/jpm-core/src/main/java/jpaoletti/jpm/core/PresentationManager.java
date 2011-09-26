@@ -214,7 +214,10 @@ public class PresentationManager extends Observable {
         final List<String> ss = getAll("entity");
         for (String s : ss) {
             try {
-                Entity e = (Entity) parser.parseFile(s);
+                final Entity e = (Entity) parser.parseFile(s);
+                for (Field field : e.getFields()) {
+                    field.setEntity(e);
+                }
                 try {
                     Class.forName(e.getClazz());
                     entities.put(e.getId(), e);
