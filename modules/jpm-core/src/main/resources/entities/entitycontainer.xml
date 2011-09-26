@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE entity SYSTEM "entity.dtd">
 <entity id="entitycontainer" clazz="jpaoletti.jpm.core.EntityContainer">
     <dataAccess class="jpaoletti.jpm.ui.DataAccessEntityContainer"/>
     <owner>
