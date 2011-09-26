@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE entity SYSTEM "entity.dtd">
 <entity id="pmsession" clazz="jpaoletti.jpm.core.PMSession">
     <dataAccess class="jpaoletti.jpm.ui.DataAccessPMSession" />
     <operations>
@@ -17,7 +16,7 @@
     <field id="lastAccess" />
     <field id="containers" display="show">
         <converters>
-            <econverter id="containers-show" />
+            <econverter id="show-containers" />
         </converters>
     </field>
 </entity>
