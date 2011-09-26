@@ -106,16 +106,14 @@ public class PMTags extends TagSupport {
      * This method show a tooltip if the key is defined
      * @param key Key
      */
-    public static String tooltip(Entity entity, Field field) {
-        final String key = "pm.field." + entity.getId() + "." + field.getId() + ".tooltip";
-        if (key == null) {
+    public static String tooltip(Field field) {
+        final String tooltip = field.getTooltip();
+        if (tooltip == null) {
             return "";
         }
-        final String message = PresentationManager.getMessage(key);
-        if (key.equals(message)) {
-            return "";
-        }
-        return "<img class='tooltip' title='" + message + "' alt='?' src='" + getContextPath() + "/templates/" + getTemplate() + "/img/tooltip.gif' />";
+        return "<img class='tooltip' title='" + tooltip + "' alt='?' src='"
+                + getContextPath() + "/templates/"
+                + getTemplate() + "/img/tooltip.gif' />";
     }
 
     public static List<Field> displayedFields(Entity entity, String operationId) {

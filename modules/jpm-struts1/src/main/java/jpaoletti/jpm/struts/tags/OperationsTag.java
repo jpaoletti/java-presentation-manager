@@ -111,7 +111,7 @@ public class OperationsTag extends PMTags {
         final String style = "\"background: url('" + getContextPath() + "/templates/" + getTemplate() + "/img/" + opid + ".gif') 5% 50% no-repeat;\"";
         print("<button class='button' style=" + style + " id='operation" + opid + "'>&nbsp;");
         if (isLabels()) {
-            print(PresentationManager.getMessage("operation." + opid, "pm.entity." + getEntity().getId()));
+            print(operation.getTitle());
         }
         println("</button>");
     }

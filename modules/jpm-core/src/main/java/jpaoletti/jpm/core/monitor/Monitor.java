@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import jpaoletti.jpm.core.PresentationManager;
 
 /**
  * A monitor that watch something showing his status.
@@ -238,5 +239,12 @@ public class Monitor extends Observable implements Runnable {
      */
     public Thread getThread() {
         return thread;
+    }
+
+    /**
+     * Returns the internationalized entity title
+     */
+    public String getTitle() {
+        return PresentationManager.getMessage("pm.monitor." + getId());
     }
 }

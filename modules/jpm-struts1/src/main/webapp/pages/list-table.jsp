@@ -3,7 +3,7 @@
     <thead>
         <tr>
             <th scope="col" class="jpm-list-operation-col" style="width:${ctx.entityContainer.list.operationColWidth}">&nbsp;</th>
-            <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><c:if test="${not empty field.width}"><th scope="col" style='width:${field.width}px;'></c:if><c:if test="${empty field.width}"><th scope="col"></c:if><pm:field-name entity="${entity}" field="${field}" /></th></c:forEach>
+            <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><c:if test="${not empty field.width}"><th scope="col" style='width:${field.width}px;'></c:if><c:if test="${empty field.width}"><th scope="col"></c:if><pm:field-name field="${field}" /></th></c:forEach>
         </tr>
     </thead>
     <tbody id="list_body" >
@@ -24,7 +24,7 @@
                 <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
                     <th>
                         <input type="text" 
-                               name="search_<pm:field-name entity="${entity}" field="${field}" />" 
+                               name="search_<pm:field-name field="${field}" />" 
                                value="<pmfn:message key="list.input.search"/>" class="search_init"
                                />
                     </th>

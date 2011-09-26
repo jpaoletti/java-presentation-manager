@@ -6,7 +6,7 @@
         <select id="dialogOrder" name="order">
             <c:forEach var="field" items="${pmfn:displayedFields(entity, 'sort')}">
                 <option value="${field.id}" ${(ctx.entityContainer.list.sort.fieldId==field.id)?'selected':''}>
-                    <pm:field-name entity='${entity}' field='${field}' />
+                    <pm:field-name field='${field}' />
                 </option>
             </c:forEach>
         </select>

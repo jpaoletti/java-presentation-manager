@@ -8,7 +8,7 @@
                     <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
                         <tr>
                             <th scope="row">
-                                <pm:field-name entity="${entity}" field="${field}" />
+                                <pm:field-name field="${field}" />
                             </th>
                             <td>
                                 <pm:filter-operations field_id="${field.id}" filter="${ctx.entityContainer.filter}" />

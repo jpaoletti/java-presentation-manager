@@ -268,4 +268,11 @@ public class Operation extends PMCoreObject {
     public void setPerm(String perm) {
         this.perm = perm;
     }
+
+    /**
+     * Returns the internationalized operation title
+     */
+    public String getTitle() {
+        return PresentationManager.getMessage("operation." + getId());
+    }
 }

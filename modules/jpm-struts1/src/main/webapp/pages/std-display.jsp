@@ -10,7 +10,7 @@
                         <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
                             <tr>
                                 <th scope="row">
-                                    <pm:field-name entity="${entity}" field="${field}" />
+                                    <pm:field-name field="${field}" />
                                 </th>
                                 <td>
                                     <pmfn:converted-item ctx="${ctx}" field="${field}" />

@@ -277,6 +277,28 @@ public class Field extends PMCoreObject {
         this.property = property;
     }
 
+    /**
+     * Returns the internationalized field title
+     */
+    public String getTitle() {
+        return PresentationManager.getMessage("pm.field." + getEntity().getId() + "." + getId());
+    }
+
+    /**
+     * Returns the internationalized field tooltip
+     */
+    public String getTooltip() {
+        final String key = "pm.field." + getEntity().getId() + "." + getId() + ".tooltip";
+        if (key == null) {
+            return null;
+        }
+        final String message = PresentationManager.getMessage(key);
+        if (key.equals(message)) {
+            return null;
+        }
+        return message;
+    }
+
     public Entity getEntity() {
         return entity;
     }

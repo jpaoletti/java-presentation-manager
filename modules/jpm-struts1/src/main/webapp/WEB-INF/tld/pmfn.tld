@@ -45,10 +45,10 @@
         <name>tooltip</name>
         <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
         <function-signature>
-            String tooltip(jpaoletti.jpm.core.Entity, jpaoletti.jpm.core.Field)
+            String tooltip(jpaoletti.jpm.core.Field)
         </function-signature>
         <example>
-            ${pmfn:tooltip(entity, field)}
+            ${pmfn:tooltip(field)}
         </example>
     </function>
 

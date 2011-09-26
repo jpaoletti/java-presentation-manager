@@ -17,7 +17,7 @@
             <thead>
                 <tr>
                     <c:forEach var="field" items="${pmfn:displayedFields(ctx.map.weak, 'list')}">
-                        <th scope="col" style="width:${field.width}px;" ><pm:field-name entity="${ctx.map.weak}" field="${field}" /></th>
+                        <th scope="col" style="width:${field.width}px;" ><pm:field-name field="${field}" /></th>
                     </c:forEach>
                 </tr>
             </thead>
