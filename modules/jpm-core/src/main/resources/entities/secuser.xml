@@ -1,0 +1,55 @@
+<?xml version='1.0' ?>
+<entity id="secuser" clazz="jpaoletti.jpm.security.core.PMSecurityUser">
+    <dataAccess class="jpaoletti.jpm.ui.DataAccessUser" />
+    <operations>
+        <operation id="list" scope="general" />
+        <operation id="add" scope="general" display="list"/>
+        <operation id="show" display="list edit" />
+        <operation id="edit" display="list show" />
+        <operation id="delete" display="list" confirm="true"/>
+        <operation id="resetpsw" display="list show edit" confirm="true"/>
+    </operations>
+    <field id="username" width="100">
+        <converters>
+            <econverter id="edit-name" operations="add"/>
+        </converters>
+        <validator class="jpaoletti.jpm.validator.LengthValidator">
+            <properties>
+                <property name="min-length" value="4" />
+                <property name="min-length-msg" value="pm.validator.username.tooshort"/>
+            </properties>
+        </validator>
+    </field>
+    
+    <field id="name" display="list add edit show" width="200">
+        <converters>
+            <econverter id="edit-name" operations="add edit"/>
+        </converters>
+    </field>
+    
+    <field id="active" width="40" align="center">
+        <converters>
+            <econverter id="show-bool" operations="list show" />
+            <econverter id="edit-bool" operations="add edit"/>
+        </converters>
+    </field>
+    
+    <field id="password" display="add" >
+        <converters>
+            <econverter id="password" operations="add"/>
+        </converters>
+    </field>
+
+    <field id="email">
+        <converters>
+            <econverter id="edit-mail" operations="edit"/>
+        </converters>
+    </field>
+    
+    <field id="groups" display="show add edit list">
+        <converters>
+            <econverter id="show-group-list" operations="show list" />
+            <econverter id="edit-group-list" operations="add edit" />
+        </converters>
+    </field>
+</entity>
