@@ -23,6 +23,14 @@
     <property name="entity" value="entities/complexclass2.xml"/>
     <property name="entity" value="entities/weakclass.xml"/>
     <property name="entity" value="entities/parentclass.xml"/>
+    
+    <!-- Security Entities-->
+    <property name="entity" value="entities/entitycontainer.xml"/>
+    <property name="entity" value="entities/pmsession.xml"/>
+    <property name="entity" value="entities/secperm.xml"/>
+    <property name="entity" value="entities/secuser.xml"/>
+    <property name="entity" value="entities/secusergroup.xml"/>
+    <property name="entity" value="entities/secuserprofile.xml"/>
 
     <!-- Monitors -->
 </presentation-manager>

@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <external-converters>
+    
+    <external-converter id="edit-name">
+        <converter class="jpaoletti.jpm.struts.converter.EditStringConverter" operations="add edit">
+            <properties>
+                <property name="max-length" value="50" />
+            </properties>
+        </converter>
+    </external-converter>
+    
+    <external-converter id="show-bool">
+        <converter class="jpaoletti.jpm.struts.converter.ShowBooleanConverter" operations="list show" />
+    </external-converter>
+    
+    <external-converter id="edit-bool">
+        <converter class="jpaoletti.jpm.struts.converter.EditBooleanConverter" operations="edit add" />
+    </external-converter>
+
+    <external-converter id="password">
+        <converter class="jpaoletti.jpm.struts.converter.EditPasswordConverter" operations="add" />
+    </external-converter>
+    
+    <external-converter id="edit-mail">
+        <converter class="jpaoletti.jpm.struts.converter.EditStringConverter" operations="add edit">
+            <properties>
+                <property name="max-length" value="200" />
+            </properties>
+        </converter>
+    </external-converter>
+    
+    <external-converter id="edit-group-list">
+        <converter class="jpaoletti.jpm.struts.converter.EditCollectionConverter" operations="add edit">
+            <properties>
+                <property name="entity" value="secusergroup" />
+                <property name="collection-class" value="java.util.ArrayList" />
+            </properties>
+        </converter>
+    </external-converter>
+    
+    <external-converter id="edit-permission-list">
+        <converter class="jpaoletti.jpm.struts.converter.EditCollectionConverter" operations="add edit">
+            <properties>
+                <property name="entity" value="secperm" />
+                <property name="collection-class" value="java.util.ArrayList" />
+            </properties>
+        </converter>
+    </external-converter>
+    
+    
+    <external-converter id="show-containers">
+        <converter class="jpaoletti.jpm.struts.converter.WeakConverter" operations="show" >
+            <properties>
+                <property name="weak-entity" value="entitycontainer" />
+                <property name="show-modify" value="false" />
+            </properties>
+        </converter>
+    </external-converter>
+    
     <external-converter id="edit-50-string">
         <converter class="jpaoletti.jpm.struts.converter.EditStringConverter" operations="add edit">
             <properties>
