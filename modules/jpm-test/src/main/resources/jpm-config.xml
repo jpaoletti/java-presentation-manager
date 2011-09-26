@@ -6,6 +6,7 @@
     <property name="ignore-db" value="true"/>
     <property name="template" value="default"/>
     <property name="copyright" value="Jeronimo Paoletti"/>
+    <property name="multi-login" value="false"/>
     
     <property name="default-converter" 
               value="jpaoletti.jpm.struts.converter.DefaultStrutsConverter"/>

@@ -1,6 +1,7 @@
 package jpaoletti.jpm.security.core;
 
 import jpaoletti.jpm.core.PMContext;
+import jpaoletti.jpm.core.PresentationManager;
 
 /**
  * This is an abstract implementation for security connectors that uses BCrypt
@@ -24,7 +25,7 @@ public abstract class PMSecurityAbstractConnector implements PMSecurityConnector
         if (!user.isActive()) {
             throw new UserNotActiveException();
         }
-        if (isLoggedIn(user) && false) { //TODO multiple login
+        if (isLoggedIn(user) && !PresentationManager.getPm().allowMultipleLogin()) {
             throw new UserAlreadyLogged();
         }
         if (!BCrypt.checkpw(password, user.getPassword())) {
@@ -79,6 +80,6 @@ public abstract class PMSecurityAbstractConnector implements PMSecurityConnector
     }
 
     private boolean isLoggedIn(PMSecurityUser user) {
-        return ctx.getPresentationManager().getSessionByUser(user.getUsername()) != null;
+        return PresentationManager.getPm().getSessionByUser(user.getUsername()) != null;
     }
 }

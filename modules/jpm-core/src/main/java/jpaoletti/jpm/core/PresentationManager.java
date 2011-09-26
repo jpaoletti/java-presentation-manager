@@ -670,4 +670,8 @@ public class PresentationManager extends Observable {
     protected List<String> getAll(String name) {
         return cfg.getAll(name);
     }
+
+    public boolean allowMultipleLogin() {
+        return "true".equalsIgnoreCase(cfg.getProperty("multi-login", "true"));
+    }
 }

@@ -48,7 +48,11 @@ public class PMVoidSecurityConnector extends PMSecurityAbstractConnector {
 
     @Override
     public PMSecurityUser authenticate(String username, String password) throws PMSecurityException {
-        return getUser(username);
+        try {
+            return super.authenticate(username, password);
+        } catch (InvalidPasswordException e) {
+            return getUser(username);
+        }
     }
 
     @Override
