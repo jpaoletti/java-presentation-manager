@@ -6,31 +6,31 @@
 
     <menu-list text="pm.menu.list.business" perm="">
         <menu-item text="pm.menu.item.simpleclass" perm="">
-            <location id="pmstruts" value="/list.do?pmid=simpleclass" />
+            <location id="list" value="simpleclass" />
         </menu-item>
         <menu-item text="pm.menu.item.complexclass1" perm="">
-            <location id="pmstruts" value="/list.do?pmid=complexclass1" />
+            <location id="list" value="complexclass1" />
         </menu-item>
         <menu-item text="pm.menu.item.complexclass2" perm="">
-            <location id="pmstruts" value="/list.do?pmid=complexclass2" />
+            <location id="list" value="complexclass2" />
         </menu-item>
         <menu-item text="pm.menu.item.parentclass" perm="">
-            <location id="pmstruts" value="/list.do?pmid=parentclass" />
+            <location id="list" value="parentclass" />
         </menu-item>
     </menu-list>
     
     <menu-list text="pm.menu.list.security" perm="">
         <menu-item text="pm.menu.item.secuser" perm="useradmin">
-            <location id="pmstruts" value="/list.do?pmid=secuser" />
+            <location id="list" value="secuser" />
         </menu-item>
         <menu-item text="pm.menu.item.secusergroup" perm="useradmin">
-            <location id="pmstruts" value="/list.do?pmid=secusergroup" />
+            <location id="list" value="secusergroup" />
         </menu-item>
         <menu-item text="pm.menu.item.secperm" perm="useradmin">
-            <location id="pmstruts" value="/list.do?pmid=secperm" />
+            <location id="list" value="secperm" />
         </menu-item>
         <menu-item text="pm.menu.item.pmsession" perm="useradmin">
-            <location id="pmstruts" value="/list.do?pmid=pmsession" />
+            <location id="list" value="pmsession" />
         </menu-item>
     </menu-list>
 
@@ -39,7 +39,9 @@
             <menu-list text="pm.menu.list.rose" perm="">
                 <menu-list text="pm.menu.list.rose" perm="">
                     <menu-item text="pm.menu.item.pm" perm="">
-                        <location id="external" value="https://github.com/jpaoletti/java-presentation-manager" />
+                        <location 
+                            id="external" 
+                            value="https://github.com/jpaoletti/java-presentation-manager" />
                     </menu-item>
                 </menu-list>
             </menu-list>
