@@ -15,7 +15,7 @@ public class MenuItem extends Menu{
 
     /**Indicates the location value of the destiny. 
      * @see MenuItemLocation */
-    private String location_value;
+    private String locationValue;
 
     /**
      * Default constructor with name
@@ -42,15 +42,15 @@ public class MenuItem extends Menu{
     /**
      * @param location_value the location_value to set
      */
-    public void setLocation_value(String location_value) {
-        this.location_value = location_value;
+    public void setLocationValue(String location_value) {
+        this.locationValue = location_value;
     }
 
     /**
      * @return the location_value
      */
-    public String getLocation_value() {
-        return location_value;
+    public String getLocationValue() {
+        return locationValue;
     }
 
     /**Recover from the service the location object and set it and the value to
@@ -58,7 +58,7 @@ public class MenuItem extends Menu{
      * @param location The id to look into the conficuration file pm.locations.xml
      * @param value The location value*/
     public void parseLocation(String location, String value) {
-        setLocation_value(value);
+        setLocationValue(value);
         setLocation(PresentationManager.getPm().getLocation(location));
     }    
 }

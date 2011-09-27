@@ -26,6 +26,6 @@ public class MenuItemLocationStruts implements MenuItemLocation {
     }
 
     protected String buildLink(MenuItem item, Object... params) {
-        return (String) params[0] + item.getLocation_value();
+        return (String) params[0] + item.getLocationValue();
     }
 }

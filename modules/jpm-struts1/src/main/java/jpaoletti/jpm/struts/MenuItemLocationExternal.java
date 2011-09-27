@@ -31,6 +31,6 @@ public class MenuItemLocationExternal implements MenuItemLocation {
      * @return The string with the external link
      */
     protected String buildLink(MenuItem item, Object... params) {
-        return item.getLocation_value();
+        return item.getLocationValue();
     }
 }
