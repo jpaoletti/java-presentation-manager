@@ -38,6 +38,7 @@ public class PMVoidSecurityConnector extends PMSecurityAbstractConnector {
         final PMSecurityUser user = new PMSecurityUser();
         user.setUsername("test");
         user.setName("test");
+        user.setPassword("");
         user.setActive(true);
         user.setDeleted(false);
         user.setChangePassword(false);
