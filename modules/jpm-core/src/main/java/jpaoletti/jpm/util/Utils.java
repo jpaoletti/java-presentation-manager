@@ -52,4 +52,8 @@ public class Utils {
     public static String hexdump(byte[] p) {
         return p.toString();
     }
+
+    public static String zeropad(String s, int i) {
+        return padright(s, i, '0');
+    }
 }
