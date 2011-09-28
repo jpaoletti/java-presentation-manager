@@ -1,5 +1,7 @@
 package jpaoletti.jpm.core.monitor;
 
+import jpaoletti.jpm.util.Utils;
+
 /**
  * A formatter that receives an array and returns a formatted string.
  *
@@ -39,11 +41,9 @@ public class BasicObjectArrayFormatter extends MonitorFormatter {
                     } catch (Exception e) {
                     }
                     if (left) {
-                        //TODO
-                        //sb.append(padleft(object.toString(), count, fill));
+                        sb.append(Utils.padleft(object.toString(), count, fill));
                     } else {
-                        //TODO
-                        //sb.append(padright(object.toString(), count, fill));
+                        sb.append(Utils.padright(object.toString(), count, fill));
                     }
                 } else {
                     sb.append(object.toString());

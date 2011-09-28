@@ -215,8 +215,10 @@ public class PresentationManager extends Observable {
         for (String s : ss) {
             try {
                 final Entity e = (Entity) parser.parseFile(s);
-                for (Field field : e.getFields()) {
-                    field.setEntity(e);
+                if (e.getFields() != null) {
+                    for (Field field : e.getFields()) {
+                        field.setEntity(e);
+                    }
                 }
                 try {
                     Class.forName(e.getClazz());
@@ -246,7 +248,7 @@ public class PresentationManager extends Observable {
      * @return The list of weak entities
      */
     protected List<Entity> weakEntities(Entity e) {
-        List<Entity> res = new ArrayList<Entity>();
+        final List<Entity> res = new ArrayList<Entity>();
         for (Entity entity : getEntities().values()) {
             if (entity.getOwner() != null && entity.getOwner().getEntityId().compareTo(e.getId()) == 0) {
                 res.add(entity);
