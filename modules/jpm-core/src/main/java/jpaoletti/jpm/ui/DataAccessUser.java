@@ -11,7 +11,7 @@ public class DataAccessUser implements DataAccess {
     @Override
     public void delete(PMContext ctx, Object object) throws PMException {
         PMSecurityUser instance = (PMSecurityUser) object;
-        getConnector().removeUser(instance);
+        getConnector(ctx).removeUser(instance);
     }
 
     @Override
@@ -26,16 +26,16 @@ public class DataAccessUser implements DataAccess {
 
     @Override
     public Object getItem(PMContext ctx, String property, String value) throws PMException {
-        return getConnector().getUser(value);
+        return getConnector(ctx).getUser(value);
     }
 
-    private PMSecurityConnector getConnector() {
-        return PresentationManager.getPm().getSecurityConnector();
+    private PMSecurityConnector getConnector(PMContext ctx) {
+        return PresentationManager.getPm().getSecurityConnector(ctx);
     }
 
     @Override
     public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
-        List<PMSecurityUser> list = getConnector().getUsers();
+        List<PMSecurityUser> list = getConnector(ctx).getUsers();
         Integer f = (from == null) ? 0 : from;
         Integer t = (count == null) ? list.size() : (from + count > list.size() ? list.size() : from + count);
         return list.subList(f, t);
@@ -43,12 +43,12 @@ public class DataAccessUser implements DataAccess {
 
     @Override
     public void update(PMContext ctx, Object instance) throws PMException {
-        getConnector().updateUser((PMSecurityUser) instance);
+        getConnector(ctx).updateUser((PMSecurityUser) instance);
     }
 
     @Override
     public void add(PMContext ctx, Object instance) throws PMException {
-        getConnector().addUser((PMSecurityUser) instance);
+        getConnector(ctx).addUser((PMSecurityUser) instance);
 
     }
 

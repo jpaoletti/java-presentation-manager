@@ -86,7 +86,7 @@ public class LoginOperation extends OperationCommandSupport {
     }
 
     private PMSecurityConnector getConnector(PMContext ctx) {
-        return PresentationManager.getPm().getSecurityConnector();
+        return PresentationManager.getPm().getSecurityConnector(ctx);
     }
 
     @Override

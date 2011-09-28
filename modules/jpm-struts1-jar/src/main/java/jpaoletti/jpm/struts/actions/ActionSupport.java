@@ -46,7 +46,7 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
 
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        PMStrutsContext ctx = (PMStrutsContext) request.getAttribute(PM_CONTEXT);
+        final PMStrutsContext ctx = (PMStrutsContext) request.getAttribute("ctx");
         ctx.setMapping(mapping);
         ctx.setForm(form);
         try {

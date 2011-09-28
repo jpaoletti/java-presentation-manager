@@ -30,7 +30,7 @@ public class DataAccessPerm implements DataAccess {
     @Override
     public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
         try {
-            List<PMSecurityPermission> list = getConnector().getPermissions();
+            List<PMSecurityPermission> list = getConnector(ctx).getPermissions();
             Integer f = (from == null) ? 0 : from;
             Integer t = (count == null) ? list.size() : (from + count > list.size() ? list.size() : from + count);
             return list.subList(f, t);
@@ -48,8 +48,8 @@ public class DataAccessPerm implements DataAccess {
     public void add(PMContext ctx, Object instance) throws PMException {
     }
 
-    private PMSecurityConnector getConnector() {
-        return PresentationManager.getPm().getSecurityConnector();
+    private PMSecurityConnector getConnector(PMContext ctx) {
+        return PresentationManager.getPm().getSecurityConnector(ctx);
     }
 
     @Override

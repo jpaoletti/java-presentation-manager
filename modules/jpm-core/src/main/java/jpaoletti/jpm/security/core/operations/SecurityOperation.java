@@ -31,6 +31,6 @@ public class SecurityOperation extends OperationCommandSupport {
     }
 
     protected PMSecurityConnector getConnector(PMContext ctx) {
-        return PresentationManager.getPm().getSecurityConnector();
+        return PresentationManager.getPm().getSecurityConnector(ctx);
     }
 }

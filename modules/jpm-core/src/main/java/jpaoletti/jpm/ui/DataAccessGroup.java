@@ -11,7 +11,7 @@ public class DataAccessGroup implements DataAccess {
     @Override
     public void delete(PMContext ctx, Object object) throws PMException {
         try {
-            getConnector().removeGroup((PMSecurityUserGroup) object);
+            getConnector(ctx).removeGroup((PMSecurityUserGroup) object);
         } catch (PMSecurityException ex) {
             ctx.getPresentationManager().error(ex);
         }
@@ -30,7 +30,7 @@ public class DataAccessGroup implements DataAccess {
     @Override
     public Object getItem(PMContext ctx, String property, String value) throws PMException {
         try {
-            return getConnector().getGroup(value);
+            return getConnector(ctx).getGroup(value);
         } catch (PMSecurityException e) {
             ctx.getPresentationManager().error(e);
         }
@@ -40,7 +40,7 @@ public class DataAccessGroup implements DataAccess {
     @Override
     public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
         try {
-            List<PMSecurityUserGroup> list = getConnector().getGroups();
+            List<PMSecurityUserGroup> list = getConnector(ctx).getGroups();
             Integer f = (from == null) ? 0 : from;
             Integer t = (count == null) ? list.size() : (from + count > list.size() ? list.size() : from + count);
             return list.subList(f, t);
@@ -53,7 +53,7 @@ public class DataAccessGroup implements DataAccess {
     @Override
     public void update(PMContext ctx, Object instance) throws PMException {
         try {
-            getConnector().updateGroup((PMSecurityUserGroup) instance);
+            getConnector(ctx).updateGroup((PMSecurityUserGroup) instance);
         } catch (PMSecurityException e) {
             ctx.getPresentationManager().error(e);
         }
@@ -62,14 +62,14 @@ public class DataAccessGroup implements DataAccess {
     @Override
     public void add(PMContext ctx, Object instance) throws PMException {
         try {
-            getConnector().addGroup((PMSecurityUserGroup) instance);
+            getConnector(ctx).addGroup((PMSecurityUserGroup) instance);
         } catch (Exception e) {
             ctx.getPresentationManager().error(e);
         }
     }
 
-    private PMSecurityConnector getConnector() {
-        return PresentationManager.getPm().getSecurityConnector();
+    private PMSecurityConnector getConnector(PMContext ctx) {
+        return PresentationManager.getPm().getSecurityConnector(ctx);
     }
 
     @Override

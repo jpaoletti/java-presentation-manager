@@ -665,7 +665,9 @@ public class PresentationManager extends Observable {
         return null;
     }
 
-    public PMSecurityConnector getSecurityConnector() {
+    //TODO Check security connector and its context
+    public PMSecurityConnector getSecurityConnector(PMContext ctx) {
+        securityConnector.setContext(ctx);
         return securityConnector;
     }
 
