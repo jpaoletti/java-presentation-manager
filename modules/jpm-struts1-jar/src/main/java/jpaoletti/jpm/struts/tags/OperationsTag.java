@@ -108,7 +108,7 @@ public class OperationsTag extends PMTags {
         script.append("('").append(hreff).append("');");
         script.append("}).button();\n");
 
-        final String style = "\"background: url('" + getContextPath() + "/templates/" + getTemplate() + "/img/" + opid + ".gif') 5% 50% no-repeat;\"";
+        final String style = "\"background-image: url('" + getContextPath() + "/templates/" + getTemplate() + "/img/" + opid + ".gif'); background-position: 5% 50%; background-repeat: no-repeat;\"";
         print("<button class='button' style=" + style + " id='operation" + opid + "'>&nbsp;");
         if (isLabels()) {
             print(operation.getTitle());
