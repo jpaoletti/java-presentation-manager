@@ -128,6 +128,20 @@
             <description>Fifth parametric replacement value, if any.</description>
         </attribute>
     </tag>
+    <tag>
+        <description>
+            Checks that the logged user has the permission and
+            evaluates the body if true
+        </description>
+        <name>checkPerm</name>
+        <tag-class>jpaoletti.jpm.struts.tags.CheckPermTag</tag-class>
+        <attribute>
+            <name>perm</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>The permission to check</description>
+        </attribute>
+    </tag>
 
     <tag>
         <description>Display an operation bar</description>
