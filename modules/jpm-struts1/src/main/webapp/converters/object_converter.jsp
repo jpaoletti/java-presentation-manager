@@ -14,7 +14,7 @@
             $("#f_${param.f}").get(0)[j]= new Option("","-1", false, false); j++;
         }
         if(filter.length >= ${ctx.map._min_search_size}){
-            jQuery.getJSON("/pm/get_list.do?entity=${ctx.map._entity}&filter_class=${ctx.map._filter}&filter="+filter+"&id=${ctx.map._id}&display=${ctx.map._display}",function(list){
+            jQuery.getJSON("${es.context_path}/get_list.do?entity=${ctx.map._entity}&filter_class=${ctx.map._filter}&filter="+filter+"&id=${ctx.map._id}&display=${ctx.map._display}",function(list){
                 for(i=0; i < list.length ; i++){
                     pr = list[i];
                     var match = pr.text.search(new RegExp(filter, "i"));
