@@ -73,12 +73,12 @@ PM_register(function() {
     
     $('#operationsort').unbind('click').click(function(){
         $("#sortDialog").dialog('option', 'buttons', {
-            "Confirm" : function() {
+            "<pmfn:message key='list.sort.button.confirm'/>" : function() {
                 $("#listform input[name=order]").val($("#dialogOrder").val());
                 $("#listform input[name=desc]").val($("#dialogDesc").val());
                 $("#listform").submit();
             },
-            "Cancel" : function() {
+            "<pmfn:message key='list.sort.button.cancel'/>" : function() {
                 $(this).dialog("close");
             }
         });
