@@ -54,10 +54,11 @@
                     });
                     
                     $( "#confirmationDialog" ).dialog({
-                        modal: true,
+                        modal: true, 
+                        resizable: false,
                         bgiframe: true,
-                        width: 250,
-                        height: 150,
+                        width: 300,
+                        height: 200,
                         autoOpen: false
                     });
 
