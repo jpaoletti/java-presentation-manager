@@ -8,7 +8,7 @@
 <%@attribute name = "resetable" required="false" type="java.lang.Boolean"  %>
 <div class="content ui-widget">
     <c:if test="${editable}">
-        <form action="${contextPath}/${operation.id}.do?pmid=${entity.id}"  accept-charset="UTF-8" >
+        <form action="${contextPath}/${operation.id}.do?pmid=${entity.id}"  accept-charset="UTF-8" method="POST">
             <input type="hidden" name="finish" value="yes" />
             <fieldset>
                 <jsp:doBody />
