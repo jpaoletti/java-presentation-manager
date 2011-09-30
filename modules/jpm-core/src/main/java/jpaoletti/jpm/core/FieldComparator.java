@@ -22,6 +22,7 @@ public class FieldComparator implements Comparator<Field> {
      * @param o2 Second field to compare
      * @return The lesser looking at order property
      * */
+    @Override
     public int compare(Field o1, Field o2) {
         int i = order.indexOf(o1.getId());
         int j = order.indexOf(o2.getId());
