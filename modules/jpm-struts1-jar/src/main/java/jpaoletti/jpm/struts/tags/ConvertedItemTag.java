@@ -39,10 +39,12 @@ public class ConvertedItemTag extends PMTags {
                 prepareContext();
                 final String highlight = highlight(getEntity(), getField(), getItem(), getFieldValue());
                 print("<div id='f_" + fieldId + "_div' class='cell " + highlight + "'>");
-                pageContext.include("../converters/"
-                        + getField().visualize(getCtx(), getOperation(), getEntity())
-                        + "&f=" + fieldId);
-
+                final Object visualize = getField().visualize(getCtx(), getOperation(), getEntity());
+                if (visualize != null) {
+                    pageContext.include("../converters/"
+                            + visualize
+                            + "&f=" + fieldId);
+                }
                 println("</div>", "<span class='field_message_container_" + getEntity().getId() + "_" + fieldId + "' />");
             } catch (Exception e) {
                 es.getPM().error(e);
