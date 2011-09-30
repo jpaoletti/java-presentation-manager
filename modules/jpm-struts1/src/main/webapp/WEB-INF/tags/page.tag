@@ -14,8 +14,6 @@
         <script type="text/javascript" src="${es.context_path}/js/jquery.dataTables.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jqueryslidemenu.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/misc.js"></script>
-        <script type="text/javascript" src="${es.context_path}/js/jquery.modal.js"></script>
-        <script type="text/javascript" src="${es.context_path}/js/jquery.center.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery.hotkeys.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery-ui-1.8.16.custom.min.js"></script>
     </head>
