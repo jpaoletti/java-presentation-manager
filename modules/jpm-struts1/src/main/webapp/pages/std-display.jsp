@@ -1,4 +1,4 @@
-<%@include file="../inc/inc-full.jsp" %>
+<%@include file="../inc/inc-full.jsp"  %>
 <%-- Standard display page for an entity instance item --%>
 <pm:page title="titles.${ctx.operation.id}">
     <div id="add" class="boxed">
@@ -21,14 +21,14 @@
                     <tfoot>
                         <tr>
                             <td colspan="2">
-                                <div class="entity_message_container_${entity.id}" />
+                                <div class="entity_message_container_${entity.id}"></div>
                             </td>
                         </tr>
                     </tfoot>
                 </table>
             </pm:std-form>
         </c:if>
-        <div class="entity_message_container_${entity.id}" />
-        <div class="message_container" />
+        <div class="entity_message_container_${entity.id}"></div>
+        <div class="message_container"></div>
     </div>
 </pm:page>
