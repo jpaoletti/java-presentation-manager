@@ -77,6 +77,13 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
         }
     }
 
+    /**
+     * Return the context path of the application
+     */
+    protected String getContextPath() {
+        return PMEntitySupport.getInstance().getContext_path();
+    }
+
     protected void excecute(PMStrutsContext ctx) throws PMException {
         doExecute(ctx);
     }
