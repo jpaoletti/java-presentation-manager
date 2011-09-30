@@ -37,22 +37,23 @@ public class OperationsTag extends PMTags {
     @Override
     public int doStartTag() throws JspException {
         try {
+            final String eid = ctx.getEntity().getId();
             final StringBuilder script = new StringBuilder("<script type='text/javascript'>\n");
             script.append("PM_register(function(){\n");
-            script.append("    $('#jpm_btn_back').click(function(){\n");
+            script.append("    $('#jpm_btn_back_").append(eid).append("').click(function(){\n");
             script.append("        history.back();\n");
             script.append("    }).button({\n");
             script.append("        text: false, icons: {primary: 'ui-icon-arrowthickstop-1-w'}\n");
             script.append("    });\n");
-            script.append("    $('#jpm_btn_refresh').click(function(){\n");
+            script.append("    $('#jpm_btn_refresh_").append(eid).append("').click(function(){\n");
             script.append("        location.reload(true);\n");
             script.append("    }).button({\n");
             script.append("        text: false, icons: {primary: 'ui-icon-refresh'}\n");
             script.append("    });\n");
 
             println("<div class='ui-widget-header ui-corner-all'>");
-            println("<button id='jpm_btn_back'>" + PresentationManager.getMessage("pm.title.back") + "</button>");
-            println("<button id='jpm_btn_refresh'>" + PresentationManager.getMessage("pm.title.refresh") + "</button>");
+            println("<button id='jpm_btn_back_" + eid + "'>" + PresentationManager.getMessage("pm.title.back") + "</button>");
+            println("<button id='jpm_btn_refresh_" + eid + "'>" + PresentationManager.getMessage("pm.title.refresh") + "</button>");
 
             if (getOperations() != null && getOperations().getOperations() != null && !getOperations().getOperations().isEmpty()) {
                 for (Operation operation : getOperations().getOperations()) {
