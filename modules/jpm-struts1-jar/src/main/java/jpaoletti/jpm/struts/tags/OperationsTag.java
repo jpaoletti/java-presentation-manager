@@ -37,7 +37,7 @@ public class OperationsTag extends PMTags {
     @Override
     public int doStartTag() throws JspException {
         try {
-            final String eid = ctx.getEntity().getId();
+            final String eid = (getEntity() != null) ? getEntity().getId() : "";
             final StringBuilder script = new StringBuilder("<script type='text/javascript'>\n");
             script.append("PM_register(function(){\n");
             script.append("    $('#jpm_btn_back_").append(eid).append("').click(function(){\n");
