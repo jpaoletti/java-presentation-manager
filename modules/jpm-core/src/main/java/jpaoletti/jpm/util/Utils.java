@@ -54,6 +54,6 @@ public class Utils {
     }
 
     public static String zeropad(String s, int i) {
-        return padright(s, i, '0');
+        return padleft(s, i, '0');
     }
 }
