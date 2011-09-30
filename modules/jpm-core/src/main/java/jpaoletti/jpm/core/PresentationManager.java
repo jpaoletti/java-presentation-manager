@@ -1,5 +1,6 @@
 package jpaoletti.jpm.core;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -456,6 +457,7 @@ public class PresentationManager extends Observable {
                 return PropertyUtils.getNestedProperty(obj, propertyName);
             }
         } catch (NullPointerException e) {
+        } catch (InvocationTargetException e) {
         } catch (Exception e) {
             // Now I don't like it.
             error(e);
