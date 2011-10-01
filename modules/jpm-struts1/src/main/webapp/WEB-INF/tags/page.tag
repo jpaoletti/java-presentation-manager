@@ -16,6 +16,7 @@
         <script type="text/javascript" src="${es.context_path}/js/misc.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery.hotkeys.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript" src="${es.context_path}/js/jquery-ui-combobox.js"></script>
     </head>
     <body class="${bodyClass}">
         <% try {%>
