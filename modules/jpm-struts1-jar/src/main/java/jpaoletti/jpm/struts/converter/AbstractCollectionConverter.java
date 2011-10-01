@@ -14,11 +14,14 @@ import jpaoletti.jpm.struts.PMStrutsContext;
  */
 public abstract class AbstractCollectionConverter extends StrutsEditConverter {
 
-    public void saveList(PMStrutsContext ctx, String eid) {
+    public List<?> saveList(PMStrutsContext ctx, String eid) {
         try {
-            ctx.getSession().setAttribute(ctx.getTmpName(), getList(ctx, null));
+            final List<?> list = getList(ctx, null);
+            ctx.getSession().setAttribute(ctx.getTmpName(), list);
+            return list;
         } catch (PMException ex) {
             ctx.getPresentationManager().error(ex);
+            return null;
         }
     }
 
