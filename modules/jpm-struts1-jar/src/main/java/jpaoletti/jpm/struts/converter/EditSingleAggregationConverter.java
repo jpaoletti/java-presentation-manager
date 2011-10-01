@@ -20,8 +20,6 @@ import jpaoletti.jpm.struts.PMStrutsContext;
  *             <property name="filter"          value="jpaoletti.jpm.core.ListFilterXX" />
  *             <property name="sort-field"      value="xxx" />
  *             <property name="sort-direction"  value="asc | desc" />
- *             <property name="search"          value="true | false" />
- *             <property name="min-search-size" value="0" />
  *         </properties>
  * </converter>
  * }
@@ -55,9 +53,7 @@ public class EditSingleAggregationConverter extends AbstractCollectionConverter 
         boolean withNull = (wn == null || wn.compareTo("true") != 0) ? false : true;
         final String filter = getConfig("filter");
         final String entity = getConfig("entity");
-        saveList((PMStrutsContext) ctx, entity);
-
-        final List<?> list = recoverList((PMStrutsContext) ctx, entity, false);
+        final List<?> list = saveList((PMStrutsContext) ctx, entity);
         final List<ACListItem> finalist = new ArrayList<ACListItem>();
         if (withNull) {
             finalist.add(new ACListItem(-1, "", false));
@@ -73,15 +69,9 @@ public class EditSingleAggregationConverter extends AbstractCollectionConverter 
                 + "?filter=" + filter
                 + "&entity=" + entity
                 + "&with_null=" + withNull
-                + "&show_search=" + hasSearch(ctx)
-                + "&min_search_size=" + getConfig("min-search-size", "0")
                 + "&prop=" + ctx.getField().getProperty());
     }
 
-    private boolean hasSearch(PMContext ctx) {
-        final String s = getConfig("search", "false");
-        return ("true".equals(s));
-    }
 
     public static class ACListItem {
 
