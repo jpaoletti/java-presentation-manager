@@ -8,6 +8,9 @@
     <property name="copyright" value="Jeronimo Paoletti"/>
     <property name="multi-login" value="false"/>
     
+    <property name="logger-class" value="jpaoletti.jpm.core.log.Log4jLogger"/>
+    <property name="logger-name" value="jpm"/>
+              
     <property name="default-converter" 
               value="jpaoletti.jpm.struts.converter.DefaultStrutsConverter"/>
               

@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 import jpaoletti.jpm.converter.*;
+import jpaoletti.jpm.core.log.JPMLogger;
 import jpaoletti.jpm.core.monitor.Monitor;
 import jpaoletti.jpm.menu.*;
 import jpaoletti.jpm.parser.*;
@@ -34,7 +35,7 @@ public class PresentationManager extends Observable {
     /**  Hash value for parameter encrypt  */
     private static Long sessionIdSeed = 0L;
     private Properties cfg;
-    private Logger logger;
+    private JPMLogger logger;
     private Map<Object, Entity> entities;
     private Map<String, MenuItemLocation> locations;
     private Map<Object, Monitor> monitors;
@@ -87,7 +88,8 @@ public class PresentationManager extends Observable {
     public boolean initialize(final String cfgFilename) throws Exception {
         notifyObservers();
         this.cfg = (Properties) new MainParser().parseFile(cfgFilename);
-        logger = Logger.getLogger(getCfg().getProperty("logger", "jPM"));
+        logger = (JPMLogger) newInstance(getCfg().getProperty("logger-class", "jpaoletti.jpm.core.log.Log4jLogger"));
+        logger.setName(getCfg().getProperty("logger-name", "jPM"));
         error = false;
         try {
             try {
