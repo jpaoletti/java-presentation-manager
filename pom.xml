@@ -38,5 +38,6 @@
         <module>modules/jpm-struts1-jar</module>
         <module>modules/jpm-struts1</module>
         <module>modules/jpm-test</module>
+        <module>modules/jpm-jpos</module>
     </modules>
 </project>
