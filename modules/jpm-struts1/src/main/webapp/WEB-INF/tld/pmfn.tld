@@ -40,6 +40,20 @@
 
     <function>
         <description>
+          Return field of the entity with the given id
+        </description>
+        <name>getField</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            jpaoletti.jpm.core.Field getField(jpaoletti.jpm.core.Entity, java.lang.String)
+        </function-signature>
+        <example>
+            ${pmfn:getField(entity,'fieldid')}
+        </example>
+    </function>
+
+    <function>
+        <description>
           Return an img html with a tooltip for a field
         </description>
         <name>tooltip</name>

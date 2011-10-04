@@ -158,4 +158,8 @@ public class PMTags extends TagSupport {
             pageContext.getOut().println(object);
         }
     }
+
+    public static Field getField(Entity entity, String fieldId) {
+        return entity.getFieldById(fieldId);
+    }
 }
