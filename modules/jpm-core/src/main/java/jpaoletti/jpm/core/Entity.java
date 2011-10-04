@@ -519,11 +519,18 @@ public class Entity extends PMCoreObject {
     public void setCached(boolean cached) {
         this.cached = cached;
     }
-    
+
     /**
      * Returns the internationalized entity title
      */
-    public String getTitle(){
-        return PresentationManager.getMessage("pm.entity."+getId());
+    public String getTitle() {
+        final String key = String.format("pm.entity.%s", getId());
+        final String message = PresentationManager.getMessage(key);
+        if (key.equals(message)) {
+            if (getExtendzEntity() != null) {
+                return getExtendzEntity().getTitle();
+            }
+        }
+        return message;
     }
 }

@@ -281,7 +281,15 @@ public class Field extends PMCoreObject {
      * Returns the internationalized field title
      */
     public String getTitle() {
-        return PresentationManager.getMessage("pm.field." + getEntity().getId() + "." + getId());
+        final String key = String.format("pm.field.%s.%s", getEntity().getId(), getId());
+        final String message = PresentationManager.getMessage(key);
+        if (key.equals(message)) {
+            final Entity extendzEntity = getEntity().getExtendzEntity();
+            if (extendzEntity != null && extendzEntity.getFieldById(getId())!=null) {
+                return extendzEntity.getFieldById(getId()).getTitle();
+            }
+        }
+        return message;
     }
 
     /**
