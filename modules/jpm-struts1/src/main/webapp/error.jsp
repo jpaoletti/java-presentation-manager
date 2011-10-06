@@ -2,6 +2,7 @@
 <pm:page title="errors">
     <div class="boxed">
         <h2 class="title"><pmfn:message key="errors.title" /></h2><br/>
+        <div class="message_container"></div>
         <a href="javascript:history.back()"><pmfn:message key="errors.back" /></a>
     </div>
 </pm:page>
