@@ -18,13 +18,6 @@
                             </tr>
                         </c:forEach>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2">
-                                <div class="entity_message_container_${entity.id}"></div>
-                            </td>
-                        </tr>
-                    </tfoot>
                 </table>
             </pm:std-form>
         </c:if>
