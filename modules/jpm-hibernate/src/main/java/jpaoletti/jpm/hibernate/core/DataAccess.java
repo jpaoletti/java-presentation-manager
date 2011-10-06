@@ -122,7 +122,7 @@ public class DataAccess implements jpaoletti.jpm.core.DataAccess, PMCoreConstant
             throw new EntityClassNotFoundException();
         }
 
-        final String order = (sort != null && sort.isSorted()) ? entity.getFieldById(sort.getFieldId()).getProperty() : null;
+        final String order = (sort != null && sort.isSorted() && entity.getFieldById(sort.getFieldId()) != null) ? entity.getFieldById(sort.getFieldId()).getProperty() : null;
         final boolean asc = (sort == null) ? true : sort.getDirection().equals(ListSort.SortDirection.ASC);
         if (order != null) {
             final String[] splitorder = order.split("[.]");
