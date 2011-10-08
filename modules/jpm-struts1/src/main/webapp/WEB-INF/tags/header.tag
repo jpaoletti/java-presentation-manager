@@ -3,7 +3,6 @@
 <%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="pm" %>
 <div id="header">
-    <pm:topmenu />
     <div id="logo">
         <h1 class="title"><pmfn:message key="${pm.title}"/></h1>
         <h2 class="title"><pmfn:message key="${pm.subtitle}"/></h2>

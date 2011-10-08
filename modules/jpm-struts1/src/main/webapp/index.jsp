@@ -4,56 +4,16 @@
         <script type="text/javascript" src="js/expand.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <script type="text/javascript">
-            var cookie_name='header_expanded';
-            function setCookie(b){
-                jQuery.cookie(cookie_name, b, {expires: 100});
-            }
-            function hideHeader(){
-                $("#full_header").slideUp('slow','linear');
-                $("#hide_context").hide();
-                $("#show_context").show();
-                setCookie(false);
-            }
-            function showHeader(){
-                $("#full_header").slideDown('slow','linear');
-                $("#hide_context").show();
-                $("#show_context").hide();
-                setCookie(true);
-            }
-            function initBtn(){
-                if(jQuery.cookie(cookie_name) == null ){
-                    setCookie(true);
-                };
-                if(jQuery.cookie(cookie_name) == 'true'){
-                    showHeader();
-                }else{
-                    hideHeader();
-                }
-            }
             PM_register(function(){
                 $(window.frames["mainframe"]).focus();
-                <c:if test="${pm.hideableHeader}">
-                    initBtn();
-                    $(".show_hide_btn").offset({left: $("#topmenu").offset().left });
-                    $("#hide_context").click( hideHeader );
-                    $("#show_context").click( showHeader );
-                </c:if>
-                });
+            });
         </script>
         <div class="index_layout" id="page-container">
             <div class="index_layout_header">
-                <div id="full_header"><pm:header /><pmfn:menu pmsession="${pmsession}" /></div>
+                <div id="full_header"><pm:header /><pm:topmenu /><pmfn:menu pmsession="${pmsession}" /></div>
             </div>
             <div class="index_layout_content">
                 <div id="content">
-                    <c:if test="${pm.hideableHeader}">
-                        <div id="hide_context" class="show_hide_btn">
-                            <img alt="^" src="${es.context_path}/templates/${pm.template}/img/arrow-up.gif" />
-                        </div>
-                        <div id="show_context" class="show_hide_btn">
-                            <img alt="v" src="${es.context_path}/templates/${pm.template}/img/arrow-down.gif" />
-                        </div>
-                    </c:if>
                     <c:if test="${empty pmsession}">
                         <iframe id="mainframe" name="mainframe" frameborder="0"  src="${es.context_path}/pages/login.jsp"></iframe>
                     </c:if>

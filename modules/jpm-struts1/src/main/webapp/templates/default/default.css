@@ -194,23 +194,6 @@ a:hover {
 /******************************************************************************/
 /* Index styles */
 
-.show_hide_btn {
-    margin-left: 2px;
-    margin-right: 10px;
-    margin-top: -25px;
-    border-bottom: #EAEAD7 solid thin;
-    border-right: #EAEAD7 solid thin;
-    border-left: #EAEAD7 solid thin;
-    z-index: 10;
-    padding:5px;
-    padding-top: 10px;
-    text-align:center;
-    cursor: pointer;
-    background-color: #CC3300;
-    width: 30px;
-    height: 10px;
-}
-
 #mainframe{
     height: 100%;
     width: 100%;
@@ -274,6 +257,7 @@ a:hover {
 
 #logo {
     padding: 5px 0px 0px 20px;
+    float:left;
 }
 
 #logo h1 {
@@ -297,7 +281,7 @@ a:hover {
 
 #topmenu ul {
     margin: 0;
-    padding: 80px 0 0 0;
+    padding: 15px 0 0 0;
     list-style: none;
     line-height: normal;
 }
@@ -316,6 +300,7 @@ a:hover {
     font-size: x-small;
     font-weight: bold;
     color: #FFFFFF;
+    vertical-align: middle;
 }
 
 #topmenu a:hover {
@@ -330,8 +315,12 @@ a:hover {
     background: url(images/img04.gif) no-repeat left center;
 }
 
-#topmenu3 {
-    background: url(images/img05.gif) no-repeat left center;
+#btnColapseExpand{
+    margin-top: -7px;
+    margin-left: 10px;
+}
+#btnColapseExpand .ui-button-text{
+    padding: 2px!important;
 }
 
 /* Content > Main */
@@ -389,10 +378,9 @@ a:hover {
 #userbox{
     padding-right:5px;
     padding-top:5px;
-    position:absolute;
     right:5px;
     text-align:right;
-    top:5px;
+    float: right;
 }
 
 #userbox img{
