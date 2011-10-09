@@ -101,12 +101,16 @@ public class OperationsTag extends PMTags {
 
         script.append(jqItem);
         script.append(".click(function(){");
-        if (operation.getConfirm()) {
-            script.append("loadPageConfirm");
+        if (operation.isAvailable()) {
+            if (operation.getConfirm()) {
+                script.append("loadPageConfirm");
+            } else {
+                script.append("loadPage");
+            }
+            script.append("('").append(hreff).append("');");
         } else {
-            script.append("loadPage");
+            script.append("alert('").append(PresentationManager.getMessage("operation.not.available", operation.getTitle())).append("');");
         }
-        script.append("('").append(hreff).append("');");
         script.append("}).button();\n");
 
         final String style = "\"background-image: url('" + getContextPath() + "/templates/" + getTemplate() + "/img/" + opid + ".gif'); background-position: 5% 50%; background-repeat: no-repeat;\"";

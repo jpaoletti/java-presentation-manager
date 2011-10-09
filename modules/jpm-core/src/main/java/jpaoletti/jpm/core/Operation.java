@@ -17,6 +17,7 @@ import jpaoletti.jpm.validator.Validator;
  *    <showTitle>true</showTitle>
  *    <confirm>true</confirm>
  *    <perm>sysadmin</perm>
+ *    <available>(*)true|false</available>
  *    <follows>other_operation_id</follows>
  *    <context class="some.operation.Context" />
  *    <validator class="some.validator.Validator1" />
@@ -61,6 +62,7 @@ public class Operation extends PMCoreObject {
     private String follows;
     //Conditional to show on others
     private OperationCondition condition;
+    private Boolean available;
 
     public OperationCondition getCondition() {
         return condition;
@@ -274,5 +276,16 @@ public class Operation extends PMCoreObject {
      */
     public String getTitle() {
         return PresentationManager.getMessage("operation." + getId());
+    }
+
+    public boolean isAvailable() {
+        if (available == null) {
+            return true;
+        }
+        return available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 }
