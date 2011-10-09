@@ -7,7 +7,8 @@ import java.util.List;
  * 
  * @author jpaoletti
  */
-public class Highlights extends PMCoreObject{
+public class Highlights extends PMCoreObject {
+
     private static final String INSTANCE = "instance";
     private List<Highlight> highlights;
 
@@ -16,7 +17,7 @@ public class Highlights extends PMCoreObject{
      * @param highlight The highlight
      * @return The indec
      */
-    public int indexOf(Highlight highlight){
+    public int indexOf(Highlight highlight) {
         return getHighlights().indexOf(highlight);
     }
 
@@ -29,12 +30,15 @@ public class Highlights extends PMCoreObject{
      * @param instance The instance
      * @return The highlight
      */
-    public Highlight getHighlight(Entity entity, Field field, Object instance){
-        if(field==null) return getHighlight(entity, instance);
+    public Highlight getHighlight(Entity entity, Field field, Object instance) {
+        if (field == null) {
+            return getHighlight(entity, instance);
+        }
         for (Highlight highlight : highlights) {
-            if(!highlight.getScope().equals(INSTANCE)){
-                if(match(instance, field, highlight))
+            if (!highlight.getScope().equals(INSTANCE)) {
+                if (match(instance, field, highlight)) {
                     return highlight;
+                }
             }
         }
         return null;
@@ -48,12 +52,13 @@ public class Highlights extends PMCoreObject{
      * @param instance The instance
      * @return The Highlinght
      */
-    public Highlight getHighlight(Entity entity, Object instance){
+    public Highlight getHighlight(Entity entity, Object instance) {
         for (Highlight highlight : highlights) {
-            if(highlight.getScope().equals(INSTANCE)){
+            if (highlight.getScope().equals(INSTANCE)) {
                 for (Field field : entity.getOrderedFields()) {
-                    if(match(instance, field, highlight))
+                    if (match(instance, field, highlight)) {
                         return highlight;
+                    }
                 }
             }
         }
@@ -70,9 +75,12 @@ public class Highlights extends PMCoreObject{
      * @return true if match
      */
     protected boolean match(Object instance, Field field, Highlight highlight) {
-        Object o = getPresentationManager().get(instance, field.getProperty());
-        if (o != null && o.toString().equals(highlight.getValue()) && highlight.getField().equals(field.getId())) {
-            return true;
+        try {
+            Object o = getPresentationManager().get(instance, field.getProperty());
+            if (o != null && o.toString().equals(highlight.getValue()) && highlight.getField().equals(field.getId())) {
+                return true;
+            }
+        } catch (Exception e) {
         }
         return false;
     }
