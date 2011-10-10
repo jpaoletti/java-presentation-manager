@@ -76,7 +76,6 @@ public class PMContext {
      */
     public EntityContainer getEntityContainer() throws PMException {
         if (entityContainer == null) {
-            PresentationManager.getPm().error("Entity container not found");
             throw new PMException("pm_core.entity.not.found");
         }
         return entityContainer;
@@ -157,7 +156,6 @@ public class PMContext {
         try {
             return getEntityContainer().getEntity();
         } catch (PMException ex) {
-            getPresentationManager().warn("Entity not found");
             return null;
         }
     }
