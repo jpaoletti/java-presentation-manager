@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
-
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -166,7 +164,7 @@ public class SECUser implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", getId()).append("nick", getNick()).toString();
+        return getNickAndId();
     }
 
     @Override
