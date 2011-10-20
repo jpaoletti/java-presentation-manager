@@ -199,6 +199,7 @@ a:hover {
     width: 100%;
     padding: 0px;
     margin: 0px;
+    border: none;
 }
 
 .index_layout{
@@ -213,7 +214,7 @@ a:hover {
 
 .index_layout_content{
     margin: 0 auto;
-    padding: 20px 0px 15px;
+/*    padding: 20px 0px 15px;*/
     height: 82%;
 }
 
