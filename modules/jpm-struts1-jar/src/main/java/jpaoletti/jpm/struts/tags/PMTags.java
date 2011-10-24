@@ -26,6 +26,10 @@ import jpaoletti.jpm.util.DisplacedList;
  */
 public class PMTags extends TagSupport {
 
+    public static boolean contains(List list, Object o) {
+        return list != null && list.contains(o);
+    }
+
     public static String itemCheckbox(PMStrutsContext ctx, DisplacedList list, Object item) throws PMException {
         if (ctx.getEntityContainer().getList().isHasSelectedScope()) {
             final StringBuilder input = new StringBuilder();

@@ -100,6 +100,15 @@
         </function-signature>
     </function>
 
+    <function>
+        <description>List contains</description>
+        <name>contains</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            boolean contains(java.util.List, java.lang.Object)
+        </function-signature>
+    </function>
+
     <tag>
         <description>Display an internationalized message</description>
         <name>message</name>
