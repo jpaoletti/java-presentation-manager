@@ -14,7 +14,7 @@ public class CheckPermTag extends PMTags {
     @Override
     public int doStartTag() throws JspException {
         final PMStrutsContext ctx = (PMStrutsContext) pageContext.getRequest().getAttribute("ctx");
-        if (ctx.getUser().hasPermission(getPerm())) {
+        if ( ctx.getUser() != null && ctx.getUser().hasPermission(getPerm())) {
             return EVAL_BODY_AGAIN;
         } else {
             return SKIP_BODY;
