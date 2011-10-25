@@ -39,13 +39,15 @@ public class OperationsTag extends PMTags {
         try {
             final String eid = (getEntity() != null) ? getEntity().getId() : "";
             String backUrl = pageContext.getRequest().getParameter("backUrl");
-            if (backUrl == null) {
-                backUrl = "document.referrer";
-            }
             final StringBuilder script = new StringBuilder("<script type='text/javascript'>\n");
             script.append("PM_register(function(){\n");
             script.append("    $('#jpm_btn_back_").append(eid).append("').click(function(){\n");
-            script.append("        loadPage('").append(backUrl).append("');\n");
+            if (backUrl == null) {
+                backUrl = "document.referrer";
+                script.append("        loadPage(document.referrer);\n");
+            } else {
+                script.append("        loadPage('").append(backUrl).append("');\n");
+            }
             script.append("    }).button({\n");
             script.append("        text: false, icons: {primary: 'ui-icon-arrowthickstop-1-w'}\n");
             script.append("    });\n");
