@@ -41,7 +41,7 @@ public class OperationsTag extends PMTags {
             final StringBuilder script = new StringBuilder("<script type='text/javascript'>\n");
             script.append("PM_register(function(){\n");
             script.append("    $('#jpm_btn_back_").append(eid).append("').click(function(){\n");
-            script.append("        history.back();\n");
+            script.append("        loadPage(document.referrer);\n");
             script.append("    }).button({\n");
             script.append("        text: false, icons: {primary: 'ui-icon-arrowthickstop-1-w'}\n");
             script.append("    });\n");
