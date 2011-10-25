@@ -2,13 +2,50 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>jpaoletti.jpm</groupId>
+    <groupId>com.github.jpaoletti</groupId>
     <artifactId>jpm-struts1-jar</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <name>jpm-struts1-jar</name>
+    
+    <description>Struts1 jar module for jpm</description>
+    
+    <parent>
+        <groupId>com.github.jpaoletti</groupId>
+        <artifactId>java-presentation-manager</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>remove-old-installers</id>
+                        <goals>
+                            <goal>remove-project-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <removeAll>true</removeAll>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,7 +70,7 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>jpaoletti.jpm</groupId>
+            <groupId>com.github.jpaoletti</groupId>
             <artifactId>jpm-core</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>

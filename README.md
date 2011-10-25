@@ -37,7 +37,7 @@ with a custom MVC system. To use it you need to use the following maven plugin:
   ...
   <dependencies>
     <dependency>
-      <groupId>jpaoletti.jpm</groupId>
+      <groupId>com.github.jpaoletti</groupId>
       <artifactId>jpm-struts1</artifactId>
       <version>1.0-SNAPSHOT</version>
       <type>war</type>
@@ -49,6 +49,11 @@ with a custom MVC system. To use it you need to use the following maven plugin:
   
 ```
 For further reference check http://maven.apache.org/plugins/maven-war-plugin/overlays.html
+
+You can check the repositories at
+
+https://oss.sonatype.org/index.html#nexus-search;quick~jpaoletti
+
 
 ## License
 

@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>jpaoletti.jpm</groupId>
+    <groupId>com.github.jpaoletti</groupId>
     <artifactId>java-presentation-manager</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>java-presentation-manager</name>
-    <url>https://github.com/jpaoletti/java-presentation-manager</url>
+    <url>http://jpaoletti.github.com/java-presentation-manager/</url>
     <description>
         Java Presentation Manager is a CRUD system with extended tools 
         to fast build an administrative and monitoring web site based in xml 
@@ -16,13 +16,25 @@
         visualization that you like most.
     </description>
     
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+    
     <licenses>
         <license>
             <name>GNU AFFERO GENERAL PUBLIC LICENSE v3</name>
             <url>http://www.opensource.org/licenses/agpl-v3.html</url>
         </license>
     </licenses>
-
+    
+    <scm>
+        <connection>scm:git:git@github.com:jpaoletti/java-presentation-manager.git</connection>
+        <developerConnection>scm:git:git@github.com:jpaoletti/java-presentation-manager.git</developerConnection>
+        <url>git@github.com:jpaoletti/java-presentation-manager.git</url>
+    </scm>
+    
     <developers>
         <developer>
             <id>jpaoletti</id>
@@ -40,4 +52,24 @@
         <module>modules/jpm-test</module>
         <module>modules/jpm-jpos</module>
     </modules>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <version>1.4</version>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
 </project>
