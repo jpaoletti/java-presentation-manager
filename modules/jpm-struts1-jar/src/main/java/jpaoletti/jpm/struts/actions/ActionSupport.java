@@ -16,6 +16,7 @@ import jpaoletti.jpm.struts.PMEntitySupport;
 import jpaoletti.jpm.struts.PMForwardException;
 import jpaoletti.jpm.struts.PMStrutsConstants;
 import jpaoletti.jpm.struts.PMStrutsContext;
+import org.apache.struts.action.ActionRedirect;
 
 /**
  * A super class for all actions with some helpers and generic stuff
@@ -54,7 +55,7 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
             if (step) {
                 excecute(ctx);
                 if (ctx.getOperation() != null && ctx.getOperation().getFollows() != null) {
-                    return new ActionForward("/" + ctx.getOperation().getFollows() + ".do");
+                    return new ActionRedirect("/" + ctx.getOperation().getFollows() + ".do");
                 }
             }
             return mapping.findForward(SUCCESS);
