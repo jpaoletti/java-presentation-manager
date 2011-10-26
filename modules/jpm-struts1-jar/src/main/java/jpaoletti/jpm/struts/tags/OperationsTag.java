@@ -43,8 +43,7 @@ public class OperationsTag extends PMTags {
             script.append("PM_register(function(){\n");
             script.append("    $('#jpm_btn_back_").append(eid).append("').click(function(){\n");
             if (backUrl == null) {
-                backUrl = "document.referrer";
-                script.append("        loadPage(document.referrer);\n");
+                script.append("        history.back();\n");
             } else {
                 script.append("        loadPage('").append(backUrl).append("');\n");
             }
