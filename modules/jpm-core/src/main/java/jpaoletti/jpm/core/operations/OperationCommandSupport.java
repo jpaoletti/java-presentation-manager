@@ -156,10 +156,8 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
             Integer index = Integer.parseInt(item);
             ctx.getPresentationManager().debug(this, "Getting row index: " + index);
             if (index != null) {
-                final DisplacedList<Object> al = new DisplacedList<Object>();
-                al.addAll(ctx.getList().getContents());
-                al.setDisplacement(ctx.getList().getContents().getDisplacement());
-                ctx.getEntityContainer().setSelected(new EntityInstanceWrapper(al.get(index)));
+                final Object itemAtIndex = ctx.getList().getContents().get(index);
+                ctx.getEntityContainer().setSelected(new EntityInstanceWrapper(itemAtIndex));
             }
         } else {
             String identified = (String) ctx.getParameter("identified");
