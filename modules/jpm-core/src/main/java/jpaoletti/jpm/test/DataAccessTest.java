@@ -9,9 +9,8 @@ import jpaoletti.jpm.core.*;
  *
  * @author jpaoletti
  */
-public abstract class DataAccessTest implements DataAccess {
+public abstract class DataAccessTest extends AbstractDataAccess {
 
-    private Entity entity;
     protected List<Object> list;
 
     protected abstract void fill();
@@ -22,7 +21,13 @@ public abstract class DataAccessTest implements DataAccess {
 
     @Override
     public Object getItem(PMContext ctx, String property, String value) throws PMException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (Object object : list) {
+            final Object actualValue = PresentationManager.getPm().get(object, property);
+            if (actualValue != null && actualValue.toString().equals(value)) {
+                return object;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -75,25 +80,5 @@ public abstract class DataAccessTest implements DataAccess {
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
         return null;
-    }
-
-    @Override
-    public Entity getEntity() {
-        return entity;
-    }
-
-    @Override
-    public void setEntity(Entity entity) {
-        this.entity = entity;
-    }
-
-    @Override
-    public InstanceId getInstanceId(PMContext ctx, EntityInstanceWrapper instanceWrapper) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Object getItem(PMContext ctx, InstanceId instanceId) throws PMException {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
