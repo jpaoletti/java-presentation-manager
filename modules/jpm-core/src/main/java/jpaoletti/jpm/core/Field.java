@@ -72,6 +72,8 @@ public class Field extends PMCoreObject {
                 ctx.setFieldValue(getPresentationManager().get(instance, getProperty()));
             }
             return c.visualize(ctx);
+        } catch (ConverterException e) {
+            throw e;
         } catch (Exception e) {
             getPresentationManager().error(e);
             throw new ConverterException("Unable to convert " + entity.getId() + "." + getProperty());
