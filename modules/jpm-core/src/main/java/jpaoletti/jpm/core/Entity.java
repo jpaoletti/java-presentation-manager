@@ -378,6 +378,12 @@ public class Entity extends PMCoreObject {
      * @return the extendzEntity
      */
     public Entity getExtendzEntity() {
+        if (extendzEntity == null && extendz != null) {
+            extendzEntity = PresentationManager.getPm().getEntity(getExtendz());
+        }
+        if (extendzEntity == null) {
+            PresentationManager.getPm().error("Entity '" + getId() + "' inherites from '" + getExtendz() + "' but this entity was not loaded yet.");
+        }
         return extendzEntity;
     }
 

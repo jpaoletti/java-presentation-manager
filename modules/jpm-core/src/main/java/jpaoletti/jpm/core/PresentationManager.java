@@ -280,9 +280,6 @@ public class PresentationManager extends Observable {
         if (e == null) {
             return null;
         }
-        if (e.getExtendz() != null && e.getExtendzEntity() == null) {
-            e.setExtendzEntity(this.getEntity(e.getExtendz()));
-        }
         return e;
     }
 
