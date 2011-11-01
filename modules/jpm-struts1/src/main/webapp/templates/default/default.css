@@ -589,10 +589,19 @@ a.pagination span.ui-button-text{
 }
 .ui-button { margin-left: -1px; }
 .ui-button-icon-only .ui-button-text { padding: 0.35em; } 
-.ui-autocomplete-input { margin: 0; padding: 0.48em 0 0.47em 0.45em; width: 300px;}
+
+.ui-autocomplete-input {
+    margin: 0;
+    width: 276px;
+    height: 26px;
+    background: #F7F7F7 !important;
+    -moz-border-radius-topright: 0px; -webkit-border-top-right-radius: 0px; -khtml-border-top-right-radius: 0px; border-top-right-radius: 0px;
+    -moz-border-radius-bottomright: 0px; -webkit-border-bottom-right-radius: 0px; -khtml-border-bottom-right-radius: 0px; border-bottom-right-radius: 0px;
+}
 .ui-autocomplete {
     max-height: 200px;
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 20px;
+    background: #F7F7F7 !important;
 }

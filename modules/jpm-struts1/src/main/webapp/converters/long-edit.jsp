@@ -9,6 +9,8 @@
        value="${ctx.fieldValue}" id="f_${param.f}" name="f_${param.f}" />
 <script type="text/javascript" src="${es.context_path}/js/jquery.meio.mask.min.js"></script>
 <script type="text/javascript">
-    $.mask.masks.longmask = {mask: '999999999999999999'}
-    $(".long-converter").setMask();
+    PM_register(function(){
+        $.mask.masks.longmask = {mask: '999999999999999999'}
+        $(".long-converter").setMask();
+    });
 </script>
