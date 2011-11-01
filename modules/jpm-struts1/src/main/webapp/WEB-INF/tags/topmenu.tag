@@ -4,7 +4,7 @@
 <div id="topmenu">
     <ul>
         <li><a href="${es.context_path}/index.jsp" id="topmenu1"><pmfn:message key="home"/></a></li>
-        <li><a href="mailto:${pm.contact}" id="topmenu3" accesskey="3" title="<pmfn:message key="contact"/>"><pmfn:message key="contact"/></a></li>
+        <li><a href="mailto:${pm.contact}" id="topmenu2" accesskey="2" title="<pmfn:message key="contact"/>"><pmfn:message key="contact"/></a></li>
         <c:if test="${pm.hideableHeader}">
             <li><button id="btnColapseExpand">&nbsp;</button></li>
         </c:if>
