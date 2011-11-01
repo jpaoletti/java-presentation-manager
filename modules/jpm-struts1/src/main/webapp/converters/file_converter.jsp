@@ -1,1 +1,0 @@
-<input type="file" value="${param.value}" id="f_${param.f}" name="f_${param.f}" />
