@@ -301,7 +301,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         return operationId;
     }
 
-    protected void proccessField(PMContext ctx, Field field, EntityInstanceWrapper wrapper) throws PMException {
+    protected void proccessField(PMContext ctx, Field field, EntityInstanceWrapper wrapper) {
         final List<Object> parameterValues = getParameterValues(ctx, field);
         int i = 0;
         for (Object value : parameterValues) {
@@ -311,12 +311,18 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
                 doProcessField(wrapper, i, converter, ctx, field, converted);
             } catch (IgnoreConvertionException e) {
                 //Do nothing, just ignore conversion.
+            } catch (ConverterException e) {
+                ctx.getPresentationManager().error(e);
+                ctx.addMessage(MessageFactory.error(ctx.getEntity(), field, e.getKey()));
+            } catch (Exception e) {
+                ctx.getPresentationManager().error(e);
+                ctx.addMessage(MessageFactory.error(ctx.getEntity(), field, UNESPECTED_ERROR));
             }
             i++;
         }
     }
 
-    protected void doProcessField(EntityInstanceWrapper wrapper, int i, final Converter converter, PMContext ctx, Field field, Object converted) throws PMException {
+    protected void doProcessField(EntityInstanceWrapper wrapper, int i, final Converter converter, PMContext ctx, Field field, Object converted) {
         final Object o = wrapper.getInstance(i);
         if (converter.getValidate()) {
             if (validateField(ctx, field, wrapper, converted)) {
@@ -338,7 +344,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         return converted;
     }
 
-    private boolean validateField(PMContext ctx, Field field, EntityInstanceWrapper wrapper, Object o) throws PMException {
+    private boolean validateField(PMContext ctx, Field field, EntityInstanceWrapper wrapper, Object o) {
         boolean ok = true;
         if (field.getValidators() != null) {
             for (Validator fv : field.getValidators()) {

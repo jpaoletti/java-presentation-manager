@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jpaoletti.jpm.converter.*;
 import jpaoletti.jpm.core.*;
+import jpaoletti.jpm.core.message.MessageFactory;
 import jpaoletti.jpm.util.DisplacedList;
 
 /**
@@ -100,6 +101,12 @@ public class PMFilterOperation extends OperationCommandSupport {
                 values.add(converted);
             } catch (IgnoreConvertionException e) {
                 //Do nothing, just ignore conversion.
+            } catch (ConverterException e) {
+                ctx.getPresentationManager().error(e);
+                ctx.addMessage(MessageFactory.error(ctx.getEntity(), field, e.getKey()));
+            } catch (Exception e) {
+                ctx.getPresentationManager().error(e);
+                ctx.addMessage(MessageFactory.error(ctx.getEntity(), field, UNESPECTED_ERROR));
             }
             i++;
         }
