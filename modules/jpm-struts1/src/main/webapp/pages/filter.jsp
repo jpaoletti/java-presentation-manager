@@ -21,7 +21,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                             <div class="entity_message_container_${entity.id}"/>
                         </td>
                     </tr>

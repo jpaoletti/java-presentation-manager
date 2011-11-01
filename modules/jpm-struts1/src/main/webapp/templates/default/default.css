@@ -8,7 +8,7 @@ html{
 }
 
 body,table,td,th,p,div,form,label,caption,a{
-    font-size: 10px;
+    font-size: 12px;
 }
 
 body {
@@ -16,6 +16,21 @@ body {
     padding: 0;
     background: #F7F7F7;
     color: #111;
+}
+
+input, select, textarea, option{
+    padding: 0.30em;
+    border: 1px solid #D4D1BF;
+    background-color: #F7F7F7;
+    color: #362b36;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+}
+
+input.string-converter{
+    width: 300px;
 }
 
 body.outer-index{
