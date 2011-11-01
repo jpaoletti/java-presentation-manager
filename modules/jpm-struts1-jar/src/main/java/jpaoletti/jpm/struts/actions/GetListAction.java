@@ -58,8 +58,6 @@ public class GetListAction extends ActionSupport {
             }
             List<?> list = null;
             synchronized (entity) {
-                ListFilter tmp = entity.getListfilter();
-                entity.setListfilter(lfilter);
                 if (_filter != null) {
                     final EntityFilter filter = entity.getDataAccess().createFilter(ctx);
                     filter.setBehavior(FilterBehavior.OR);
@@ -68,11 +66,10 @@ public class GetListAction extends ActionSupport {
                         filter.addFilter(_display_field, _filter, FilterOperation.LIKE);
                     }
                     filter.process(entity);
-                    list = entity.getList(ctx, filter, null, _from, _count);
+                    list = entity.getDataAccess().list(ctx, filter, lfilter, null, _from, _count);
                 } else {
-                    list = entity.getList(ctx, null, null, _from, _count);
+                    list = entity.getDataAccess().list(ctx, null, lfilter, null, _from, _count);
                 }
-                entity.setListfilter(tmp);
             }
             for (Object object : list) {
                 if (object != null) {

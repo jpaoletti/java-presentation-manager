@@ -37,10 +37,6 @@ public class Entity extends PMCoreObject {
     private String id;
     /**The full name of the class represented by the entity.*/
     private String clazz;
-    /**A filter for the list of instances of the entity.
-     * <br/>{@code <listfilter class="a.class.implementing.ListFilter" />}
-     * @see ListFilter */
-    private ListFilter listfilter;
     /**If defined, represents the order of the fields. 
      * <br/>{@code <order>field_id2 field_id3 field_id1</order>}
      * @see Field*/
@@ -164,7 +160,21 @@ public class Entity extends PMCoreObject {
      * @throws PMException
      */
     public List<?> getList(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
-        return getDataAccess().list(ctx, filter, sort, from, count);
+        return getDataAccess().list(ctx, filter, null, sort, from, count);
+    }
+
+    /**
+     * Returns a list taken from data access with the given parameters.
+     * 
+     * @param ctx The context
+     * @param filter A list filter
+     * @param from The index of the first element
+     * @param count The maximun number of items retrieved
+     * @return The list
+     * @throws PMException
+     */
+    public List<?> getList(PMContext ctx, ListFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+        return getDataAccess().list(ctx, null, filter, sort, from, count);
     }
 
     /**Getter for a field by its id
@@ -264,20 +274,6 @@ public class Entity extends PMCoreObject {
      */
     public void setClazz(String clazz) {
         this.clazz = clazz;
-    }
-
-    /**Getter for listfilter
-     * @return the listfilter
-     */
-    public ListFilter getListfilter() {
-        return listfilter;
-    }
-
-    /**
-     * @param listfilter the listfilter to set
-     */
-    public void setListfilter(ListFilter listfilter) {
-        this.listfilter = listfilter;
     }
 
     /**Getter for order

@@ -26,7 +26,7 @@ public class DataAccessPerm extends AbstractDataAccess {
     }
 
     @Override
-    public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+    public List<?> list(PMContext ctx, EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         try {
             List<PMSecurityPermission> list = getConnector(ctx).getPermissions();
             Integer f = (from == null) ? 0 : from;
@@ -52,7 +52,7 @@ public class DataAccessPerm extends AbstractDataAccess {
 
     @Override
     public Long count(PMContext ctx) throws PMException {
-        return new Long(list(ctx, null, null, null, null).size());
+        return new Long(list(ctx, null, null, null, null, null).size());
     }
 
     @Override

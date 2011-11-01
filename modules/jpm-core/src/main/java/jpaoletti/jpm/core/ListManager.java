@@ -13,6 +13,15 @@ public class ListManager {
     public PaginatedList initList(PMContext ctx, Operations operations) throws PMException {
         final PaginatedList pmlist = new PaginatedList();
         //Initial values
+        final String _listfilter = ctx.getOperation().getConfig("listfilter");
+        if (_listfilter != null) {
+            try {
+                pmlist.setListFilter((ListFilter) PresentationManager.getPm().newInstance(_listfilter));
+            } catch (Exception e) {
+                PresentationManager.getPm().error("Unable to load list filter: " + _listfilter);
+                throw new PMException("cant.load.list.filter");
+            }
+        }
         pmlist.setSort(new ListSort(null, ListSort.SortDirection.ASC));
         pmlist.setPage(1);
         pmlist.setRowsPerPage(Integer.parseInt(ctx.getOperation().getConfig("rows-per-page", "10")));
@@ -33,7 +42,7 @@ public class ListManager {
     public void configureList(final PMContext ctx, final PaginatedList pmlist, Operations operations) throws PMException {
         List<Object> contents = null;
         Long total = null;
-
+        ctx.getEntityContainer().setList(pmlist);
         try {
             if (isPaginable(ctx)) {
                 contents = (List<Object>) ctx.getEntity().getList(ctx, ctx.getEntityContainer().getFilter(), pmlist.getSort(), pmlist.from(), pmlist.rpp());
@@ -44,11 +53,11 @@ public class ListManager {
                 total = ctx.getEntity().getDataAccess().count(ctx);
             }
         } catch (Exception e) {
+            ctx.getEntityContainer().setList(null);
             ctx.getPresentationManager().error(e);
             throw new PMException("pm.operation.cant.load.list");
         }
         ctx.getPresentationManager().debug(this, "List Contents: " + contents);
-        ctx.getEntityContainer().setList(pmlist);
         pmlist.setContents(new DisplacedList<Object>(contents));
         pmlist.setTotal(total);
         ctx.getPresentationManager().debug(this, "Resulting list: " + pmlist);

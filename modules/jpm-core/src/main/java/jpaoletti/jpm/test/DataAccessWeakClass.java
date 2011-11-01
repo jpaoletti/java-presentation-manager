@@ -14,7 +14,7 @@ public class DataAccessWeakClass extends DataAccessTest {
     }
 
     @Override
-    public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+    public List<?> list(PMContext ctx, EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         ParentClass pc = getParent(ctx);
         List<?> weaklist = pc.getWeaks();
         int f = (from == null) ? 0 : from;

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import jpaoletti.jpm.core.AbstractDataAccess;
 import jpaoletti.jpm.core.Entity;
+import jpaoletti.jpm.core.ListFilter;
 import jpaoletti.jpm.core.ListSort;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMCoreConstants;
@@ -73,9 +74,9 @@ public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
     }
 
     @Override
-    public List<?> list(PMContext ctx, jpaoletti.jpm.core.EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+    public List<?> list(PMContext ctx, jpaoletti.jpm.core.EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         //We use the filter only if the entity we use is the container one.
-        final Criteria list = createCriteria(ctx, getEntity(), filter, sort);
+        final Criteria list = createCriteria(ctx, getEntity(), filter, lfilter, sort);
         if (count != null) {
             list.setMaxResults(count);
         }
@@ -106,13 +107,13 @@ public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
 
     @Override
     public Long count(PMContext ctx) throws PMException {
-        final Criteria count = createCriteria(ctx, getEntity(), ctx.getEntityContainer().getFilter(), null);
+        final Criteria count = createCriteria(ctx, getEntity(), ctx.getEntityContainer().getFilter(), ctx.getEntityContainer().getList().getListFilter(), null);
         count.setProjection(Projections.rowCount());
         count.setMaxResults(1);
         return (Long) count.uniqueResult();
     }
 
-    protected Criteria createCriteria(PMContext ctx, Entity entity, jpaoletti.jpm.core.EntityFilter filter, ListSort sort) throws PMException {
+    protected Criteria createCriteria(PMContext ctx, Entity entity, jpaoletti.jpm.core.EntityFilter filter, ListFilter lfilter, ListSort sort) throws PMException {
         final List<String> aliases = new ArrayList<String>();
         Criteria c;
         try {
@@ -138,8 +139,8 @@ public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
                 c.addOrder(Order.desc(order));
             }
         }
-        if (entity.getListfilter() != null) {
-            final Object lf = entity.getListfilter().getListFilter(ctx);
+        if (lfilter != null) {
+            final Object lf = lfilter.getListFilter(ctx);
             if (lf instanceof Criterion) {
                 c.add((Criterion) lf);
             } else if (lf instanceof Map) {

@@ -10,6 +10,7 @@ import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.EntityFilter;
 import jpaoletti.jpm.core.EntityInstanceWrapper;
 import jpaoletti.jpm.core.InstanceId;
+import jpaoletti.jpm.core.ListFilter;
 import jpaoletti.jpm.core.ListSort;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
@@ -53,7 +54,7 @@ public class TestDataAccess implements DataAccess {
     }
 
     @Override
-    public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+    public List<?> list(PMContext ctx, EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         return contents;
     }
 

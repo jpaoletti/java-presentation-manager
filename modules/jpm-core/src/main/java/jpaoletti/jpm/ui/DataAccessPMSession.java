@@ -17,7 +17,7 @@ public class DataAccessPMSession extends AbstractDataAccess {
     }
 
     @Override
-    public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+    public List<?> list(PMContext ctx, EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         final List<PMSession> res = new ArrayList<PMSession>();
         for (Entry<String, PMSession> entry : PresentationManager.getPm().getSessions().entrySet()) {
             res.add(entry.getValue());

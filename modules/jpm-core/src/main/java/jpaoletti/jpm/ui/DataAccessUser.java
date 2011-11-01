@@ -4,7 +4,7 @@ import java.util.List;
 import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.security.core.*;
 
-public class DataAccessUser extends AbstractDataAccess{
+public class DataAccessUser extends AbstractDataAccess {
 
     @Override
     public void delete(PMContext ctx, Object object) throws PMException {
@@ -32,7 +32,7 @@ public class DataAccessUser extends AbstractDataAccess{
     }
 
     @Override
-    public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+    public List<?> list(PMContext ctx, EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         List<PMSecurityUser> list = getConnector(ctx).getUsers();
         Integer f = (from == null) ? 0 : from;
         Integer t = (count == null) ? list.size() : (from + count > list.size() ? list.size() : from + count);
@@ -52,12 +52,11 @@ public class DataAccessUser extends AbstractDataAccess{
 
     @Override
     public Long count(PMContext ctx) throws PMException {
-        return new Long(list(ctx, null, null, null, null).size());
+        return new Long(list(ctx, null, null, null, null, null).size());
     }
 
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
         return new EntityFilter();
     }
-
 }

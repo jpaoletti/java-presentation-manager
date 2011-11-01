@@ -17,7 +17,7 @@ public class DataAccessEntityContainer extends AbstractDataAccess {
     }
 
     @Override
-    public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+    public List<?> list(PMContext ctx, EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         final PMSession session = getParent(ctx);
         List<?> weaklist = new ArrayList(session.getContainers());
         int f = (from == null) ? 0 : from;

@@ -19,6 +19,7 @@ public class PaginatedList {
     private Long total;
     private Integer rowsPerPage;
     private ListSort sort;
+    private ListFilter listFilter; //Permanent list filter
     private Operations operations;
     private Operations rowOperations;
     private boolean searchable;
@@ -329,5 +330,13 @@ public class PaginatedList {
         } catch (Exception ex) {
             return 0;
         }
+    }
+
+    public ListFilter getListFilter() {
+        return listFilter;
+    }
+
+    public void setListFilter(ListFilter listFilter) {
+        this.listFilter = listFilter;
     }
 }

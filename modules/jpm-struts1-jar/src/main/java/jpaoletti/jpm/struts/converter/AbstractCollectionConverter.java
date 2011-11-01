@@ -12,6 +12,7 @@ import jpaoletti.jpm.struts.PMStrutsContext;
  *
  * @author jpaoletti
  */
+@Deprecated
 public abstract class AbstractCollectionConverter extends StrutsEditConverter {
 
     public List<?> saveList(PMStrutsContext ctx, String eid) {
@@ -49,17 +50,10 @@ public abstract class AbstractCollectionConverter extends StrutsEditConverter {
         if (filter != null && filter.compareTo("null") != 0 && filter.compareTo("") != 0) {
             lfilter = (ListFilter) ctx.getPresentationManager().newInstance(filter);
         }
-        Entity e = ctx.getPresentationManager().getEntity(eid);
-        List<?> list = null;
+        final Entity e = ctx.getPresentationManager().getEntity(eid);
         if (e == null) {
             throw new ConverterException("Cannot find entity " + eid);
         }
-        synchronized (e) {
-            ListFilter tmp = e.getListfilter();
-            e.setListfilter(lfilter);
-            list = e.getList(ctx, null, sort, null, null);
-            e.setListfilter(tmp);
-        }
-        return list;
+        return e.getList(ctx, lfilter, sort, null, null);
     }
 }

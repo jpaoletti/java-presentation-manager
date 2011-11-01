@@ -36,7 +36,7 @@ public class DataAccessGroup extends AbstractDataAccess {
     }
 
     @Override
-    public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
+    public List<?> list(PMContext ctx, EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         try {
             List<PMSecurityUserGroup> list = getConnector(ctx).getGroups();
             Integer f = (from == null) ? 0 : from;
@@ -72,7 +72,7 @@ public class DataAccessGroup extends AbstractDataAccess {
 
     @Override
     public Long count(PMContext ctx) throws PMException {
-        return new Long(list(ctx, null, null, null, null).size());
+        return new Long(list(ctx, null, null, null, null, null).size());
     }
 
     @Override
