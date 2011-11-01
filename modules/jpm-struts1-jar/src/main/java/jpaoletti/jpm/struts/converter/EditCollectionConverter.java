@@ -1,9 +1,9 @@
 package jpaoletti.jpm.struts.converter;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.naming.ConfigurationException;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.struts.PMStrutsContext;
@@ -66,17 +66,6 @@ public class EditCollectionConverter extends AbstractCollectionConverter {
             result = (Collection<Object>) ctx.getPresentationManager().newInstance(collection_class);
         }
         return result;
-    }
-
-    @Override
-    public String visualize(PMContext ctx) throws ConverterException {
-        final String filter = getConfig("filter");
-        final String entity = getConfig("entity");
-        saveList((PMStrutsContext) ctx, entity);
-        if (ctx.getFieldValue() == null) {
-            ctx.setFieldValue(new ArrayList<Object>());
-        }
-        return super.visualize("collection_converter.jsp?filter=" + filter + "&entity=" + entity + "&prop=" + ctx.getField().getProperty());
     }
 
     private boolean includeRepeated(PMContext ctx) {
