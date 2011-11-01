@@ -1,5 +1,6 @@
 <?xml version='1.0'?>
 <entity id="simpleclass" clazz="jpaoletti.jpm.test.SimpleClass">
+    <idField>id</idField>
     <dataAccess class="jpaoletti.jpm.test.DataAccessSimpleClass" />
     <operations>
         <operation id="list" enabled="true" scope="general" display="all" >
