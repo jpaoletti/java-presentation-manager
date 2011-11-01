@@ -39,3 +39,13 @@ function paginate(i){
     $("#page").val(i);
     $("#listform").submit();
 }
+
+function enable_disable(inputid, v){
+    var f = $('#'+inputid);
+    if (v){
+        f.val("");
+        f.attr('disabled', 'disabled');
+    }else{
+        f.removeAttr('disabled');
+    }
+}

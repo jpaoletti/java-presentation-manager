@@ -13,7 +13,7 @@ import jpaoletti.jpm.core.PMContext;
  * </pre>
  * @author jpaoletti
  * */
-public class EditIntegerConverter extends EditStringConverter {
+public class EditIntegerConverter extends DefaultStrutsConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
@@ -22,5 +22,19 @@ public class EditIntegerConverter extends EditStringConverter {
         } catch (NumberFormatException e) {
             return null;
         }
+    }
+
+    @Override
+    public String visualize(PMContext ctx) throws ConverterException {
+        Object p = ctx.getFieldValue();
+        if (p == null) {
+            p = getValue(ctx.getEntityInstance(), ctx.getField());
+        }
+        final String value = (p == null) ? "" : p.toString();
+        ctx.setFieldValue(value);
+        return super.visualize("integer-edit.jsp?"
+                + "ml=" + getConfig("max-length")
+                + "&isNull=" + (p == null)
+                + "&withNull=" + getConfig("with-null", "false"));
     }
 }
