@@ -32,7 +32,7 @@
     };
 </script>
 <input type="text" id="search_${param.f}" size="7" />
-<div id="loading_${param.f}"><img alt="..." src="${es.context_path}/templates/${pm.template}/images/loading.gif"/></div>
+<div id="loading_${param.f}"><img alt="..." src="${es.templatePath}/images/loading.gif"/></div>
 <span id="done_${param.f}" style="display: none;">
     <script type="text/javascript">$("#search_${param.f}").change(sacupds["${param.f}"]);</script>
     <select size="1" id="f_${param.f}" name="f_${param.f}"></select>

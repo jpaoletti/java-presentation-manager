@@ -131,4 +131,11 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
     public static PMSession getPMSession(final HttpServletRequest request) {
         return (PMSession) request.getSession().getAttribute(PMSESSION);
     }
+
+    /**
+     * @return The actual template path
+     */
+    public String getTemplatePath() {
+        return getContext_path() + "/templates/" + PresentationManager.getPm().getTemplate() + "/";
+    }
 }

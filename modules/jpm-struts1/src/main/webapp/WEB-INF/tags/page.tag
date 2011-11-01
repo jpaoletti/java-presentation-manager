@@ -9,8 +9,8 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <title><pmfn:message key="${pm.title}"/> - <pmfn:message key="${title}"/></title>
-        <link href="${es.context_path}/templates/${pm.template}/all.css" rel="stylesheet" type="text/css" />
-        <link rel="shortcut icon" href="${es.context_path}/templates/${pm.template}/img/favicon.ico" />
+        <link href="${es.templatePath}/all.css" rel="stylesheet" type="text/css" />
+        <link rel="shortcut icon" href="${es.templatePath}/img/favicon.ico" />
         <script type="text/javascript" src="${es.context_path}/js/jquery-1.6.4.min.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery.dataTables.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jqueryslidemenu.js"></script>
@@ -89,7 +89,7 @@
         <c:if test="${empty loading || loading}">
             <span id="loadingDiv">
                 <div class="mainLoading">
-                    <img src="${es.context_path}/templates/${pm.template}/images/main_loading.gif"  alt="..." />
+                    <img src="${es.templatePath}/images/main_loading.gif"  alt="..." />
                 </div>
             </span>
             <span id="bodySpan" style="display: none;">
