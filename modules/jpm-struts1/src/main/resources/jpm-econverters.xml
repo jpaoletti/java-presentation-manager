@@ -113,4 +113,25 @@
             </properties>
         </converter>
     </external-converter>
+    
+    <external-converter id="simpleclasses-show">
+        <converter class="jpaoletti.jpm.struts.converter.CollectionConverter" operations="show">
+            <properties>
+                <property name="entity" value="simpleclass" />
+                <property name="display" value="{description}" />
+            </properties>            
+        </converter>
+    </external-converter>
+    
+    <external-converter id="simpleclasses-edit">
+        <converter class="jpaoletti.jpm.struts.converter.CollectionConverter" operations="add edit">
+            <properties>
+                <property name="entity" value="simpleclass" />
+                <property name="display" value="{description}" />
+                <property name="readonly" value="false" />
+                <property name="collection-class" value="java.util.ArrayList" />
+            </properties>
+        </converter>        
+    </external-converter>
+    
 </external-converters>

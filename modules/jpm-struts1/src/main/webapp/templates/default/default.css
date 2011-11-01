@@ -62,11 +62,6 @@ p, blockquote, ul, ol {
     line-height: 1.8em;
 }
 
-ul {
-    margin-left: 2em;
-    list-style: square;
-}
-
 ol {
     margin-left: 2em;
     list-style: lower-roman;
