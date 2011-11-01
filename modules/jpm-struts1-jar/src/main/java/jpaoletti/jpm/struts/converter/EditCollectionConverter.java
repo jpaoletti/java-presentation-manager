@@ -13,6 +13,7 @@ import jpaoletti.jpm.struts.PMStrutsContext;
  * 
  * @author jpaoletti
  */
+@Deprecated
 public class EditCollectionConverter extends AbstractCollectionConverter {
 
     @Override
