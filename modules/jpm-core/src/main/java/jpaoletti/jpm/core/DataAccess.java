@@ -20,6 +20,14 @@ public interface DataAccess {
      */
     public Entity getEntity();
 
+    /**
+     * Getter for the id of an object. If entity.idField is null, null is 
+     * @param ctx The context
+     * @param instanceWrapper The instance to identify
+     * @param id The string representation of some identification.
+     */
+    public InstanceId getInstanceId(PMContext ctx, EntityInstanceWrapper instanceWrapper) throws PMException;
+
     /**Get an item from data source an item identified by the property=value
      *
      * @param ctx The context
@@ -29,6 +37,16 @@ public interface DataAccess {
      * @throws PMException
      * */
     public Object getItem(PMContext ctx, String property, String value) throws PMException;
+
+    /**
+     * Get an item by id, if the entity has idField. If not, null is returned.
+     *
+     * @param ctx The context
+     * @param instanceId The value of the id that must be looked for. @see InstanceId
+     * @return The object or null of not found
+     * @throws PMException
+     * */
+    public Object getItem(PMContext ctx, InstanceId instanceId) throws PMException;
 
     /**Get a filtered list of items from data source with the given items
      * 

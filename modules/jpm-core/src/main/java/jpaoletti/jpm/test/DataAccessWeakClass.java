@@ -2,8 +2,6 @@ package jpaoletti.jpm.test;
 
 import java.util.List;
 import jpaoletti.jpm.core.*;
-import jpaoletti.jpm.test.ParentClass;
-import jpaoletti.jpm.test.WeakClass;
 
 /**
  *
@@ -53,5 +51,15 @@ public class DataAccessWeakClass extends DataAccessTest {
     protected ParentClass getParent(PMContext ctx) throws PMException {
         ParentClass pc = (ParentClass) ctx.getEntityContainer().getOwner().getSelected().getInstance();
         return pc;
+    }
+
+    @Override
+    public InstanceId getInstanceId(PMContext ctx, EntityInstanceWrapper instanceWrapper) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Object getItem(PMContext ctx, InstanceId instanceId) throws PMException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

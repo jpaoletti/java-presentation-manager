@@ -86,4 +86,14 @@ public abstract class DataAccessTest implements DataAccess {
     public void setEntity(Entity entity) {
         this.entity = entity;
     }
+
+    @Override
+    public InstanceId getInstanceId(PMContext ctx, EntityInstanceWrapper instanceWrapper) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Object getItem(PMContext ctx, InstanceId instanceId) throws PMException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

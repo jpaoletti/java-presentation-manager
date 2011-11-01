@@ -3,13 +3,13 @@ package jpaoletti.jpm.core;
 import java.util.ArrayList;
 import java.util.List;
 
-/**An implementation of Data Access that simply do nothing
+/**
+ * An implementation of Data Access that simply do nothing
  * 
  * @author jpaoletti
- * */
-public class DataAccessVoid implements DataAccess {
-
-    private Entity entity;
+ * 
+ */
+public class DataAccessVoid extends AbstractDataAccess {
 
     @Override
     public void add(PMContext ctx, Object instance) throws PMException {
@@ -20,10 +20,6 @@ public class DataAccessVoid implements DataAccess {
         return 0L;
     }
 
-    @Override
-    public EntityFilter createFilter(PMContext ctx) throws PMException {
-        return new EntityFilter();
-    }
 
     @Override
     public void delete(PMContext ctx, Object object) throws PMException {
@@ -40,21 +36,6 @@ public class DataAccessVoid implements DataAccess {
     }
 
     @Override
-    public Object refresh(PMContext ctx, Object o) throws PMException {
-        return o;
-    }
-
-    @Override
     public void update(PMContext ctx, Object instance) throws PMException {
-    }
-
-    @Override
-    public void setEntity(Entity entity) {
-        this.entity = entity;
-    }
-
-    @Override
-    public Entity getEntity() {
-        return entity;
     }
 }

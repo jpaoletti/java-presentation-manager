@@ -33,6 +33,11 @@ public class ListOperation extends OperationCommandSupport {
             pmlist.setRowsPerPage(rpp);
         }
         listManager.configureList(ctx, pmlist, operations);
+        ctx.put("listContents", ctx.getEntityContainer().getList().getContents());
+        //Optimization, with identified entities we don't need to keep the list in memory
+        if (ctx.getEntity().isIdentified()) {
+            ctx.getEntityContainer().getList().setContents(null);
+        }
     }
 
     public void configureOrder(PMContext ctx, PaginatedList pmlist) {

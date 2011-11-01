@@ -76,21 +76,23 @@ public class Operations extends PMCoreObject {
      * @return The Operations
      */
     public Operations getOperationsForScope(OperationScope... scopes) {
-        Operations result = new Operations();
-        List<Operation> r = new ArrayList<Operation>();
-        for (Operation op : getOperations()) {
-            if (op.getScope() != null) {
-                String s = op.getScope().trim();
-                for (int i = 0; i < scopes.length; i++) {
-                    OperationScope scope = scopes[i];
-                    if (scope.is(s)) {
-                        r.add(op);
-                        break;
+        final Operations result = new Operations();
+        final List<Operation> r = new ArrayList<Operation>();
+        if (getOperations() != null) {
+            for (Operation op : getOperations()) {
+                if (op.getScope() != null) {
+                    String s = op.getScope().trim();
+                    for (int i = 0; i < scopes.length; i++) {
+                        OperationScope scope = scopes[i];
+                        if (scope.is(s)) {
+                            r.add(op);
+                            break;
+                        }
                     }
                 }
             }
+            result.setOperations(r);
         }
-        result.setOperations(r);
         return result;
     }
 
@@ -114,6 +116,10 @@ public class Operations extends PMCoreObject {
      * @return
      */
     public int count() {
-        return getOperations().size();
+        if (getOperations() == null) {
+            return 0;
+        } else {
+            return getOperations().size();
+        }
     }
 }

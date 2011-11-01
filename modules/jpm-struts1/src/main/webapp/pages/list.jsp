@@ -1,7 +1,7 @@
 <%@include file="../inc/inc-full.jsp" %>
 <bean:define id="operation" name="ctx" property="operation" toScope="request"/>
 <bean:define id="PMLIST"    name="ctx" property="entityContainer.list" toScope="request"/>
-<bean:define id="contents"  name="ctx" property="entityContainer.list.contents" type="java.util.List<Object>" toScope="request"/>
+<bean:define id="contents"  name="ctx" property="map.listContents" type="java.util.List<Object>" toScope="request"/>
 <pm:page title="list">
     <div class="boxed">
         <pm:std-header ctx="${ctx}" operations="${ctx.entityContainer.list.operations}" />

@@ -4,9 +4,7 @@ import java.util.List;
 import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.security.core.*;
 
-public class DataAccessPerm implements DataAccess {
-
-    private Entity entity;
+public class DataAccessPerm extends AbstractDataAccess {
 
     @Override
     public void delete(PMContext ctx, Object object) {
@@ -60,15 +58,5 @@ public class DataAccessPerm implements DataAccess {
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
         return new EntityFilter();
-    }
-
-    @Override
-    public void setEntity(Entity entity) {
-        this.entity = entity;
-    }
-
-    @Override
-    public Entity getEntity() {
-        return entity;
     }
 }

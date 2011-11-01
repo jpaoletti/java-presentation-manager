@@ -218,24 +218,30 @@ public class PresentationManager extends Observable {
         for (String s : ss) {
             try {
                 final Entity e = (Entity) parser.parseFile(s);
-                if (e.getFields() != null) {
-                    for (Field field : e.getFields()) {
-                        field.setEntity(e);
-                    }
-                }
-                try {
-                    Class.forName(e.getClazz());
-                    entities.put(e.getId(), e);
-                    entities.put(ss.indexOf(s), e);
-                    if (e.isWeak()) {
-                        logItem("[Entity] " + e.getId(), e.getClazz(), "\u00b7");
-                    } else {
-                        logItem("[Entity] " + e.getId(), e.getClazz(), "*");
-                    }
-
-                } catch (ClassNotFoundException cnte) {
-                    logItem("[Entity] " + e.getId(), e.getClazz(), "?");
+                if (e.hasSelectedScopeOperations() && !e.isIdentified()) {
+                    error("Entity " + e.getId() + " has selected scope operations and idField is not defined");
+                    logItem("[Entity] " + e.getId(), e.getClazz(), "!");
                     error = true;
+                } else {
+                    if (e.getFields() != null) {
+                        for (Field field : e.getFields()) {
+                            field.setEntity(e);
+                        }
+                    }
+                    try {
+                        Class.forName(e.getClazz());
+                        entities.put(e.getId(), e);
+                        entities.put(ss.indexOf(s), e);
+                        if (e.isWeak()) {
+                            logItem("[Entity] " + e.getId(), e.getClazz(), "\u00b7");
+                        } else {
+                            logItem("[Entity] " + e.getId(), e.getClazz(), "*");
+                        }
+
+                    } catch (ClassNotFoundException cnte) {
+                        logItem("[Entity] " + e.getId(), e.getClazz(), "?");
+                        error = true;
+                    }
                 }
             } catch (Exception exception) {
                 error(exception);

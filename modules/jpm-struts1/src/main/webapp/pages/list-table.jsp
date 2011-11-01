@@ -10,7 +10,7 @@
         <c:forEach var="item" items="${contents}" varStatus="status" >
             <tr class="${pmfn:highlight(entity,null,item,null)}">
                 <th scope="row" class="jpm-list-operation-bar">
-                    ${pmfn:itemCheckbox(ctx,contents,item)}${pmfn:rowNumber(ctx.entityContainer.list,item)}${pmfn:listItemOperations(ctx, contents, item)}
+                    ${pmfn:itemCheckbox(ctx,contents,item)}${pmfn:rowNumber(ctx.entityContainer.list, contents,item)}${pmfn:listItemOperations(ctx, contents, item)}
                 </th>
                 <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><td align="${field.align}"><pmfn:converted-item ctx="${ctx}" operation="${operation}" item="${item}" field="${field}" /></td>
                 </c:forEach>

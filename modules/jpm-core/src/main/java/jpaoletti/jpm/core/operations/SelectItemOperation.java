@@ -1,6 +1,7 @@
 package jpaoletti.jpm.core.operations;
 
-import java.util.Set;
+import java.util.List;
+import jpaoletti.jpm.core.InstanceId;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
 
@@ -23,12 +24,12 @@ public class SelectItemOperation extends OperationCommandSupport {
         super.doExecute(ctx);
         final String _item = (String) ctx.getParameter("idx");
         if (_item != null) {
-            final Integer item = Integer.parseInt(_item);
-            final Set<Integer> selectedIndexes = ctx.getEntityContainer().getSelectedIndexes();
-            if (selectedIndexes.contains(item)) {
-                selectedIndexes.remove(item);
+            final InstanceId id = buildInstanceId(ctx.getEntity(), _item);
+            final List<InstanceId> selectedIndexes = ctx.getEntityContainer().getSelectedInstanceIds();
+            if (selectedIndexes.contains(id)) {
+                selectedIndexes.remove(id);
             } else {
-                selectedIndexes.add(item);
+                selectedIndexes.add(id);
             }
         }
     }

@@ -5,22 +5,21 @@ import java.util.List;
 import jpaoletti.jpm.core.*;
 
 /**
+ * DataAccess for entity containers. idField is ignored and "id" used
  *
  * @author jpaoletti
  */
-public class DataAccessEntityContainer implements DataAccess {
-
-    private Entity entity;
+public class DataAccessEntityContainer extends AbstractDataAccess {
 
     @Override
     public Object getItem(PMContext ctx, String property, String value) throws PMException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return getParent(ctx).getContainer(value);
     }
 
     @Override
     public List<?> list(PMContext ctx, EntityFilter filter, ListSort sort, Integer from, Integer count) throws PMException {
-        PMSession pc = getParent(ctx);
-        List<?> weaklist = new ArrayList(pc.getContainers());
+        final PMSession session = getParent(ctx);
+        List<?> weaklist = new ArrayList(session.getContainers());
         int f = (from == null) ? 0 : from;
         int c = (int) ((count == null) ? count(ctx) : count);
         if (count(ctx) < c) {
@@ -64,15 +63,5 @@ public class DataAccessEntityContainer implements DataAccess {
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void setEntity(Entity entity) {
-        this.entity = entity;
-    }
-
-    @Override
-    public Entity getEntity() {
-        return entity;
     }
 }

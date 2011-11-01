@@ -9,13 +9,11 @@ import jpaoletti.jpm.core.*;
  *
  * @author jpaoletti
  */
-public class DataAccessPMSession implements DataAccess {
-
-    private Entity entity;
+public class DataAccessPMSession extends AbstractDataAccess {
 
     @Override
     public Object getItem(PMContext ctx, String property, String value) throws PMException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return PresentationManager.getPm().getSession(value);
     }
 
     @Override
@@ -54,15 +52,5 @@ public class DataAccessPMSession implements DataAccess {
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void setEntity(Entity entity) {
-        this.entity = entity;
-    }
-
-    @Override
-    public Entity getEntity() {
-        return entity;
     }
 }

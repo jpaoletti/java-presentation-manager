@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagSupport;
 import jpaoletti.jpm.core.Entity;
+import jpaoletti.jpm.core.EntityInstanceWrapper;
 import jpaoletti.jpm.core.Field;
 import jpaoletti.jpm.core.Highlight;
+import jpaoletti.jpm.core.InstanceId;
 import jpaoletti.jpm.core.Operation;
 import jpaoletti.jpm.core.PMException;
 import jpaoletti.jpm.core.PaginatedList;
@@ -33,9 +35,11 @@ public class PMTags extends TagSupport {
     public static String itemCheckbox(PMStrutsContext ctx, DisplacedList list, Object item) throws PMException {
         if (ctx.getEntityContainer().getList().isHasSelectedScope()) {
             final StringBuilder input = new StringBuilder();
+            final InstanceId id = ctx.getDataAccess().getInstanceId(ctx, new EntityInstanceWrapper(item));
+            final String idValue = id.getValue();
             input.append("<input type='checkbox' ");
-            input.append("onchange='selectItem(").append(list.indexOf(item)).append(");'");
-            if (ctx.getEntityContainer().getSelectedIndexes().contains(list.indexOf(item))) {
+            input.append("onchange='selectItem(").append(idValue).append(");'");
+            if (ctx.getEntityContainer().isSelected(id)) {
                 input.append("checked");
             }
             input.append("/>");
@@ -57,7 +61,9 @@ public class PMTags extends TagSupport {
                         if (itemOperation.getUrl() != null) {
                             furl = itemOperation.getUrl();
                         } else {
-                            furl = getContextPath() + "/" + itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + list.indexOf(item);
+                            final InstanceId id = ctx.getDataAccess().getInstanceId(ctx, new EntityInstanceWrapper(item));
+                            final String idValue = id.getValue();
+                            furl = getContextPath() + "/" + itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + idValue;
                         }
                         sb.append("<a href=\"javascript:");
                         if (itemOperation.getConfirm()) {
@@ -98,9 +104,9 @@ public class PMTags extends TagSupport {
         }
     }
 
-    public static String rowNumber(PaginatedList pmlist, Object item) {
+    public static String rowNumber(PaginatedList pmlist, DisplacedList list, Object item) {
         if (pmlist.isShowRowNumber()) {
-            return String.format("[%0" + pmlist.getListTotalDigits() + "d]&nbsp;", pmlist.getContents().indexOf(item));
+            return String.format("[%0" + pmlist.getListTotalDigits() + "d]&nbsp;", list.indexOf(item));
         } else {
             return "";
         }

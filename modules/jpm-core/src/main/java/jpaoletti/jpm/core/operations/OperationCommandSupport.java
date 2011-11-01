@@ -10,7 +10,6 @@ import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.core.exception.NotAuthenticatedException;
 import jpaoletti.jpm.core.exception.NotAuthorizedException;
 import jpaoletti.jpm.core.message.MessageFactory;
-import jpaoletti.jpm.util.DisplacedList;
 import jpaoletti.jpm.validator.ValidationResult;
 import jpaoletti.jpm.validator.Validator;
 
@@ -31,6 +30,16 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
 
     public OperationCommandSupport(String operationId) {
         this.operationId = operationId;
+    }
+
+    protected InstanceId buildInstanceId(Entity entity, final String item) throws NumberFormatException {
+        InstanceId instanceId;
+        if (entity.isIdentified()) {
+            instanceId = new InstanceId(item);
+        } else {
+            instanceId = new InstanceId(Integer.parseInt(item));
+        }
+        return instanceId;
     }
 
     protected boolean prepare(PMContext ctx) throws PMException {
@@ -150,17 +159,15 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         if (ctx.getBoolean("clean_selected", false)) {
             ctx.getEntityContainer().setSelected(null);
         }
-        //If we get item param, we change the selected item on the container
-        String item = ctx.getString(PM_ITEM);
+        //If we get item param, we change the selected item on the container.
+        //This may be either an identification field value or an index depending
+        //on entity.isIdentified value
+        final String item = ctx.getString(PM_ITEM);
         if (item != null && !item.trim().equals("")) {
-            Integer index = Integer.parseInt(item);
-            ctx.getPresentationManager().debug(this, "Getting row index: " + index);
-            if (index != null) {
-                final Object itemAtIndex = ctx.getList().getContents().get(index);
-                ctx.getEntityContainer().setSelected(new EntityInstanceWrapper(itemAtIndex));
-            }
+            final Object instance = ctx.getDataAccess().getItem(ctx, buildInstanceId(ctx.getEntity(), item));
+            ctx.getEntityContainer().setSelected(new EntityInstanceWrapper(instance));
         } else {
-            String identified = (String) ctx.getParameter("identified");
+            final String identified = (String) ctx.getParameter("identified");
             if (identified != null && identified.trim().compareTo("") != 0) {
                 ctx.getPresentationManager().debug(this, "Getting row identified by: " + identified);
                 String[] ss = identified.split(":");
@@ -386,6 +393,18 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
             result.add(s);
             i++;
             s = getParamValues(ctx, eid + "_" + i, ";");
+        }
+        return result;
+    }
+
+    /**
+     * @return the selected instances 
+     */
+    public List<Object> getSelectedInstances(PMContext ctx) throws PMException {
+        final List<Object> result = new ArrayList<Object>();
+        final List<InstanceId> selectedIndexes = ctx.getEntityContainer().getSelectedInstanceIds();
+        for (InstanceId id : selectedIndexes) {
+            result.add(ctx.getDataAccess().getItem(ctx, id));
         }
         return result;
     }

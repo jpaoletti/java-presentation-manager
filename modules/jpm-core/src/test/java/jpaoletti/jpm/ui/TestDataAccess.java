@@ -8,6 +8,8 @@ import java.util.List;
 import jpaoletti.jpm.core.DataAccess;
 import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.EntityFilter;
+import jpaoletti.jpm.core.EntityInstanceWrapper;
+import jpaoletti.jpm.core.InstanceId;
 import jpaoletti.jpm.core.ListSort;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
@@ -81,6 +83,29 @@ public class TestDataAccess implements DataAccess {
 
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
+        return null;
+    }
+
+    @Override
+    public InstanceId getInstanceId(PMContext ctx, EntityInstanceWrapper instanceWrapper) {
+        if (getEntity().isIdentified()) {
+            return new InstanceId(((JPMTest) instanceWrapper.getInstance()).getId());
+        } else {
+            return new InstanceId(contents.indexOf(instanceWrapper.getInstance()));
+        }
+    }
+
+    @Override
+    public Object getItem(PMContext ctx, InstanceId instanceId) throws PMException {
+        if (getEntity().isIdentified()) {
+            for (JPMTest test : contents) {
+                if (test.getId() == instanceId.getId()) {
+                    return test;
+                }
+            }
+        } else {
+            return contents.get(instanceId.getIndex());
+        }
         return null;
     }
 }

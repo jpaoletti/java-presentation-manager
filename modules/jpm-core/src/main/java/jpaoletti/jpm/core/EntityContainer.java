@@ -1,7 +1,7 @@
 package jpaoletti.jpm.core;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author jpaoletti
@@ -16,7 +16,7 @@ public class EntityContainer {
     private String sid;
     private Entity entity;
     private PaginatedList list;
-    private Set<Integer> selectedIndexes;
+    private List<InstanceId> selectedInstances;
     private EntityInstanceWrapper selected;
     private boolean selectedNew;
     private EntityFilter filter;
@@ -161,20 +161,13 @@ public class EntityContainer {
     }
 
     /**
-     * @param selectedIndexes the selectedIndexes to set
+     * @return the selected instances ids
      */
-    public void setSelectedIndexes(Set<Integer> selectedIndexes) {
-        this.selectedIndexes = selectedIndexes;
-    }
-
-    /**
-     * @return the selectedIndexes
-     */
-    public Set<Integer> getSelectedIndexes() {
-        if (selectedIndexes == null) {
-            selectedIndexes = new HashSet<Integer>();
+    public List<InstanceId> getSelectedInstanceIds() {
+        if (selectedInstances == null) {
+            selectedInstances = new ArrayList<InstanceId>();
         }
-        return selectedIndexes;
+        return selectedInstances;
     }
 
     /**
@@ -207,5 +200,9 @@ public class EntityContainer {
      */
     public void setOperation(Operation operation) {
         this.operation = operation;
+    }
+
+    public boolean isSelected(InstanceId id) {
+        return getSelectedInstanceIds().contains(id);
     }
 }

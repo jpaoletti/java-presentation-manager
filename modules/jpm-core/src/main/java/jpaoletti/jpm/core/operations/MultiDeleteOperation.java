@@ -1,6 +1,6 @@
 package jpaoletti.jpm.core.operations;
 
-import java.util.Set;
+import java.util.List;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
 
@@ -21,12 +21,15 @@ public class MultiDeleteOperation extends OperationCommandSupport {
     @Override
     protected void doExecute(PMContext ctx) throws PMException {
         super.doExecute(ctx);
-        final Set<Integer> selectedIndexes = ctx.getEntityContainer().getSelectedIndexes();
-        final DeleteOperation deleteOp = new DeleteOperation();
-        for (Integer item : selectedIndexes) {
-            ctx.put(PM_ITEM, item.toString());
-            deleteOp.execute(ctx);
+        final List<Object> instances = getSelectedInstances(ctx);
+        for (Object instance : instances) {
+            ctx.getDataAccess().delete(ctx, instance);
         }
-        ctx.getEntityContainer().getSelectedIndexes().clear();
+        ctx.getEntityContainer().getSelectedInstanceIds().clear();
+    }
+
+    @Override
+    protected boolean openTransaction() {
+        return super.openTransaction();
     }
 }

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jpaoletti.jpm.core.operations.OperationScope;
 
 /**An Entity is the visual representation and operation over a class of a data model. One entity is 
  * configured through an xml file.<br/>
@@ -89,6 +90,10 @@ public class Entity extends PMCoreObject {
     private Boolean noCount;
     private List<Entity> weaks;
     private boolean cached;
+    /**
+     * Field id that represent the id of the entity.Optional
+     */
+    private String idField;
 
     /**Default constructor*/
     public Entity() {
@@ -397,10 +402,12 @@ public class Entity extends PMCoreObject {
         if (dataAccess == null) {
             try {
                 dataAccess = (DataAccess) PresentationManager.getPm().newInstance(PresentationManager.getPm().getDefaultDataAccess());
-                dataAccess.setEntity(this);
             } catch (Exception e) {
                 getPresentationManager().error(e);
             }
+        }
+        if (dataAccess != null) {
+            dataAccess.setEntity(this);
         }
         return dataAccess;
     }
@@ -532,5 +539,37 @@ public class Entity extends PMCoreObject {
             }
         }
         return message;
+    }
+
+    public String getIdField() {
+        if (idField != null) {
+            return idField;
+        } else if (getExtendzEntity() != null) {
+            return getExtendzEntity().getIdField();
+        } else {
+            return null;
+        }
+    }
+
+    public void setIdField(String idField) {
+        this.idField = idField;
+    }
+
+    /**
+     * @return true if the entity has idField
+     */
+    public boolean isIdentified() {
+        return getIdField() != null;
+    }
+
+    /**
+     * @return true if the entity has operations with selected scope
+     */
+    public boolean hasSelectedScopeOperations() {
+        if (getOperations() != null) {
+            return getOperations().getOperationsForScope(OperationScope.SELECTED).count() > 0;
+        } else {
+            return false;
+        }
     }
 }

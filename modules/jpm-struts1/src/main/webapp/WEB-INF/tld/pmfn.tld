@@ -73,7 +73,7 @@
         <name>rowNumber</name>
         <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
         <function-signature>
-            String rowNumber(jpaoletti.jpm.core.PaginatedList, java.lang.Object)
+            String rowNumber(jpaoletti.jpm.core.PaginatedList, jpaoletti.jpm.util.DisplacedList, java.lang.Object)
         </function-signature>
     </function>
 

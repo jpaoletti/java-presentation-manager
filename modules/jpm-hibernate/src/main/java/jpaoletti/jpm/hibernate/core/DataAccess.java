@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jpaoletti.jpm.core.AbstractDataAccess;
 import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.ListSort;
 import jpaoletti.jpm.core.PMContext;
@@ -21,9 +22,7 @@ import org.hibernate.criterion.Restrictions;
 /**
  * Data access using an hibernate session
  */
-public class DataAccess implements jpaoletti.jpm.core.DataAccess, PMCoreConstants {
-
-    private Entity entity;
+public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
 
     @Override
     public Object getItem(PMContext ctx, String property, String value) throws PMException {
@@ -189,15 +188,5 @@ public class DataAccess implements jpaoletti.jpm.core.DataAccess, PMCoreConstant
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
         return new EntityFilter();
-    }
-
-    @Override
-    public void setEntity(Entity entity) {
-        this.entity = entity;
-    }
-
-    @Override
-    public Entity getEntity() {
-        return entity;
     }
 }
