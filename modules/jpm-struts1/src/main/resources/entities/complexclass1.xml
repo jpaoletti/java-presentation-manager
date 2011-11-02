@@ -3,17 +3,20 @@
     <dataAccess class="jpaoletti.jpm.test.DataAccessComplexClass1" />
     <order>id description amount date datetime active key </order>
     <operations>
-        <operation id="list" enabled="true" scope="general">
+        <operation id="list"  scope="general">
             <properties>
                 <property name="operation-column-width" value="1px" />
                 <property name="show-row-number" value="true" />
             </properties>
         </operation>
-        <operation id="show" enabled="true" scope="item" display="edit list" />
-        <operation id="add" enabled="true" scope="general" display="all" />
-        <operation id="edit" enabled="true" scope="item" display="edit show list" />
-        <operation id="delete" enabled="true" scope="item" display="edit show list" confirm="true"/>
-        <operation id="multidelete" enabled="true" scope="selected" display="list" confirm="true"/>
+        <operation id="show"  scope="item" display="edit list" />
+        <operation id="add"  scope="general" display="all" />
+        <operation id="edit"  scope="item" display="edit show list" />
+        <operation id="delete"  scope="item" display="edit show list" confirm="true" />
+        <operation id="selectall"  scope="general" display="list" />
+        <operation id="deselectall"  scope="general" display="list" />
+        <operation id="invertselection"  scope="general" display="list" />
+        <operation id="multidelete"  scope="selected" display="list" confirm="true"/>
         <operation id="sort" scope="general" display="list" />
     </operations>
 

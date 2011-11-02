@@ -8,8 +8,14 @@ import jpaoletti.jpm.core.*;
  */
 public class ListOperation extends OperationCommandSupport {
 
+    protected static final String LIST_CONTENTS = "listContents";
+
     public ListOperation(String operationId) {
         super(operationId);
+    }
+
+    public ListOperation() {
+        super("list");
     }
 
     @Override
@@ -33,7 +39,7 @@ public class ListOperation extends OperationCommandSupport {
             pmlist.setRowsPerPage(rpp);
         }
         listManager.configureList(ctx, pmlist, operations);
-        ctx.put("listContents", ctx.getEntityContainer().getList().getContents());
+        ctx.put(LIST_CONTENTS, ctx.getEntityContainer().getList().getContents());
         //Optimization, with identified entities we don't need to keep the list in memory
         if (ctx.getEntity().isIdentified()) {
             ctx.getEntityContainer().getList().setContents(null);

@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionMapping;
 import jpaoletti.jpm.core.PMCoreConstants;
 import jpaoletti.jpm.core.PMException;
 import jpaoletti.jpm.core.exception.NotAuthorizedException;
-import jpaoletti.jpm.core.PresentationManager;
 import jpaoletti.jpm.core.exception.NotAuthenticatedException;
 import jpaoletti.jpm.core.message.MessageFactory;
 import jpaoletti.jpm.struts.PMEntitySupport;

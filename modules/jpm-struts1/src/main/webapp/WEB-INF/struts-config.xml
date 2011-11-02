@@ -11,8 +11,17 @@
     <action-mappings>
         <action path="/get_list" type="jpaoletti.jpm.struts.actions.GetListAction" />
 
-        <action path="/list" type="jpaoletti.jpm.struts.actions.ListAction" scope="request">
+        <action path="/list" type="jpaoletti.jpm.struts.actions.ListAction">
             <forward name="success" path="/pages/list.jsp"/>
+        </action>
+        <action path="/selectall" type="jpaoletti.jpm.struts.actions.SelectAllAction">
+            <forward name="success" path="/list.do"/>
+        </action>
+        <action path="/deselectall" type="jpaoletti.jpm.struts.actions.DeselectAllAction">
+            <forward name="success" path="/list.do"/>
+        </action>
+        <action path="/invertselection" type="jpaoletti.jpm.struts.actions.InvertSelectionAction">
+            <forward name="success" path="/list.do"/>
         </action>
 
         <action path="/filter" type="jpaoletti.jpm.struts.actions.FilterAction" validate="false">
