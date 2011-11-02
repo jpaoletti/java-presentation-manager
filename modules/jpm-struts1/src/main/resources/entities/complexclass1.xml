@@ -39,8 +39,8 @@
     </field>
     <field id="active" width="30" display="all" align="center">
         <converters>
-            <converter class="jpaoletti.jpm.struts.converter.ShowBooleanConverter" operations="list show" />
-            <converter class="jpaoletti.jpm.struts.converter.EditBooleanConverter" operations="add edit" />
+            <econverter id="show-bool" operations="list show" />
+            <econverter id="edit-bool" operations="add edit" />
         </converters>
     </field>
     <field id="key" width="150" >

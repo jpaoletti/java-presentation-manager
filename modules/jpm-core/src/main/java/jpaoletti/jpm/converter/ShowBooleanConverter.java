@@ -1,9 +1,7 @@
-package jpaoletti.jpm.struts.converter;
+package jpaoletti.jpm.converter;
 
-import jpaoletti.jpm.converter.Converter;
-import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.PMContext;
-import jpaoletti.jpm.struts.PMEntitySupport;
+import jpaoletti.jpm.core.PresentationManager;
 
 /**Converter for showing a boolean value.<br>
  * <pre>
@@ -27,17 +25,13 @@ public class ShowBooleanConverter extends Converter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
-        Object value = getValue(ctx.getEntityInstance(), ctx.getField());
-        if (!(value instanceof Boolean)) {
-            throw new ConverterException("invalid.conversion");
+        if (!(ctx.getFieldValue() instanceof Boolean)) {
+            throw new ConverterException("boolean.converter.invalid.value");
         }
-        boolean b = ((Boolean) value).booleanValue();
-        String s;
-        if (b) {
-            s = getConfig("true-text", "pm.converter.boolean_converter.yes");
+        if ((Boolean) ctx.getFieldValue()) {
+            return visualize(PresentationManager.getMessage(getConfig("true-text", "pm.converter.boolean_converter.yes")));
         } else {
-            s = getConfig("false-text", "pm.converter.boolean_converter.no");
+            return visualize(PresentationManager.getMessage(getConfig("false-text", "pm.converter.boolean_converter.no")));
         }
-        return super.visualize("localized_string_converter.jsp?value=" + PMEntitySupport.toHtml(s));
     }
 }
