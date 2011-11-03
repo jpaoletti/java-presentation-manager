@@ -2,19 +2,15 @@ package jpaoletti.jpm.struts.converter;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.EntityInstanceWrapper;
 import jpaoletti.jpm.core.InstanceId;
-import jpaoletti.jpm.core.ListFilter;
-import jpaoletti.jpm.core.ListSort;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
 import jpaoletti.jpm.core.PresentationManager;
-import org.javatuples.Pair;
+import jpaoletti.jpm.struts.CollectionHelper;
 
 /**
  * A converter for collections. Entity idField must be defined.<br>
@@ -70,14 +66,14 @@ public class CollectionConverter extends DefaultStrutsConverter {
 
     @Override
     public Object visualize(PMContext ctx) throws ConverterException {
+        final CollectionHelper helper = new CollectionHelper(getConfig("display"));
         final Entity entity = getEntity();
         final Collection fieldValue = (Collection) ctx.getFieldValue();
         if (getConfig("readonly", "true").equalsIgnoreCase("true")) {
-            final List<String> listOfTexts = getListOfTexts(fieldValue);
-            ctx.put("collection", listOfTexts);
+            ctx.put("collection", helper.getListOfTexts(fieldValue));
             return super.visualize("collection-show.jsp?");
         } else {
-            ctx.put("fullList", getFullList(ctx, entity));
+            ctx.put("fullList", helper.getFullList(ctx, entity, getConfig("filter"), null, getConfig("sord-field"), getConfig("sord-direction")));
             final List<String> idList = new ArrayList<String>();
             if (fieldValue != null) {
                 try {
@@ -94,18 +90,6 @@ public class CollectionConverter extends DefaultStrutsConverter {
     }
 
     /**
-     * Getter for display property. Must be defined.
-     * @return Display property value
-     */
-    protected String getDisplay() throws ConverterException {
-        final String _display = getConfig("display");
-        if (_display == null) {
-            throw new ConverterException("object.converter.display.cannot.be.null");
-        }
-        return _display;
-    }
-
-    /**
      * Getter for entity property. Must be defined.
      * @return the entity
      */
@@ -119,58 +103,5 @@ public class CollectionConverter extends DefaultStrutsConverter {
             throw new ConverterException("collection.converter.entity.cannot.be.null");
         }
         return entity;
-    }
-
-    protected List<String> getListOfTexts(final Collection collection) throws ConverterException {
-        final String _display = getDisplay();
-        final String[] _display_fields = _display.split("[{.*?}]");
-        final List<String> result = new ArrayList();
-        for (Object object : collection) {
-            result.add(getObjectDisplay(_display_fields, object, _display));
-        }
-        return result;
-    }
-
-    protected String getObjectDisplay(final String[] _display_fields, Object object, final String _display) {
-        final Map<String, String> replaces = new HashMap<String, String>();
-        for (String _display_field : _display_fields) {
-            if (_display_field != null && !"".equals(_display_field.trim())) {
-                replaces.put("\\{" + _display_field + "\\}", PresentationManager.getPm().getAsString(object, _display_field));
-            }
-        }
-        String result = _display;
-        for (Map.Entry<String, String> entry : replaces.entrySet()) {
-            result = result.replaceFirst(entry.getKey(), entry.getValue());
-        }
-        return result;
-    }
-
-    public List<Pair<String, String>> getFullList(PMContext ctx, Entity entity) throws ConverterException {
-        final String filter = getConfig("filter");
-        final String sortField = getConfig("sord-field");
-        final String sortd = getConfig("sord-direction");
-        final ListSort sort = new ListSort(sortField, (sortd != null) ? ListSort.SortDirection.ASC : ListSort.SortDirection.DESC);
-
-        ListFilter lfilter = null;
-        if (filter != null && filter.compareTo("null") != 0 && filter.compareTo("") != 0) {
-            lfilter = (ListFilter) ctx.getPresentationManager().newInstance(filter);
-        }
-        final List<Pair<String, String>> result = new ArrayList<Pair<String, String>>();
-        try {
-            final List<?> list = entity.getList(ctx, lfilter, sort, null, null);
-            if (list == null) {
-                return null;
-            }
-            final String _display = getDisplay();
-            final String[] _display_fields = _display.split("[{.*?}]");
-            for (Object object : list) {
-                result.add(new Pair<String, String>(
-                        entity.getDataAccess().getInstanceId(ctx, new EntityInstanceWrapper(object)).getValue(),
-                        getObjectDisplay(_display_fields, object, _display)));
-            }
-        } catch (PMException ex) {
-            throw new ConverterException(ex);
-        }
-        return result;
     }
 }
