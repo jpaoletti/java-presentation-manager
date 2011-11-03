@@ -33,6 +33,19 @@
         </converters>
     </field>
     
+    <field id="simpleClass2" display="edit show add list">
+        <converters>
+            <converter class="jpaoletti.jpm.struts.converter.ObjectConverter" operations="add edit">
+                <properties>
+                    <property name="entity"          value="simpleclass" />
+                    <property name="display"         value="[{id}]description" />
+                    <property name="with-null"       value="false" />
+                    <property name="min-search-size" value="0" />
+                </properties>
+            </converter>
+        </converters>
+    </field>
+    
     <field id="simpleClasses" display="edit show add">
         <converters>
             <econverter id="simpleclasses-show" />

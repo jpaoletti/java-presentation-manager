@@ -21,6 +21,7 @@ public class DataAccessComplexClass2 extends DataAccessTest {
                 o.setId(new Long(i));
                 o.setDescription(String.format("Complex Class II %d", i));
                 o.setSimpleClass((SimpleClass) childs.get(random(0, childs.size() - 1)));
+                o.setSimpleClass2((SimpleClass) childs.get(random(0, childs.size() - 1)));
                 o.setSimpleClasses(new ArrayList<SimpleClass>());
                 int x = random(1, childs.size() - 2);
                 for (int j = x - 1; j < x + 1; j++) {

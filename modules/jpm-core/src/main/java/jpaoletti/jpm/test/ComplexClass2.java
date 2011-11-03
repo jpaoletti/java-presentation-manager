@@ -6,8 +6,10 @@ import java.util.List;
  *
  * @author jpaoletti
  */
-public class ComplexClass2 extends SimpleClass{
+public class ComplexClass2 extends SimpleClass {
+
     private SimpleClass simpleClass;
+    private SimpleClass simpleClass2;
     private List<SimpleClass> simpleClasses;
 
     public SimpleClass getSimpleClass() {
@@ -24,5 +26,13 @@ public class ComplexClass2 extends SimpleClass{
 
     public void setSimpleClasses(List<SimpleClass> simpleClasses) {
         this.simpleClasses = simpleClasses;
+    }
+
+    public SimpleClass getSimpleClass2() {
+        return simpleClass2;
+    }
+
+    public void setSimpleClass2(SimpleClass simpleClass2) {
+        this.simpleClass2 = simpleClass2;
     }
 }
