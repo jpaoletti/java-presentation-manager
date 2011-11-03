@@ -22,7 +22,7 @@
                                         "(?![^&;]+;)(?!<[^<>]*)(" +
                                         $.ui.autocomplete.escapeRegex(request.term) +
                                         ")(?![^<>]*>)(?![^&;]+;)", "gi"
-                                        ), "<strong>$1</strong>" ),
+                                        ), "$1" ),
                                 value: text,
                                 option: this
                             };
@@ -59,7 +59,8 @@
             input.data( "autocomplete" )._renderItem = function( ul, item ) {
                 return $( "<li></li>" )
                 .data( "item.autocomplete", item )
-                .append( "<a>" + item.label + "</a>" )
+                .append( "<a class='"+$(item.option).attr('class')+"' disabled='"+$(item.option).attr('disabled')+"'>" + item.label + "</a>" )
+                //.append( "<a>" + item.label + "</a>" )
                 .appendTo( ul );
             };
 
