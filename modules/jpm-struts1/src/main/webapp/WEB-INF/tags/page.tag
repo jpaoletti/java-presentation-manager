@@ -57,7 +57,11 @@
                         });
 
                         jQuery.each(PM_onLoadFunctions, function(){
-                            this();
+                            try{
+                                this();
+                            }catch(e){
+                                alert("Error: "+e);
+                            }
                         });
                     
                         jQuery.each(msg_system, function(){
