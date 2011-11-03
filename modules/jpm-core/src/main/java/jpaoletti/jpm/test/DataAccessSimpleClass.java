@@ -1,7 +1,6 @@
 package jpaoletti.jpm.test;
 
 import java.util.ArrayList;
-import jpaoletti.jpm.test.SimpleClass;
 
 /**
  *

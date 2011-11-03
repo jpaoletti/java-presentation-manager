@@ -3,6 +3,7 @@ package jpaoletti.jpm.test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import jpaoletti.jpm.core.*;
 
 /**
@@ -50,7 +51,15 @@ public abstract class DataAccessTest extends AbstractDataAccess {
         }
         int fpc = f + c;
         final List subList = result.subList(f, (int) ((fpc > count(ctx)) ? count(ctx) : fpc));
-        return subList;
+        if (filter == null) {
+            return subList;
+        } else {
+            final List finalList = new ArrayList<Object>();
+            for (Map.Entry entry : filter.getFilterValues().entrySet()) {
+                //TODO apply a filter
+            }
+            return subList;
+        }
     }
 
     @Override
@@ -79,6 +88,6 @@ public abstract class DataAccessTest extends AbstractDataAccess {
 
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
-        return null;
+        return new EntityFilter();
     }
 }
