@@ -605,3 +605,7 @@ a.pagination span.ui-button-text{
     padding-right: 20px;
     background: #F7F7F7 !important;
 }
+
+.object-converter-search{
+    height: 26px;
+}

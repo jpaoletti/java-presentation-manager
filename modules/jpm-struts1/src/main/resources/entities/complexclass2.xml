@@ -22,9 +22,12 @@
 
     <field id="simpleClass" display="edit show add list">
         <converters>
-            <converter class="jpaoletti.jpm.struts.converter.EditSingleAggregationConverter" operations="add edit">
+            <converter class="jpaoletti.jpm.struts.converter.ObjectConverter" operations="add edit">
                 <properties>
-                    <property name="entity" value="simpleclass" />
+                    <property name="entity"          value="simpleclass" />
+                    <property name="display"         value="***{id}---{description}***" />
+                    <property name="with-null"       value="true" />
+                    <property name="min-search-size" value="1" />
                 </properties>
             </converter>
         </converters>

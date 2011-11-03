@@ -2,8 +2,11 @@ package jpaoletti.jpm.struts.converter;
 
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.Entity;
+import jpaoletti.jpm.core.EntityInstanceWrapper;
+import jpaoletti.jpm.core.InstanceId;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
+import jpaoletti.jpm.struts.CollectionHelper;
 
 /**Converter for integer <br>
  * <pre>
@@ -12,7 +15,6 @@ import jpaoletti.jpm.core.PMException;
  *     <operationId>edit</operationId>
  *         <properties>
  *             <property name="entity"          value="other_entity" />
- *             <property name="id"              value="other_entity_id" />
  *             <property name="display"         value="other_entity_display" />
  *             <property name="with-null"       value="true" />
  *             <property name="filter"          value="jpaoletti.jpm.core.ListFilterXX" />
@@ -30,14 +32,13 @@ public class ObjectConverter extends StrutsEditConverter {
     @Override
     public Object build(PMContext ctx) throws ConverterException {
         try {
-            final String _id = getConfig("id");
             final String _entity = getConfig("entity");
             final Entity entity = ctx.getPresentationManager().getEntity(_entity);
             final String newFieldValue = (String) ctx.getFieldValue();
             if (newFieldValue == null || newFieldValue.trim().compareTo("-1") == 0) {
                 return null;
             }
-            return entity.getDataAccess().getItem(ctx, _id, newFieldValue);
+            return entity.getDataAccess().getItem(ctx, new InstanceId(newFieldValue));
         } catch (PMException ex) {
             throw new ConverterException(ex);
         }
@@ -45,8 +46,12 @@ public class ObjectConverter extends StrutsEditConverter {
 
     @Override
     public Object visualize(PMContext ctx) throws ConverterException {
-        final String _id = getConfig("id");
-        if (_id == null) {
+        final String _entity = getConfig("entity");
+        final Entity entity = ctx.getPresentationManager().getEntity(_entity);
+        if (entity == null) {
+            throw new ConverterException("object.converter.entity.cannot.be.null");
+        }
+        if (!entity.isIdentified()) {
             throw new ConverterException("object.converter.id.cannot.be.null");
         }
         final String _display = getConfig("display");
@@ -59,18 +64,17 @@ public class ObjectConverter extends StrutsEditConverter {
             ctx.put("_selected_id", "-1");
             ctx.put("_with_null", false); //false because selected is already null
         } else {
-            String[] _display_fields = _display.split("[ ]");
-            String _selected_value = "" ;
-            for (String _display_field : _display_fields) {
-                _selected_value += " "+ctx.getPresentationManager().getAsString(fieldValue, _display_field);
+            final CollectionHelper helper = new CollectionHelper(_display);
+            try {
+                ctx.put("_selected_value", helper.getObjectDisplay(fieldValue));
+                ctx.put("_selected_id", entity.getDataAccess().getInstanceId(ctx, new EntityInstanceWrapper(fieldValue)).getValue());
+                ctx.put("_with_null", getConfig("with-null", "false"));
+            } catch (PMException ex) {
+                throw new ConverterException("object.converter.cannot.get.id");
             }
-            ctx.put("_selected_value", _selected_value);
-            ctx.put("_selected_id", ctx.getPresentationManager().getAsString(fieldValue, _id));
-            ctx.put("_with_null", getConfig("with-null", "false"));
         }
         ctx.put("_min_search_size", getConfig("min-search-size", "0"));
-        ctx.put("_entity", getConfig("entity"));
-        ctx.put("_id", _id);
+        ctx.put("_entity", _entity);
         ctx.put("_display", _display);
         ctx.put("_filter", getConfig("filter"));
         return super.visualize("object_converter.jsp?");
