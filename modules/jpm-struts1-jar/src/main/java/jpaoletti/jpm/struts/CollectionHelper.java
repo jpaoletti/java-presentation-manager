@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.EntityFilter;
@@ -24,7 +26,7 @@ import jpaoletti.jpm.util.KeyValue;
  */
 public class CollectionHelper {
 
-    public static final String DISPLAY_PATTERN = "[{.*?}]";
+    private static final Pattern DISPLAY_PATTERN = Pattern.compile("\\{.*?\\}");
     private String display;
 
     public CollectionHelper(String _display) throws ConverterException {
@@ -43,12 +45,11 @@ public class CollectionHelper {
     }
 
     public String getObjectDisplay(Object object) {
-        final String[] _display_fields = getDisplay().split(DISPLAY_PATTERN);
         final Map<String, String> replaces = new HashMap<String, String>();
-        for (String _display_field : _display_fields) {
-            if (_display_field != null && !"".equals(_display_field.trim())) {
-                replaces.put("\\{" + _display_field + "\\}", PresentationManager.getPm().getAsString(object, _display_field));
-            }
+        final Matcher matcher = DISPLAY_PATTERN.matcher(getDisplay());
+        while (matcher.find()) {
+            final String _display_field = matcher.group().replaceAll("\\{", "").replaceAll("\\}", "");
+            replaces.put("\\{" + _display_field + "\\}", PresentationManager.getPm().getAsString(object, _display_field));
         }
         String result = getDisplay();
         for (Map.Entry<String, String> entry : replaces.entrySet()) {
@@ -80,8 +81,9 @@ public class CollectionHelper {
             if (stringFilter != null) {
                 final EntityFilter filter = entity.getDataAccess().createFilter(ctx);
                 filter.setBehavior(FilterBehavior.OR);
-                final String[] _display_fields = getDisplay().split(DISPLAY_PATTERN);
-                for (String _display_field : _display_fields) {
+                final Matcher matcher = DISPLAY_PATTERN.matcher(getDisplay());
+                while (matcher.find()) {
+                    final String _display_field = matcher.group().replaceAll("\\{", "").replaceAll("\\}", "");
                     filter.addFilter(_display_field, stringFilter, FilterOperation.LIKE);
                 }
                 filter.process(entity);
