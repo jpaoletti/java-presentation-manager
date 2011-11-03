@@ -54,17 +54,13 @@ public class ObjectConverter extends StrutsEditConverter {
         if (!entity.isIdentified()) {
             throw new ConverterException("object.converter.id.cannot.be.null");
         }
-        final String _display = getConfig("display");
-        if (_display == null) {
-            throw new ConverterException("object.converter.display.cannot.be.null");
-        }
         final Object fieldValue = ctx.getFieldValue();
         if (fieldValue == null) {
             ctx.put("_selected_value", "");
             ctx.put("_selected_id", "-1");
-            ctx.put("_with_null", false); //false because selected is already null
+            ctx.put("_with_null", getConfig("with-null", "false")); //false because selected is already null
         } else {
-            final CollectionHelper helper = new CollectionHelper(_display);
+            final CollectionHelper helper = new CollectionHelper(getConfig("display"));
             try {
                 ctx.put("_selected_value", helper.getObjectDisplay(fieldValue));
                 ctx.put("_selected_id", entity.getDataAccess().getInstanceId(ctx, new EntityInstanceWrapper(fieldValue)).getValue());
@@ -75,7 +71,7 @@ public class ObjectConverter extends StrutsEditConverter {
         }
         ctx.put("_min_search_size", getConfig("min-search-size", "0"));
         ctx.put("_entity", _entity);
-        ctx.put("_display", _display);
+        ctx.put("_display", getConfig("display"));
         ctx.put("_filter", getConfig("filter"));
         return super.visualize("object_converter.jsp?");
     }

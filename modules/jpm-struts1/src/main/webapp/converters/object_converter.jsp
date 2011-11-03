@@ -9,15 +9,17 @@
             $("#f_${param.f}").contents().each(function(){$(this).remove()});
             var j = 0;
             var filter = $("#search_${param.f}").val();
+            <c:if test="${ctx.map._min_search_size > 0 }">
             $("#f_${param.f}").get(0)[j]= selectedOption; j++;
             $($("#f_${param.f}").get(0)).append("<option disabled='disabled'>-------------------------</option>"); j++;
+            </c:if>
             if(${ctx.map._with_null}){
                 $("#f_${param.f}").get(0)[j]= new Option("","-1", false, false); j++;
             }
             if(filter.length >= ${ctx.map._min_search_size}){
                 jQuery.getJSON("${es.context_path}/get_list.do?entity=${ctx.map._entity}&filter_class=${ctx.map._filter}&filter="+filter+"&id=${ctx.map._id}&display=${ctx.map._display}",function(list){
                     jQuery.each(list, function (i, item){                    
-                        $("#f_${param.f}").get(0)[j]= new Option(list[i].value, list[i].key, false, ${ctx.map._selected_id}==list[i].key); j++;
+                        $("#f_${param.f}").get(0)[j]= new Option(list[i].value, list[i].key, false, "${ctx.map._selected_id}"==list[i].key); j++;
                     });
                     $("#loading_${param.f}").hide();
                     $("#done_${param.f}").show();
