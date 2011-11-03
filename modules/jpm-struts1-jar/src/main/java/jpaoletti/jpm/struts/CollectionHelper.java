@@ -30,9 +30,6 @@ public class CollectionHelper {
     private String display;
 
     public CollectionHelper(String _display) throws ConverterException {
-        if (_display == null) {
-            throw new ConverterException("display.cannot.be.null");
-        }
         this.display = _display;
     }
 
@@ -45,6 +42,9 @@ public class CollectionHelper {
     }
 
     public String getObjectDisplay(Object object) {
+        if (getDisplay() == null) {
+            return object == null ? "" : object.toString();
+        }
         final Map<String, String> replaces = new HashMap<String, String>();
         final Matcher matcher = DISPLAY_PATTERN.matcher(getDisplay());
         while (matcher.find()) {
@@ -59,6 +59,9 @@ public class CollectionHelper {
     }
 
     public String getDisplay() {
+        if (display != null && "".equals(display.trim())) {
+            return null;
+        }
         return display;
     }
 
@@ -78,7 +81,7 @@ public class CollectionHelper {
         final List<KeyValue> result = new ArrayList<KeyValue>();
         try {
             final List<?> list;
-            if (stringFilter != null) {
+            if (stringFilter != null && getDisplay() != null) {
                 final EntityFilter filter = entity.getDataAccess().createFilter(ctx);
                 filter.setBehavior(FilterBehavior.OR);
                 final Matcher matcher = DISPLAY_PATTERN.matcher(getDisplay());
