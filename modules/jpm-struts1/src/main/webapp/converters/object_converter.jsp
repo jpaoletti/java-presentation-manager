@@ -42,12 +42,10 @@
 </c:if>
 <div id="loading_${param.f}"><img alt="..." src="${es.templatePath}/images/loading.gif"/></div>
 <span id="done_${param.f}" style="display: none;">
-    <select size="1" id="f_${param.f}" name="f_${param.f}" class="object-converter-select"></select>
+    <select size="1" id="f_${param.f}" name="f_${param.f}" class="object-converter-select object-converter-select-${ctx.map._min_search_size}"></select>
 </span>
-<script type="text/javascript" src="${es.context_path}/js/jquery-ui-combobox.js"></script>
 <script type="text/javascript">
     PM_register(function(){
         sacupds["${param.f}"]();
-        $("#f_${param.f}").combobox();
     });
 </script>

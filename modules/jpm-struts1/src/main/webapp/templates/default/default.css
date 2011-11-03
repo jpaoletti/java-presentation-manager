@@ -606,6 +606,18 @@ a.pagination span.ui-button-text{
     background: #F7F7F7 !important;
 }
 
+.object-converter-select{
+    height: 26px;
+    width: 200px;
+}
 .object-converter-search{
     height: 26px;
+    width: 100px;
+}
+.object-converter-select-0{
+    width: 302px;
+}
+.object-converter-select option{
+    border: none;
+    border-bottom: grey solid thin; 
 }
