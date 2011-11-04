@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import jpaoletti.jpm.converter.ConverterException;
+import jpaoletti.jpm.converter.IgnoreConvertionException;
 import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.EntityInstanceWrapper;
 import jpaoletti.jpm.core.InstanceId;
@@ -35,6 +36,9 @@ public class CollectionConverter extends DefaultStrutsConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
+        if (getConfig("readonly", "true").equalsIgnoreCase("true")) {
+            throw new IgnoreConvertionException();
+        }
         final Entity entity = getEntity();
         final String collection_class = getConfig("collection-class");
         if (collection_class == null) {
