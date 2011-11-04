@@ -45,9 +45,15 @@ public class ListManager {
         ctx.getEntityContainer().setList(pmlist);
         try {
             if (isPaginable(ctx)) {
-                contents = (List<Object>) ctx.getEntity().getList(ctx, ctx.getEntityContainer().getFilter(), pmlist.getSort(), pmlist.from(), pmlist.rpp());
+                contents = (List<Object>) ctx.getEntity().getDataAccess().list(ctx,
+                        ctx.getEntityContainer().getFilter(),
+                        ctx.getEntityContainer().getList().getListFilter(),
+                        pmlist.getSort(), pmlist.from(), pmlist.rpp());
             } else {
-                contents = (List<Object>) ctx.getEntity().getList(ctx, ctx.getEntityContainer().getFilter(), pmlist.getSort(), null, null);
+                contents = (List<Object>) ctx.getEntity().getDataAccess().list(ctx,
+                        ctx.getEntityContainer().getFilter(),
+                        ctx.getEntityContainer().getList().getListFilter(),
+                        pmlist.getSort(), null, null);
             }
             if (!ctx.getEntity().getNoCount()) {
                 total = ctx.getEntity().getDataAccess().count(ctx);
