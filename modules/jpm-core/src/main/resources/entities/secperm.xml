@@ -1,5 +1,6 @@
 <?xml version='1.0' ?>
 <entity id="secperm" clazz="jpaoletti.jpm.security.core.PMSecurityPermission">
+    <idField>name</idField>
     <dataAccess class="jpaoletti.jpm.ui.DataAccessPerm" />
     <operations>
         <operation id="list" />

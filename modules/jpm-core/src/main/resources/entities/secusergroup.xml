@@ -1,5 +1,6 @@
 <?xml version='1.0' ?>
 <entity id="secusergroup" clazz="jpaoletti.jpm.security.core.PMSecurityUserGroup">
+    <idField>name</idField>
     <dataAccess class="jpaoletti.jpm.ui.DataAccessGroup" />
     <operations>
         <operation id="list"/>
