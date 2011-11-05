@@ -63,10 +63,8 @@ public class ListManager {
             ctx.getPresentationManager().error(e);
             throw new PMException("pm.operation.cant.load.list");
         }
-        ctx.getPresentationManager().debug(this, "List Contents: " + contents);
         pmlist.setContents(new DisplacedList<Object>(contents));
         pmlist.setTotal(total);
-        ctx.getPresentationManager().debug(this, "Resulting list: " + pmlist);
         pmlist.setRowsPerPage(pmlist.rpp());
         prepareParameters(ctx, operations);
     }
