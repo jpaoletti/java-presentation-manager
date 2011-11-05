@@ -231,6 +231,12 @@ public class PMContext {
         return (getUser() != null);
     }
 
+    /**
+     * Look for a parameter in the context with the given name.
+     *
+     * @param paramid parameter id
+     * @return parameter value
+     */
     public Object getParameter(String paramid) {
         final Object v = get("param_" + paramid);
         if (v == null) {
@@ -244,6 +250,23 @@ public class PMContext {
                     return s;
                 }
             }
+            return v;
+        }
+    }
+
+    /**
+     * Look for a parameter in the context with the given name.
+     * If parmeter is null, return def
+     *
+     * @param paramid parameter id
+     * @param def default value
+     * @return parameter value or def if null
+     */
+    public Object getParameter(String paramid, Object def) {
+        final Object v = getParameter(paramid);
+        if (v == null) {
+            return def;
+        } else {
             return v;
         }
     }
