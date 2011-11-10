@@ -5,7 +5,7 @@
     <groupId>com.github.jpaoletti</groupId>
     <artifactId>java-presentation-manager</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>java-presentation-manager</name>
     <url>http://jpaoletti.github.com/java-presentation-manager/</url>
     <description>
@@ -15,7 +15,6 @@
         define your model in xml terms and choose the data sources and 
         visualization that you like most.
     </description>
-    
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
