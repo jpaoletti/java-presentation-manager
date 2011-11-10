@@ -4,16 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.jpaoletti</groupId>
     <artifactId>jpm-struts1-jar</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>jpm-struts1-jar</name>
-    
     <description>Struts1 jar module for jpm</description>
     
     <parent>
         <groupId>com.github.jpaoletti</groupId>
         <artifactId>java-presentation-manager</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     
