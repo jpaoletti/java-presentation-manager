@@ -48,6 +48,9 @@ public class LoginOperation extends OperationCommandSupport {
             } catch (InvalidPasswordException e) {
                 pm.removeSession(session.getId());
                 throw new PMException("pm_security.password.invalid");
+            } catch (PMException e) {
+                pm.removeSession(session.getId());
+                throw e;
             } catch (Exception e) {
                 pm.error(e);
                 pm.removeSession(session.getId());
