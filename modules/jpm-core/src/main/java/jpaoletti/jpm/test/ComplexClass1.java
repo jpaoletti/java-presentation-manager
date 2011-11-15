@@ -7,7 +7,8 @@ import java.util.Date;
  *
  * @author jpaoletti
  */
-public class ComplexClass1 extends SimpleClass{
+public class ComplexClass1 extends SimpleClass {
+
     private BigDecimal amount;
     private Date date;
     private Date datetime;
@@ -15,6 +16,7 @@ public class ComplexClass1 extends SimpleClass{
     private String password;
     private String key;
     private Long size;
+    private String bigstring;
 
     public Boolean getActive() {
         return active;
@@ -97,5 +99,13 @@ public class ComplexClass1 extends SimpleClass{
     @Override
     public String toString() {
         return getDescription();
+    }
+
+    public String getBigstring() {
+        return bigstring;
+    }
+
+    public void setBigstring(String bigstring) {
+        this.bigstring = bigstring;
     }
 }

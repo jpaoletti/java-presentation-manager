@@ -55,4 +55,9 @@
             <econverter id="edit-long" operations="add edit" />
         </converters>
     </field>
+    <field id="bigstring" display="show edit add">
+        <converters>
+            <econverter id="edit-big-string" operations="edit add" />
+        </converters>
+    </field>
 </entity>

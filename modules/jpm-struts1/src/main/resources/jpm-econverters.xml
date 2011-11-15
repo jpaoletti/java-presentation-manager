@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <external-converters>
     
+    <external-converter id="edit-big-string">
+        <converter class="jpaoletti.jpm.struts.converter.EditBigStringConverter" operations="add edit">
+            <properties>
+                <property name="with-null" value="true" />
+                <property name="rows" value="10" />
+                <property name="cols" value="40" />
+            </properties>
+        </converter>
+    </external-converter>
     <external-converter id="edit-name">
         <converter class="jpaoletti.jpm.struts.converter.EditStringConverter" operations="add edit">
             <properties>
