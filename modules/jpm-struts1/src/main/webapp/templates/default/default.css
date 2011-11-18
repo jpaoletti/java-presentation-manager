@@ -156,49 +156,11 @@ table.sort_table{
 /******************************************************************************/
 /** Buttons **/
 .button {
-    background-position: 4px;
-    background-repeat:no-repeat;
-    text-indent:15px;
     min-width:75px;
 }
 
-a:hover {
-    background-color:#F3F3E9;
-    color:#737373;
-}
-
-.add {
-    background:url(img/add.gif) no-repeat 10px 8px;
-}
-.delete {
-    background:url(img/delete.gif) no-repeat 10px 8px;
-}
-.user {
-    background:url(img/user.gif) no-repeat 10px 8px;
-}
-.alert {
-    background:url(img/alert.gif) no-repeat 10px 8px;
-}
-.msg {
-    background:url(img/msg.gif) no-repeat 10px 8px;
-}
-.download {
-    background:url(img/download.gif) no-repeat 10px 8px;
-}
-.show {
-    background:url(img/show.gif) no-repeat 10px 8px;
-}
-.edit {
-    background:url(img/edit.gif) no-repeat 10px 8px;
-}
-.info {
-    background:url(img/info.gif) no-repeat 10px 8px;
-}
-.list {
-    background:url(img/list.gif) no-repeat 10px 8px;
-}
-.clearfilter{
-    background:url(img/clearfilter.gif) no-repeat 10px 8px;
+.ui-list-icon{
+    float:left;
 }
 
 /******************************************************************************/

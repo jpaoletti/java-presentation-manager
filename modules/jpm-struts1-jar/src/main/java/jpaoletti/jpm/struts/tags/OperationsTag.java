@@ -116,10 +116,8 @@ public class OperationsTag extends PMTags {
         } else {
             script.append("alert('").append(PresentationManager.getMessage("operation.not.available", operation.getTitle())).append("');");
         }
-        script.append("}).button();\n");
-
-        final String style = "\"background-image: url('" + getContextPath() + "/templates/" + getTemplate() + "/img/" + opid + ".gif'); background-position: 5% 50%; background-repeat: no-repeat;\"";
-        print("<button class='button' style=" + style + " id='operation" + opid + "'>&nbsp;");
+        script.append("}).button({ icons: { primary:'ui-icon-operation-").append(opid).append("' }});\n");
+        print("<button class='button' id='operation" + opid + "'>&nbsp;");
         if (isLabels()) {
             print(operation.getTitle());
         }

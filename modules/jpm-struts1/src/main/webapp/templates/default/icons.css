@@ -1,0 +1,14 @@
+.ui-icon-operation-add { background-position: -16px -128px; }
+.ui-icon-operation-sort { background-position: -128px 0; }
+.ui-icon-operation-edit { background-position: -64px -112px; }
+.ui-icon-operation-show { background-position: -160px -112px;}
+.ui-icon-operation-list { background-position: -112px -112px; }
+.ui-icon-operation-delete { background-position: -176px -96px; }
+.ui-icon-operation-resetpsw{ background-position: -112px -128px; }
+.ui-icon-operation-changepassword { background-position: -112px -128px; }
+.ui-icon-operation-multidelete { background-position: -176px -96px; }
+.ui-icon-operation-clearfilter { background-image: url("img/clearfilter.gif") !important; }
+.ui-icon-operation-filter { background-image: url("img/filter.gif") !important; }
+.ui-icon-operation-invertselection { background-image: url("img/invertselection.gif") !important; }
+.ui-icon-operation-deselectall { background-image: url("img/deselectall.gif") !important; }
+.ui-icon-operation-selectall { background-image: url("img/selectall.gif") !important; }

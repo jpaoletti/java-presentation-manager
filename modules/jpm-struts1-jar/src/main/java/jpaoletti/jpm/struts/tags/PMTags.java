@@ -37,7 +37,7 @@ public class PMTags extends TagSupport {
             final StringBuilder input = new StringBuilder();
             final InstanceId id = ctx.getDataAccess().getInstanceId(ctx, new EntityInstanceWrapper(item));
             final String idValue = id.getValue();
-            input.append("<input type='checkbox' ");
+            input.append("<input class='ui-list-icon' type='checkbox' ");
             input.append("onchange='selectItem(").append(idValue).append(");'");
             if (ctx.getEntityContainer().isSelected(id)) {
                 input.append("checked");
@@ -65,7 +65,7 @@ public class PMTags extends TagSupport {
                             final String idValue = id.getValue();
                             furl = getContextPath() + "/" + itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + idValue;
                         }
-                        sb.append("<a href=\"javascript:");
+                        sb.append("<a  class='ui-list-icon ui-icon ui-icon-operation-").append(itemOperation.getId()).append("'href=\"javascript:");
                         if (itemOperation.getConfirm()) {
                             sb.append("loadPageConfirm");
                         } else {
@@ -77,14 +77,7 @@ public class PMTags extends TagSupport {
                         sb.append(itemOperation.getId());
                         sb.append("' title='");
                         sb.append(PresentationManager.getMessage("operation." + itemOperation.getId()));
-                        sb.append("'><img src='");
-                        sb.append(getContextPath());
-                        sb.append("/templates/");
-                        sb.append(ctx.getPresentationManager().getTemplate());
-                        sb.append("/img/").append(itemOperation.getId());
-                        sb.append(".gif' alt='");
-                        sb.append(itemOperation.getId());
-                        sb.append("' /></a>");
+                        sb.append("'>&nbsp;</a>");
                     }
                 }
             }
@@ -106,7 +99,7 @@ public class PMTags extends TagSupport {
 
     public static String rowNumber(PaginatedList pmlist, DisplacedList list, Object item) {
         if (pmlist.isShowRowNumber()) {
-            return String.format("[%0" + pmlist.getListTotalDigits() + "d]&nbsp;", list.indexOf(item));
+            return String.format("<span class='ui-list-icon'>[%0" + pmlist.getListTotalDigits() + "d]&nbsp;</span>", list.indexOf(item));
         } else {
             return "";
         }
