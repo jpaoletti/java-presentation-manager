@@ -5,7 +5,7 @@
     <operations>
         <operation id="list"  scope="general">
             <properties>
-                <property name="operation-column-width" value="1px" />
+                <property name="operation-column-width" value="100px" />
                 <property name="show-row-number" value="true" />
             </properties>
         </operation>

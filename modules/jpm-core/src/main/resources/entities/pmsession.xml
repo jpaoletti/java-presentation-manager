@@ -4,7 +4,7 @@
     <operations>
         <operation id="list" enabled="true" scope="item" display="all">
             <properties>
-                <property name="operation-column-width" value="1px" />
+                <property name="operation-column-width" value="100px" />
             </properties>
         </operation>
         <operation id="show" enabled="true" scope="item" display="list" />
