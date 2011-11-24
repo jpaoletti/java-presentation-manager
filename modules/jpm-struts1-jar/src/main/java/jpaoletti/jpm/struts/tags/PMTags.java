@@ -65,7 +65,7 @@ public class PMTags extends TagSupport {
                             final String idValue = id.getValue();
                             furl = getContextPath() + "/" + itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + idValue;
                         }
-                        sb.append("<a  class='ui-list-icon ui-icon ui-icon-operation-").append(itemOperation.getId()).append("'href=\"javascript:");
+                        sb.append("<a class='ui-list-icon-container' class=''href=\"javascript:");
                         if (itemOperation.getConfirm()) {
                             sb.append("loadPageConfirm");
                         } else {
@@ -77,7 +77,7 @@ public class PMTags extends TagSupport {
                         sb.append(itemOperation.getId());
                         sb.append("' title='");
                         sb.append(PresentationManager.getMessage("operation." + itemOperation.getId()));
-                        sb.append("'>&nbsp;</a>");
+                        sb.append("'><div class='ui-list-icon ui-icon ui-icon-operation-").append(itemOperation.getId()).append("'>&nbsp;</div></a>");
                     }
                 }
             }

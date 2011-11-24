@@ -159,8 +159,20 @@ table.sort_table{
     min-width:75px;
 }
 
-.ui-list-icon{
+.ui-list-icon-container{
+    border: 1px solid #CBC7BD;
+    -moz-border-radius: 3px; -webkit-border-radius: 3px; -khtml-border-radius: 3px; border-radius: 3px;
     float:left;
+    padding: 3px; 
+    border: 1px solid #aed0ea; 
+    background: #d7ebf9 url(images/ui-bg_glass_80_d7ebf9_1x400.png) 50% 50% repeat-x;
+    margin-right: 5px;
+}
+.ui-list-icon-container:hover{ 
+    border: 1px solid #74b2e2; background: #e4f1fb url(images/ui-bg_glass_100_e4f1fb_1x400.png) 50% 50% repeat-x;
+}
+.ui-list-icon-container:hover .ui-list-icon{
+    background-image: url(images/ui-icons_2694e8_256x240.png);
 }
 
 /******************************************************************************/
