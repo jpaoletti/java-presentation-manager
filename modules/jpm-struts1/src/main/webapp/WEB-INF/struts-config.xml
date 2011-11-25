@@ -30,6 +30,11 @@
             <forward name="failure" path="/pages/filter.jsp"/>
         </action>
 
+        <action path="/export" type="jpaoletti.jpm.struts.actions.ExportAction">
+            <forward name="continue" path="/pages/export.jsp"/>
+            <forward name="failure" path="/pages/export.jsp"/>
+        </action>
+
         <action path="/add" type="jpaoletti.jpm.struts.actions.AddAction" validate="false">
             <forward name="success" path="/list.do" redirect="true"/>
             <forward name="continue" path="/pages/std-display.jsp"/>

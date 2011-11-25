@@ -7,6 +7,7 @@
 .ui-icon-operation-resetpsw{ background-position: -112px -128px; }
 .ui-icon-operation-changepassword { background-position: -112px -128px; }
 .ui-icon-operation-multidelete { background-position: -176px -96px; }
+.ui-icon-operation-export { background-position: -240px -128px; }
 .ui-icon-operation-clearfilter { background-image: url("img/clearfilter.gif") !important; }
 .ui-icon-operation-filter { background-image: url("img/filter.gif") !important; }
 .ui-icon-operation-invertselection { background-image: url("img/invertselection.gif") !important; }
