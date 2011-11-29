@@ -22,4 +22,9 @@ public class ShowOperation extends OperationCommandSupport {
     protected boolean checkSelected() {
         return true;
     }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
+    }
 }

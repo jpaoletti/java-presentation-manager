@@ -72,4 +72,9 @@ public class AddOperation extends OperationCommandSupport {
     protected boolean openTransaction() {
         return true;
     }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
+    }
 }

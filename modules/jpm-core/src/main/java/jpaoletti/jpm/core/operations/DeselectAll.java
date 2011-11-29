@@ -24,4 +24,9 @@ public class DeselectAll extends OperationCommandSupport {
             ctx.getEntityContainer().getSelectedInstanceIds().clear();
         }
     }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
+    }
 }

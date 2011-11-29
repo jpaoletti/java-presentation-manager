@@ -121,4 +121,9 @@ public class Export extends OperationCommandSupport {
         }
         return headers;
     }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
+    }
 }

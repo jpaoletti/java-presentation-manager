@@ -112,4 +112,9 @@ public class PMFilterOperation extends OperationCommandSupport {
         }
         return values;
     }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
+    }
 }

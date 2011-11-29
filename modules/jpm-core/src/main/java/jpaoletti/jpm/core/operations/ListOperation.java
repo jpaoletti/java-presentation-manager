@@ -64,4 +64,9 @@ public class ListOperation extends OperationCommandSupport {
             }
         }
     }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
+    }
 }

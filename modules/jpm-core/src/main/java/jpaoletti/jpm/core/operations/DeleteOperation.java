@@ -37,4 +37,9 @@ public class DeleteOperation extends OperationCommandSupport {
         ctx.getEntity().getDataAccess().delete(ctx, instance);
         ctx.getEntityContainer().setSelected(null);
     }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
+    }
 }

@@ -18,4 +18,9 @@ public class ClearFilterOperation extends OperationCommandSupport {
         super.doExecute(ctx);
         ctx.getEntityContainer().setFilter(null);
     }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
+    }
 }

@@ -8,6 +8,7 @@ import jpaoletti.jpm.core.PMException;
  * @author jpaoletti
  */
 public class SortOperation extends OperationCommandSupport {
+
     public SortOperation(String operationId) {
         super(operationId);
     }
@@ -24,5 +25,10 @@ public class SortOperation extends OperationCommandSupport {
         ctx.put("desc", ctx.getParameter("desc"));
         //After that, a redirection to list operation is needed and preserving
         //this keys results in sorting.
+    }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
     }
 }

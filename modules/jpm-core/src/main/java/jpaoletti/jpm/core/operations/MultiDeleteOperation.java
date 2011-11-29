@@ -30,6 +30,11 @@ public class MultiDeleteOperation extends OperationCommandSupport {
 
     @Override
     protected boolean openTransaction() {
-        return super.openTransaction();
+        return true;
+    }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
     }
 }

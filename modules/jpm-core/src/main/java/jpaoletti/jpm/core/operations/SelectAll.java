@@ -32,4 +32,9 @@ public class SelectAll extends ListOperation {
             }
         }
     }
+
+    @Override
+    protected boolean checkEntity() {
+        return true;
+    }
 }
