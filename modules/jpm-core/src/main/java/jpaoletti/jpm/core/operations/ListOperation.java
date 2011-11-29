@@ -51,7 +51,7 @@ public class ListOperation extends OperationCommandSupport {
         if (o != null) {
             pmlist.getSort().setFieldId(o);
         } else {
-            if (pmlist.getSort().isSorted()) {
+            if (!pmlist.getSort().isSorted()) {
                 pmlist.getSort().setFieldId(ctx.getEntity().getOrderedFields().get(0).getId());
             }
         }
