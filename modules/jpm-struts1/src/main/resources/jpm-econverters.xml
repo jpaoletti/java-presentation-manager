@@ -7,6 +7,9 @@
                 <property name="filename" value="converters/show.tostring.converter" />
             </properties>
         </converter>
+    </external-converter>    
+    <external-converter id="local-string">
+        <converter class="jpaoletti.jpm.converter.ShowLocalizedStringConverter" operations="show list export" />
     </external-converter>
     
     <external-converter id="edit-big-string">

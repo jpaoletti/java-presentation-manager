@@ -47,9 +47,8 @@
     </field>
     <field id="key" width="150" >
         <converters>
-            <converter class="jpaoletti.jpm.struts.converter.ShowLocalizedStringConverter" operations="show list" />
             <econverter id="edit-50-string" operations="add edit" />
-            <econverter id="to-string" operations="export" />
+            <econverter id="local-string" operations="list show export" />
         </converters>
     </field>
     <field id="size" width="80" >
