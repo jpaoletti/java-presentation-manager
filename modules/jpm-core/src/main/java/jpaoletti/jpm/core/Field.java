@@ -68,9 +68,7 @@ public class Field extends PMCoreObject {
             final Object instance = ctx.getEntityInstance();
             ctx.setEntityInstanceWrapper(new EntityInstanceWrapper(instance));
             ctx.setField(this);
-            if (ctx.getFieldValue() == null) {
-                ctx.setFieldValue(getPresentationManager().get(instance, getProperty()));
-            }
+            ctx.setFieldValue(getPresentationManager().get(instance, getProperty()));
             return c.visualize(ctx);
         } catch (ConverterException e) {
             throw e;
@@ -287,7 +285,7 @@ public class Field extends PMCoreObject {
         final String message = PresentationManager.getMessage(key);
         if (key.equals(message)) {
             final Entity extendzEntity = getEntity().getExtendzEntity();
-            if (extendzEntity != null && extendzEntity.getFieldById(getId())!=null) {
+            if (extendzEntity != null && extendzEntity.getFieldById(getId()) != null) {
                 return extendzEntity.getFieldById(getId()).getTitle();
             }
         }
