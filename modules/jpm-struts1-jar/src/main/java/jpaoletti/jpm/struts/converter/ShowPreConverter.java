@@ -1,14 +1,13 @@
 package jpaoletti.jpm.struts.converter;
 
 import jpaoletti.jpm.converter.ConverterException;
-import jpaoletti.jpm.converter.ShowStringConverter;
 import jpaoletti.jpm.core.PMContext;
 
 /**
  *
  * @author jpaoletti
  */
-public class ShowPreConverter extends ShowStringConverter {
+public class ShowPreConverter extends DefaultStrutsConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {
