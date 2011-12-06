@@ -3,7 +3,9 @@
     <dataAccess class="jpaoletti.jpm.ui.DataAccessUser" />
     <operations>
         <operation id="list" scope="general" />
-        <operation id="add" scope="general" display="list"/>
+        <operation id="add" scope="general" display="list">
+            <validator class="jpaoletti.jpm.validator.UniqueUsername"/>
+        </operation>
         <operation id="show" display="list edit" />
         <operation id="edit" display="list show" />
         <operation id="delete" display="list" confirm="true"/>
