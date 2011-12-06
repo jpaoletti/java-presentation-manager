@@ -1,7 +1,6 @@
 package jpaoletti.jpm.struts.converter;
 
 import jpaoletti.jpm.converter.ConverterException;
-import jpaoletti.jpm.converter.ShowStringConverter;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.struts.PMEntitySupport;
 
@@ -27,7 +26,7 @@ import jpaoletti.jpm.struts.PMEntitySupport;
  * @author J.Paoletti
  *
  */
-public class ShowLinkConverter extends ShowStringConverter {
+public class ShowLinkConverter extends DefaultStrutsConverter {
 
     @Override
     public String visualize(PMContext ctx) throws ConverterException {

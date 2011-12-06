@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <external-converters>
-    
     <external-converter id="to-string">
-        <converter class="jpaoletti.jpm.converter.GenericConverter" operations="export">
-            <properties>
-                <property name="filename" value="converters/show.tostring.converter" />
-            </properties>
-        </converter>
+        <converter class="jpaoletti.jpm.converter.ToStringConverter" operations="list show export" />
+    </external-converter>    
+    <external-converter id="local-string">
+        <converter class="jpaoletti.jpm.converter.ShowLocalizedStringConverter" operations="show list export" />
     </external-converter>
     
     <external-converter id="edit-big-string">
@@ -27,7 +25,7 @@
     </external-converter>
     
     <external-converter id="show-bool">
-        <converter class="jpaoletti.jpm.converter.ShowBooleanConverter" operations="list show" />
+        <converter class="jpaoletti.jpm.converter.ShowBooleanConverter" operations="list show export" />
     </external-converter>
     
     <external-converter id="edit-bool">

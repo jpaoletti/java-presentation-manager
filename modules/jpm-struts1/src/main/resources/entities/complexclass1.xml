@@ -5,7 +5,7 @@
     <operations>
         <operation id="list"  scope="general">
             <properties>
-                <property name="operation-column-width" value="100px" />
+                <property name="operation-column-width" value="150px" />
                 <property name="show-row-number" value="true" />
             </properties>
         </operation>
@@ -40,16 +40,14 @@
     </field>
     <field id="active" width="30" display="all" align="center">
         <converters>
-            <econverter id="show-bool" operations="list show" />
+            <econverter id="show-bool" operations="list show export" />
             <econverter id="edit-bool" operations="add edit" />
-            <econverter id="to-string" operations="export" />
         </converters>
     </field>
     <field id="key" width="150" >
         <converters>
-            <converter class="jpaoletti.jpm.struts.converter.ShowLocalizedStringConverter" operations="show list" />
             <econverter id="edit-50-string" operations="add edit" />
-            <econverter id="to-string" operations="export" />
+            <econverter id="local-string" operations="list show export" />
         </converters>
     </field>
     <field id="size" width="80" >
