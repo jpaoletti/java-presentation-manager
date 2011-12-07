@@ -8,6 +8,7 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
         <title><pmfn:message key="${pm.title}"/> - <pmfn:message key="${title}"/></title>
         <link href="${es.templatePath}/all.css" rel="stylesheet" type="text/css" />
         <link rel="shortcut icon" href="${es.templatePath}/img/favicon.ico" />
