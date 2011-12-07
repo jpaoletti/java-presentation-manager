@@ -11,6 +11,7 @@
     
     <property name="logger-class"   value="jpaoletti.jpm.core.log.Log4jLogger"/>
     <property name="logger-name"    value="jpm"/>
+    <property name="hideable-header" value="true"/>
               
     <property name="default-converter" 
               value="jpaoletti.jpm.struts.converter.DefaultStrutsConverter"/>
