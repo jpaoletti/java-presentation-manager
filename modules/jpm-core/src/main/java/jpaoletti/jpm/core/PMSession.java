@@ -37,6 +37,7 @@ public class PMSession extends PMContext {
         return containers.get(entityId);
     }
 
+    @Override
     public PMSecurityUser getUser() {
         return user;
     }
