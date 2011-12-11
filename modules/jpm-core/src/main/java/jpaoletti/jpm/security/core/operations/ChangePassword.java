@@ -15,11 +15,6 @@ public class ChangePassword extends SecurityOperation {
     }
 
     @Override
-    protected boolean checkSelected() {
-        return false;
-    }
-
-    @Override
     protected boolean prepare(PMContext ctx) throws PMException {
         super.prepare(ctx);
         return finished(ctx);
@@ -46,5 +41,15 @@ public class ChangePassword extends SecurityOperation {
         } catch (PMSecurityException e) {
             throw new PMException("pm_security.password.invalid");
         }
+    }
+
+    @Override
+    protected boolean checkEntity() {
+        return false;
+    }
+
+    @Override
+    protected boolean checkSelected() {
+        return false;
     }
 }

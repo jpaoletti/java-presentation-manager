@@ -9,7 +9,7 @@
     </div>
     <c:if test="${not empty pmsession.user}">
         <div id="userbox">
-            <a href="javascript:loadPage('${es.context_path}/show.do?pmid=secuserprofile&identified=username:${pmsession.user.username}');">
+            <a href="javascript:loadPage('${es.context_path}/profile.do');">
                 <img src='${pmsession.user.gravatar}?s=40&d=mm' alt="${pmsession.user.name}" title="${pmsession.user.name}"/>
             </a>
         </div>

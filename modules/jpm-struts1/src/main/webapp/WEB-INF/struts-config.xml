@@ -66,6 +66,18 @@
             <forward name="success" redirect="true" path="/pages/logout.jsp"/>
         </action>
 
+        <action path="/profile" type="jpaoletti.jpm.struts.actions.ProfileAction">
+            <forward name="success" path="/pages/profile.jsp" />
+            <forward name="continue" path="/pages/profile.jsp"/>
+            <forward name="failure" path="/pages/profile.jsp"/>
+        </action>
+
+        <action path="/changepassword" type="jpaoletti.jpm.struts.actions.ChangePasswordAction">
+            <forward name="success" path="/logout.do" />
+            <forward name="continue" path="/pages/profile.jsp"/>
+            <forward name="failure" path="/pages/profile.jsp"/>
+        </action>
+
         <action path="/show" type="jpaoletti.jpm.struts.actions.ShowAction" >
             <forward name="success" path="/pages/std-display.jsp" />
             <forward name="failure" path="/pages/std-display.jsp"/>
