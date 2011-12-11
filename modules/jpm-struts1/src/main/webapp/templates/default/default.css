@@ -1,22 +1,7 @@
-*{
-    font-family: "Arial", "Helvetica", "Verdana", "sans-serif";
-}
-
-html{
-    margin: 0;
-    padding: 0;
-}
-
-body,table,td,th,p,div,form,label,caption,a{
-    font-size: 12px;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background: #F7F7F7;
-    color: #111;
-}
+*{font-family: "Arial", "Helvetica", "Verdana", "sans-serif";}
+html{margin: 0;padding: 0;}
+body,table,td,th,p,div,form,label,caption,a{font-size: 12px;}
+body {margin: 0;padding: 0;background: #F7F7F7;color: #111;}
 
 input, select, textarea, option{
     padding: 0.30em;
@@ -29,9 +14,7 @@ input, select, textarea, option{
     border-radius: 6px;
 }
 
-input.string-converter{
-    width: 300px;
-}
+input.string-converter{width: 300px;}
 
 body.outer-index{
     position: absolute;
@@ -42,44 +25,17 @@ body.outer-index{
     border: solid #414141 2px;
 }
 
-form{
-    overflow: auto;
-    width: auto;
-}
+form{overflow: auto;width: auto;}
+fieldset {border: none;width: auto;overflow: auto;}
+legend {display: none;}
 
-fieldset {
-    border: none;
-    width: auto;
-    overflow: auto;
-}
-
-legend {
-    display: none;
-}
-
-h1.title , h2.title , h3.title  {
-    margin: 0;
-    color: #2779AA;
-}
-
-h2.title  {
-    margin-bottom: .5em;
-    font-size: 1.6em;
-}
-
-h3.title {
-    margin-bottom: 1em;
-    font-size: 1em;
-}
+h1.title , h2.title , h3.title  {margin: 0;color: #2779AA;}
+h2.title  {margin-bottom: .5em;font-size: 1.6em;}
+h3.title {margin-bottom: 1em;font-size: 1em;}
 
 p, blockquote, ul, ol {
     margin-bottom: 1.5em;
     line-height: 1.8em;
-}
-
-ol {
-    margin-left: 2em;
-    list-style: lower-roman;
 }
 
 a {
@@ -91,9 +47,7 @@ a:hover {
     color: #11A6D4;
 }
 
-img {
-    border: none;
-}
+img {order: none;}
 
 .mainLoading{
     position: fixed;
@@ -155,9 +109,7 @@ table.sort_table{
 
 /******************************************************************************/
 /** Buttons **/
-.button {
-    min-width:75px;
-}
+.button { min-width:75px;}
 
 .ui-list-icon{float:left;}
 
@@ -179,143 +131,38 @@ table.sort_table{
 
 /******************************************************************************/
 /* Index styles */
-
-#mainframe{
-    height: 100%;
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-    border: none;
-}
-
-.index_layout{
-    position: relative;
-    min-height: 100%;
-    height: auto !important;
-}
-
-.index_layout_header{
-
-}
-
-.index_layout_content{
-    margin: 0 auto;
-/*    padding: 20px 0px 15px;*/
-    height: 82%;
-}
-
-.index_layout_footer{
-    background: #414141;
-    color: white;
-    width: 100%;
-    position: absolute;
-    bottom: 0px !important;
-}
-
-.boxed {
-    margin-bottom: 1em;
-}
-
-.boxed .content {
-    padding: 10px;
-}
-
-#page-container{
-    position: relative;
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-}
-
-#list-container{
-    margin: 5px 5px 5px 5px;
-}
+#page-container{position: relative; min-height: 100%; height: auto !important; height: 100%;}
+#mainframe{height: 100%; width: 100%; padding: 0px; margin: 0px; border: none;}
+.index_layout{position: relative; height:auto !important; height:100%; min-height:100%;}
+.index_layout_header{z-index: 1; width: 100%; position: fixed; background-color: #F7F7F7;}
+.index_layout_content{top: 90px;position: absolute;bottom: 0px; left: 0px; right: 0px; z-index: 0;}
+.boxed {margin-bottom: 1em;}
+.boxed .content {padding: 10px;}
+#list-container{margin: 5px 5px 5px 5px;}
 
 /* Header */
 
 #header {
-    height: 65px;
+    height: 50px;
     margin: 0 auto;
     border-bottom:  2px solid black;
     margin: 0px 0px 1px 0px;
 }
 
-/* Header > Logo */
+#logo {padding: 5px 0px 0px 20px; float:left;}
+#logo h1 {font-size: 2em;}
+#logo h2 { margin: 0; font-size: 1.2em; }
+#logo a { text-decoration: none; color: black;}
 
-#logo {
-    padding: 5px 0px 0px 20px;
-    float:left;
-}
-
-#logo h1 {
-    font-size: 3em;
-}
-
-#logo h2 {
-    margin: 0;
-    font-size: 1.2em;
-}
-
-#logo a {
-    text-decoration: none;
-    color: black;
-}
-
-#topmenu {
-    float: right;
-    margin-right: 20px;
-}
-
-#topmenu ul {
-    margin: 0;
-    padding: 15px 0 0 0;
-    list-style: none;
-    line-height: normal;
-}
-
-#topmenu li {
-    display: inline
-}
-
-#topmenu a {
-    display: block;
-    float: left;
-    margin: 0 0 0 20px;
-    padding: 0 0 0 15px;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-size: x-small;
-    font-weight: bold;
-    color: #FFFFFF;
-    vertical-align: middle;
-}
-
-#topmenu a:hover {
-    text-decoration: underline
-}
-
-#topmenu1 {
-    background: url(images/img03.gif) no-repeat left center;
-}
-
-#topmenu2 {
-    background: url(images/img05.gif) no-repeat left center;
-}
-
-#btnColapseExpand{
-    margin-top: -7px;
-    margin-left: 10px;
-}
-#btnColapseExpand .ui-button-text{
-    padding: 2px!important;
-}
-
-/* Content > Main */
-
-#main {
-    float: left;
-    width: 460px;
-}
+.menu-button-bar{width: 180px; height: 25px; background-color: gray; position: absolute; right: 50px; top: 5px;}
+/*.menu-button-bar{width: 180px; height: 25px; float: right; background-color: gray; margin-top: 7px; margin-right: 5px;}*/
+.menu-button-bar .version, .menu-button-bar .copyright{float: right; color: white; font-weight: bold; margin-top: 6px; border-left: white solid thin; padding-left: 10px; margin-right: 5px;}
+.menu-button-bar .copyright {float: left; cursor: help; border: none;}
+.menu-button-bar a div{width: 16px; height: 16px; display: block; margin: 4px; background-position: center center; background-repeat: no-repeat; float: left;background-image: url('images/ui-icons_ffffff_256x240.png'); }
+.menu-button-bar a div.home   {background-position: 0 -112px; }
+.menu-button-bar a div.contact{background-position: -80px -96px; }
+.menu-button-bar a div.logout {background-position: 0 -176px; float: right;}
+.menu-button-bar a div.expand {background-position: -128px -16px; }
 
 #welcome {
     margin: 0 0 3em 0;
@@ -323,44 +170,12 @@ table.sort_table{
     border-bottom: 1px solid #CCCCCC;
 }
 
-#login {
-    width: 220px;
-    margin: 30px;
-}
+#login {width: 220px; margin: 30px;}
+#login label {display: block;}
+#login p {margin: 0; padding-top: .2em;}
+#links {text-align: center;}
 
-#login label {
-    display: block;
-}
-
-#login p {
-    margin: 0;
-    padding-top: .2em;
-}
-
-/* Footer > Legal */
-
-#legal {
-    margin: 0;
-    padding: 3px;
-    text-align: center;
-}
-
-#legal a {
-    font-weight: bold;
-    color: #FFFFFF;
-}
-
-/* Footer > Links */
-
-#links {
-    text-align: center;
-}
-
-/* Menu */
-
-#menu {
-    height: 40px;
-}
+#menu {height: 40px;}
 
 #userbox{
     padding-right:5px;
@@ -370,9 +185,7 @@ table.sort_table{
     float: right;
 }
 
-#userbox img{
-    vertical-align:middle;
-}
+#userbox img{vertical-align:middle;}
 
 #appversion{
     float: left;

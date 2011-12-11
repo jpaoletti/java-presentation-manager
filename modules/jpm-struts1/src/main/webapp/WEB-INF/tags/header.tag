@@ -9,11 +9,34 @@
     </div>
     <c:if test="${not empty pmsession.user}">
         <div id="userbox">
-            <img src='${pmsession.user.gravatar}?s=50&d=mm' alt="gravatar"/> &nbsp;${pmsession.user.name} &nbsp; |
-            <c:if test="${pm.loginRequired}">
-                &nbsp; <a href="javascript:loadPage('${es.context_path}/show.do?pmid=secuserprofile&identified=username:${pmsession.user.username}');"><pmfn:message key="user.profile"/></a> &nbsp; |
-            </c:if>
-            &nbsp; <a href="${es.context_path}/logout.do" title="<pmfn:message key="logout"/>"><pmfn:message key="logout"/></a>
+            <a href="javascript:loadPage('${es.context_path}/show.do?pmid=secuserprofile&identified=username:${pmsession.user.username}');">
+                <img src='${pmsession.user.gravatar}?s=40&d=mm' alt="${pmsession.user.name}" title="${pmsession.user.name}"/>
+            </a>
         </div>
     </c:if>
 </div>
+<c:if test="${pm.hideableHeader}">
+    <script type="text/javascript">
+        function setExpandCookie(b){
+            jQuery.cookie("header_expanded", b, {expires: 100});
+        }
+        function initBtn(){
+            if(jQuery.cookie("header_expanded") == null ){
+                setExpandCookie(true);
+            };
+            if(jQuery.cookie("header_expanded") != 'true'){
+                $("#header").hide();
+            }
+        }
+        PM_register(function(){
+            initBtn();
+            $("#btnColapseExpand").click(function(){
+                var header = $("#header");
+                header.slideToggle(400, function () {
+                    setExpandCookie(header.is(":visible"));
+                    $(".index_layout_content").css('top', $("#full_header").height() + "px");
+                });
+            });
+        });
+    </script>
+</c:if>

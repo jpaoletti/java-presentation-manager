@@ -5,28 +5,21 @@
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <script type="text/javascript">
             PM_register(function(){
-                //                $(window).resize(function(){
-                //                    $('.index_layout_content').css({'height': (($(window).height()) - ($(".index_layout_header").outerHeight()) - ($(".index_layout_footer").outerHeight()))+'px'});
-                //                });
                 $(window.frames["mainframe"]).focus();
             });
         </script>
         <div class="index_layout" id="page-container">
             <div class="index_layout_header">
-                <div id="full_header"><pm:header /><pm:topmenu /><pmfn:menu pmsession="${pmsession}" /></div>
+                <div id="full_header"><pm:header /><pmfn:menu pmsession="${pmsession}" /></div>
             </div>
             <div class="index_layout_content">
-                <div id="content">
-                    <c:if test="${empty pmsession}">
-                        <iframe id="mainframe" name="mainframe" src="${es.context_path}/pages/login.jsp"></iframe>
-                    </c:if>
-
-                    <c:if test="${not empty pmsession}">
-                        <iframe id="mainframe" name="mainframe" src="${es.context_path}/${es.welcomePage}"></iframe>
-                    </c:if>
-                </div>
+                <c:if test="${empty pmsession}">
+                    <iframe id="mainframe" name="mainframe" src="${es.context_path}/pages/login.jsp"></iframe>
+                </c:if>
+                <c:if test="${not empty pmsession}">
+                    <iframe id="mainframe" name="mainframe" src="${es.context_path}/${es.welcomePage}"></iframe>
+                </c:if>
             </div>
-            <%@include file="inc/footer.jsp" %>
         </div>
     </pm:page>
 </c:if>

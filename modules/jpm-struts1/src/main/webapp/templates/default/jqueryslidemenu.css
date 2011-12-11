@@ -2,12 +2,14 @@
     font: bold 12px Verdana;
     background: #414141;
     width: 100%;
+    z-index: 2;
 }
 
 .jqueryslidemenu ul{
     margin: 0;
     padding: 0;
     list-style-type: none;
+    z-index: 2;
 }
 
 /*Top level list items*/

@@ -1,5 +1,6 @@
 package jpaoletti.jpm.struts.tags;
 
+import java.util.Calendar;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
@@ -25,18 +26,36 @@ public class MenuTag extends PMTags {
     @Override
     public int doStartTag() throws JspException {
         try {
-
-            pageContext.getOut().println("<div id='menu' class='jqueryslidemenu'>");
-            pageContext.getOut().println("<ul>");
+            final JspWriter out = pageContext.getOut();
+            out.println("<div id='menu' class='jqueryslidemenu'>");
+            out.println("<ul>");
 
             if (pmsession != null && pmsession.getMenu() != null) {
                 final MenuList list = (MenuList) pmsession.getMenu();
                 for (Menu m : list.getSubmenus()) {
-                    printMenu(m, pageContext.getOut());
+                    printMenu(m, out);
                 }
             }
-            pageContext.getOut().println("</ul>");
-            pageContext.getOut().println("</div>");
+            out.println("</ul>");
+            out.println("<div class='menu-button-bar'>");
+            out.println("<a href='index.jsp' title=" + PresentationManager.getMessage("home") + "><div class='home'></div></a>");
+            final String contact = PresentationManager.getPm().getContact();
+            if (contact != null) {
+                out.println("<a href='mailto:" + contact + "' title=" + PresentationManager.getMessage("contact") + "><div class='contact'></div></a>");
+            }
+            final String copyright = PresentationManager.getPm().getCopyright();
+            if (copyright != null) {
+                out.println("<div class='copyright' title='" + PresentationManager.getMessage("header.copyright", copyright, Calendar.getInstance().get(Calendar.YEAR)) + "'>&copy;</div>");
+            }
+            if (PresentationManager.getPm().isHideableHeader()) {
+                out.println("<a href='#' id='btnColapseExpand' title=" + PresentationManager.getMessage("header.expand") + "><div class='expand'></div></a>");
+            }
+            if (pmsession != null) {
+                out.println("<a href='logout.do' title=" + PresentationManager.getMessage("logout") + "><div class='logout'></div></a>");
+            }
+            out.println("<div class='version'>v" + PresentationManager.getPm().getAppversion() + "</div>");
+            out.println("</div>");
+            out.println("</div>");
         } catch (Exception ex) {
             throw new JspTagException("MessageTag: " + ex.getMessage());
         }
