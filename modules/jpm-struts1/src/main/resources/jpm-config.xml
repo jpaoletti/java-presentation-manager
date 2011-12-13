@@ -36,7 +36,6 @@
     <property name="entity" value="entities/secperm.xml"/>
     <property name="entity" value="entities/secuser.xml"/>
     <property name="entity" value="entities/secusergroup.xml"/>
-    <property name="entity" value="entities/secuserprofile.xml"/>
 
     <!-- Monitors -->
 </presentation-manager>
