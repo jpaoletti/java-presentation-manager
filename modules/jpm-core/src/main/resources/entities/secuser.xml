@@ -2,7 +2,11 @@
 <entity id="secuser" clazz="jpaoletti.jpm.security.core.PMSecurityUser">
     <dataAccess class="jpaoletti.jpm.ui.DataAccessUser" />
     <operations>
-        <operation id="list" scope="general" />
+        <operation id="list" scope="general">
+            <properties>
+                <property name="operation-column-width" value="150px" />
+            </properties>
+        </operation>
         <operation id="add" scope="general" display="list">
             <validator class="jpaoletti.jpm.validator.UniqueUsername"/>
         </operation>

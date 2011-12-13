@@ -3,7 +3,11 @@
     <idField>name</idField>
     <dataAccess class="jpaoletti.jpm.ui.DataAccessGroup" />
     <operations>
-        <operation id="list"/>
+        <operation id="list" scope="general">
+            <properties>
+                <property name="operation-column-width" value="120px" />
+            </properties>
+        </operation>
         <operation id="add" scope="general" display="list show" />
         <operation id="show" display="list" />
         <operation id="edit" display="list show" />
