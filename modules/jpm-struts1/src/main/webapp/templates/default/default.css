@@ -185,7 +185,8 @@ table.sort_table{
     float: right;
 }
 
-#userbox img{vertical-align:middle;}
+#userbox img{vertical-align:bottom; margin-left: 2px;}
+#userbox .user-name{font-style: italic; font-weight: bold}
 
 #appversion{
     float: left;
