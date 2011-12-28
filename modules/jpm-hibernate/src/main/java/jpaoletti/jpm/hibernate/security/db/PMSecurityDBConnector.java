@@ -248,6 +248,7 @@ public class PMSecurityDBConnector extends PMSecurityAbstractConnector {
         if (secgroup == null) {
             group.setName(g.getName());
         }
+        group.getPermissions().clear();
         for (PMSecurityPermission p : g.getPermissions()) {
             group.getPermissions().add(getDBPerm(p.getName()));
         }
