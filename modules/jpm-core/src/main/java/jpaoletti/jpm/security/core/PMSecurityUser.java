@@ -211,4 +211,26 @@ public class PMSecurityUser {
             return "http://www.gravatar.com/avatar/" + hash;
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof PMSecurityUser)) {
+            return false;
+        }
+        final PMSecurityUser other = (PMSecurityUser) obj;
+        if ((this.getUsername() == null) ? (other.getUsername() != null) : !this.getUsername().equals(other.getUsername())) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + (this.getUsername() != null ? this.getUsername().hashCode() : 0);
+        return hash;
+    }
 }
