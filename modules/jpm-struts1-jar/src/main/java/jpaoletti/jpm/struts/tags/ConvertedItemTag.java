@@ -3,12 +3,14 @@ package jpaoletti.jpm.struts.tags;
 import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
+import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.EntityContainer;
 import jpaoletti.jpm.core.Field;
 import jpaoletti.jpm.core.Operation;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
+import jpaoletti.jpm.core.PresentationManager;
 import jpaoletti.jpm.struts.PMEntitySupport;
 
 /**
@@ -50,6 +52,9 @@ public class ConvertedItemTag extends PMTags {
                     }
                 }
                 println("</div>", "<span class='field_message_container_" + getEntity().getId() + "_" + fieldId + "' />");
+            } catch (ConverterException e) {
+                println("<img width='16px' src='" + getContextPath() + "/templates/" + getTemplate() + "/images/m_error.png' alt='error' />",
+                        "<span class='pm_message_ERROR'>" + PresentationManager.getMessage(e.getMsg().getKey(), e.getMsg().getArgs()) + "</span>");
             } catch (Exception e) {
                 es.getPM().error(e);
                 println("<img width='16px' src='" + getContextPath() + "/templates/" + getTemplate() + "/images/m_error.png' alt='error' />");

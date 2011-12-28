@@ -313,7 +313,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
                 //Do nothing, just ignore conversion.
             } catch (ConverterException e) {
                 ctx.getPresentationManager().error(e);
-                ctx.addMessage(MessageFactory.error(ctx.getEntity(), field, e.getKey()));
+                ctx.addMessage(MessageFactory.error(ctx.getEntity(), field, e.getMsg().getKey()));
             } catch (Exception e) {
                 ctx.getPresentationManager().error(e);
                 ctx.addMessage(MessageFactory.error(ctx.getEntity(), field, UNESPECTED_ERROR));

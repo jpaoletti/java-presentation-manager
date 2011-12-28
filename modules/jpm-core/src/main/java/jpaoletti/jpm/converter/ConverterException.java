@@ -1,6 +1,8 @@
 package jpaoletti.jpm.converter;
 
 import jpaoletti.jpm.core.PMException;
+import jpaoletti.jpm.core.message.Message;
+import jpaoletti.jpm.core.message.MessageFactory;
 
 /**
  * An exception thrown if a conversion fail
@@ -11,12 +13,16 @@ public class ConverterException extends PMException {
 
     private static final long serialVersionUID = 6940226004619692335L;
 
+    public ConverterException(Message msg) {
+        super(msg);
+    }
+
     /**
      *
      * @param string
      */
     public ConverterException(String string) {
-        super(string);
+        super(MessageFactory.error(string));
     }
 
     /**
