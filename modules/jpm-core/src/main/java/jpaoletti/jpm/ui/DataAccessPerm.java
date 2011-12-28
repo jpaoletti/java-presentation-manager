@@ -12,6 +12,15 @@ public class DataAccessPerm extends AbstractDataAccess {
 
     @Override
     public Object getItem(PMContext ctx, String property, String value) throws PMException {
+        if (value == null) {
+            return null;
+        }
+        final List<PMSecurityPermission> list = getConnector(ctx).getPermissions();
+        for (PMSecurityPermission perm : list) {
+            if (value.equals(perm.getName())) {
+                return perm;
+            }
+        }
         return null;
     }
 
@@ -28,9 +37,9 @@ public class DataAccessPerm extends AbstractDataAccess {
     @Override
     public List<?> list(PMContext ctx, EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         try {
-            List<PMSecurityPermission> list = getConnector(ctx).getPermissions();
-            Integer f = (from == null) ? 0 : from;
-            Integer t = (count == null) ? list.size() : (from + count > list.size() ? list.size() : from + count);
+            final List<PMSecurityPermission> list = getConnector(ctx).getPermissions();
+            final Integer f = (from == null) ? 0 : from;
+            final Integer t = (count == null) ? list.size() : (from + count > list.size() ? list.size() : from + count);
             return list.subList(f, t);
         } catch (PMSecurityException e) {
             ctx.getPresentationManager().error(e);
