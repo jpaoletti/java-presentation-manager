@@ -1,5 +1,7 @@
 package jpaoletti.jpm.core;
 
+import jpaoletti.jpm.core.message.Message;
+
 /**
  * A generic expection for Presentation Manager engine.
  * 
@@ -8,7 +10,12 @@ package jpaoletti.jpm.core;
 public class PMException extends Exception {
 
     private String key;
+    private Message msg;
     private static final long serialVersionUID = -1685585143991954053L;
+
+    public PMException(Message msg) {
+        this.msg = msg;
+    }
 
     /**
      *
@@ -54,5 +61,13 @@ public class PMException extends Exception {
      */
     public String getKey() {
         return key;
+    }
+
+    public Message getMsg() {
+        return msg;
+    }
+
+    public void setMsg(Message msg) {
+        this.msg = msg;
     }
 }
