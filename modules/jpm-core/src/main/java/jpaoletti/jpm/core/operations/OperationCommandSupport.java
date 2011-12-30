@@ -312,10 +312,12 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
             } catch (IgnoreConvertionException e) {
                 //Do nothing, just ignore conversion.
             } catch (ConverterException e) {
-                ctx.getPresentationManager().error(e);
+                ctx.getPresentationManager().error(String.format("Error converting %s.%s : %s", ctx.getEntity().getId(), field.getId(), e.getMessage()));
+                ctx.getPresentationManager().warn(e);
                 ctx.addMessage(MessageFactory.error(ctx.getEntity(), field, e.getMsg().getKey()));
             } catch (Exception e) {
-                ctx.getPresentationManager().error(e);
+                ctx.getPresentationManager().error(String.format("Error converting %s.%s : %s", ctx.getEntity().getId(), field.getId(), e.getMessage()));
+                ctx.getPresentationManager().warn(e);
                 ctx.addMessage(MessageFactory.error(ctx.getEntity(), field, UNESPECTED_ERROR));
             }
             i++;
