@@ -58,7 +58,7 @@
 
         <action path="/login" type="jpaoletti.jpm.struts.actions.LoginAction">
             <forward name="success" redirect="true" path="/pages/login.jsp"/>
-            <forward name="failure" redirect="false" path="/pages/login.jsp"/>
+            <forward name="failure" redirect="false" path="/index.jsp"/>
             <forward name="changePassword" redirect="true" path="/pages/login.jsp"/>
         </action>
 
