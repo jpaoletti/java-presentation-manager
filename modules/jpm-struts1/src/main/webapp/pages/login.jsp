@@ -47,4 +47,15 @@
             <div class="message_container">&nbsp;</div>
         </div>
     </c:if>
+    <script type="text/javascript" charset="utf-8">
+        PM_register(function(){
+            $("#username").keypress(function(e){
+                if (e.keyCode == '13') {
+                    e.preventDefault();
+                    $("#password").focus();
+                }
+            });
+            $("#username").focus();
+        });
+    </script>
 </pm:page>

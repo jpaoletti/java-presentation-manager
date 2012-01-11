@@ -3,21 +3,21 @@
     <pm:page title="titles.index" bodyClass="outer-index" loading="false">
         <script type="text/javascript" src="js/expand.js"></script>
         <script type="text/javascript" src="js/jquery.cookie.js"></script>
-        <script type="text/javascript">
-            PM_register(function(){
-                $(window.frames["mainframe"]).focus();
-            });
-        </script>
         <div class="index_layout" id="page-container">
             <div class="index_layout_header">
                 <div id="full_header"><pm:header /><pmfn:menu pmsession="${pmsession}" /></div>
             </div>
             <div class="index_layout_content">
                 <c:if test="${empty pmsession}">
-                    <iframe id="mainframe" name="mainframe" src="${es.context_path}/pages/login.jsp"></iframe>
+                    <jsp:include page="pages/login.jsp" />
                 </c:if>
                 <c:if test="${not empty pmsession}">
                     <iframe id="mainframe" name="mainframe" src="${es.context_path}/${es.welcomePage}"></iframe>
+                    <script type="text/javascript">
+                        PM_register(function(){
+                            $(window.frames["mainframe"]).focus();
+                        });
+                    </script>
                 </c:if>
             </div>
         </div>
