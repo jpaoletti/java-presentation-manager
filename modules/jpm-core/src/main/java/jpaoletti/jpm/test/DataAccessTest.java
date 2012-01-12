@@ -22,7 +22,7 @@ public abstract class DataAccessTest extends AbstractDataAccess {
 
     @Override
     public Object getItem(PMContext ctx, String property, String value) throws PMException {
-        for (Object object : list) {
+        for (Object object : getList(ctx)) {
             final Object actualValue = PresentationManager.getPm().get(object, property);
             if (actualValue != null && actualValue.toString().equals(value)) {
                 return object;
@@ -89,5 +89,9 @@ public abstract class DataAccessTest extends AbstractDataAccess {
     @Override
     public EntityFilter createFilter(PMContext ctx) throws PMException {
         return new EntityFilter();
+    }
+
+    public List<?> getList(PMContext ctx) {
+        return list;
     }
 }
