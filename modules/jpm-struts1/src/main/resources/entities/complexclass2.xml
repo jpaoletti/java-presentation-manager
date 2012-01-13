@@ -9,7 +9,7 @@
     <operations>
         <operation id="list" enabled="true" scope="general">
             <properties>
-                <property name="operation-column-width" value="100px" />
+                <property name="operation-column-width" value="120px" />
             </properties>
         </operation>
         <operation id="show" enabled="true" scope="item" display="edit list" />
