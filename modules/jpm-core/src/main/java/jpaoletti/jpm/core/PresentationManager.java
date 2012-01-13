@@ -628,7 +628,8 @@ public class PresentationManager extends Observable {
 
     public static synchronized String newSessionId() {
         sessionIdSeed++;
-        return sessionIdSeed.toString();
+        final MD5 md5 = new MD5();
+        return md5.calcMD5(sessionIdSeed.toString());
     }
 
     /**
