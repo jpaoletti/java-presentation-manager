@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import jpaoletti.jpm.menu.Menu;
 import jpaoletti.jpm.security.core.PMSecurityUser;
+import jpaoletti.jpm.util.StringEncrypter;
 
 /**
  *
@@ -19,10 +20,12 @@ public class PMSession extends PMContext {
     private final Map<String, EntityContainer> containers = new HashMap<String, EntityContainer>();
     private Date lastAccess;
     private PMChatLog chatLog;
+    private StringEncrypter stringEncrypter;
 
     public PMSession(String id) {
         this.sessionId = id;
         this.chatLog = new PMChatLog();
+        this.stringEncrypter = new StringEncrypter(id);
     }
 
     public Collection<EntityContainer> getContainers() {
@@ -72,5 +75,18 @@ public class PMSession extends PMContext {
 
     public PMChatLog getChatLog() {
         return chatLog;
+    }
+
+    /**
+     * Getter for the string encripter for this session
+     * 
+     * @return enripter
+     */
+    public StringEncrypter getStringEncrypter() {
+        return stringEncrypter;
+    }
+
+    public void setStringEncrypter(StringEncrypter stringEncrypter) {
+        this.stringEncrypter = stringEncrypter;
     }
 }
