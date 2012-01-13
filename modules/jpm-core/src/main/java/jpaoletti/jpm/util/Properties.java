@@ -62,6 +62,9 @@ public class Properties {
      */
     public boolean getBool(String name, boolean def) {
         final String s = getProperty(name);
+        if (s == null) {
+            return def;
+        }
         try {
             return s != null && s.equalsIgnoreCase("true");
         } catch (Exception e) {
