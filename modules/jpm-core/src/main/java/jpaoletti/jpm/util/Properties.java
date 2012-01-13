@@ -33,10 +33,37 @@ public class Properties {
         }
     }
 
+    /**
+     * Returns the property assuming its an int. If it isn't or if its not defined,
+     * returns default value
+     * 
+     * @param name Property name
+     * @param def Default value
+     * 
+     * @return Property value or def
+     */
     public Integer getInt(String name, Integer def) {
         final String s = getProperty(name);
         try {
             return Integer.parseInt(s);
+        } catch (Exception e) {
+            return def;
+        }
+    }
+
+    /**
+     * Returns the property assuming its a boolean. If it isn't or if its not 
+     * defined, returns default value.
+     * 
+     * @param name Property name
+     * @param def Default value
+     * 
+     * @return Property value or def
+     */
+    public boolean getBool(String name, boolean def) {
+        final String s = getProperty(name);
+        try {
+            return s != null && s.equalsIgnoreCase("true");
         } catch (Exception e) {
             return def;
         }
