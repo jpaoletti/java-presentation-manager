@@ -8,6 +8,7 @@
     <property name="copyright"      value="Jeronimo Paoletti"/>
     <property name="multi-login"    value="true"/>
     <property name="welcome-page"   value="pages/_customindex.jsp"/>
+    <property name="locale"         value=""/> <!-- en_US -->
     
     <property name="logger-class"   value="jpaoletti.jpm.core.log.Log4jLogger"/>
     <property name="logger-name"    value="jpm"/>

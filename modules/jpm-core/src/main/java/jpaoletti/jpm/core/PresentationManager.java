@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -30,6 +31,7 @@ public class PresentationManager extends Observable {
     private static final String PERSISTENCE_MANAGER = "persistence-manager";
     private static final String SECURITY_CONNECTOR = "security-connector";
     private static final String HASH = "abcde54321poiuy96356abcde54321poiuy96356"; //TODO
+    private ResourceBundle bundle;
     /** Singleton */
     private static PresentationManager instance;
     /**  Hash value for parameter encrypt  */
@@ -639,7 +641,7 @@ public class PresentationManager extends Observable {
             return null;
         }
         try {
-            final ResourceBundle bundle = ResourceBundle.getBundle("ApplicationResource"); //TODO
+            final ResourceBundle bundle = getPm().getResourceBundle();
             String string = bundle.getString(key);
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
@@ -684,5 +686,26 @@ public class PresentationManager extends Observable {
 
     public boolean allowMultipleLogin() {
         return "true".equalsIgnoreCase(cfg.getProperty("multi-login", "true"));
+    }
+
+    /**
+     * Returns local resource bundle for internationalization
+     */
+    protected ResourceBundle getResourceBundle() {
+        if (bundle == null) {
+            String lang = "";
+            String country = "";
+            final String _locale = getPm().getCfg().getProperty("locale", "");
+            if (_locale != null && !"".equals(_locale.trim())) {
+                final String[] __locale = _locale.split("[_]");
+                lang = __locale[0];
+                if (__locale.length > 1) {
+                    country = __locale[1];
+                }
+            }
+            final Locale locale = new Locale(lang, country);
+            bundle = ResourceBundle.getBundle("ApplicationResource", locale);
+        }
+        return bundle;
     }
 }
