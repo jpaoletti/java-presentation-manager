@@ -5,7 +5,7 @@
     <operations>
         <operation id="list" enabled="true" scope="general" display="all" >
             <properties>
-                <property name="operation-column-width" value="100px" />
+                <property name="operation-column-width" value="120px" />
                 <property name="sort-field" value="description" />
                 <property name="sort-direction" value="desc" />
             </properties>

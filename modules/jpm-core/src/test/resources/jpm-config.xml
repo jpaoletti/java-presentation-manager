@@ -2,7 +2,6 @@
 <presentation-manager>
     <property name="appversion" value="1.0.0"/>
     <property name="logger" value="jpm"/>
-    <property name="ignore-db" value="true"/>
     <property name="template" value="default"/>
 
     <property name="security-connector" 

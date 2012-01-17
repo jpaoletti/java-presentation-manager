@@ -31,16 +31,16 @@ public class GetListAction extends ActionSupport {
         final Gson gson = new Gson();
         ctx.getResponse().setContentType("application/json");
         try {
-            final String _entity = ctx.getRequest().getParameter("entity");
+            final String _entity = (String) ctx.getParameter("entity");
             final Entity entity = ctx.getPresentationManager().getEntity(_entity);
             if (entity == null) {
                 throw new ConverterException("Cannot find entity " + entity);
             }
             final List<KeyValue> finalist = helper.getFullList(ctx, entity,
-                    ctx.getRequest().getParameter("filter_class"),
-                    ctx.getRequest().getParameter("filter"),
-                    ctx.getRequest().getParameter("sortField"),
-                    ctx.getRequest().getParameter("sortDir"));
+                    (String) ctx.getParameter("filter_class"),
+                    (String) ctx.getParameter("filter"),
+                    (String) ctx.getParameter("sortField"),
+                    (String) ctx.getParameter("sortDir"));
             try {
                 ctx.getResponse().getWriter().print(gson.toJson(finalist));
             } catch (IOException ex) {

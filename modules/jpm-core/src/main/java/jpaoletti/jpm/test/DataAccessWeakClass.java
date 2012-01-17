@@ -54,12 +54,11 @@ public class DataAccessWeakClass extends DataAccessTest {
     }
 
     @Override
-    public InstanceId getInstanceId(PMContext ctx, EntityInstanceWrapper instanceWrapper) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Object getItem(PMContext ctx, InstanceId instanceId) throws PMException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<?> getList(PMContext ctx) {
+        try {
+            return getParent(null).getWeaks();
+        } catch (PMException ex) {
+            return null;
+        }
     }
 }
