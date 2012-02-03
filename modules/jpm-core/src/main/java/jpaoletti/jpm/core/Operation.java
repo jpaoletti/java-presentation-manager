@@ -2,15 +2,16 @@ package jpaoletti.jpm.core;
 
 import java.util.ArrayList;
 import java.util.Properties;
-
 import jpaoletti.jpm.validator.Validator;
 
-/**An Operation is any action that can be applied to an Entity or to an Entity Instance. Most common
- * operations are list, add, delete, edit and show but programmer can define any new. To give it a new
- * style or icon there must be a css class defined on your template/buttons.css with the class name equals
- * to operation id. The title of the operation is determined by an entry in the ApplicationResource file 
- * with the key "operation._op_id_" <br>
- * 
+/**
+ * An Operation is any action that can be applied to an Entity or to an Entity
+ * Instance. Most common operations are list, add, delete, edit and show but
+ * programmer can define any new. To give it a new style or icon there must be a
+ * css class defined on your template/buttons.css with the class name equals to
+ * operation id. The title of the operation is determined by an entry in the
+ * ApplicationResource file with the key "operation._op_id_" <br>
+ *
  * <pre>
  * {@code
  * <operation id="some_id" enabled="true" scope="general | item | selected" display="all | add list edit">
@@ -25,44 +26,69 @@ import jpaoletti.jpm.validator.Validator;
  * </operation>
  * }
  * </pre>
- *  
- * @author jpaoletti 
- * */
+ *
+ * @author jpaoletti
+ *
+ */
 public class Operation extends PMCoreObject {
 
-    /**The operation Id. Must be unique and only one word */
+    /**
+     * The operation Id. Must be unique and only one word
+     */
     private String id;
-    /**Determine if the operation is enabled or not.*/
+    /**
+     * Determine if the operation is enabled or not.
+     */
     private Boolean enabled;
-    /**Scope of the operation. Possibles values are:
-     * <dl>
-     * <dd> general </dd><dt>A general scope operation affects all the instances of the entity or none of them. </dt>
-     * <dd> item </dd><dt>An item scope operation affects only one instance.</dt>
-     * <dd> selected </dd><dt>A selected scope operation affects only selected instances.</dt>
-     * </dl>
-     * */
+    /**
+     * Scope of the operation. Possibles values are: <dl> <dd> general
+     * </dd><dt>A general scope operation affects all the instances of the
+     * entity or none of them. </dt> <dd> item </dd><dt>An item scope operation
+     * affects only one instance.</dt> <dd> selected </dd><dt>A selected scope
+     * operation affects only selected instances.</dt> </dl>
+     *
+     */
     private String scope;
-    /**A String with other operations id separated by blanks where this operation will be shown*/
+    /**
+     * A String with other operations id separated by blanks where this
+     * operation will be shown
+     */
     private String display;
-    /**If defined, its a direct link to a fixed URL*/
+    /**
+     * If defined, its a direct link to a fixed URL
+     */
     private String url;
-    /** Indicates if the entity's title is shown */
+    /**
+     * Indicates if the entity's title is shown
+     */
     private Boolean showTitle;
-    /** Indicate if a confirmation is needed before proceed.*/
+    /**
+     * Indicate if a confirmation is needed before proceed.
+     */
     private Boolean confirm;
-    /**@see OperationContext*/
+    /**
+     * @see OperationContext
+     */
     private OperationContext context;
-    /**A list of validators for the operation.*/
+    /**
+     * A list of validators for the operation.
+     */
     private ArrayList<Validator> validators;
-    /**A properties object to get some extra configurations*/
+    /**
+     * A properties object to get some extra configurations
+     */
     private Properties properties;
-    /**Permission to do this operation*/
+    /**
+     * Permission to do this operation
+     */
     private String perm;
     // Another operation ID that follows this one on success
     private String follows;
     //Conditional to show on others
     private OperationCondition condition;
     private Boolean available;
+    //Display a compact visual representation, usually an icon without text
+    private Boolean compact;
 
     public OperationCondition getCondition() {
         return condition;
@@ -82,6 +108,7 @@ public class Operation extends PMCoreObject {
 
     /**
      * Determine if this operation is visible in another.
+     *
      * @param other The id of the other operation
      * @return true if this operation is visible in the other
      */
@@ -91,6 +118,7 @@ public class Operation extends PMCoreObject {
 
     /**
      * Redefines toString from object
+     *
      * @return
      */
     @Override
@@ -205,11 +233,14 @@ public class Operation extends PMCoreObject {
         this.validators = validators;
     }
 
-    /**Getter for a specific property with a default value in case its not defined. 
-     * Only works for string.
+    /**
+     * Getter for a specific property with a default value in case its not
+     * defined. Only works for string.
+     *
      * @param name Property name
      * @param def Default value
-     * @return Property value only if its a string */
+     * @return Property value only if its a string
+     */
     public String getConfig(String name, String def) {
         if (properties != null) {
             Object obj = properties.get(name);
@@ -220,9 +251,12 @@ public class Operation extends PMCoreObject {
         return def;
     }
 
-    /**Getter for any property in the properties object
+    /**
+     * Getter for any property in the properties object
+     *
      * @param name The property name
-     * @return The property value */
+     * @return The property value
+     */
     public String getConfig(String name) {
         return getConfig(name, null);
     }
@@ -236,7 +270,7 @@ public class Operation extends PMCoreObject {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public Boolean getShowTitle() {
@@ -287,5 +321,16 @@ public class Operation extends PMCoreObject {
 
     public void setAvailable(Boolean available) {
         this.available = available;
+    }
+
+    public Boolean getCompact() {
+        if (compact == null) {
+            return false;
+        }
+        return compact;
+    }
+
+    public void setCompact(Boolean compact) {
+        this.compact = compact;
     }
 }

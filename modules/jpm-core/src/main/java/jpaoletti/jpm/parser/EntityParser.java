@@ -1,6 +1,7 @@
 package jpaoletti.jpm.parser;
 
-import jpaoletti.jpm.converter.*;
+import jpaoletti.jpm.converter.Converter;
+import jpaoletti.jpm.converter.ExternalConverter;
 import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.validator.Validator;
 
@@ -43,6 +44,7 @@ public class EntityParser extends ParserSupport {
         getXstream().useAttributeFor(Operation.class, "confirm");
         getXstream().useAttributeFor(Operation.class, "perm");
         getXstream().useAttributeFor(Operation.class, "follows");
+        getXstream().useAttributeFor(Operation.class, "compact");
 
         getXstream().alias("owner", EntityOwner.class);
         getXstream().alias("highlights", Highlights.class);
