@@ -99,7 +99,9 @@
             </span>
             <span id="bodySpan" style="display: none;">
                 <% try {%>
-                <jsp:doBody />
+                <div class="content">
+                    <jsp:doBody />
+                </div>
                 <% } catch (Exception e) {
                     jpaoletti.jpm.core.PresentationManager.getPm().error(e);
                 %>
