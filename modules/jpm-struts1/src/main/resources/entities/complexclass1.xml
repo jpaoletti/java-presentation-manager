@@ -9,14 +9,15 @@
                 <property name="show-row-number" value="true" />
             </properties>
         </operation>
-        <operation id="show"  scope="item" display="edit list" />
-        <operation id="add"  scope="general" display="all" />
-        <operation id="edit"  scope="item" display="edit show list" />
-        <operation id="delete"  scope="item" display="edit show list" confirm="true" />
-        <operation id="selectall"  scope="general" display="list" />
+        <operation id="selectall"        scope="general" display="list" compact="true" />
+        <operation id="deselectall"      scope="general" display="list" compact="true" />
+        <operation id="invertselection"  scope="general" display="list" compact="true" />
+
+        <operation id="show"    scope="item"    display="edit list" />
+        <operation id="add"     scope="general" display="all" />
+        <operation id="edit"    scope="item"    display="edit show list" />
+        <operation id="delete"  scope="item"    display="edit show list"   confirm="true" />
         <operation id="export"  scope="general" display="list" />
-        <operation id="deselectall"  scope="general" display="list" />
-        <operation id="invertselection"  scope="general" display="list" />
         <operation id="multidelete"  scope="selected" display="list" confirm="true"/>
         <operation id="sort" scope="general" display="list" />
     </operations>
