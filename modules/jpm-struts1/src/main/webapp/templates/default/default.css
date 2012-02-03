@@ -2,6 +2,7 @@
 html{margin: 0;padding: 0;}
 body,table,td,th,p,div,form,label,caption,a{font-size: 12px;}
 body {margin: 0;padding: 0;background: #F7F7F7;color: #111;}
+.boxed{padding: 5px;}
 
 input, select, textarea, option{
     padding: 0.30em;
@@ -110,6 +111,7 @@ table.sort_table{
 /******************************************************************************/
 /** Buttons **/
 .button { min-width:75px;}
+.compact-button { min-width:0px;}
 
 .ui-list-icon{float:left;}
 
@@ -136,8 +138,7 @@ table.sort_table{
 .index_layout{position: relative; height:auto !important; height:100%; min-height:100%;}
 .index_layout_header{z-index: 1; width: 100%; position: fixed; background-color: #F7F7F7;}
 .index_layout_content{top: 90px;position: absolute;bottom: 0px; left: 0px; right: 0px; z-index: 0;}
-.boxed {margin-bottom: 1em;}
-.boxed .content {padding: 10px;}
+.content {padding: 10px;}
 #list-container{margin: 5px 5px 5px 5px;}
 
 /* Header */
