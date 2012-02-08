@@ -2,13 +2,7 @@ package jpaoletti.jpm;
 
 import java.io.IOException;
 import java.util.Map;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,9 +30,11 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
         if (isIgnored(req.getRequestURI())) {
             chain.doFilter(request, response);
         } else {
-            final PMStrutsContext ctx = initJPMContext(req, response);
+            final PMStrutsContext ctx = initJPMContext(req, (HttpServletResponse) response);
             try {
-                chain.doFilter(request, response);
+                if (ctx != null) {
+                    chain.doFilter(request, response);
+                }
             } catch (ServletException e) {
                 error(ctx, e);
                 throw e;
@@ -78,7 +74,7 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
         }
     }
 
-    protected PMStrutsContext initJPMContext(HttpServletRequest request, ServletResponse response) {
+    protected PMStrutsContext initJPMContext(HttpServletRequest request, HttpServletResponse response) throws IOException {
         final PresentationManager pm = PresentationManager.getPm();
         request.setAttribute("pm", pm);
         if (pm == null) {
