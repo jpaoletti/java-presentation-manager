@@ -1,8 +1,6 @@
 <%@include file="../inc/tag-libs.jsp" %>
 <pm:page title="titles.monitor">
-    <div class="boxed">
-        <h2 class="title">${monitor.title}&nbsp;${operation.title}</h2>
-    </div>
+    <h2 class="title">${monitor.title}&nbsp;${operation.title}</h2>
     <div id="con" class="boxed monitor_window monitor_${monitor.id}">
         <div id='line_container' ></div>
     </div>
