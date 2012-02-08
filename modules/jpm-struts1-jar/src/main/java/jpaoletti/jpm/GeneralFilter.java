@@ -51,8 +51,8 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
     }
 
     protected void error(PMStrutsContext ctx, Exception e) {
-        if (ctx.getPresentationManager() != null) {
-            ctx.getPresentationManager().error(e);
+        if (PresentationManager.getPm() != null) {
+            PresentationManager.getPm().error(e);
         }
     }
 
