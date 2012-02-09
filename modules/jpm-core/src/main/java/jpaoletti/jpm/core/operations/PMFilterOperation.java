@@ -2,7 +2,9 @@ package jpaoletti.jpm.core.operations;
 
 import java.util.ArrayList;
 import java.util.List;
-import jpaoletti.jpm.converter.*;
+import jpaoletti.jpm.converter.Converter;
+import jpaoletti.jpm.converter.ConverterException;
+import jpaoletti.jpm.converter.IgnoreConvertionException;
 import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.core.message.MessageFactory;
 import jpaoletti.jpm.util.DisplacedList;

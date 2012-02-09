@@ -9,8 +9,9 @@ import jpaoletti.jpm.converter.Converters;
 import jpaoletti.jpm.converter.GenericConverter;
 import jpaoletti.jpm.validator.Validator;
 
-/**A Field represents a property of the represented entity.
- * 
+/**
+ * A Field represents a property of the represented entity.
+ *
  * <h2>Simple entity configuration file</h2>
  * <pre>
  * {@code
@@ -19,17 +20,25 @@ import jpaoletti.jpm.validator.Validator;
  * </field>
  * }
  * </pre>
+ *
  * @author jpaoletti
- * */
+ *
+ */
 public class Field extends PMCoreObject {
 
-    /**The id of the field, must be unique in the entity*/
+    /**
+     * The id of the field, must be unique in the entity
+     */
     private String id;
-    /**The property to be accesed on the entity instance objects. There must be
+    /**
+     * The property to be accesed on the entity instance objects. There must be
      * a getter and a setter for this name on the represented entity. When null,
-    default is the field id*/
+     * default is the field id
+     */
     private String property;
-    /**The width of the field value*/
+    /**
+     * The width of the field value
+     */
     private String width;
     private String display;
     private ArrayList<Validator> validators;
@@ -49,6 +58,7 @@ public class Field extends PMCoreObject {
 
     /**
      * Visualize the field using the given operation and entity
+     *
      * @param ctx the context
      * @param operation The operation
      * @param entity The entity
@@ -68,7 +78,11 @@ public class Field extends PMCoreObject {
             final Object instance = ctx.getEntityInstance();
             ctx.setEntityInstanceWrapper(new EntityInstanceWrapper(instance));
             ctx.setField(this);
-            ctx.setFieldValue(getPresentationManager().get(instance, getProperty()));
+            // We only set the field value if instance is not null.
+            // Some operations may use this value without an instance.
+            if (instance != null) {
+                ctx.setFieldValue(getPresentationManager().get(instance, getProperty()));
+            }
             return c.visualize(ctx);
         } catch (ConverterException e) {
             throw e;
@@ -97,6 +111,7 @@ public class Field extends PMCoreObject {
 
     /**
      * Visualize the field using the given operation and context entity
+     *
      * @param ctx the context
      * @param operation The operation
      * @return The String visualization
@@ -108,6 +123,7 @@ public class Field extends PMCoreObject {
 
     /**
      * Visualize the field using the context operation and entity
+     *
      * @param ctx The context
      * @return a String with the visualization
      * @throws PMException
@@ -157,9 +173,9 @@ public class Field extends PMCoreObject {
     }
 
     /**
-     * A (separated by blanks) list of operation ids where this field
-     * will be displayed
-     * 
+     * A (separated by blanks) list of operation ids where this field will be
+     * displayed
+     *
      * @return The list
      */
     public String getDisplay() {
@@ -169,9 +185,10 @@ public class Field extends PMCoreObject {
         return display;
     }
 
-    /**Indicates if the field is shown in the given operation id
+    /**
+     * Indicates if the field is shown in the given operation id
      *
-     * @param operationId  The Operation id
+     * @param operationId The Operation id
      * @return true if field is displayed on the operation
      */
     public boolean shouldDisplay(String operationId) {
@@ -251,6 +268,7 @@ public class Field extends PMCoreObject {
 
     /**
      * String representation of the field
+     *
      * @return
      */
     @Override
@@ -258,7 +276,8 @@ public class Field extends PMCoreObject {
         return id;
     }
 
-    /** @return the property of the entity instance object that can be accesed by
+    /**
+     * @return the property of the entity instance object that can be accesed by
      * getter and setter. Default value is the field id
      */
     public String getProperty() {
@@ -271,6 +290,7 @@ public class Field extends PMCoreObject {
 
     /**
      * Setter for property
+     *
      * @param property
      */
     public void setProperty(String property) {
