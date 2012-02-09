@@ -25,6 +25,38 @@
     </function>
 
     <function>
+        <description>Builds a jpm plain url based on given url, without loadPage</description>
+        <name>plainUrl</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>String plainUrl(jpaoletti.jpm.core.PMSession, java.lang.String)</function-signature>
+        <example>${pmfn:plainUrl(pmsession,"/url.do")}</example>
+    </function>
+
+    <function>
+        <description>Builds a jpm url based on given url</description>
+        <name>url</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>String url(jpaoletti.jpm.core.PMSession, java.lang.String)</function-signature>
+        <example>${pmfn:url(pmsession,"/url.do")}</example>
+    </function>
+
+    <function>
+        <description>Builds a jpm url based on given url with confirmation parameter</description>
+        <name>urlc</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>String url(jpaoletti.jpm.core.PMSession, java.lang.String, java.lang.Boolean)</function-signature>
+        <example>${pmfn:urlc(pmsession,"/url.do",true)}</example>
+    </function>
+
+    <function>
+        <description>Builds a jpm url based on given url with confirmation and prefix parameters</description>
+        <name>urlcp</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>String url(jpaoletti.jpm.core.PMSession, java.lang.String, java.lang.Boolean, java.lang.String)</function-signature>
+        <example>${pmfn:urlcp(pmsession,'/url.do', true, 'javascript:')}</example>
+    </function>
+
+    <function>
         <description>
           Return a css class name for a highlight
         </description>

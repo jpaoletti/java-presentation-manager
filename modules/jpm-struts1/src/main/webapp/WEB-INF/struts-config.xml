@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
 <struts-config>
+    <!--
+    WARN: Do NOT use <forward name="success" path="/XXX.do"/> , it will lead to
+          an access denied. Use success(ctx, '/XXX.do', true/false); instead.
+    -->
     <form-beans>
     </form-beans>
     <global-forwards>
+        <forward name="success" path="/denied.jsp"/>
         <forward name="denied" path="/denied.jsp"/>
         <forward name="failure" path="/error.jsp"/>
         <forward name="login" path="/pages/login.jsp"/>
     </global-forwards>
     <action-mappings>
         <action path="/get_list" type="jpaoletti.jpm.struts.actions.GetListAction" />
-
         <action path="/list" type="jpaoletti.jpm.struts.actions.ListAction">
             <forward name="success" path="/pages/list.jsp"/>
         </action>
-        <action path="/selectall" type="jpaoletti.jpm.struts.actions.SelectAllAction">
-            <forward name="success" path="/list.do"/>
-        </action>
-        <action path="/deselectall" type="jpaoletti.jpm.struts.actions.DeselectAllAction">
-            <forward name="success" path="/list.do"/>
-        </action>
-        <action path="/invertselection" type="jpaoletti.jpm.struts.actions.InvertSelectionAction">
-            <forward name="success" path="/list.do"/>
-        </action>
+        <action path="/selectall" type="jpaoletti.jpm.struts.actions.SelectAllAction"/>
+        <action path="/deselectall" type="jpaoletti.jpm.struts.actions.DeselectAllAction"/>
+        <action path="/invertselection" type="jpaoletti.jpm.struts.actions.InvertSelectionAction" />
 
         <action path="/filter" type="jpaoletti.jpm.struts.actions.FilterAction" validate="false">
-            <forward name="success" path="/list.do" redirect="true"/>
             <forward name="continue" path="/pages/filter.jsp"/>
             <forward name="failure" path="/pages/filter.jsp"/>
         </action>
@@ -36,23 +33,19 @@
         </action>
 
         <action path="/add" type="jpaoletti.jpm.struts.actions.AddAction" validate="false">
-            <forward name="success" path="/list.do" redirect="true"/>
             <forward name="continue" path="/pages/std-display.jsp"/>
             <forward name="failure" path="/pages/std-display.jsp"/>
         </action>
 
         <action path="/delete" type="jpaoletti.jpm.struts.actions.DeleteAction">
-            <forward name="success" path="/list.do" redirect="true"/>
             <forward name="failure" path="/pages/list.jsp" />
         </action>
 
         <action path="/multidelete" type="jpaoletti.jpm.struts.actions.MultiDeleteAction">
-            <forward name="success" path="/list.do" redirect="true"/>
             <forward name="failure" path="/pages/list.jsp" />
         </action>
 
         <action path="/clearfilter" type="jpaoletti.jpm.struts.actions.ClearFilterAction">
-            <forward name="success" path="/list.do" redirect="true"/>
             <forward name="failure" path="/pages/list.jsp" />
         </action>
 
@@ -73,7 +66,6 @@
         </action>
 
         <action path="/changepassword" type="jpaoletti.jpm.struts.actions.ChangePasswordAction">
-            <forward name="success" path="/logout.do" />
             <forward name="continue" path="/pages/profile.jsp"/>
             <forward name="failure" path="/pages/profile.jsp"/>
         </action>
@@ -83,10 +75,9 @@
             <forward name="failure" path="/pages/std-display.jsp"/>
         </action>
 
-        <action path="/edit" type="jpaoletti.jpm.struts.actions.EditAction" validate="false">
-            <forward name="success" path="/show.do" redirect="true"/>
+        <action path="/edit" type="jpaoletti.jpm.struts.actions.EditAction">
             <forward name="continue" path="/pages/std-display.jsp"/>
-            <forward name="failure" path="/pages/std-display.jsp"/>
+            <forward name="failure"  path="/pages/std-display.jsp"/>
         </action>
 
         <action path="/selectItem" type="jpaoletti.jpm.struts.actions.SelectItemAction" >

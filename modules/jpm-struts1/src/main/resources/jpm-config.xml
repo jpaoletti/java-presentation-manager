@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presentation-manager>
     <property name="debug"          value="true"/>
-    <property name="appversion"     value="1.2.0"/>
+    <property name="appversion"     value="1.3.0"/>
     <property name="template"       value="default"/>
     <property name="copyright"      value="Jeronimo Paoletti"/>
     <property name="multi-login"    value="true"/>
     <property name="welcome-page"   value="pages/_customindex.jsp"/>
     <property name="locale"         value=""/> <!-- en_US -->
+    <property name="secure-urls"    value="true"/>
     
     <property name="logger-class"    value="jpaoletti.jpm.core.log.Log4jLogger"/>
     <property name="logger-name"     value="jpm"/>

@@ -1,15 +1,15 @@
 package jpaoletti.jpm;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import jpaoletti.jpm.core.PMCoreConstants;
 import jpaoletti.jpm.core.PMSession;
 import jpaoletti.jpm.core.PresentationManager;
-import jpaoletti.jpm.core.operations.OperationCommandSupport;
 import jpaoletti.jpm.struts.PMEntitySupport;
 import jpaoletti.jpm.struts.PMStrutsConstants;
 import jpaoletti.jpm.struts.PMStrutsContext;
@@ -60,6 +60,12 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
     public void init(FilterConfig arg0) throws ServletException {
     }
 
+    protected List<String> getSecurityExceptions() {
+        final List<String> exceptions = new ArrayList<String>();
+        exceptions.add("login.do");
+        return exceptions;
+    }
+
     protected boolean isIgnored(String s) {
         if (PresentationManager.getPm() != null) {
             final String[] ignoredExtensions = PresentationManager.getPm().getCfg().getProperty("struts-ignored-extensions", "css,gif,png,jpg,js").split(",");
@@ -80,6 +86,21 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
         if (pm == null) {
             return null;
         }
+        final String servletPath = request.getServletPath();
+        //Login is the only action that can be accessed directly
+        if (servletPath.endsWith(".do")) {
+            final String action = servletPath.substring(servletPath.lastIndexOf("/") + 1);
+            final List<String> exceptions = getSecurityExceptions();
+            if (!exceptions.contains(action)) {
+                if (pm.getCfg().getBool("secure-urls", true)) {
+                    response.sendError(403);
+                    return null;
+                } else {
+                    pm.warn("Insecure access to '" + servletPath + "'");
+                }
+            }
+        }
+
         final PMEntitySupport o = (PMEntitySupport) request.getSession().getAttribute(ENTITY_SUPPORT);
         if (o == null) {
             PMEntitySupport es = PMEntitySupport.getInstance();
@@ -98,15 +119,6 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
             Map.Entry entry = (Map.Entry) object;
             ctx.put("param_" + entry.getKey(), entry.getValue());
         }
-
-        final Object pmid = ctx.getParameter("pmid");
-        ctx.put(OperationCommandSupport.PM_ID, pmid);
-        ctx.getRequest().setAttribute("pmid", pmid);
-
-        final Object item = ctx.getParameter("item");
-        ctx.put(OperationCommandSupport.PM_ITEM, item);
-        ctx.getRequest().setAttribute("item", item);
-        ctx.getPersistenceManager(); // deprecated. Used to back compat
         return ctx;
     }
 }

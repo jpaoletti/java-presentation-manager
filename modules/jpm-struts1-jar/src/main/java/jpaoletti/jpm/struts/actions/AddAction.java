@@ -10,8 +10,8 @@ public class AddAction extends ActionSupport {
     @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         ctx.put("editable", true);
-        final boolean finish = ctx.getParameter("finish") == null;
-        if (finish) {
+        final boolean finish = ctx.getParameter("finish") != null;
+        if (!finish) {
             ctx.put("clean_selected", true);
             ctx.put("validate", false);
         }
@@ -20,6 +20,8 @@ public class AddAction extends ActionSupport {
         op.execute(ctx);
 
         if (finish) {
+            success(ctx, "/list.do", true);
+        } else {
             throw new PMForwardException(CONTINUE);
         }
     }

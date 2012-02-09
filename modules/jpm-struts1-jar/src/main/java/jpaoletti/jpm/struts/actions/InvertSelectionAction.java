@@ -14,5 +14,6 @@ public class InvertSelectionAction extends ActionSupport {
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         final InvertSelection op = new InvertSelection();
         op.execute(ctx);
+        success(ctx, "/list.do", true);
     }
 }

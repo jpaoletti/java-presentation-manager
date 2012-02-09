@@ -9,5 +9,6 @@ public class DeleteAction extends ActionSupport {
     @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         (new DeleteOperation("delete")).execute(ctx);
+        success(ctx, "/list.do", true);
     }
 }

@@ -1,7 +1,9 @@
 package jpaoletti.jpm.struts;
 
+import jpaoletti.jpm.core.PMSession;
 import jpaoletti.jpm.menu.MenuItem;
 import jpaoletti.jpm.menu.MenuItemLocation;
+import jpaoletti.jpm.struts.tags.PMTags;
 
 /**
  * Location for internal links that uses loadPage javascript function
@@ -12,13 +14,12 @@ public class MenuItemLocationStruts implements MenuItemLocation {
 
     @Override
     public Object build(MenuItem item, Object... params) {
-        MenuItemContext context = new MenuItemContext();
-        StringBuilder sb = new StringBuilder("<a href=");
-        String link = buildLink(item, params);
-        sb.append("javascript:loadPage('");
-        sb.append(link);
-        sb.append("')");
-        sb.append(">");
+        final MenuItemContext context = new MenuItemContext();
+        final StringBuilder sb = new StringBuilder("<a href=\"");
+        final PMSession session = (PMSession) params[1];
+        final String link = buildLink(item, params);
+        sb.append(PMTags.url(session, link));
+        sb.append("\">");
         context.setPrefix(sb.toString());
         context.setValue(item.getText());
         context.setSufix("</a>");
@@ -26,6 +27,6 @@ public class MenuItemLocationStruts implements MenuItemLocation {
     }
 
     protected String buildLink(MenuItem item, Object... params) {
-        return (String) params[0] + item.getLocationValue();
+        return item.getLocationValue();
     }
 }

@@ -4,6 +4,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import jpaoletti.jpm.core.EntityContainer;
 import jpaoletti.jpm.struts.PMEntitySupport;
+import jpaoletti.jpm.struts.PMStrutsContext;
 
 /**
  * Navigation list tag
@@ -32,14 +33,11 @@ public class NavigationTag extends PMTags {
     public String getNavigationList(final EntityContainer c) {
         final StringBuilder sb = new StringBuilder();
         if (c != null && c.getSelected() != null) {
+            final PMStrutsContext ctx = (PMStrutsContext) pageContext.getRequest().getAttribute("ctx");
+            final String url = PMTags.url(ctx.getPmsession(), "/" + c.getOperation().getId() + ".do?pmid=" + c.getEntity().getId());
             sb.append(getNavigationList(c.getOwner()));
             sb.append("&nbsp; &gt; &nbsp;");
-            sb.append("<a href='");
-            sb.append(getContextPath());
-            sb.append("/");
-            sb.append(c.getOperation().getId());
-            sb.append(".do?pmid=");
-            sb.append(c.getEntity().getId()).append("' >");
+            sb.append("<a href=\"").append(url).append("\">");
             final Object inst = c.getSelected().getInstance();
             if (inst == null) {
                 sb.append("");

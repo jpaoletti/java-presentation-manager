@@ -14,5 +14,6 @@ public class MultiDeleteAction extends ActionSupport {
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         final MultiDeleteOperation op = new MultiDeleteOperation();
         op.execute(ctx);
+        success(ctx, "/list.do", true);
     }
 }

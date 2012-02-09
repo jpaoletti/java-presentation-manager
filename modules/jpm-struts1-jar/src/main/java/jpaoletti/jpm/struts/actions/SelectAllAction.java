@@ -14,5 +14,6 @@ public class SelectAllAction extends ActionSupport {
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         final SelectAll op = new SelectAll();
         op.execute(ctx);
+        success(ctx, "/list.do", true);
     }
 }

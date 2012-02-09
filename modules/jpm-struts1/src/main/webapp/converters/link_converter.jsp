@@ -1,1 +1,1 @@
-<a href="${es.context_path}/${ctx.map.other_operation}.do?pmid=${ctx.map.other_entity}&identified=${ctx.map.identified}">${ctx.map.display}</a>
+<a href="${pmfn:plainUrl(ctx.pmsession,ctx.map.other_operation.concat('.do?pmid=').concat(ctx.map.other_entity).concat('&identified=').concat(ctx.map.identified))}">${ctx.map.display}</a>

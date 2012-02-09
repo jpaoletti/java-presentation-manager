@@ -3,23 +3,10 @@ package jpaoletti.jpm.struts.tags;
 import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
-import jpaoletti.jpm.core.Entity;
-import jpaoletti.jpm.core.Operation;
-import jpaoletti.jpm.core.Operations;
-import jpaoletti.jpm.core.PMContext;
-import jpaoletti.jpm.core.PMSession;
-import jpaoletti.jpm.core.PresentationManager;
+import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.core.operations.OperationCommandSupport;
 import jpaoletti.jpm.struts.PMStrutsConstants;
 
-/**
- * Display an html div bar with the operations
- *
- * @author jpaoletti
- * @since 15/09/2011
- * @version v1.2
- *
- */
 /**
  * Display an html div bar with the operations
  *
@@ -45,7 +32,7 @@ public class OperationsTag extends PMTags {
             if (backUrl == null) {
                 script.append("        history.back();\n");
             } else {
-                script.append("        loadPage('").append(backUrl).append("');\n");
+                script.append("        ").append(PMTags.url(getPmsession(), backUrl)).append(";\n");
             }
             script.append("    }).button({\n");
             script.append("        text: false, icons: {primary: 'ui-icon-arrowthickstop-1-w'}\n");
@@ -67,7 +54,6 @@ public class OperationsTag extends PMTags {
                     }
                 }
             }
-
             println("</div>");
             script.append("\n});</script>");
             println(script);
@@ -97,27 +83,28 @@ public class OperationsTag extends PMTags {
     private void processOperation(Operation operation, StringBuilder script) throws IOException {
         final String opid = operation.getId();
         final String jqItem = "    $('#operation" + opid + "')";
+        script.append(jqItem);
         final String item = getCtx().getString(OperationCommandSupport.PM_ITEM);
-        final String hreff = (operation.getUrl() != null)
-                ? operation.getUrl()
-                : getContextPath() + "/" + opid + ".do"
-                + "?pmid=" + getEntity().getId()
+        final String hreff = opid + ".do?pmid=" + getEntity().getId()
                 + ((item != null) ? "&item=" + item : "");
 
-        script.append(jqItem);
         script.append(".click(function(){");
         if (operation.isAvailable()) {
-            if (operation.getConfirm()) {
-                script.append("loadPageConfirm");
+            if (operation.getUrl() != null) {
+                script.append("loadPage('").append(operation.getUrl()).append("')");
             } else {
-                script.append("loadPage");
+                script.append(PMTags.url(getPmsession(), hreff, operation.getConfirm(), null));
             }
-            script.append("('").append(hreff).append("');");
+            script.append(";");
         } else {
             script.append("alert('").append(PresentationManager.getMessage("operation.not.available", operation.getTitle())).append("');");
         }
-        script.append("}).button({ icons: { primary:'ui-icon-operation-").append(opid).append("' }});\n");
-        print("<button class='button' id='operation" + opid + "'>&nbsp;");
+        script.append("}).button({ "); 
+        if(operation.getCompact()){
+            script.append("text: false, ");
+        }
+        script.append("icons: { primary:'ui-icon-operation-").append(opid).append("' }});\n");
+        print("<button class='button",(operation.getCompact())?" compact-button":"","' id='operation" + opid + "'>&nbsp;");
         if (isLabels()) {
             print(operation.getTitle());
         }

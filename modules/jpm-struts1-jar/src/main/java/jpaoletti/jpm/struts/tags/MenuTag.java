@@ -51,7 +51,7 @@ public class MenuTag extends PMTags {
                 out.println("<a href='#' id='btnColapseExpand' title=" + PresentationManager.getMessage("header.expand") + "><div class='expand'></div></a>");
             }
             if (pmsession != null) {
-                out.println("<a href='logout.do' title=" + PresentationManager.getMessage("logout") + "><div class='logout'></div></a>");
+                out.println("<a href='" + PMTags.plainUrl(pmsession, "logout.do") + "' title=" + PresentationManager.getMessage("logout") + "><div class='logout'></div></a>");
             }
             out.println("<div class='version'>v" + PresentationManager.getPm().getAppversion() + "</div>");
             out.println("</div>");
@@ -76,7 +76,7 @@ public class MenuTag extends PMTags {
                 if (item.getLocation() == null) {
                     out.print("<a href='#'>" + PresentationManager.getMessage(m.getText()) + "</a>");
                 } else {
-                    final MenuItemContext ctx = (MenuItemContext) item.getLocation().build(item, getContextPath());
+                    final MenuItemContext ctx = (MenuItemContext) item.getLocation().build(item, getContextPath(), getPmsession());
                     out.print(ctx.getPrefix());
                     out.print(PresentationManager.getMessage(ctx.getValue()));
                     out.print(ctx.getSufix());

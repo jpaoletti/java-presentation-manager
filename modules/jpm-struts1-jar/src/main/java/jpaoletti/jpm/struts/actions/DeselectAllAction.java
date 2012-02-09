@@ -14,5 +14,6 @@ public class DeselectAllAction extends ActionSupport {
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         final DeselectAll op = new DeselectAll();
         op.execute(ctx);
+        success(ctx, "/list.do", true);
     }
 }

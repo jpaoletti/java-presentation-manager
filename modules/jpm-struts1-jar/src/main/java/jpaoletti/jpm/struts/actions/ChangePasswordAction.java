@@ -13,6 +13,8 @@ public class ChangePasswordAction extends ActionSupport {
         final ChangePassword op = new ChangePassword("changepassword");
         if (!op.execute(ctx)) {
             throw new PMForwardException(CONTINUE);
+        }else{
+            success(ctx, "/logout.do", true);
         }
     }
 }

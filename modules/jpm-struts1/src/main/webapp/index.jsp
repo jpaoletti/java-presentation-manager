@@ -12,7 +12,7 @@
                     <jsp:include page="pages/login.jsp" />
                 </c:if>
                 <c:if test="${not empty pmsession}">
-                    <iframe id="mainframe" name="mainframe" src="${es.context_path}/${es.welcomePage}"></iframe>
+                    <iframe id="mainframe" name="mainframe" src="${pmfn:plainUrl(pmsession, es.welcomePage)}"></iframe>
                     <script type="text/javascript">
                         PM_register(function(){
                             $(window.frames["mainframe"]).focus();

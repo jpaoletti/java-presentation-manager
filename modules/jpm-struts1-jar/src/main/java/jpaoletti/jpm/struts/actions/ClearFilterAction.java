@@ -13,6 +13,7 @@ public class ClearFilterAction extends ActionSupport{
     @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         (new ClearFilterOperation("clearfilter")).execute(ctx);
+        success(ctx, "/list.do", true);
     }
 
 }

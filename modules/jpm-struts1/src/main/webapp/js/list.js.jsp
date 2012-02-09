@@ -94,5 +94,5 @@ PM_register(function() {
 });
 
 function selectItem(i){
-    $.ajax({ url: "${es.context_path}/selectItem.do?pmid=${param.pmid}&idx="+i});
+    $.ajax({ url: "${pmfn:plainUrl(ctx.pmsession, 'selectItem.do?pmid='.concat(param.pmid))}?idx="+i});
 }

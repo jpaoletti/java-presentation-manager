@@ -10,7 +10,7 @@
     <c:if test="${not empty pmsession.user}">
         <div id="userbox">
             <span class="user-name">${pmsession.user.name}</span>
-            <a href="javascript:loadPage('${es.context_path}/profile.do');">
+            <a href="${pmfn:url(ctx.pmsession, '/profile.do')}">
                 <img src='${pmsession.user.gravatar}?s=40&d=mm' alt="${pmsession.user.name}" title="${pmsession.user.name}"/>
             </a>
         </div>

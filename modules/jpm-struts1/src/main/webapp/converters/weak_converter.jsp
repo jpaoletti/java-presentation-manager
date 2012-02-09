@@ -6,32 +6,30 @@
             $("#weak${param.f}").button({
                 icons:{primary:'ui-icon-extlink'}
             }).click(function(){
-                loadPage("${es.context_path}/list.do?pmid=${param.weakid}");
+        ${pmfn:urlcp(ctx.pmsession, 'list.do?pmid='.concat(param.weakid), false, null )};
+                });
             });
-        });
     </script>
 </c:if>
 <c:if test="${param.showlist}">
-    <div class="boxed">
-        <table id="list" class="display" >
-            <thead>
+    <table id="list" class="display" >
+        <thead>
+            <tr>
+                <c:forEach var="field" items="${pmfn:displayedFields(ctx.map.weak, 'list')}">
+                    <th scope="col" style="width:${field.width}px;" ><pm:field-name field="${field}" /></th>
+                </c:forEach>
+            </tr>
+        </thead>
+        <tbody id="list_body" >
+            <c:forEach var="item" items="${ctx.fieldValue}" >
                 <tr>
                     <c:forEach var="field" items="${pmfn:displayedFields(ctx.map.weak, 'list')}">
-                        <th scope="col" style="width:${field.width}px;" ><pm:field-name field="${field}" /></th>
+                        <td align="text-align:${field.align};">
+                            <pmfn:converted-item ctx="${ctx}" field="${field}" item="${item}" operation="${ctx.map.woperation}" entityContainer="${ctx.map.weakContainer}" />
+                        </td>
                     </c:forEach>
                 </tr>
-            </thead>
-            <tbody id="list_body" >
-                <c:forEach var="item" items="${ctx.fieldValue}" >
-                    <tr>
-                        <c:forEach var="field" items="${pmfn:displayedFields(ctx.map.weak, 'list')}">
-                            <td align="text-align:${field.align};">
-                                <pmfn:converted-item ctx="${ctx}" field="${field}" item="${item}" operation="${ctx.map.woperation}" entityContainer="${ctx.map.weakContainer}" />
-                            </td>
-                        </c:forEach>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
+            </c:forEach>
+        </tbody>
+    </table>
 </c:if>

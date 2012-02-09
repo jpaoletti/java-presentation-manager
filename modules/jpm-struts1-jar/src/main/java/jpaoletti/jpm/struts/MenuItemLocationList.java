@@ -12,6 +12,6 @@ public class MenuItemLocationList extends MenuItemLocationStruts {
 
     @Override
     protected String buildLink(MenuItem item, Object... params) {
-        return (String) params[0] + "/list.do?pmid=" + item.getLocationValue();
+        return "list.do?pmid=" + item.getLocationValue();
     }
 }

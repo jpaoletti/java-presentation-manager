@@ -2,20 +2,18 @@ package jpaoletti.jpm.struts.actions;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 import jpaoletti.jpm.core.PMCoreConstants;
 import jpaoletti.jpm.core.PMException;
-import jpaoletti.jpm.core.exception.NotAuthorizedException;
 import jpaoletti.jpm.core.exception.NotAuthenticatedException;
+import jpaoletti.jpm.core.exception.NotAuthorizedException;
 import jpaoletti.jpm.core.message.MessageFactory;
+import jpaoletti.jpm.core.operations.OperationCommandSupport;
 import jpaoletti.jpm.struts.PMEntitySupport;
 import jpaoletti.jpm.struts.PMForwardException;
 import jpaoletti.jpm.struts.PMStrutsConstants;
 import jpaoletti.jpm.struts.PMStrutsContext;
-import org.apache.struts.action.ActionRedirect;
+import jpaoletti.jpm.struts.tags.PMTags;
+import org.apache.struts.action.*;
 
 /**
  * A super class for all actions with some helpers and generic stuff
@@ -49,12 +47,22 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
         final PMStrutsContext ctx = (PMStrutsContext) request.getAttribute("ctx");
         ctx.setMapping(mapping);
         ctx.setForm(form);
+
+        final Object pmid = ctx.getParameter("pmid");
+        ctx.put(OperationCommandSupport.PM_ID, pmid);
+        ctx.getRequest().setAttribute("pmid", pmid);
+
+        final Object item = ctx.getParameter("item");
+        ctx.put(OperationCommandSupport.PM_ITEM, item);
+        ctx.getRequest().setAttribute("item", item);
+        ctx.getPersistenceManager(); // deprecated. Used to back compat
+
         try {
             boolean step = prepare(ctx);
             if (step) {
                 excecute(ctx);
                 if (ctx.getOperation() != null && ctx.getOperation().getFollows() != null) {
-                    return new ActionRedirect("/" + ctx.getOperation().getFollows() + ".do");
+                    success(ctx, "/" + ctx.getOperation().getFollows() + ".do", true);
                 }
             }
             return mapping.findForward(SUCCESS);
@@ -86,5 +94,22 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
 
     protected void excecute(PMStrutsContext ctx) throws PMException {
         doExecute(ctx);
+    }
+
+    /**
+     * Consider the operation successfull and redirect or forward to the given url
+     * @param ctx Context
+     * @param url Next url
+     * @param redirect If true, redirects, else, forwards
+     * 
+     * @throws PMForwardException always
+     */
+    protected void success(PMStrutsContext ctx, String url, boolean redirect) throws PMForwardException {
+        final String plainUrl = PMTags.plainUrl(ctx.getPmsession(), url).substring(getContextPath().length());
+        if (redirect) {
+            throw new PMForwardException(new ActionRedirect(plainUrl));
+        } else {
+            throw new PMForwardException(new ActionForward(plainUrl));
+        }
     }
 }

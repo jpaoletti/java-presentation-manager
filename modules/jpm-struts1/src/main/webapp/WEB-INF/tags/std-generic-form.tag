@@ -6,7 +6,7 @@
 <%@attribute name = "resetable" required="false" type="java.lang.Boolean"  %>
 <div class="content ui-widget">
     <c:if test="${editable}">
-        <form action="${action}" accept-charset="UTF-8" method="POST">
+        <form action="${pmfn:plainUrl(ctx.pmsession, action)}" accept-charset="UTF-8" method="POST">
             <input type="hidden" name="finish" value="yes" />
             <fieldset>
                 <jsp:doBody />
