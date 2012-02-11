@@ -4,16 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.jsp.tagext.TagSupport;
-import jpaoletti.jpm.core.Entity;
-import jpaoletti.jpm.core.EntityInstanceWrapper;
-import jpaoletti.jpm.core.Field;
-import jpaoletti.jpm.core.Highlight;
-import jpaoletti.jpm.core.InstanceId;
-import jpaoletti.jpm.core.Operation;
-import jpaoletti.jpm.core.PMException;
-import jpaoletti.jpm.core.PMSession;
-import jpaoletti.jpm.core.PaginatedList;
-import jpaoletti.jpm.core.PresentationManager;
+import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.core.operations.OperationScope;
 import jpaoletti.jpm.struts.PMEntitySupport;
 import jpaoletti.jpm.struts.PMStrutsContext;
@@ -35,10 +26,10 @@ public class PMTags extends TagSupport {
 
     /**
      * Builds a jpm url based on given url
-     * 
+     *
      * @param session Session user. Cannot be null
      * @param url Url to be built, <b>without</b> context path
-     * 
+     *
      * @return ready to use url
      */
     public static String url(PMSession session, String url) {
@@ -47,12 +38,12 @@ public class PMTags extends TagSupport {
 
     /**
      * Builds a jpm url based on given url
-     * 
+     *
      * @param session Session user. Cannot be null
      * @param url Url to be built, <b>without</b> context path
-     * @param confirm if confirm is true, uses loadPageConfirm instead of 
+     * @param confirm if confirm is true, uses loadPageConfirm instead of
      * loadPage
-     * 
+     *
      * @return ready to use url
      */
     public static String url(PMSession session, String url, boolean confirm) {
@@ -61,31 +52,35 @@ public class PMTags extends TagSupport {
 
     /**
      * Builds a jpm url based on given url
-     * 
+     *
      * @param session Session user. Cannot be null
      * @param url Url to be built, <b>without</b> context path
-     * @param confirm if confirm is true, uses loadPageConfirm instead of 
+     * @param confirm if confirm is true, uses loadPageConfirm instead of
      * loadPage
-     * 
+     *
      * @return ready to use url
      */
     public static String url(PMSession session, String url, Boolean confirm, String prefix) {
-        final String contextPath = PMEntitySupport.getInstance().getContext_path();
-        final StringBuilder sb = new StringBuilder();
-        if (prefix != null) {
-            sb.append(prefix);
-        }
-        if (confirm) {
-            sb.append("loadPageConfirm('");
+        if (session != null) {
+            final String contextPath = PMEntitySupport.getInstance().getContext_path();
+            final StringBuilder sb = new StringBuilder();
+            if (prefix != null) {
+                sb.append(prefix);
+            }
+            if (confirm) {
+                sb.append("loadPageConfirm('");
+            } else {
+                sb.append("loadPage('");
+            }
+            sb.append(contextPath);
+            sb.append("/");
+            sb.append(session.getStringEncrypter().encrypt(
+                    (url.startsWith("/")) ? url.substring(1) : url));
+            sb.append(".jpm')");
+            return sb.toString();
         } else {
-            sb.append("loadPage('");
+            return url;
         }
-        sb.append(contextPath);
-        sb.append("/");
-        sb.append(session.getStringEncrypter().encrypt(
-                (url.startsWith("/")) ? url.substring(1) : url));
-        sb.append(".jpm')");
-        return sb.toString();
     }
 
     public static String plainUrl(PMSession session, String url) {
@@ -164,6 +159,7 @@ public class PMTags extends TagSupport {
 
     /**
      * This method show a tooltip if the key is defined
+     *
      * @param key Key
      */
     public static String tooltip(Field field) {
