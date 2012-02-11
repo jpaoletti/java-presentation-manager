@@ -63,9 +63,6 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
             boolean step = prepare(ctx);
             if (step) {
                 excecute(ctx);
-                if (ctx.getOperation() != null && ctx.getOperation().getFollows() != null) {
-                    success(ctx, "/" + ctx.getOperation().getFollows() + ".do", true);
-                }
             }
             return mapping.findForward(SUCCESS);
         } catch (PMForwardException e) {
@@ -109,11 +106,15 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
      * @throws PMForwardException always
      */
     protected void success(PMStrutsContext ctx, String url, boolean redirect) throws PMForwardException {
-        final String plainUrl = PMTags.plainUrl(ctx.getPmsession(), url).substring(getContextPath().length());
-        if (redirect) {
-            throw new PMForwardException(new ActionRedirect(plainUrl));
+        if (ctx.getOperation() != null && ctx.getOperation().getFollows() != null) {
+            throw new PMForwardException(new ActionRedirect("/" + ctx.getOperation().getFollows() + ".do"));
         } else {
-            throw new PMForwardException(new ActionForward(plainUrl));
+            final String plainUrl = PMTags.plainUrl(ctx.getPmsession(), url).substring(getContextPath().length());
+            if (redirect) {
+                throw new PMForwardException(new ActionRedirect(plainUrl));
+            } else {
+                throw new PMForwardException(new ActionForward(plainUrl));
+            }
         }
     }
 
