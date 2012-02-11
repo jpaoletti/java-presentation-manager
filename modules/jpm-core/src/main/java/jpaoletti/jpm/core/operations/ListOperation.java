@@ -69,4 +69,20 @@ public class ListOperation extends OperationCommandSupport {
     protected boolean checkEntity() {
         return true;
     }
+
+    /**
+     * List action must not try to configure selected item. Instead if list
+     * detect that the selected item is new (thay may happen when user start new
+     * operation but desist), selected item must be se to null.
+     *
+     * @param ctx PM Context
+     */
+    @Override
+    public void configureSelected(PMContext ctx) throws NumberFormatException, PMException {
+        if (ctx.getEntityContainer().isSelectedNew()) {
+            ctx.getEntityContainer().setSelected(null);
+        } else {
+            super.configureSelected(ctx);
+        }
+    }
 }
