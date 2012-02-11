@@ -228,7 +228,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
 
         if (origin != null) {
             if (!entityContainer.isSelectedNew()) {
-                Object o = null;
+                Object o;
                 try {
                     o = ctx.getEntity().getDataAccess().refresh(ctx, origin.getInstance());
                 } catch (Exception e) {
