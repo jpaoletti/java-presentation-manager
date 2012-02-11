@@ -7,7 +7,6 @@ import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.PMException;
 import jpaoletti.jpm.struts.CollectionHelper;
-import jpaoletti.jpm.struts.PMForwardException;
 import jpaoletti.jpm.struts.PMStrutsContext;
 import jpaoletti.jpm.util.KeyValue;
 
@@ -49,6 +48,7 @@ public class GetListAction extends ActionSupport {
         } catch (Exception ex) {
             ctx.getPresentationManager().error(ex);
         }
-        throw new PMForwardException("none");
+        noAction();
     }
+
 }
