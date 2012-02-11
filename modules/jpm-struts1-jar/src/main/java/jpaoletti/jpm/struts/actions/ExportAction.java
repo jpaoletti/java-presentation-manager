@@ -33,6 +33,7 @@ public class ExportAction extends ActionSupport {
             ctx.getResponse().getOutputStream().write(out.toByteArray());
             ctx.getResponse().getOutputStream().close();
             out.close();
+            noAction();
         } catch (IOException ex) {
             throw new PMException(ex);
         }
