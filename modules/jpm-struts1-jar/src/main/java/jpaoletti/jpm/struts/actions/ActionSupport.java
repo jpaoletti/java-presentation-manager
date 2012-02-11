@@ -24,7 +24,9 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
 
     protected abstract void doExecute(PMStrutsContext ctx) throws PMException;
 
-    /**Forces execute to check if any user is logged in*/
+    /**
+     * Forces execute to check if any user is logged in
+     */
     protected boolean checkUser() {
         return true;
     }
@@ -97,11 +99,13 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
     }
 
     /**
-     * Consider the operation successfull and redirect or forward to the given url
+     * Consider the operation successful and redirect or forward to the given
+     * url
+     *
      * @param ctx Context
      * @param url Next url
      * @param redirect If true, redirects, else, forwards
-     * 
+     *
      * @throws PMForwardException always
      */
     protected void success(PMStrutsContext ctx, String url, boolean redirect) throws PMForwardException {
@@ -111,5 +115,16 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
         } else {
             throw new PMForwardException(new ActionForward(plainUrl));
         }
+    }
+
+    /**
+     * Consider the operation done by the Action and does not forward to any
+     * know action. This mus be used in case the Action resolves de output
+     * without any need of forward or redirect. url
+     *
+     * @throws PMForwardException always
+     */
+    protected void noAction() throws PMForwardException {
+        throw new PMForwardException("none");
     }
 }
