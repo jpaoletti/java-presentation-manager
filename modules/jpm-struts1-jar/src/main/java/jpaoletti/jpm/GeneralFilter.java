@@ -62,7 +62,7 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
 
     protected List<String> getSecurityExceptions() {
         final List<String> exceptions = new ArrayList<String>();
-        exceptions.add("login.do");
+        exceptions.add("/login.do");
         return exceptions;
     }
 
@@ -89,9 +89,8 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
         final String servletPath = request.getServletPath();
         //Login is the only action that can be accessed directly
         if (servletPath.endsWith(".do")) {
-            final String action = servletPath.substring(servletPath.lastIndexOf("/") + 1);
             final List<String> exceptions = getSecurityExceptions();
-            if (!exceptions.contains(action)) {
+            if (!exceptions.contains(servletPath)) {
                 if (pm.getCfg().getBool("secure-urls", true)) {
                     response.sendError(403);
                     return null;
