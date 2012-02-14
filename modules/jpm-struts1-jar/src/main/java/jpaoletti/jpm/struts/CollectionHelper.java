@@ -1,23 +1,10 @@
 package jpaoletti.jpm.struts;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import jpaoletti.jpm.converter.ConverterException;
-import jpaoletti.jpm.core.Entity;
-import jpaoletti.jpm.core.EntityFilter;
-import jpaoletti.jpm.core.EntityInstanceWrapper;
-import jpaoletti.jpm.core.FilterBehavior;
-import jpaoletti.jpm.core.FilterOperation;
-import jpaoletti.jpm.core.ListFilter;
-import jpaoletti.jpm.core.ListSort;
-import jpaoletti.jpm.core.PMContext;
-import jpaoletti.jpm.core.PMException;
-import jpaoletti.jpm.core.PresentationManager;
+import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.util.KeyValue;
 
 /**
