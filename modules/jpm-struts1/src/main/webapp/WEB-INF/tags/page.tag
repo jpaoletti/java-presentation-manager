@@ -5,6 +5,7 @@
 <%@ attribute name="title" required="true" %>
 <%@ attribute name="bodyClass" required="false" %>
 <%@ attribute name="loading" required="false"  %>
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
