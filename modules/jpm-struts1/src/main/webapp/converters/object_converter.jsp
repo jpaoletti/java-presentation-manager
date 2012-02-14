@@ -17,7 +17,13 @@
                 $("#f_${param.f}").get(0)[j]= new Option("","-1", false, false); j++;
             }
             if(filter.length >= ${ctx.map._min_search_size}){
-                jQuery.getJSON("${pmfn:plainUrl(ctx.pmsession, '/get_list.do?entity='.concat(ctx.map._entity).concat('&filter_class=').concat(ctx.map._filter).concat('&id=').concat(ctx.map._id).concat('&display=').concat(ctx.map._display))}?filter=" + filter, function(list){
+                jQuery.getJSON("${pmfn:plainUrl(ctx.pmsession, '/get_list.do'
+                                  .concat('?entity=').concat(ctx.map._entity)
+                                  .concat('&filter_class=').concat(ctx.map._filter)
+                                  .concat('&id=').concat(ctx.map._id)
+                                  .concat('&display=').concat(ctx.map._display)
+                                  .concat('&sortField=').concat(ctx.map._sortField)
+                                  .concat('&sortDir=').concat(ctx.map._sortDir))}?filter=" + filter, function(list){
                     jQuery.each(list, function (i, item){                    
                         $("#f_${param.f}").get(0)[j]= new Option(list[i].value, list[i].key, false, "${ctx.map._selected_id}"==list[i].key); j++;
                     });
