@@ -134,7 +134,7 @@ table.sort_table{
 /******************************************************************************/
 /* Index styles */
 #page-container{position: relative; min-height: 100%; height: auto !important; height: 100%;}
-#mainframe{height: 100%; width: 100%; padding: 0px; margin: 0px; border: none;}
+#mainframe{height: 99%; width: 100%; padding: 0px; margin: 0px; border: none;}
 .index_layout{position: relative; height:auto !important; height:100%; min-height:100%;}
 .index_layout_header{z-index: 1; width: 100%; position: fixed; background-color: #F7F7F7;}
 .index_layout_content{top: 90px;position: absolute;bottom: 0px; left: 0px; right: 0px; z-index: 0;}
