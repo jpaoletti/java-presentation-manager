@@ -1,11 +1,7 @@
 package jpaoletti.jpm.struts.converter;
 
 import jpaoletti.jpm.converter.ConverterException;
-import jpaoletti.jpm.core.Entity;
-import jpaoletti.jpm.core.EntityInstanceWrapper;
-import jpaoletti.jpm.core.InstanceId;
-import jpaoletti.jpm.core.PMContext;
-import jpaoletti.jpm.core.PMException;
+import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.struts.CollectionHelper;
 
 /**Converter for integer <br>
@@ -18,8 +14,8 @@ import jpaoletti.jpm.struts.CollectionHelper;
  *             <property name="display"         value="other_entity_display" />
  *             <property name="with-null"       value="true" />
  *             <property name="filter"          value="jpaoletti.jpm.core.ListFilterXX" />
- *             <property name="sort-field"      value="xxx" /> NOT IMPLEMENTED!
- *             <property name="sort-direction"  value="asc | desc" /> NOT IMPLEMENTED!
+ *             <property name="sort-field"      value="xxx" />
+ *             <property name="sort-direction"  value="asc | desc" />
  *             <property name="min-search-size" value="0" />
  *         </properties>
  * </converter>
@@ -73,6 +69,9 @@ public class ObjectConverter extends StrutsEditConverter {
         ctx.put("_entity", _entity);
         ctx.put("_display", getConfig("display"));
         ctx.put("_filter", getConfig("filter"));
+        ctx.put("_filter", getConfig("filter"));
+        ctx.put("_sortField", getConfig("sort-field"));
+        ctx.put("_sortDir", getConfig("sort-direction"));
         return super.visualize("object_converter.jsp?");
     }
 }
