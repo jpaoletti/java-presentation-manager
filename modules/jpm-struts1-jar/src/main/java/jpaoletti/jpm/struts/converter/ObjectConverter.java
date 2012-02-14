@@ -4,7 +4,8 @@ import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.struts.CollectionHelper;
 
-/**Converter for integer <br>
+/**
+ * Converter for integer <br>
  * <pre>
  * {@code
  * <converter class="jpaoletti.jpm.converter.ObjectConverter">
@@ -21,8 +22,10 @@ import jpaoletti.jpm.struts.CollectionHelper;
  * </converter>
  * }
  * </pre>
+ *
  * @author jpaoletti
- * */
+ *
+ */
 public class ObjectConverter extends StrutsEditConverter {
 
     @Override
@@ -71,7 +74,10 @@ public class ObjectConverter extends StrutsEditConverter {
         ctx.put("_filter", getConfig("filter"));
         ctx.put("_filter", getConfig("filter"));
         ctx.put("_sortField", getConfig("sort-field"));
-        ctx.put("_sortDir", getConfig("sort-direction"));
+        final String sd = getConfig("sort-direction");
+        if (sd != null && !"".equals(sd.trim()) && "desc".equalsIgnoreCase(sd)) {
+            ctx.put("_sortDir", "1");
+        }
         return super.visualize("object_converter.jsp?");
     }
 }
