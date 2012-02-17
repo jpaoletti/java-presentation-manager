@@ -13,7 +13,7 @@
         <title><pmfn:message key="${pm.title}"/> - <pmfn:message key="${title}"/></title>
         <link href="${es.templatePath}/all.css" rel="stylesheet" type="text/css" />
         <link rel="shortcut icon" href="${es.templatePath}/img/favicon.ico" />
-        <script type="text/javascript" src="${es.context_path}/js/jquery-1.6.4.min.js"></script>
+        <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery.dataTables.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jqueryslidemenu.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/misc.js"></script>
