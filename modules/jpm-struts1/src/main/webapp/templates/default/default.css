@@ -294,7 +294,7 @@ table.display th.jpm-list-operation-bar img{
     cursor: help;
 }
 
-.pm_message_ERROR{
+div.pm_message_ERROR{
     background-color: pink;
     border: red solid thin;
     color: red;
@@ -305,7 +305,7 @@ table.display th.jpm-list-operation-bar img{
     padding-left: 50px;
 }
 
-.pm_message_WARN{
+div.pm_message_WARN{
     background-color: yellow;
     border: orange solid thin;
     padding: 10px;
@@ -315,7 +315,7 @@ table.display th.jpm-list-operation-bar img{
     padding-left: 50px;
 }
 
-.pm_message_INFO{
+div.pm_message_INFO{
     background-color: lightcyan;
     border: blue solid thin;
     color: blue;
