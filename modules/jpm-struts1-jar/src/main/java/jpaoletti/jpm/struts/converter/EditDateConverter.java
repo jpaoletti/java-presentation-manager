@@ -4,9 +4,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.PMContext;
+import jpaoletti.jpm.core.message.MessageFactory;
 
 /**Converter for date.<br>
  * <pre>
@@ -31,7 +31,10 @@ public class EditDateConverter extends EditStringConverter {
                 return getDateFormat().parse((String) value);
             }
         } catch (ParseException e) {
-            ctx.getPresentationManager().error(e);
+            throw new ConverterException(MessageFactory.error(
+                    ctx.getEntity(), 
+                    ctx.getField(), 
+                    "date.converter.invalid.value"));
         }
         return null;
     }
