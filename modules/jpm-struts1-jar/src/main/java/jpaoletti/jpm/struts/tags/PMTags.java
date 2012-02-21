@@ -85,9 +85,14 @@ public class PMTags extends TagSupport {
 
     public static String plainUrl(PMSession session, String url) {
         final String contextPath = PMEntitySupport.getInstance().getContext_path();
-        return contextPath + "/"
-                + session.getStringEncrypter().encrypt((url.startsWith("/")) ? url.substring(1) : url)
-                + ".jpm";
+        final String finalUrl = (url.startsWith("/")) ? url.substring(1) : url;
+        if (session != null) {
+            return contextPath + "/"
+                    + session.getStringEncrypter().encrypt(finalUrl)
+                    + ".jpm";
+        } else {
+            return contextPath + "/" + finalUrl;
+        }
     }
 
     public static String itemCheckbox(PMStrutsContext ctx, DisplacedList list, Object item) throws PMException {
