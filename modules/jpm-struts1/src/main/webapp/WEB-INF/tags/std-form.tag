@@ -8,8 +8,7 @@
 <%@attribute name = "resetable" required="false" type="java.lang.Boolean"  %>
 <div class="content ui-widget">
     <c:if test="${editable}">
-        <form action="${pmfn:plainUrl(ctx.pmsession, operation.id.concat('.do?pmid=').concat(entity.id))}" accept-charset="UTF-8" method="POST">
-            <input type="hidden" name="finish" value="yes" />
+        <form action="${pmfn:plainUrl(ctx.pmsession, operation.id.concat('.do?finish=yes&pmid=').concat(entity.id))}" accept-charset="UTF-8" method="POST">
             <fieldset>
                 <jsp:doBody />
                 <br/>
