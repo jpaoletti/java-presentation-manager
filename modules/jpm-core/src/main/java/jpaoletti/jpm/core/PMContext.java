@@ -41,6 +41,7 @@ public class PMContext {
 
     /**
      * Getter for PM singleton
+     *
      * @return
      */
     public PresentationManager getPresentationManager() {
@@ -49,6 +50,7 @@ public class PMContext {
 
     /**
      * Return the persistence manager
+     *
      * @return PersistenceManager
      */
     public PersistenceManager getPersistenceManager() {
@@ -98,8 +100,10 @@ public class PMContext {
     }
 
     /**
-     * Returns the entity container 
-     * @param ignorenull If true, does not throws an exception on missing container
+     * Returns the entity container
+     *
+     * @param ignorenull If true, does not throws an exception on missing
+     * container
      * @return The container
      * @throws PMException
      */
@@ -149,7 +153,7 @@ public class PMContext {
 
     /**
      * Return the entity in the container
-     * 
+     *
      * @return The entity
      */
     public Entity getEntity() {
@@ -173,6 +177,7 @@ public class PMContext {
 
     /**
      * Return the list of the container
+     *
      * @return The list
      * @throws PMException
      */
@@ -182,6 +187,7 @@ public class PMContext {
 
     /**
      * Return the selected item of the container
+     *
      * @return The EntityInstanceWrapper
      * @throws PMException
      */
@@ -195,7 +201,7 @@ public class PMContext {
 
     /**
      * Indicate if there is a container with an entity
-     * 
+     *
      * @return
      */
     public boolean hasEntity() {
@@ -214,7 +220,9 @@ public class PMContext {
         return sessionId;
     }
 
-    /**Getter for the logged user
+    /**
+     * Getter for the logged user
+     *
      * @return The user
      */
     public PMSecurityUser getUser() {
@@ -224,7 +232,9 @@ public class PMContext {
         return getPmsession().getUser();
     }
 
-    /**Indicates if there is a user online
+    /**
+     * Indicates if there is a user online
+     *
      * @return True if there is a user online
      */
     public boolean isUserOnLine() {
@@ -255,8 +265,8 @@ public class PMContext {
     }
 
     /**
-     * Look for a parameter in the context with the given name.
-     * If parmeter is null, return def
+     * Look for a parameter in the context with the given name. If parmeter is
+     * null, return def
      *
      * @param paramid parameter id
      * @param def default value
@@ -275,12 +285,28 @@ public class PMContext {
         this.sessionId = sessionId;
     }
 
+    /**
+     * Obtain parameters based on paramid as an array.
+     *
+     * @param paramid Parameter id
+     * @return Array list
+     */
     public Object[] getParameters(String paramid) {
-        return (Object[]) get("param_" + paramid);
+        final Object parameter = getParameter(paramid);
+        if (parameter == null) {
+            return null;
+        }
+        if (parameter instanceof Object[]) {
+            return (Object[]) parameter;
+        } else {
+            final Object[] result = {parameter};
+            return result;
+        }
     }
 
     /**
      * Getter for a boolean value.
+     *
      * @param key The key
      * @param def Default value if there is no item at key
      * @return A boolean
@@ -312,6 +338,7 @@ public class PMContext {
 
     /**
      * Puts the key/value pair from each pair into the context
+     *
      * @param pair The pair
      */
     public void put(ContextPair... pairs) {
