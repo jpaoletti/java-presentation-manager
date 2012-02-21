@@ -156,9 +156,15 @@ public class PMSecurityUser {
         return false;
     }
 
+    /**
+     * Determine if the user belongs to the group
+     */
     public boolean belongsTo(String groupname) {
+        if (groupname == null) {
+            return false;
+        }
         for (PMSecurityUserGroup g : getGroups()) {
-            if (g.getName().compareToIgnoreCase(groupname) == 0) {
+            if (groupname.equalsIgnoreCase(g.getName())) {
                 return true;
             }
         }
