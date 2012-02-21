@@ -3,7 +3,7 @@
 <pm:page title="titles.${ctx.operation.id}">
     <pm:std-generic-header ctx="${ctx}" title="profile.title"/>
     <h3><pmfn:message key="profile.title.personal"/></h3>
-    <pm:std-generic-form action="${es.context_path}/profile.do" editable="true" resetable="true" >
+    <pm:std-generic-form action="profile.do?finish=yes" editable="true" resetable="true" >
         <table class="std-table">
             <tbody>
                 <tr>
@@ -29,7 +29,7 @@
         </table>
     </pm:std-generic-form>
     <h3><pmfn:message key="profile.title.changepass" /></h3>
-    <pm:std-generic-form action="${es.context_path}/changepassword.do" editable="true" resetable="true" >
+    <pm:std-generic-form action="changepassword.do?finish=yes" editable="true" resetable="true" >
         <table class="std-table">
             <tbody>
                 <tr>
