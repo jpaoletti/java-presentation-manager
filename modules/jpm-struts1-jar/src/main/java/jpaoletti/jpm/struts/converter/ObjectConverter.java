@@ -2,6 +2,7 @@ package jpaoletti.jpm.struts.converter;
 
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.*;
+import jpaoletti.jpm.core.message.MessageFactory;
 import jpaoletti.jpm.struts.CollectionHelper;
 
 /**
@@ -39,7 +40,7 @@ public class ObjectConverter extends StrutsEditConverter {
             }
             return entity.getDataAccess().getItem(ctx, new InstanceId(newFieldValue));
         } catch (PMException ex) {
-            throw new ConverterException(ex);
+            throw new ConverterException(MessageFactory.error(ctx.getEntity(), ctx.getField(), "cant.convert.object", ex.getMessage()));
         }
     }
 
