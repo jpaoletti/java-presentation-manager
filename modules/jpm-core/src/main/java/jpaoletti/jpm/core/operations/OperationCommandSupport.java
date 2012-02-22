@@ -366,15 +366,14 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         if (parameters == null) {
             return null;
         }
-        //The following if keeps backward compatibility
-        if (parameters instanceof String[]) {
-            String[] ss = (String[]) parameters;
+        //The following is kept backward compatibility
+        if (parameters instanceof Object[]) {
+            final Object[] ss = (Object[]) parameters;
             if (ss != null) {
                 StringBuilder s = new StringBuilder();
                 if (ss != null && ss.length > 0) {
                     s.append(ss[0]);
                 }
-
                 //In this case we have a multivalue input
                 for (int i = 1; i < ss.length; i++) {
                     s.append(separator);
@@ -390,7 +389,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
     }
 
     protected List<Object> getParameterValues(PMContext ctx, Field field) {
-        List<Object> result = new ArrayList<Object>();
+        final List<Object> result = new ArrayList<Object>();
         String eid = "f_" + field.getId();
         Object s = getParamValues(ctx, eid, ";");
         int i = 0;
