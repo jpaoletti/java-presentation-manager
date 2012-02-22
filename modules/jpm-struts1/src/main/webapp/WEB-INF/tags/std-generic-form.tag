@@ -4,9 +4,11 @@
 <%@attribute name = "action" required="true" type="java.lang.String" %>
 <%@attribute name = "editable" required="true" type="java.lang.Boolean"  %>
 <%@attribute name = "resetable" required="false" type="java.lang.Boolean"  %>
+<%@attribute name = "formId" required="false" type="java.lang.String" %>
 <div class="content ui-widget">
     <c:if test="${editable}">
-        <form action="${pmfn:plainUrl(ctx.pmsession, action)}" accept-charset="UTF-8" method="POST">
+        <form action="${pmfn:plainUrl(ctx.pmsession, action)}" accept-charset="UTF-8" 
+              method="POST" id="${formId}">
             <input type="hidden" name="finish" value="yes" />
             <fieldset>
                 <jsp:doBody />
