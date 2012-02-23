@@ -16,6 +16,9 @@ public class Properties {
     private List<Property> properties;
 
     public String getProperty(String name) {
+        if (properties == null) {
+            return null;
+        }
         for (Property property : properties) {
             if (property.getName().equals(name)) {
                 return property.getValue();
@@ -34,12 +37,12 @@ public class Properties {
     }
 
     /**
-     * Returns the property assuming its an int. If it isn't or if its not defined,
-     * returns default value
-     * 
+     * Returns the property assuming its an int. If it isn't or if its not
+     * defined, returns default value
+     *
      * @param name Property name
      * @param def Default value
-     * 
+     *
      * @return Property value or def
      */
     public Integer getInt(String name, Integer def) {
@@ -52,12 +55,12 @@ public class Properties {
     }
 
     /**
-     * Returns the property assuming its a boolean. If it isn't or if its not 
+     * Returns the property assuming its a boolean. If it isn't or if its not
      * defined, returns default value.
-     * 
+     *
      * @param name Property name
      * @param def Default value
-     * 
+     *
      * @return Property value or def
      */
     public boolean getBool(String name, boolean def) {
@@ -76,6 +79,9 @@ public class Properties {
      * Return all values for the given name
      */
     public List<String> getAll(String name) {
+        if (properties == null) {
+            return null;
+        }
         final List<String> all = new ArrayList<String>();
         for (Property property : properties) {
             if (property.getName().equals(name)) {
