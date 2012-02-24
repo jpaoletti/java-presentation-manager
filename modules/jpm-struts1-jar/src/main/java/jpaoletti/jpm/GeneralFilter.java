@@ -42,7 +42,9 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
                 error(ctx, e);
             } finally {
                 try {
-                    ctx.getPersistenceManager().finish(ctx);
+                    if (ctx != null) {
+                        ctx.getPersistenceManager().finish(ctx);
+                    }
                 } catch (Exception e) {
                     error(ctx, e);
                 }
