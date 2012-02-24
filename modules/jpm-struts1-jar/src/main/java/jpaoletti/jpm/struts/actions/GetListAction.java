@@ -13,13 +13,11 @@ import jpaoletti.jpm.util.KeyValue;
 /**
  * Needs the following parameters. <br/>
  *
- * <ul>
- *  <li>entity: Entity id of the wanted list</li>
- *  <li>display: list of properties separated by blanks for displaying</li>
- *  <li>filter: asuming that display is a string, the filter looks for the item list with display "like" the value</li>
- *  <li>filter_class: filter class implementing jpaoletti.jpm.core.ListFilter</li>
- *  <li></li>
- * </ul>
+ * <ul> <li>entity: Entity id of the wanted list</li> <li>display: list of
+ * properties separated by blanks for displaying</li> <li>filter: asuming that
+ * display is a string, the filter looks for the item list with display "like"
+ * the value</li> <li>filter_class: filter class implementing
+ * jpaoletti.jpm.core.ListFilter</li> <li></li> </ul>
  *
  * @author jpaoletti
  */
@@ -27,7 +25,7 @@ public class GetListAction extends ActionSupport {
 
     @Override
     protected void doExecute(PMStrutsContext ctx) throws PMException {
-        final CollectionHelper helper = new CollectionHelper(ctx.getRequest().getParameter("display"));
+        final CollectionHelper helper = new CollectionHelper((String) ctx.getParameter("display"));
         final Gson gson = new Gson();
         ctx.getResponse().setContentType("application/json");
         try {
@@ -50,5 +48,4 @@ public class GetListAction extends ActionSupport {
         }
         noAction();
     }
-
 }
