@@ -50,6 +50,10 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         configureEntityContainer(ctx);
         configureSelected(ctx);
         operation = configureOperations(ctx);
+        if (checkOperation() && operation == null) {
+            throw new NotAuthorizedException();
+        }
+
         if (operation != null && operation.getPerm() != null && !ctx.getUser().hasPermission(operation.getPerm())) {
             throw new NotAuthorizedException();
         }
@@ -69,7 +73,9 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
 
     protected void internalExecute(PMContext ctx) throws PMException {
         ctx.getPresentationManager().debug(this, "Executing operation " + getOperationId());
-        /* Validate de operation*/
+        /*
+         * Validate de operation
+         */
         if (ctx.getSelected() != null) {
             validate(ctx);
         }
@@ -84,16 +90,13 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
                 operation.getContext().preExecute(ctx);
             }
 
-            /** EXCECUTES THE OPERATION **/
+            // EXCECUTES THE OPERATION 
             doExecute(ctx);
 
             if (operation != null && operation.getContext() != null) {
                 operation.getContext().postExecute(ctx);
             }
 
-            /*if(isAuditable(ctx)){
-            logRevision (ctx.getDB(), (ctx.getEntity()!=null)?ctx.getEntity().getId():null, ctx.getOper_id(), ctx.getUser());
-            }*/
             try {
                 if (tx != null) {
                     ctx.getPresentationManager().debug(this, "Commiting Transaction " + tx);
@@ -288,6 +291,13 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         return false;
     }
 
+    /**
+     * If no operation is found, prepare throws NotAuthorizedException
+     */
+    protected boolean checkOperation() {
+        return true;
+    }
+
     protected boolean checkSelected() {
         return false;
     }
@@ -405,7 +415,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
     }
 
     /**
-     * @return the selected instances 
+     * @return the selected instances
      */
     public List<Object> getSelectedInstances(PMContext ctx) throws PMException {
         final List<Object> result = new ArrayList<Object>();
@@ -420,9 +430,9 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
     }
 
     /**
-     * Indicates if the operation is finished. The operation has ended when
-     * the "finished" parameter is present.
-     * 
+     * Indicates if the operation is finished. The operation has ended when the
+     * "finished" parameter is present.
+     *
      */
     protected boolean finished(PMContext ctx) {
         return ctx.getParameter(FINISH) != null;
