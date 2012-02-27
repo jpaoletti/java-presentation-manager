@@ -48,7 +48,7 @@
         });
     </script>
 </c:if>
-<div id="loading_${param.f}"><img alt="..." src="${es.templatePath}/images/loading.gif"/></div>
+<div id="loading_${param.f}" class="object-converter-loading"><img alt="..." src="${es.templatePath}/images/loading.gif"/></div>
 <span id="done_${param.f}" style="display: none;">
     <select size="1" id="f_${param.f}" name="f_${param.f}" class="object-converter-select object-converter-select-${ctx.map._min_search_size}"></select>
 </span>
