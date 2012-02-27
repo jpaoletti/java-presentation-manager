@@ -32,7 +32,7 @@ public class SECUser implements Serializable {
     @Column(name = "change_password")
     @Type(type = "yes_no")
     private boolean changePassword;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SECUserProp> props;
 
     public SECUser() {
