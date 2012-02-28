@@ -6,7 +6,7 @@ import jpaoletti.jpm.security.core.PMSecurityUser;
 
 /**
  * User Profile operation
- * 
+ *
  * @author jpaoletti
  */
 public class ProfileOperation extends OperationCommandSupport {
@@ -50,6 +50,11 @@ public class ProfileOperation extends OperationCommandSupport {
 
     @Override
     protected boolean checkEntity() {
+        return false;
+    }
+
+    @Override
+    protected boolean checkOperation() {
         return false;
     }
 }
