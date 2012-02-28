@@ -4,15 +4,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import jpaoletti.jpm.core.AbstractDataAccess;
-import jpaoletti.jpm.core.Entity;
-import jpaoletti.jpm.core.ListFilter;
-import jpaoletti.jpm.core.ListSort;
-import jpaoletti.jpm.core.PMContext;
-import jpaoletti.jpm.core.PMCoreConstants;
-import jpaoletti.jpm.core.PMException;
+import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.core.exception.EntityClassNotFoundException;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -29,12 +22,12 @@ public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
     public Object getItem(PMContext ctx, String property, String value) throws PMException {
         try {
             /*
-             * To avoid the use of SQL restriction that use column name we introspect
-             * the property type and parse it. It work for some basics for now
-             * until we find a better way.
+             * To avoid the use of SQL restriction that use column name we
+             * introspect the property type and parse it. It work for some
+             * basics for now until we find a better way.
              *
-             * If we get an error or the type is not a Long, Integer, Boolean nor String,
-             * we try the old way.
+             * If we get an error or the type is not a Long, Integer, Boolean
+             * nor String, we try the old way.
              */
             final Session db = getDb(ctx);
             final Class<?> clazz = Class.forName(getEntity().getClazz());
@@ -101,7 +94,7 @@ public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
         try {
             getDb(ctx).save(object);
         } catch (org.hibernate.exception.ConstraintViolationException e) {
-            throw new PMException("constraint.violation.exception");
+            throw new PMException("constraint.violation.exception", e);
         }
     }
 
