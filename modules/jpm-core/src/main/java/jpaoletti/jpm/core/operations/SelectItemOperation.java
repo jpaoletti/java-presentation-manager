@@ -38,4 +38,9 @@ public class SelectItemOperation extends OperationCommandSupport {
     protected boolean checkEntity() {
         return true;
     }
+
+    @Override
+    protected boolean checkOperation() {
+        return false;
+    }
 }
