@@ -1,6 +1,7 @@
 package jpaoletti.jpm.security.core.operations;
 
-import jpaoletti.jpm.core.*;
+import jpaoletti.jpm.core.PMContext;
+import jpaoletti.jpm.core.PMException;
 import jpaoletti.jpm.security.core.PMSecurityException;
 import jpaoletti.jpm.security.core.PMSecurityUser;
 
@@ -50,6 +51,11 @@ public class ChangePassword extends SecurityOperation {
 
     @Override
     protected boolean checkSelected() {
+        return false;
+    }
+
+    @Override
+    protected boolean checkOperation() {
         return false;
     }
 }
