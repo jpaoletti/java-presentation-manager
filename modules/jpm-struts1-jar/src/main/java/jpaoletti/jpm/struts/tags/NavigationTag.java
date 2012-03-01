@@ -8,7 +8,7 @@ import jpaoletti.jpm.struts.PMStrutsContext;
 
 /**
  * Navigation list tag
- * 
+ *
  * @author jpaoletti
  */
 public class NavigationTag extends PMTags {
@@ -34,7 +34,9 @@ public class NavigationTag extends PMTags {
         final StringBuilder sb = new StringBuilder();
         if (c != null && c.getSelected() != null) {
             final PMStrutsContext ctx = (PMStrutsContext) pageContext.getRequest().getAttribute("ctx");
-            final String url = PMTags.url(ctx.getPmsession(), "/" + c.getOperation().getId() + ".do?pmid=" + c.getEntity().getId());
+            final Object navigationBackParam = ctx.getParameter("navigation_back");
+            final String operationBack = navigationBackParam == null ? c.getOperation().getId() : (String) navigationBackParam;
+            final String url = PMTags.url(ctx.getPmsession(), "/" + operationBack + ".do?pmid=" + c.getEntity().getId());
             sb.append(getNavigationList(c.getOwner()));
             sb.append("&nbsp; &gt; &nbsp;");
             sb.append("<a href=\"").append(url).append("\">");
