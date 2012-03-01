@@ -25,15 +25,15 @@ public abstract class PMSecurityAbstractConnector implements PMSecurityConnector
         if (!user.isActive()) {
             throw new UserNotActiveException();
         }
-        if (isLoggedIn(user) && !PresentationManager.getPm().allowMultipleLogin()) {
-            throw new UserAlreadyLogged();
-        }
         try {
             if (password == null || user.getPassword() == null || !BCrypt.checkpw(password, user.getPassword())) {
                 throw new InvalidPasswordException();
             }
         } catch (Exception e) {
             throw new InvalidPasswordException();
+        }
+        if (isLoggedIn(user) && !PresentationManager.getPm().allowMultipleLogin()) {
+            throw new UserAlreadyLogged();
         }
         return user;
     }
