@@ -15,7 +15,6 @@
         <link rel="shortcut icon" href="${es.templatePath}/img/favicon.ico" />
         <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="${es.context_path}/js/jqueryslidemenu.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/misc.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery.hotkeys.js"></script>
         <script type="text/javascript" src="${es.context_path}/js/jquery-ui-1.8.16.custom.min.js"></script>

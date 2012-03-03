@@ -28,6 +28,7 @@ public class MenuTag extends PMTags {
         try {
             final JspWriter out = pageContext.getOut();
             out.println("<div id='menu' class='jqueryslidemenu'>");
+            out.println("<script type='text/javascript' src='" + getContextPath() + "/js/jqueryslidemenu.js'></script>");
             out.println("<ul>");
 
             if (pmsession != null && pmsession.getMenu() != null) {
