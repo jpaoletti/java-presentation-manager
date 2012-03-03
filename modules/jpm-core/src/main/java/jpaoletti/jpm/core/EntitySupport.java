@@ -6,7 +6,7 @@ package jpaoletti.jpm.core;
  * */
 public class EntitySupport {
 
-    public PresentationManager getPM() {
+    public PresentationManager getPm() {
         return PresentationManager.getPm();
     }
 }
