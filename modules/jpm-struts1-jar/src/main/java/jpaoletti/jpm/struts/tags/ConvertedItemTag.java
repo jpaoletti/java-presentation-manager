@@ -52,7 +52,7 @@ public class ConvertedItemTag extends PMTags {
                         PresentationManager.getMessage(e.getMsg().getKey(), e.getMsg().getArgs()),
                         "</span>");
             } catch (Exception e) {
-                es.getPM().warn(e);
+                es.getPm().warn(e);
                 println("<img width='16px' src='" + getContextPath() + "/templates/" + getTemplate() + "/images/m_error.png' alt='error' />");
             }
         } catch (IOException ex) {
