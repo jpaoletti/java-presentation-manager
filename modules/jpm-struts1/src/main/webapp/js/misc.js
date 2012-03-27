@@ -15,9 +15,7 @@ function PM_register(func){
  * Loads a page on main frame
  **/
 function loadPage(url){
-    var mf = top.frames["mainframe"];
-    mf.location = url;
-    $(mf).focus();
+    window.location = url;
 }
 
 /**
