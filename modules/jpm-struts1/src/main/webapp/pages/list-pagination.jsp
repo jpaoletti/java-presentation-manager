@@ -36,8 +36,6 @@
         <c:if test="${empty PMLIST.total || PMLIST.page < PMLIST.pages}">
             <a class="pagination" href="javascript:paginate('${PMLIST.page+1}')"><pmfn:message key="pm.struts.list.next"/> &raquo;</a>
         </c:if>
-        <script type="text/javascript">
-                $(".pagination").button();
-        </script>
+        <script type="text/javascript"> PM_register(function(){$(".pagination").button()})</script>
     </div>
 </c:if>
