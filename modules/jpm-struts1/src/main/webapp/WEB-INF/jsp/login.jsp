@@ -1,4 +1,5 @@
-<%@include file="../inc/tag-libs.jsp" %>
+<%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
+<%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %>
 <c:if test="${not empty pmsession}">
     <script type="text/javascript" charset="utf-8">
         parent.location = "${es.context_path}";

@@ -11,7 +11,7 @@
         <forward name="success" path="/denied.jsp"/>
         <forward name="denied" path="/denied.jsp"/>
         <forward name="failure" path="/error.jsp"/>
-        <forward name="login" path="/pages/login.jsp"/>
+        <forward name="login" path="/index.jsp"/>
     </global-forwards>
     <action-mappings>
         <action path="/get_list" type="jpaoletti.jpm.struts.actions.GetListAction" />
@@ -50,9 +50,9 @@
         </action>
 
         <action path="/login" type="jpaoletti.jpm.struts.actions.LoginAction">
-            <forward name="success" redirect="true" path="/pages/login.jsp"/>
+            <forward name="success" redirect="true" path="/index.jsp"/>
             <forward name="failure" redirect="false" path="/index.jsp"/>
-            <forward name="changePassword" redirect="true" path="/pages/login.jsp"/>
+            <forward name="changePassword" redirect="true" path="/index.jsp"/>
         </action>
 
         <action path="/logout" type="jpaoletti.jpm.struts.actions.LogoutAction">
