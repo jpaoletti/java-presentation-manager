@@ -141,6 +141,15 @@
         </function-signature>
     </function>
 
+    <function>
+        <description>Display an internationalized message</description>
+        <name>message</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String message(java.lang.String)
+        </function-signature>
+    </function>
+
     <tag>
         <description>Display an internationalized message</description>
         <name>message</name>

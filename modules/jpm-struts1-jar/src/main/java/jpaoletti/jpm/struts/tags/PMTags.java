@@ -223,4 +223,11 @@ public class PMTags extends TagSupport {
     public static Field getField(Entity entity, String fieldId) {
         return entity.getFieldById(fieldId);
     }
+    
+    /**
+     * Display an internationalized message
+     */
+    public static String message(String key){
+        return PresentationManager.getMessage(key);
+    }
 }
