@@ -5,10 +5,11 @@ import java.util.List;
 
 /**
  * @author jpaoletti
- * 
- * This class encapsulate an entity, its list and everything associated to an entity. An instance
- * of this class is inserted in session under demand and stay in session for fast reference.
- * 
+ *
+ * This class encapsulate an entity, its list and everything associated to an
+ * entity. An instance of this class is inserted in session under demand and
+ * stay in session for fast reference.
+ *
  */
 public class EntityContainer {
 
@@ -25,7 +26,7 @@ public class EntityContainer {
 
     /**
      * Main constructor
-     * 
+     *
      * @param entity The contained entity
      * @param sid The session id
      */
@@ -39,7 +40,7 @@ public class EntityContainer {
 
     /**
      * Builds a string based on a session id and the entity id. Not implemented.
-     * 
+     *
      * @param sid A session id
      * @param eid The entity id
      * @return The resulting string
@@ -51,6 +52,7 @@ public class EntityContainer {
 
     /**
      * Getter for the id
+     *
      * @return The id
      */
     public String getId() {
@@ -67,6 +69,7 @@ public class EntityContainer {
 
     /**
      * Getter for the entity
+     *
      * @return The entity
      */
     public Entity getEntity() {
@@ -83,6 +86,7 @@ public class EntityContainer {
 
     /**
      * Getter for the list
+     *
      * @return The list
      */
     public PaginatedList getList() {
@@ -107,13 +111,15 @@ public class EntityContainer {
 
     /**
      * Getter for the session id
-     * @return The  session id
+     *
+     * @return The session id
      */
     public String getSid() {
         return sid;
     }
 
     /**
+     * Setter for selected instance
      *
      * @param selected
      */
@@ -124,6 +130,7 @@ public class EntityContainer {
 
     /**
      * Getter for the selected instance wrapper
+     *
      * @return The wrapper
      */
     public EntityInstanceWrapper getSelected() {
@@ -140,6 +147,7 @@ public class EntityContainer {
 
     /**
      * Indicate if the actual selected is new
+     *
      * @return true when selected is new
      */
     public boolean isSelectedNew() {
@@ -172,6 +180,7 @@ public class EntityContainer {
 
     /**
      * Getter for the owner
+     *
      * @return The owner
      */
     public EntityContainer getOwner() {
@@ -188,6 +197,7 @@ public class EntityContainer {
 
     /**
      * Getter for the operation
+     *
      * @return The operation
      */
     public Operation getOperation() {
