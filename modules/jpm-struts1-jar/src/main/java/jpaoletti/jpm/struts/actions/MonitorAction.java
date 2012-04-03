@@ -29,13 +29,13 @@ public class MonitorAction extends ActionSupport {
             boolean kontinue = (c != null) && (c.compareTo("true") == 0);
             ctx.put(PM_MONITOR_CONTINUE, kontinue);
 
-            String pmid = ctx.getRequest().getParameter(PMEntitySupport.PM_ID);
+            String pmid = (String) ctx.getParameter(PMEntitySupport.PM_ID);
             if (pmid == null) {
                 pmid = (String) ctx.getSession().getAttribute(PMEntitySupport.LAST_PM_ID);
             } else {
                 ctx.getSession().setAttribute(PMEntitySupport.LAST_PM_ID, pmid);
             }
-            Monitor monitor = ctx.getPresentationManager().getMonitor(pmid);
+            final Monitor monitor = ctx.getPresentationManager().getMonitor(pmid);
             if (monitor == null) {
                 ctx.addMessage(MessageFactory.error("pm.struts.error.monitor.not.found", pmid));
                 throw new PMException();
@@ -67,6 +67,8 @@ public class MonitorAction extends ActionSupport {
             ctx.getSession().setAttribute("monitor", monitor);
             if (kontinue) {
                 throw new PMForwardException("monitor_cont");
+            }else{
+                success(ctx, "pages/monitor.jsp", false);
             }
         }
     }

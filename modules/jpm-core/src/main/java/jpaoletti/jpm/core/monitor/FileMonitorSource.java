@@ -9,10 +9,10 @@ import jpaoletti.jpm.core.PersistenceManager;
 
 /**
  * A monitor source that takes information from a file
- * 
- * @author jpaoletti 
- * 
- * */
+ *
+ * @author jpaoletti
+ *
+ */
 public class FileMonitorSource extends MonitorSource {
 
     public FileMonitorSource(PersistenceManager persistenceManager) {
@@ -22,7 +22,7 @@ public class FileMonitorSource extends MonitorSource {
 
     /**
      * Get the file lines since the actual until the last.
-     * 
+     *
      * @param actual Actual line identification
      * @return The list of lines
      * @throws Exception
@@ -30,10 +30,9 @@ public class FileMonitorSource extends MonitorSource {
     @Override
     public List<MonitorLine> getLinesFrom(Object actual) throws Exception {
         //TODO Enhance line retrieve to get last lines directly
-        String line = null;
+        String line;
         Integer currentLineNo = 0;
-        List<MonitorLine> result = new ArrayList<MonitorLine>();
-
+        final List<MonitorLine> result = new ArrayList<MonitorLine>();
         BufferedReader in = null;
         try {
             in = new BufferedReader(new FileReader(getFilename()));
@@ -46,7 +45,6 @@ public class FileMonitorSource extends MonitorSource {
                 }
                 currentLineNo++;
             }
-
             //read until endLine
             line = in.readLine();
             while (line != null) {
@@ -70,6 +68,7 @@ public class FileMonitorSource extends MonitorSource {
 
     /**
      * Return the last file line
+     *
      * @return The line
      * @throws Exception
      */
@@ -77,7 +76,6 @@ public class FileMonitorSource extends MonitorSource {
     public MonitorLine getLastLine() throws Exception {
         String line = null;
         MonitorLine result = new MonitorLine();
-
         BufferedReader in = null;
         try {
             in = new BufferedReader(new FileReader(getFilename()));

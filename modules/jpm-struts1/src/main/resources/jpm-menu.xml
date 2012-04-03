@@ -4,6 +4,12 @@
         <location id="external" value="https://github.com/jpaoletti/java-presentation-manager" />
     </menu-item>
 
+    <menu-list text="pm.menu.list.monitor" perm="">
+        <menu-item text="pm.monitor.file" perm="">
+            <location id="pmstruts" value="monitor.do?pmid=file" />
+        </menu-item>
+    </menu-list>
+
     <menu-list text="pm.menu.list.business" perm="">
         <menu-item text="pm.menu.item.simpleclass" perm="">
             <location id="list" value="simpleclass" />

@@ -38,4 +38,5 @@
     <property name="entity" value="entities/secusergroup.xml"/>
 
     <!-- Monitors -->
+    <property name="monitor" value="monitors/file.xml"/>
 </presentation-manager>
