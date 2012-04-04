@@ -404,3 +404,5 @@ a.pagination span.ui-button-text{
 .object-converter-select-0{width: 302px;}
 .object-converter-select option{border: none;border-bottom: grey solid thin; }
 .object-converter-loading{float: left;}
+
+#list.display th.sortable{cursor: pointer}
