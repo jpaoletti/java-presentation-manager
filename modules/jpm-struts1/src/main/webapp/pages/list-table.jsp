@@ -3,7 +3,7 @@
     <thead>
         <tr>
             <th scope="col" class="jpm-list-operation-col" style="width:${ctx.entityContainer.list.operationColWidth}">&nbsp;</th>
-            <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><c:if test="${not empty field.width}"><th scope="col" style='width:${field.width}px;'></c:if><c:if test="${empty field.width}"><th scope="col"></c:if><pm:field-name field="${field}" /></th></c:forEach>
+            <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><c:if test="${not empty field.width}"><th scope="col" id="col_${field.id}" style='width:${field.width}px;'></c:if><c:if test="${empty field.width}"><th scope="col" id="col_${field.id}" ></c:if><pm:field-name field="${field}" /></th></c:forEach>
         </tr>
     </thead>
     <tbody id="list_body" >
