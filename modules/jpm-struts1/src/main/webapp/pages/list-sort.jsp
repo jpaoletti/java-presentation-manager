@@ -19,3 +19,9 @@
         </select>
     </div>
 </div>
+<script type="text/javascript">
+    PM_register(function(){
+        $("#col_${ctx.entityContainer.list.sort.fieldId}")
+            .append("<img alt='' src=\"${es.templatePath}img/arrow-${(ctx.entityContainer.list.sort.desc)?'down':'up'}.gif\" />");
+    });
+</script>
