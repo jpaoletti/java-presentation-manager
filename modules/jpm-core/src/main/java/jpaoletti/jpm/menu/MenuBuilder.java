@@ -8,19 +8,25 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**A parser class to parse the pm.menu.xml configuration file. 
- * 
+/**
+ * A parser class to parse the pm.menu.xml configuration file.
+ *
  * @author jpaoletti
- * */
+ *
+ */
 public class MenuBuilder extends DefaultHandler {
 
     private MenuList menu;
     private MenuItem item;
     private String conf;
 
-    /**The constructor of the parser. It needs the configuration file name and the PMService. 
+    /**
+     * The constructor of the parser. It needs the configuration file name and
+     * the PMService.
+     *
      * @param conf The relative filename of the pm.menu.xml file
-     **/
+     *
+     */
     public MenuBuilder(String conf) {
         this.conf = conf;
         initMenu();
@@ -106,6 +112,7 @@ public class MenuBuilder extends DefaultHandler {
 
     /**
      * Getter for menu
+     *
      * @return The MenuList
      */
     public MenuList getMenu() {
@@ -114,6 +121,7 @@ public class MenuBuilder extends DefaultHandler {
 
     /**
      * Setter for menu
+     *
      * @param menu
      */
     public void setMenu(MenuList menu) {
