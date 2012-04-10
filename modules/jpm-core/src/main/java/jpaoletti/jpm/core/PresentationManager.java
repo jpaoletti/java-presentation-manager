@@ -175,7 +175,7 @@ public class PresentationManager extends Observable {
         return cfg.getProperty("appversion", "1.0.0");
     }
 
-    protected String getDefaultConverterClass() {
+    public String getDefaultConverterClass() {
         return getCfg().getProperty(DEFAULT_CONVERTER);
     }
 
@@ -274,7 +274,7 @@ public class PresentationManager extends Observable {
      * @param e The strong entity
      * @return The list of weak entities
      */
-    protected List<Entity> weakEntities(Entity e) {
+    public List<Entity> weakEntities(Entity e) {
         final List<Entity> res = new ArrayList<Entity>();
         for (Entity entity : getEntities().values()) {
             if (entity.getOwner() != null && entity.getOwner().getEntityId().compareTo(e.getId()) == 0) {
@@ -733,7 +733,7 @@ public class PresentationManager extends Observable {
         return securityConnector;
     }
 
-    protected List<String> getAll(String name) {
+    public List<String> getAll(String name) {
         return cfg.getAll(name);
     }
 
@@ -744,7 +744,7 @@ public class PresentationManager extends Observable {
     /**
      * Returns local resource bundle for internationalization
      */
-    protected ResourceBundle getResourceBundle() {
+    public ResourceBundle getResourceBundle() {
         if (bundle == null) {
             String lang = "";
             String country = "";
@@ -765,7 +765,7 @@ public class PresentationManager extends Observable {
     /**
      * @return the cfgFilename
      */
-    protected String getCfgFilename() {
+    public String getCfgFilename() {
         return cfgFilename;
     }
 
