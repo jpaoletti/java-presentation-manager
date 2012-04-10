@@ -1,12 +1,17 @@
 package jpaoletti.jpm.parser;
 
 import jpaoletti.jpm.converter.*;
+import jpaoletti.jpm.core.PresentationManager;
 
 /**
  *
  * @author jpaoletti
  */
 public class ExternalConverterParser extends ParserSupport {
+
+    public ExternalConverterParser(PresentationManager pm) {
+        super(pm);
+    }
 
     @Override
     protected void init() {
@@ -19,11 +24,11 @@ public class ExternalConverterParser extends ParserSupport {
         getXstream().useAttributeFor(Converter.class, "operations");
         getXstream().useAttributeFor(Converter.class, "validate");
 
-        getXstream().registerConverter(new EConverterConverter());
+        getXstream().registerConverter(new EConverterConverter(getPm()));
     }
 
     @Override
     protected Object newObject() {
-        return new ExternalConverters();
+        return new ExternalConverters(getPm());
     }
 }

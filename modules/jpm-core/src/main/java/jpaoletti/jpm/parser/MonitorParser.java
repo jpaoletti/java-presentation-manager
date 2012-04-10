@@ -1,5 +1,6 @@
 package jpaoletti.jpm.parser;
 
+import jpaoletti.jpm.core.PresentationManager;
 import jpaoletti.jpm.core.monitor.Monitor;
 
 /**
@@ -7,6 +8,10 @@ import jpaoletti.jpm.core.monitor.Monitor;
  * @author jpaoletti
  */
 public class MonitorParser extends ParserSupport {
+
+    public MonitorParser(PresentationManager pm) {
+        super(pm);
+    }
 
     @Override
     protected void init() {
@@ -17,6 +22,6 @@ public class MonitorParser extends ParserSupport {
 
     @Override
     protected Object newObject() {
-        return new Monitor();
+        return new Monitor(getPm());
     }
 }

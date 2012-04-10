@@ -14,6 +14,12 @@ import jpaoletti.jpm.core.PresentationManager;
  */
 public class EConverterConverter implements com.thoughtworks.xstream.converters.Converter {
 
+    private PresentationManager pm;
+
+    public EConverterConverter(PresentationManager pm) {
+        this.pm = pm;
+    }
+
     @Override
     public void marshal(Object o, HierarchicalStreamWriter writer, MarshallingContext mc) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -29,7 +35,7 @@ public class EConverterConverter implements com.thoughtworks.xstream.converters.
             final Converter c = (Converter) uc.convertAnother(result, Class.forName(clazz));
             result.setConverter(c);
         } catch (Exception ex) {
-            PresentationManager.getPm().warn("External converter not found: " + clazz);
+            pm.warn("External converter not found: " + clazz);
         } finally {
             reader.moveUp();
         }

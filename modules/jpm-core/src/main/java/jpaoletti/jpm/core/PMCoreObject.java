@@ -1,8 +1,9 @@
 package jpaoletti.jpm.core;
 
 /**
- * This is the superclass of all the core objects of Presentation Manager and it provides some
- * helpers.
+ * This is the superclass of all the core objects of Presentation Manager and it
+ * provides some helpers.
+ *
  * @author jpaoletti
  *
  */

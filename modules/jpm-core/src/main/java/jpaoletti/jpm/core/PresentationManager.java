@@ -45,8 +45,7 @@ public class PresentationManager extends Observable {
      * Default constructor with default configuration name "jpm-config.xml".
      */
     public PresentationManager() {
-        setCfgFilename("jpm-config.xml");
-        initialize();
+        this("jpm-config.xml");
     }
 
     /**
@@ -54,7 +53,11 @@ public class PresentationManager extends Observable {
      */
     public PresentationManager(String cfgFilename) {
         this.cfgFilename = cfgFilename;
-        initialize();
+        if (initialize()) {
+            instance = this;
+        } else {
+            instance = null;
+        }
     }
 
     /**
@@ -70,11 +73,7 @@ public class PresentationManager extends Observable {
             if (getPm() == null) {
                 instance = new PresentationManager(configurationFilename);
             }
-            final boolean success = !getPm().error;
-            if (!success) {
-                instance = null;
-            }
-            return success;
+            return isActive();
         } catch (Exception ex) {
             instance = null;
             Logger.getRootLogger().fatal("Unable to initialize jPM", ex);
@@ -99,7 +98,7 @@ public class PresentationManager extends Observable {
     public final boolean initialize() {
         notifyObservers();
         try {
-            this.cfg = (Properties) new MainParser().parseFile(getCfgFilename());
+            this.cfg = (Properties) new MainParser(this).parseFile(getCfgFilename());
         } catch (Exception ex) {
             ex.printStackTrace(); //Deep trouble
             error = true;
@@ -181,7 +180,7 @@ public class PresentationManager extends Observable {
     }
 
     private void loadMonitors() {
-        PMParser parser = new MonitorParser();
+        PMParser parser = new MonitorParser(this);
         final Map<Object, Monitor> result = new HashMap<Object, Monitor>();
         final List<String> monitorNames = getAll("monitor");
         for (String monitorName : monitorNames) {
@@ -226,7 +225,7 @@ public class PresentationManager extends Observable {
     }
 
     private void loadEntities() {
-        EntityParser parser = new EntityParser();
+        EntityParser parser = new EntityParser(this);
         if (entities == null) {
             entities = new HashMap<Object, Entity>();
         } else {
@@ -552,7 +551,7 @@ public class PresentationManager extends Observable {
     }
 
     private void loadConverters() {
-        final PMParser parser = new ExternalConverterParser();
+        final PMParser parser = new ExternalConverterParser(this);
         externalConverters = new ArrayList<ExternalConverters>();
         final List<String> ss = getAll("external-converters");
         for (String s : ss) {

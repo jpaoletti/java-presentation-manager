@@ -11,6 +11,10 @@ import jpaoletti.jpm.validator.Validator;
  */
 public class EntityParser extends ParserSupport {
 
+    public EntityParser(PresentationManager pm) {
+        super(pm);
+    }
+
     @Override
     protected void init() {
         super.init();
@@ -78,6 +82,6 @@ public class EntityParser extends ParserSupport {
 
     @Override
     protected Object newObject() {
-        return new Entity();
+        return new Entity(getPm());
     }
 }
