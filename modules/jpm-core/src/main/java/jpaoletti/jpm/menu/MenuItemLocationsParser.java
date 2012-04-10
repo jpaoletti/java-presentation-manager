@@ -3,26 +3,25 @@ package jpaoletti.jpm.menu;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
 import jpaoletti.jpm.core.PresentationManager;
 import jpaoletti.jpm.util.ResourceManager;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-/**A parser class for the pm.locations.xml configuration file.
- * 
+/**
+ * A parser class for the pm.locations.xml configuration file.
+ *
  * @author jpaoletti
  */
 public final class MenuItemLocationsParser extends DefaultHandler {
 
-    private static final String TAB = "    ";
     private String conf;
     private Map<String, MenuItemLocation> locations;
     private boolean error = false;
+    private PresentationManager pm;
 
     /**
      * Constructor for the parser
@@ -30,7 +29,8 @@ public final class MenuItemLocationsParser extends DefaultHandler {
      * @param evt Event for log
      * @param conf Configuration filename
      */
-    public MenuItemLocationsParser(String conf) {
+    public MenuItemLocationsParser(PresentationManager pm, String conf) {
+        this.pm = pm;
         this.setConf(conf);
         init();
     }
@@ -48,7 +48,7 @@ public final class MenuItemLocationsParser extends DefaultHandler {
             final InputStream is = ResourceManager.getInputStream(conf);
             db.parse(is, this);
         } catch (Exception e) {
-            PresentationManager.getPm().error(e);
+            pm.error(e);
         }
     }
 
@@ -66,10 +66,10 @@ public final class MenuItemLocationsParser extends DefaultHandler {
             String id = attributes.getValue("id");
             String clazz = attributes.getValue("class");
             try {
-                locations.put(id, (MenuItemLocation) PresentationManager.getPm().newInstance(clazz));
-                PresentationManager.getPm().logItem("[MenuItemLocation] " + id, clazz, "*");
+                locations.put(id, (MenuItemLocation) pm.newInstance(clazz));
+                pm.logItem("[MenuItemLocation] " + id, clazz, "*");
             } catch (Exception e) {
-                PresentationManager.getPm().logItem("[MenuItemLocation] " + id, clazz, "!");
+                pm.logItem("[MenuItemLocation] " + id, clazz, "!");
                 error = true;
             }
         }
@@ -98,7 +98,7 @@ public final class MenuItemLocationsParser extends DefaultHandler {
 
     /**
      * Indicates if there was an error dduring excecution
-     * 
+     *
      * @return true if an error ocurred
      */
     public boolean hasError() {
