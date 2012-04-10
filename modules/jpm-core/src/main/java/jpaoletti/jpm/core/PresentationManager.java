@@ -1,40 +1,32 @@
 package jpaoletti.jpm.core;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Observable;
-import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import jpaoletti.jpm.converter.*;
+import java.util.*;
+import jpaoletti.jpm.converter.Converter;
+import jpaoletti.jpm.converter.ConverterWrapper;
+import jpaoletti.jpm.converter.ExternalConverters;
 import jpaoletti.jpm.core.log.JPMLogger;
 import jpaoletti.jpm.core.monitor.Monitor;
-import jpaoletti.jpm.menu.*;
+import jpaoletti.jpm.menu.MenuItemLocation;
+import jpaoletti.jpm.menu.MenuItemLocationsParser;
 import jpaoletti.jpm.parser.*;
 import jpaoletti.jpm.security.core.PMSecurityConnector;
 import jpaoletti.jpm.util.Properties;
 import org.apache.commons.beanutils.NestedNullException;
-import org.apache.log4j.Logger;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.log4j.Logger;
 
 /**
+ * Main engine class.
  *
  * @author jpaoletti
  */
 public class PresentationManager extends Observable {
 
+    private static PresentationManager instance; // Singleton
     private static final String DEFAULT_CONVERTER = "default-converter";
     private static final String PERSISTENCE_MANAGER = "persistence-manager";
     private static final String SECURITY_CONNECTOR = "security-connector";
-    private static final String HASH = "abcde54321poiuy96356abcde54321poiuy96356"; //TODO
     private ResourceBundle bundle;
-    /** Singleton */
-    private static PresentationManager instance;
-    /**  Hash value for parameter encrypt  */
     private static Long sessionIdSeed = 0L;
     private Properties cfg;
     private JPMLogger logger;
@@ -47,24 +39,42 @@ public class PresentationManager extends Observable {
     private final Map<String, PMSession> sessions = new HashMap<String, PMSession>();
     private Timer sessionChecker;
     private PMSecurityConnector securityConnector;
+    private String cfgFilename;
+
+    /**
+     * Default constructor with default configuration name "jpm-config.xml".
+     */
+    public PresentationManager() {
+        setCfgFilename("jpm-config.xml");
+        initialize();
+    }
+
+    /**
+     * Constructor with configuration file name.
+     */
+    public PresentationManager(String cfgFilename) {
+        this.cfgFilename = cfgFilename;
+        initialize();
+    }
 
     /**
      * Initialize the Presentation Manager singleton
+     *
      * @param configurationFilename File name for a configuration file
      * @param log a PrintStream for logs
-     * 
+     *
      * @return true if initialization was success, false otherwies
      */
     public static boolean start(final String configurationFilename) {
         try {
-            if (instance == null) {
-                instance = new PresentationManager();
+            if (getPm() == null) {
+                instance = new PresentationManager(configurationFilename);
             }
-            final boolean result = instance.initialize(configurationFilename);
-            if (!result) {
+            final boolean success = !getPm().error;
+            if (!success) {
                 instance = null;
             }
-            return result;
+            return success;
         } catch (Exception ex) {
             instance = null;
             Logger.getRootLogger().fatal("Unable to initialize jPM", ex);
@@ -76,20 +86,25 @@ public class PresentationManager extends Observable {
      * @return true if jpm is active
      */
     public static boolean isActive() {
-        return instance != null;
+        return getPm() != null;
     }
 
     /**
      * Initialize the Presentation Manager.
-     * 
-     * @param cfgFilename File name for a configuration file
+     *
      * @param log a PrintStream for logs
-     * 
+     *
      * @return true if initialization was success, false otherwies
      */
-    public boolean initialize(final String cfgFilename) throws Exception {
+    public final boolean initialize() {
         notifyObservers();
-        this.cfg = (Properties) new MainParser().parseFile(cfgFilename);
+        try {
+            this.cfg = (Properties) new MainParser().parseFile(getCfgFilename());
+        } catch (Exception ex) {
+            ex.printStackTrace(); //Deep trouble
+            error = true;
+            return false;
+        }
         logger = (JPMLogger) newInstance(getCfg().getProperty("logger-class", "jpaoletti.jpm.core.log.Log4jLogger"));
         logger.setName(getCfg().getProperty("logger-name", "jPM"));
         error = false;
@@ -189,6 +204,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Formatting helper for startup
+     *
      * @param evt The event
      * @param s1 Text
      * @param s2 Extra description
@@ -199,7 +215,7 @@ public class PresentationManager extends Observable {
     }
 
     private void loadLocations() {
-        MenuItemLocationsParser parser = new MenuItemLocationsParser("jpm-locations.xml");
+        final MenuItemLocationsParser parser = new MenuItemLocationsParser(this, "jpm-locations.xml");
         locations = parser.getLocations();
         if (locations == null || locations.isEmpty()) {
             warn("No locations defined!");
@@ -255,6 +271,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Return the list of weak entities of the given entity.
+     *
      * @param e The strong entity
      * @return The list of weak entities
      */
@@ -274,6 +291,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Return the entity of the given id
+     *
      * @param id Entity id
      * @return The entity
      */
@@ -287,6 +305,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Return the location of the given id
+     *
      * @param id The location id
      * @return The MenuItemLocation
      */
@@ -296,6 +315,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Return the monitor of the given id
+     *
      * @param id The monitor id
      * @return The monitor
      */
@@ -303,20 +323,24 @@ public class PresentationManager extends Observable {
         return getMonitors().get(id);
     }
 
-    /**Create and fill a new Entity Container
+    /**
+     * Create and fill a new Entity Container
+     *
      * @param id Entity id
      * @return The container
      */
     public EntityContainer newEntityContainer(String id) {
-        Entity e = lookupEntity(id);
+        final Entity e = lookupEntity(id);
         if (e == null) {
             return null;
         }
         e.setWeaks(weakEntities(e));
-        return new EntityContainer(e, HASH);
+        return new EntityContainer(e);
     }
 
-    /**Looks for an Entity with the given id*/
+    /**
+     * Looks for an Entity with the given id
+     */
     private Entity lookupEntity(String sid) {
         for (Integer i = 0; i < getEntities().size(); i++) {
             Entity e = getEntities().get(i);
@@ -328,9 +352,12 @@ public class PresentationManager extends Observable {
     }
 
 
-    /* Getters */
+    /*
+     * Getters
+     */
     /**
      * Getter for contact
+     *
      * @return
      */
     public String getContact() {
@@ -339,6 +366,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Getter for default data access
+     *
      * @return
      */
     public String getDefaultDataAccess() {
@@ -347,6 +375,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Getter for entities map
+     *
      * @return
      */
     public Map<Object, Entity> getEntities() {
@@ -355,6 +384,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Getter for location map
+     *
      * @return
      */
     public Map<String, MenuItemLocation> getLocations() {
@@ -363,6 +393,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Getter for login required
+     *
      * @return
      */
     public boolean isLoginRequired() {
@@ -371,6 +402,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Getter for monitor map
+     *
      * @return
      */
     public Map<Object, Monitor> getMonitors() {
@@ -379,6 +411,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Create a new instance of the persistance manager
+     *
      * @return
      */
     public PersistenceManager newPersistenceManager() {
@@ -387,16 +420,19 @@ public class PresentationManager extends Observable {
 
     /**
      * Getter for singleton pm
+     *
      * @return
      */
     public static PresentationManager getPm() {
         return instance;
     }
 
-    /* Loggin helpers*/
+    /*
+     * Loggin helpers
+     */
     /**
      * If debug flag is active, create a debug information log
-     * 
+     *
      * @param invoquer The invoquer of the debug
      * @param o Object to log
      */
@@ -408,13 +444,16 @@ public class PresentationManager extends Observable {
 
     /**
      * Generate an info entry on the local logger
+     *
      * @param o Object to log
      */
     public void info(Object o) {
         logger.info(o);
     }
 
-    /**Generate a warn entry on the local logger
+    /**
+     * Generate a warn entry on the local logger
+     *
      * @param o Object to log
      */
     public void warn(Object o) {
@@ -425,7 +464,9 @@ public class PresentationManager extends Observable {
         }
     }
 
-    /**Generate an error entry on the local logger
+    /**
+     * Generate an error entry on the local logger
+     *
      * @param o Object to log
      */
     public void error(Object o) {
@@ -436,12 +477,17 @@ public class PresentationManager extends Observable {
         }
     }
 
-    /* Helpers for bean management */
-    /**Getter for an object property value as String
+    /*
+     * Helpers for bean management
+     */
+    /**
+     * Getter for an object property value as String
+     *
      * @param obj The object
      * @param propertyName The property
      * @return The value of the property of the object as string
-     * */
+     *
+     */
     public String getAsString(Object obj, String propertyName) {
         Object o = get(obj, propertyName);
         if (o != null) {
@@ -453,6 +499,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Getter for an object property value
+     *
      * @param obj The object
      * @param propertyName The property
      * @return The value of the property of the object
@@ -473,11 +520,14 @@ public class PresentationManager extends Observable {
         return null;
     }
 
-    /**Setter for an object property value
+    /**
+     * Setter for an object property value
+     *
      * @param obj The object
      * @param name The property name
      * @param value The value to set
-     * */
+     *
+     */
     public void set(Object obj, String name, Object value) {
         try {
             PropertyUtils.setNestedProperty(obj, name, value);
@@ -488,6 +538,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Creates a new instance object of the given class.
+     *
      * @param clazz The Class of the new Object
      * @return The new Object or null on any error.
      */
@@ -556,6 +607,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Return the session for the given id
+     *
      * @param sessionId The id of the wanted session
      * @return The session
      */
@@ -569,6 +621,7 @@ public class PresentationManager extends Observable {
 
     /**
      * Getter for the session map.
+     *
      * @return Sessions
      */
     public Map<String, PMSession> getSessions() {
@@ -576,7 +629,7 @@ public class PresentationManager extends Observable {
     }
 
     /**
-     * Removes the given id session 
+     * Removes the given id session
      */
     public void removeSession(String sessionId) {
         sessions.remove(sessionId);
@@ -708,5 +761,19 @@ public class PresentationManager extends Observable {
             bundle = ResourceBundle.getBundle("ApplicationResource", locale);
         }
         return bundle;
+    }
+
+    /**
+     * @return the cfgFilename
+     */
+    protected String getCfgFilename() {
+        return cfgFilename;
+    }
+
+    /**
+     * @param cfgFilename the cfgFilename to set
+     */
+    protected final void setCfgFilename(String cfgFilename) {
+        this.cfgFilename = cfgFilename;
     }
 }
