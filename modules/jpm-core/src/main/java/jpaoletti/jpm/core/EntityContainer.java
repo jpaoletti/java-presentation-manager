@@ -14,7 +14,6 @@ import java.util.List;
 public class EntityContainer {
 
     private String id;
-    private String sid;
     private Entity entity;
     private PaginatedList list;
     private List<InstanceId> selectedInstances;
@@ -30,10 +29,9 @@ public class EntityContainer {
      * @param entity The contained entity
      * @param sid The session id
      */
-    public EntityContainer(Entity entity, String sid) {
+    public EntityContainer(Entity entity) {
         super();
         this.entity = entity;
-        this.sid = sid;
         this.id = buildId(entity.getId());
         this.selectedNew = false;
     }
@@ -99,23 +97,6 @@ public class EntityContainer {
      */
     public void setList(PaginatedList list) {
         this.list = list;
-    }
-
-    /**
-     *
-     * @param sid
-     */
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
-
-    /**
-     * Getter for the session id
-     *
-     * @return The session id
-     */
-    public String getSid() {
-        return sid;
     }
 
     /**
