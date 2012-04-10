@@ -3,22 +3,26 @@ package jpaoletti.jpm.core.monitor;
 import java.util.List;
 import java.util.Properties;
 import jpaoletti.jpm.core.PersistenceManager;
+import jpaoletti.jpm.core.PresentationManager;
 
-/** A monitor source is where the monitor takes the information
- * 
+/**
+ * A monitor source is where the monitor takes the information
+ *
  * @author jpaoletti
- * 
- * */
+ *
+ */
 public abstract class MonitorSource {
 
     private PersistenceManager persistenceManager;
     private Properties properties;
 
-    public MonitorSource(PersistenceManager persistenceManager) {
-        this.persistenceManager = persistenceManager;
+    public MonitorSource() {
     }
 
     public PersistenceManager getPersistenceManager() {
+        if (persistenceManager == null) {
+            this.persistenceManager = PresentationManager.getPm().newPersistenceManager();
+        }
         return persistenceManager;
     }
 
@@ -33,7 +37,7 @@ public abstract class MonitorSource {
 
     /**
      * Returns a list of line from the actual object
-     * 
+     *
      * @param actual Actual line identification
      * @return The list of lines
      * @throws Exception
@@ -42,13 +46,15 @@ public abstract class MonitorSource {
 
     /**
      * Returns the last line of the monitor
-     * @return  The line
+     *
+     * @return The line
      * @throws Exception
      */
     public abstract MonitorLine getLastLine() throws Exception;
 
     /**
      * Setter for properties
+     *
      * @param properties
      */
     public void setProperties(Properties properties) {
@@ -57,17 +63,21 @@ public abstract class MonitorSource {
 
     /**
      * Getter for properties
+     *
      * @return The properties
      */
     public Properties getProperties() {
         return properties;
     }
 
-    /**Getter for a specific property with a default value in case its not defined. 
-     * Only works for string.
+    /**
+     * Getter for a specific property with a default value in case its not
+     * defined. Only works for string.
+     *
      * @param name Property name
      * @param def Default value
-     * @return Property value only if its a string */
+     * @return Property value only if its a string
+     */
     public String getConfig(String name, String def) {
         if (properties != null) {
             Object obj = properties.get(name);
@@ -78,9 +88,12 @@ public abstract class MonitorSource {
         return def;
     }
 
-    /**Getter for any property in the properties object
+    /**
+     * Getter for any property in the properties object
+     *
      * @param name The property name
-     * @return The property value */
+     * @return The property value
+     */
     public String getConfig(String name) {
         return getConfig(name, null);
     }

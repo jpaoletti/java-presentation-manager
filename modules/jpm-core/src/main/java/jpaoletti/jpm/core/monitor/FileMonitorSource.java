@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import jpaoletti.jpm.core.PersistenceManager;
 
 /**
  * A monitor source that takes information from a file
@@ -15,9 +14,6 @@ import jpaoletti.jpm.core.PersistenceManager;
  */
 public class FileMonitorSource extends MonitorSource {
 
-    public FileMonitorSource(PersistenceManager persistenceManager) {
-        super(persistenceManager);
-    }
     private String filename;
 
     /**

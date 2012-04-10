@@ -3,7 +3,6 @@ package jpaoletti.jpm.hibernate.core.monitor;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import jpaoletti.jpm.core.PersistenceManager;
 import jpaoletti.jpm.core.monitor.MonitorLine;
 import jpaoletti.jpm.core.monitor.MonitorSource;
 import org.hibernate.SQLQuery;
@@ -17,11 +16,7 @@ public class SQLMonitorSource extends MonitorSource {
     private String query;
     private String lastLineQuery;
     private Integer idColumn;
-
-    public SQLMonitorSource(PersistenceManager persistenceManager) {
-        super(persistenceManager);
-    }
-
+    
     @Override
     public void init() {
         setQuery(getConfig("query"));
