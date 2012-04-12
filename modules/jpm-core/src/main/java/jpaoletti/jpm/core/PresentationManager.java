@@ -1,6 +1,7 @@
 package jpaoletti.jpm.core;
 
 import java.util.*;
+import jpaoletti.jpm.converter.ClassConverterList;
 import jpaoletti.jpm.converter.Converter;
 import jpaoletti.jpm.converter.ConverterWrapper;
 import jpaoletti.jpm.converter.ExternalConverters;
@@ -34,6 +35,7 @@ public class PresentationManager extends Observable {
     private Map<String, MenuItemLocation> locations;
     private Map<Object, Monitor> monitors;
     private List<ExternalConverters> externalConverters;
+    private ClassConverterList classConverters;
     private String persistenceManager;
     private boolean error;
     private final Map<String, PMSession> sessions = new HashMap<String, PMSession>();
@@ -147,6 +149,7 @@ public class PresentationManager extends Observable {
             loadEntities();
             loadMonitors();
             loadConverters();
+            loadClassConverters();
             loadLocations();
             createSessionChecker();
         } catch (Exception exception) {
@@ -564,6 +567,35 @@ public class PresentationManager extends Observable {
                 logItem("[ExternalConverter] " + s, null, "!");
             }
         }
+        //Check repeated ids
+        final List<String> ids = new ArrayList<String>();
+        for (ExternalConverters ec : getExternalConverters()) {
+            for (ConverterWrapper cw : ec.getConverters()) {
+                if (ids.contains(cw.getId())) {
+                    logItem("[ExternalConverter] Repeated id: " + cw.getId(), null, "!");
+                    error = true;
+                } else {
+                    ids.add(cw.getId());
+                }
+            }
+        }
+    }
+
+    private void loadClassConverters() {
+        final PMParser parser = new ClassConverterParser(this);
+        final String classConvertersFile = getCfg().getProperty("class-converters");
+        if (classConvertersFile != null) {
+            try {
+                classConverters = (ClassConverterList) parser.parseFile(classConvertersFile);
+                logItem("[ClassConverters] " + classConvertersFile, null, "*");
+            } catch (Exception exception) {
+                error(exception);
+                logItem("[ClassConverters] " + classConvertersFile, null, "!");
+            }
+        } else {
+            logItem("[ClassConverters] - ", null, "*");
+            classConverters = new ClassConverterList(this);
+        }
     }
 
     public Converter findExternalConverter(String id) {
@@ -780,5 +812,23 @@ public class PresentationManager extends Observable {
      */
     protected final void setCfgFilename(String cfgFilename) {
         this.cfgFilename = cfgFilename;
+    }
+
+    public ClassConverterList getClassConverters() {
+        return classConverters;
+    }
+
+    /**
+     * Search external converter by id
+     */
+    public Converter getExternalConverter(String id) {
+        for (ExternalConverters ec : getExternalConverters()) {
+            for (ConverterWrapper cw : ec.getConverters()) {
+                if (cw.getId().equals(id)) {
+                    return cw.getConverter();
+                }
+            }
+        }
+        return null;
     }
 }

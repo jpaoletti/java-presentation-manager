@@ -47,7 +47,6 @@
     </field>
     <field id="key" width="150" >
         <converters>
-            <econverter id="edit-50-string" operations="add edit" />
             <econverter id="local-string" operations="list show export" />
         </converters>
     </field>
@@ -60,7 +59,6 @@
     <field id="bigstring" display="show edit add">
         <converters>
             <econverter id="edit-big-string" operations="edit add" />
-            <econverter id="to-string" operations="export" />
         </converters>
     </field>
 </entity>

@@ -316,7 +316,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         int i = 0;
         for (Object value : parameterValues) {
             try {
-                final Converter converter = field.getConverters().getConverterForOperation(ctx.getOperation().getId());
+                final Converter converter = field.getConverter(ctx.getOperation().getId());
                 Object converted = getConvertedValue(ctx, field, value, wrapper, converter);
                 doProcessField(wrapper, i, converter, ctx, field, converted);
             } catch (IgnoreConvertionException e) {

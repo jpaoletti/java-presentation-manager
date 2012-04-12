@@ -69,7 +69,7 @@ public class Field extends PMCoreObject {
         try {
             Converter c = null;
             if (getConverters() != null) {
-                c = getConverters().getConverterForOperation(operation.getId());
+                c = getConverter(operation.getId());
             }
             if (c == null) {
                 c = getDefaultConverter();
@@ -332,5 +332,26 @@ public class Field extends PMCoreObject {
 
     public void setEntity(Entity entity) {
         this.entity = entity;
+    }
+
+    /**
+     * Find the right converter for this field on the given operation.
+     *
+     * @param operation
+     *
+     * @return a converter
+     */
+    public Converter getConverter(String operation) {
+        final Converter c = getConverters().getConverterForOperation(operation);
+        if(c == null){
+            try {
+                final String className = Class.forName(getEntity().getClazz()).getDeclaredField(getProperty()).getType().getName();
+                return getPm().getClassConverters().getConverter(operation, className);
+            } catch (Exception ex) {
+                getPm().error(ex);
+                return null;
+            }
+        }
+        return c;
     }
 }

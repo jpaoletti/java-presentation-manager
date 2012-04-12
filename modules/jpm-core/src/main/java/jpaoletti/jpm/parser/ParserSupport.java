@@ -28,7 +28,9 @@ public abstract class ParserSupport implements PMParser {
     public Object parseFile(String filename) throws Exception {
         init();
         final InputStream is = ResourceManager.getInputStream(filename);
-        return xstream.fromXML(new InputStreamReader(is), newObject());
+        final Object result = xstream.fromXML(new InputStreamReader(is), newObject());
+        afterParse(result);
+        return result;
     }
 
     @Override
@@ -46,5 +48,8 @@ public abstract class ParserSupport implements PMParser {
 
     public PresentationManager getPm() {
         return pm;
+    }
+
+    protected void afterParse(Object result) {
     }
 }

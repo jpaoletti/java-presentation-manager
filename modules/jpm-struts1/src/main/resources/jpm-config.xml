@@ -22,6 +22,9 @@
     <!-- External Converters -->
     <property name="external-converters" value="jpm-econverters.xml"/>
 
+    <!-- Class Converters -->
+    <property name="class-converters" value="jpm-class-converters.xml"/>
+
     <!-- Busissnes Entities -->
 
     <property name="entity" value="entities/simpleclass.xml"/>

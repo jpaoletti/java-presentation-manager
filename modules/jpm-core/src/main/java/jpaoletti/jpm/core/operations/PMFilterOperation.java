@@ -98,7 +98,7 @@ public class PMFilterOperation extends OperationCommandSupport {
         int i = 0;
         for (Object value : parameterValues) {
             try {
-                final Converter converter = field.getConverters().getConverterForOperation(ctx.getOperation().getId());
+                final Converter converter = field.getConverter(ctx.getOperation().getId());
                 Object converted = getConvertedValue(ctx, field, value, null, converter);
                 values.add(converted);
             } catch (IgnoreConvertionException e) {

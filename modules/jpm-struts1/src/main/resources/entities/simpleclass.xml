@@ -23,9 +23,5 @@
             <econverter id="edit-long" operations="add" />
         </converters>
     </field>
-    <field id="description">
-        <converters>
-            <econverter id="edit-50-string"/>
-        </converters>
-    </field>
+    <field id="description" />
 </entity>
