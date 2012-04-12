@@ -19,6 +19,28 @@ The default visual implementation is based on Struts 1. This is going to change 
 with a custom MVC system. To use it you need to use the following maven plugin:
 
 ```xml
+
+  <properties>
+      <jpm.version>1.3.0</jpm.version>
+      <jpm.impl>jpm-struts1</jpm.impl>
+  </properties>
+  ...
+  <dependencies>
+      <dependency>
+          <groupId>com.github.jpaoletti</groupId>
+          <artifactId>${jpm.impl}</artifactId>
+          <version>${jpm.version}</version>
+          <type>war</type>
+      </dependency>
+      <dependency>
+          <groupId>com.github.jpaoletti</groupId>
+          <artifactId>${jpm.impl}</artifactId>
+          <version>${jpm.version}</version>
+          <type>jar</type>
+          <classifier>classes</classifier>
+      </dependency>
+    ...
+  </dependencies>
   ...
   <build>
     <plugins>
@@ -34,19 +56,6 @@ with a custom MVC system. To use it you need to use the following maven plugin:
   </build>
   ...
 
-  ...
-  <dependencies>
-    <dependency>
-      <groupId>com.github.jpaoletti</groupId>
-      <artifactId>jpm-struts1</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <type>war</type>
-      <scope>runtime</scope>
-    </dependency>
-    ...
-  </dependencies>
-  ...
-  
 ```
 For further reference check http://maven.apache.org/plugins/maven-war-plugin/overlays.html
 
