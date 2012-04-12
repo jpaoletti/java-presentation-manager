@@ -44,7 +44,7 @@ public abstract class PMCoreObject implements PMCoreConstants {
      *
      * @return The Presentation Manager
      */
-    protected PresentationManager getPresentationManager() {
+    protected PresentationManager getPm() {
         return PresentationManager.getPm();
     }
 }

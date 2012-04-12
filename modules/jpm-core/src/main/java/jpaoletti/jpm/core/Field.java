@@ -2,7 +2,6 @@ package jpaoletti.jpm.core;
 
 import java.util.ArrayList;
 import java.util.Properties;
-
 import jpaoletti.jpm.converter.Converter;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.converter.Converters;
@@ -81,13 +80,13 @@ public class Field extends PMCoreObject {
             // We only set the field value if instance is not null.
             // Some operations may use this value without an instance.
             if (instance != null) {
-                ctx.setFieldValue(getPresentationManager().get(instance, getProperty()));
+                ctx.setFieldValue(getPm().get(instance, getProperty()));
             }
             return c.visualize(ctx);
         } catch (ConverterException e) {
             throw e;
         } catch (Exception e) {
-            getPresentationManager().error(e);
+            getPm().error(e);
             throw new ConverterException("Unable to convert " + entity.getId() + "." + getProperty());
         }
     }
@@ -98,14 +97,14 @@ public class Field extends PMCoreObject {
      * @return The converter
      */
     public Converter getDefaultConverter() {
-        if (getPresentationManager().getDefaultConverter() == null) {
+        if (getPm().getDefaultConverter() == null) {
             Converter c = new GenericConverter();
             Properties properties = new Properties();
             properties.put("filename", "converters/show.tostring.converter");
             c.setProperties(properties);
             return c;
         } else {
-            return getPresentationManager().getDefaultConverter();
+            return getPm().getDefaultConverter();
         }
     }
 
@@ -302,7 +301,7 @@ public class Field extends PMCoreObject {
      */
     public String getTitle() {
         final String key = String.format("pm.field.%s.%s", getEntity().getId(), getId());
-        final String message = PresentationManager.getMessage(key);
+        final String message = getPm().message(key);
         if (key.equals(message)) {
             final Entity extendzEntity = getEntity().getExtendzEntity();
             if (extendzEntity != null && extendzEntity.getFieldById(getId()) != null) {
@@ -320,7 +319,7 @@ public class Field extends PMCoreObject {
         if (key == null) {
             return null;
         }
-        final String message = PresentationManager.getMessage(key);
+        final String message = getPm().message(key);
         if (key.equals(message)) {
             return null;
         }

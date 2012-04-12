@@ -76,7 +76,7 @@ public class Highlights extends PMCoreObject {
      */
     protected boolean match(Object instance, Field field, Highlight highlight) {
         try {
-            Object o = getPresentationManager().get(instance, field.getProperty());
+            Object o = getPm().get(instance, field.getProperty());
             if (o != null && o.toString().equals(highlight.getValue()) && highlight.getField().equals(field.getId())) {
                 return true;
             }

@@ -126,8 +126,8 @@ public class GenericConverter extends Converter {
         Interpreter bash = new Interpreter();
         BshClassManager bcm = bash.getClassManager();
         //TODO
-        //bcm.setClassPath(getPresentationManager().getLoader().getURLs());
-        //bcm.setClassLoader(getPresentationManager().getService().getServer().getLoader());
+        //bcm.setClassPath(getPm().getLoader().getURLs());
+        //bcm.setClassLoader(getPm().getService().getServer().getLoader());
         bash.set("qbean", this);
         return bash;
     }

@@ -1,7 +1,6 @@
 package jpaoletti.jpm.converter;
 
 import jpaoletti.jpm.core.PMContext;
-import jpaoletti.jpm.core.PresentationManager;
 
 /**Converter for showing a boolean value.<br>
  * <pre>
@@ -24,8 +23,8 @@ public class ShowBooleanConverter extends Converter {
             throw new ConverterException("boolean.converter.invalid.value");
         }
         final String result = ((Boolean) ctx.getFieldValue())
-                ? PresentationManager.getMessage(getConfig("true-text", "pm.converter.boolean_converter.yes"))
-                : PresentationManager.getMessage(getConfig("false-text", "pm.converter.boolean_converter.no"));
+                ? getPm().message(getConfig("true-text", "pm.converter.boolean_converter.yes"))
+                : getPm().message(getConfig("false-text", "pm.converter.boolean_converter.no"));
         ctx.setFieldValue(result);
         return visualize(result);
     }

@@ -689,13 +689,12 @@ public class PresentationManager extends Observable {
     /**
      * Returns the internacionalized string for the given key
      */
-    public static String getMessage(String key, Object... params) {
+    public String message(String key, Object... params) {
         if (key == null) {
             return null;
         }
         try {
-            final ResourceBundle bundle = getPm().getResourceBundle();
-            String string = bundle.getString(key);
+            String string = getResourceBundle().getString(key);
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
                     String param = (params[i] == null) ? "" : params[i].toString();
@@ -706,6 +705,13 @@ public class PresentationManager extends Observable {
         } catch (Exception e) {
             return key;
         }
+    }
+
+    /**
+     * Returns the internacionalized string for the given key
+     */
+    public static String getMessage(String key, Object... params) {
+        return getPm().message(key, params);
     }
 
     public Converter getDefaultConverter() {

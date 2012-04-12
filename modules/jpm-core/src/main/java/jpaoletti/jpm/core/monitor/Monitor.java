@@ -246,6 +246,6 @@ public class Monitor extends Observable implements Runnable {
      * Returns the internationalized entity title
      */
     public String getTitle() {
-        return PresentationManager.getMessage("pm.monitor." + getId());
+        return pm.message("pm.monitor." + getId());
     }
 }

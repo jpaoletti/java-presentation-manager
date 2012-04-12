@@ -217,7 +217,7 @@ public class Entity extends PMCoreObject {
                 return r;
             }
         } catch (Exception e) {
-            getPresentationManager().error(e);
+            getPm().error(e);
         }
         return getAllFields();
     }
@@ -439,7 +439,7 @@ public class Entity extends PMCoreObject {
             try {
                 dataAccess = (DataAccess) pm.newInstance(pm.getDefaultDataAccess());
             } catch (Exception e) {
-                getPresentationManager().error(e);
+                getPm().error(e);
             }
         }
         if (dataAccess != null) {
@@ -570,7 +570,7 @@ public class Entity extends PMCoreObject {
      */
     public String getTitle() {
         final String key = String.format("pm.entity.%s", getId());
-        final String message = PresentationManager.getMessage(key);
+        final String message = pm.message(key);
         if (key.equals(message)) {
             if (getExtendzEntity() != null) {
                 return getExtendzEntity().getTitle();

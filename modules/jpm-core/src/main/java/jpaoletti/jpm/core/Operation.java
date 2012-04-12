@@ -309,7 +309,7 @@ public class Operation extends PMCoreObject {
      * Returns the internationalized operation title
      */
     public String getTitle() {
-        return PresentationManager.getMessage("operation." + getId());
+        return getPm().message("operation." + getId());
     }
 
     public boolean isAvailable() {
