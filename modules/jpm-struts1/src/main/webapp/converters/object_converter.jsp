@@ -44,7 +44,9 @@
     <input type="text" id="search_${param.f}" size="7" class="object-converter-search"/>
     <script type="text/javascript">
         PM_register(function(){
-            $("#search_${param.f}").keyup(sacupds["${param.f}"]); 
+            $("#search_${param.f}").keyup(function() {
+                delay(sacupds["${param.f}"], 1000 );
+            });
         });
     </script>
 </c:if>
