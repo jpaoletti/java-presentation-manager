@@ -55,10 +55,14 @@ public class PresentationManager extends Observable {
      */
     public PresentationManager(String cfgFilename) {
         this.cfgFilename = cfgFilename;
-        if (initialize()) {
-            instance = this;
+        if (instance == null) {
+            if (initialize()) {
+                instance = this;
+            } else {
+                instance = null;
+            }
         } else {
-            instance = null;
+            instance.warn("Trying to initialize the already initialized PM. Ignoring");
         }
     }
 
@@ -560,7 +564,7 @@ public class PresentationManager extends Observable {
         for (String s : ss) {
             try {
                 final ExternalConverters ec = (ExternalConverters) parser.parseFile(s);
-                getExternalConverters().add(ec);
+                externalConverters.add(ec);
                 logItem("[ExternalConverter] " + s, null, "*");
             } catch (Exception exception) {
                 error(exception);
@@ -569,7 +573,7 @@ public class PresentationManager extends Observable {
         }
         //Check repeated ids
         final List<String> ids = new ArrayList<String>();
-        for (ExternalConverters ec : getExternalConverters()) {
+        for (ExternalConverters ec : externalConverters) {
             for (ConverterWrapper cw : ec.getConverters()) {
                 if (ids.contains(cw.getId())) {
                     logItem("[ExternalConverter] Repeated id: " + cw.getId(), null, "!");
