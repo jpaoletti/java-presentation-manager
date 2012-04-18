@@ -48,7 +48,7 @@ public class MenuTag extends PMTags {
                 out.println("<div class='copyright' title='" + PresentationManager.getMessage("header.copyright", copyright, Calendar.getInstance().get(Calendar.YEAR)) + "'>&copy;</div>");
             }
             if (PresentationManager.getPm().isHideableHeader()) {
-                out.println("<a href='#' id='btnColapseExpand' title=" + PresentationManager.getMessage("header.expand") + "><div class='expand'></div></a>");
+                out.println("<a href='#' id='btnColapseExpand' title='" + PresentationManager.getMessage("header.expand") + "'><div class='expand'></div></a>");
             }
             if (pmsession != null) {
                 out.println("<a href='" + PMTags.plainUrl(pmsession, "logout.do") + "' title=" + PresentationManager.getMessage("logout") + "><div class='logout'></div></a>");
