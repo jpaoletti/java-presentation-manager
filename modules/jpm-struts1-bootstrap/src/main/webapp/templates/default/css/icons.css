@@ -1,0 +1,16 @@
+.ui-icon{display:inline-block;width:14px;height:14px;line-height:14px;vertical-align:text-top;background-image:url("../img/glyphicons-halflings.png");background-position:14px 14px;background-repeat:no-repeat;*margin-right:.3em;}[class^="icon-"]:last-child,[class*=" icon-"]:last-child{*margin-left:0;}
+.ui-icon-operation-list{background-position:-264px -24px;}
+.ui-icon-operation-show{background-position:-48px 0;}
+.ui-icon-operation-edit{background-position:0 -72px;}
+.ui-icon-operation-add{background-position:-408px -96px;}
+.ui-icon-operation-delete{background-position:-456px 0;}
+.ui-icon-operation-multidelete{background-position:-456px 0;}
+.ui-icon-operation-export{background-position:-24px -24px;}
+
+/* Not from bootstrap */
+.ui-icon-operation-clearfilter { background: url("../img/clearfilter.gif") !important; }
+.ui-icon-operation-filter { background: url("../img/filter.gif") !important; }
+.ui-icon-operation-invertselection { background: url("../img/invertselection.gif") !important; }
+.ui-icon-operation-deselectall { background: url("../img/deselectall.gif") !important; }
+.ui-icon-operation-selectall { background: url("../img/selectall.gif") !important; }
+.ui-icon-operation-resetpsw{ background: url("../img/operation-resetpsw.png") !important; }
