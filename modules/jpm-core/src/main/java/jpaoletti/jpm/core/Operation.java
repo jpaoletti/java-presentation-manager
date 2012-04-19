@@ -20,6 +20,8 @@ import jpaoletti.jpm.validator.Validator;
  *    <perm>sysadmin</perm>
  *    <available>(*)true|false</available>
  *    <follows>other_operation_id</follows>
+ *    <compact>true</compact>
+ *    <popup>true</popup>
  *    <context class="some.operation.Context" />
  *    <validator class="some.validator.Validator1" />
  *    <validator class="some.validator.Validator2" />
@@ -32,15 +34,11 @@ import jpaoletti.jpm.validator.Validator;
  */
 public class Operation extends PMCoreObject {
 
-    /**
-     * The operation Id. Must be unique and only one word
-     */
+    //The operation Id. Must be unique and only one word
     private String id;
-    /**
-     * Determine if the operation is enabled or not.
-     */
+    //Determine if the operation is enabled or not.
     private Boolean enabled;
-    /**
+    /*
      * Scope of the operation. Possibles values are: <dl> <dd> general
      * </dd><dt>A general scope operation affects all the instances of the
      * entity or none of them. </dt> <dd> item </dd><dt>An item scope operation
@@ -54,33 +52,21 @@ public class Operation extends PMCoreObject {
      * operation will be shown
      */
     private String display;
-    /**
-     * If defined, its a direct link to a fixed URL
-     */
+    //If defined, its a direct link to a fixed URL
     private String url;
-    /**
-     * Indicates if the entity's title is shown
-     */
+    //Indicates if the entity's title is shown
     private Boolean showTitle;
-    /**
-     * Indicate if a confirmation is needed before proceed.
-     */
+    //Indicate if a confirmation is needed before proceed.
     private Boolean confirm;
     /**
      * @see OperationContext
      */
     private OperationContext context;
-    /**
-     * A list of validators for the operation.
-     */
+    //A list of validators for the operation.
     private ArrayList<Validator> validators;
-    /**
-     * A properties object to get some extra configurations
-     */
+    //A properties object to get some extra configurations
     private Properties properties;
-    /**
-     * Permission to do this operation
-     */
+    //Permission to do this operation
     private String perm;
     // Another operation ID that follows this one on success
     private String follows;
@@ -88,7 +74,9 @@ public class Operation extends PMCoreObject {
     private OperationCondition condition;
     private Boolean available;
     //Display a compact visual representation, usually an icon without text
-    private Boolean compact;
+    private Boolean compact; //Default: false
+    //Display operation in a "popup" visualization instead of redirecting it
+    private Boolean popup; //Default: false
 
     public OperationCondition getCondition() {
         return condition;
@@ -332,5 +320,16 @@ public class Operation extends PMCoreObject {
 
     public void setCompact(Boolean compact) {
         this.compact = compact;
+    }
+
+    public Boolean getPopup() {
+        if (popup == null) {
+            return false;
+        }
+        return popup;
+    }
+
+    public void setPopup(Boolean popup) {
+        this.popup = popup;
     }
 }
