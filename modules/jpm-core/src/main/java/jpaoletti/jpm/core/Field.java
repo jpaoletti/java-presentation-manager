@@ -343,12 +343,12 @@ public class Field extends PMCoreObject {
      */
     public Converter getConverter(String operation) {
         final Converter c = getConverters().getConverterForOperation(operation);
-        if(c == null){
+        if (c == null) {
             try {
                 final String className = Class.forName(getEntity().getClazz()).getDeclaredField(getProperty()).getType().getName();
                 return getPm().getClassConverters().getConverter(operation, className);
             } catch (Exception ex) {
-                getPm().error(ex);
+                getPm().warn(String.format("Unable to introspect field '%s' on entity '%s'", getProperty(), getEntity().getId()));
                 return null;
             }
         }
