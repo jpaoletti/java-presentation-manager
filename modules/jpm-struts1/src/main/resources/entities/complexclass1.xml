@@ -45,7 +45,7 @@
             <econverter id="edit-bool" operations="add edit" />
         </converters>
     </field>
-    <field id="key" width="150" >
+    <field id="key">
         <converters>
             <econverter id="local-string" operations="list show export" />
         </converters>
