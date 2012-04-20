@@ -1,7 +1,5 @@
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %>
 <script type="text/javascript" src="${es.context_path}/js/jquery.dataTables.js"></script>
-<script type="text/javascript" src="${es.context_path}/js/jquery-ui-1.8.16.custom.min.js"></script>
-<script type="text/javascript" src="${es.context_path}/js/jquery-ui-combobox.js"></script>
 <script type="text/javascript">
     var msg_system = new Array();
     var msg_entity = new Array();
