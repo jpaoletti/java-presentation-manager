@@ -20,7 +20,7 @@ public class EditIntegerConverter extends DefaultStrutsConverter {
         try {
             return Integer.parseInt((String) ctx.getFieldValue());
         } catch (NumberFormatException e) {
-            return null;
+            throw new ConverterException("pm.struts.converter.invalid.int");
         }
     }
 

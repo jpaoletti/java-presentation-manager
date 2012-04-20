@@ -20,7 +20,7 @@ public class EditBooleanConverter extends StrutsEditConverter {
         if (res.compareTo("false") == 0) {
             return false;
         }
-        return null;
+        throw new ConverterException("pm.struts.converter.invalid.boolean");
     }
 
     @Override

@@ -21,7 +21,7 @@ public class EditLongConverter extends DefaultStrutsConverter {
         try {
             return Long.parseLong((String) ctx.getFieldValue());
         } catch (NumberFormatException e) {
-            return null;
+            throw new ConverterException("pm.struts.converter.invalid.long");
         }
     }
 

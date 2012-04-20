@@ -29,7 +29,7 @@ public class EditDecimalConverter extends DefaultStrutsConverter {
             final String separator = getConfig("separator", ".");
             return new BigDecimal(((String) ctx.getFieldValue()).replace(separator, "."));
         } catch (Exception e) {
-            return null;
+            throw new ConverterException("pm.struts.converter.invalid.decimal");
         }
     }
 
