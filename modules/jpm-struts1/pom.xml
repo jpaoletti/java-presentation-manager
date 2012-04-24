@@ -12,6 +12,10 @@
         <version>1.3.1-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
+    <properties>
+        <cfg>cfg-struts1</cfg>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -79,6 +83,19 @@
         </dependency>
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <!-- Test resources for simplier development-->
+                <directory>../jpm-test/src/main/resources</directory>
+                <excludes>
+                    <exclude>jpm-config.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>

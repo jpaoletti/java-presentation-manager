@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class table="complexclass1" name="jpaoletti.jpm.test.ComplexClass1" 
+           dynamic-insert="false" dynamic-update="false" mutable="true" 
+           optimistic-lock="version" polymorphism="implicit" select-before-update="false">
+        <id name="id" type="long">
+            <generator class="native"/>
+        </id>
+        <property name="description" />
+        <property name="active" type="yes_no"/>
+        <property name="amount" type="double" length="10" precision="2" />
+        <property name="bigstring" type="text" />
+        <property name="date" type="date" />
+        <property name="datetime" type="timestamp" />
+        <property name="key" type="string" />
+        <property name="password" type="string" />
+        <property name="size" type="long" />
+    </class>
+</hibernate-mapping>

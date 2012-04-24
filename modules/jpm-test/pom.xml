@@ -2,11 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.github.jpaoletti</groupId>
-    <artifactId>jpm-struts1-bootstrap</artifactId>
-    <packaging>war</packaging>    
-    <description>Struts1 web module for jpm</description>
+    <artifactId>jpm-test</artifactId>
+    <packaging>war</packaging>
+    <name>jpm-test</name>
+
+    <description>
+        Test project using hibernate and a HSQL database.
+        By using maven profiles it is possible to switch between each implementation.
+    </description>
     <parent>
         <groupId>com.github.jpaoletti</groupId>
         <artifactId>java-presentation-manager</artifactId>
@@ -15,19 +19,38 @@
     </parent>
 
     <properties>
-        <cfg>cfg-struts1</cfg>
-        <jpm.version>1.3.1-SNAPSHOT</jpm.version>
-        <jpm.impl>jpm-struts1</jpm.impl>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!-- Profiles are used to switch between implementations-->
+    <profiles>
+        <profile>
+            <id>struts1</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jpm.version>${project.version}</jpm.version>
+                <jpm.impl>jpm-struts1</jpm.impl>
+                <cfg>cfg-struts1</cfg>
+            </properties>
+        </profile>
+        <profile>
+            <id>struts1-bootstrap</id>
+            <properties>
+                <jpm.version>${project.version}</jpm.version>
+                <jpm.impl>jpm-struts1-bootstrap</jpm.impl>
+                <cfg>cfg-struts1</cfg>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
+            <groupId>com.github.jpaoletti</groupId>
+            <artifactId>jpm-hibernate</artifactId>
+            <version>${jpm.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.jpaoletti</groupId>
@@ -42,6 +65,17 @@
             <type>jar</type>
             <classifier>classes</classifier>
         </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -50,14 +84,13 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
-            <resource>
-                <!-- Test resources for simplier development-->
-                <directory>../jpm-test/src/main/resources</directory>
-                 <excludes>
-                    <exclude>jpm-config.xml</exclude>
-                </excludes>
-            </resource>
         </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -76,15 +109,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.1.1</version>
                 <configuration>
-                    <attachClasses>true</attachClasses>
-                    <goal>deploy</goal>
-                    <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                        </manifest>
-                    </archive>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
             <plugin>

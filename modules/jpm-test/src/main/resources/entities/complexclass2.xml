@@ -1,6 +1,5 @@
 <?xml version='1.0'?>
 <entity id="complexclass2" clazz="jpaoletti.jpm.test.ComplexClass2" extendz="simpleclass">
-    <dataAccess class="jpaoletti.jpm.test.DataAccessComplexClass2" />
     <order>id description </order>
     <highlights>
         <highlight field="id" value="3" style="yellow" scope="instance" />

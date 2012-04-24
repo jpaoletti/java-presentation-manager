@@ -1,6 +1,5 @@
 <?xml version='1.0'?>
 <entity id="complexclass1" clazz="jpaoletti.jpm.test.ComplexClass1" extendz="simpleclass">
-    <dataAccess class="jpaoletti.jpm.test.DataAccessComplexClass1" />
     <order>id description amount date datetime active key </order>
     <operations>
         <operation id="list"  scope="general">

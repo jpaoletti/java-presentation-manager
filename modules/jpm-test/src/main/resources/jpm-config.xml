@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <presentation-manager>
-    <property name="debug"          value="true"/>
-    <property name="appversion"     value="1.3.0"/>
-    <property name="template"       value="default"/>
-    <property name="copyright"      value="Jeronimo Paoletti"/>
-    <property name="multi-login"    value="true"/>
-    <property name="welcome-page"   value="pages/_customindex.jsp"/>
-    <property name="locale"         value=""/> <!-- en_US -->
-    <property name="secure-urls"    value="true"/>
+    <property name="debug" value="true"/>
+    <property name="appversion" value="1.0.0"/>
+    <property name="template" value="default"/>
+    <property name="persistence-manager" 
+              value="jpaoletti.jpm.hibernate.core.PersistenceManager"/>
     
-    <property name="logger-class"    value="jpaoletti.jpm.core.log.Log4jLogger"/>
-    <property name="logger-name"     value="jpm"/>
-    <property name="hideable-header" value="true"/>
-
-    <property name="default-data-access"
-              value="jpaoletti.jpm.test.DataAccessTest"/>
-
+    <property name="default-data-access" 
+              value="jpaoletti.jpm.hibernate.core.DataAccess"/>
+    
     <property name="default-converter" 
               value="jpaoletti.jpm.struts.converter.DefaultStrutsConverter"/>
               
@@ -33,7 +26,7 @@
 
     <!-- Class Converters -->
     <property name="class-converters" value="${cfg}/jpm-class-converters.xml"/>
-
+    
     <!-- Busissnes Entities -->
 
     <property name="entity" value="entities/simpleclass.xml"/>

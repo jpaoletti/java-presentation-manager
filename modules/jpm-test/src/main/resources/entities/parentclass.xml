@@ -1,6 +1,5 @@
 <?xml version='1.0'?>
 <entity id="parentclass" clazz="jpaoletti.jpm.test.ParentClass" extendz="simpleclass">
-    <dataAccess class="jpaoletti.jpm.test.DataAccessParentClass" />
     <order>id description </order>
     <operations>
         <operation id="list" enabled="true" scope="general" display="all" >

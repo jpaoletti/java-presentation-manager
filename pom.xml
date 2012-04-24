@@ -47,6 +47,7 @@
         <module>modules/jpm-hibernate</module>
         <module>modules/jpm-struts1</module>
         <module>modules/jpm-struts1-bootstrap</module>
+        <module>modules/jpm-test</module>
     </modules>
     
     <build>
