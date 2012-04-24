@@ -221,7 +221,7 @@ public class PresentationManager extends Observable {
     }
 
     private void loadLocations() {
-        final MenuItemLocationsParser parser = new MenuItemLocationsParser(this, "jpm-locations.xml");
+        final MenuItemLocationsParser parser = new MenuItemLocationsParser(this, getCfg().getProperty("locations", "jpm-locations.xml"));
         locations = parser.getLocations();
         if (locations == null || locations.isEmpty()) {
             warn("No locations defined!");
