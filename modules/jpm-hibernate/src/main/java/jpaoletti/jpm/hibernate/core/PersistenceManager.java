@@ -3,6 +3,7 @@ package jpaoletti.jpm.hibernate.core;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
 import jpaoletti.jpm.core.PresentationManager;
+import jpaoletti.jpm.hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -49,5 +50,10 @@ public class PersistenceManager implements jpaoletti.jpm.core.PersistenceManager
     @Override
     public Session getConnection() {
         return session;
+    }
+
+    @Override
+    public Session newConnection() {
+        return HibernateUtil.getSession();
     }
 }

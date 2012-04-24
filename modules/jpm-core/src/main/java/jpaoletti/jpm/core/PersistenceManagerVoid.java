@@ -3,7 +3,7 @@ package jpaoletti.jpm.core;
 /**
  * This class replace the old service property "ignoreDB". Just use this class
  * in "persistence-manager"
- * 
+ *
  * @author jpaoletti
  *
  */
@@ -11,6 +11,7 @@ public class PersistenceManagerVoid implements PersistenceManager<Object> {
 
     /**
      * Inherited. Just do nothing
+     *
      * @param ctx
      * @param transaction
      * @throws Exception
@@ -21,6 +22,7 @@ public class PersistenceManagerVoid implements PersistenceManager<Object> {
 
     /**
      * Inherited. Just do nothing
+     *
      * @param ctx
      * @throws Exception
      */
@@ -30,6 +32,7 @@ public class PersistenceManagerVoid implements PersistenceManager<Object> {
 
     /**
      * Inherited. Just do nothing
+     *
      * @param ctx
      * @throws Exception
      */
@@ -39,6 +42,7 @@ public class PersistenceManagerVoid implements PersistenceManager<Object> {
 
     /**
      * Inherited. Just do nothing
+     *
      * @param ctx
      * @param transaction
      * @throws Exception
@@ -49,6 +53,7 @@ public class PersistenceManagerVoid implements PersistenceManager<Object> {
 
     /**
      * Inherited. Just do nothing
+     *
      * @param ctx
      * @return
      * @throws Exception
@@ -60,6 +65,11 @@ public class PersistenceManagerVoid implements PersistenceManager<Object> {
 
     @Override
     public Object getConnection() {
+        return null;
+    }
+
+    @Override
+    public Object newConnection() {
         return null;
     }
 }

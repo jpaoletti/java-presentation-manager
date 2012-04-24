@@ -3,15 +3,20 @@ package jpaoletti.jpm.core;
 /**
  * This interface encapsulate a transaction behaviour
  *
- * @author jpaoletti 
+ * @author jpaoletti
  */
 public interface PersistenceManager<T> {
+
+    /**
+     * Create a new connection
+     */
+    public T newConnection();
 
     public T getConnection();
 
     /**
      * Initialize persistance
-     * 
+     *
      * @param ctx The context
      * @throws Exception
      */
@@ -19,6 +24,7 @@ public interface PersistenceManager<T> {
 
     /**
      * Finalize persistance
+     *
      * @param ctx The context
      * @throws Exception
      */
@@ -26,6 +32,7 @@ public interface PersistenceManager<T> {
 
     /**
      * Starts a transaction
+     *
      * @param ctx The context
      * @return Transaction object
      * @throws Exception
@@ -34,6 +41,7 @@ public interface PersistenceManager<T> {
 
     /**
      * Commit the given transaction
+     *
      * @param ctx The context
      * @param transaction The transaction
      * @throws Exception
@@ -42,6 +50,7 @@ public interface PersistenceManager<T> {
 
     /**
      * Rollback the given transaction
+     *
      * @param ctx The context
      * @param transaction The transaction
      * @throws Exception
