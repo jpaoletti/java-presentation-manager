@@ -10,7 +10,7 @@ import jpaoletti.jpm.core.*;
 public class DataAccessWeakClass extends DataAccessTest {
 
     @Override
-    protected void fill() {
+    protected void fill(PMContext ctx) {
     }
 
     @Override

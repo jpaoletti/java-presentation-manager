@@ -1,20 +1,83 @@
 package jpaoletti.jpm.test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 import jpaoletti.jpm.core.*;
 
 /**
- *
+ * Test data access.
+ * 
  * @author jpaoletti
  */
-public abstract class DataAccessTest extends AbstractDataAccess {
+public class DataAccessTest extends AbstractDataAccess {
 
     protected List<Object> list;
 
-    protected abstract void fill();
+    protected void fill(PMContext ctx) {
+        final String clazz = ctx.getEntity().getClazz();
+        list = new ArrayList<Object>();
+        if (clazz.equals(SimpleClass.class.getName())) {
+            int top = random(5, 30);
+            for (int i = 0; i < top; i++) {
+                SimpleClass o = new SimpleClass();
+                o.setId(new Long(i));
+                o.setDescription(String.format("Simple Class %d", i));
+                list.add(o);
+            }
+        } else if (clazz.equals(ComplexClass1.class.getName())) {
+            int top = random(5, 30);
+            for (int i = 0; i < top; i++) {
+                ComplexClass1 o = new ComplexClass1();
+                o.setId(new Long(i));
+                o.setDescription(String.format("Complex Class I %d", i));
+                o.setActive((i % 2 == 0) ? Boolean.TRUE : Boolean.FALSE);
+                o.setAmount(new BigDecimal(Math.random()));
+                o.setDate(new Date());
+                o.setDatetime(new Date());
+                o.setKey("pm.test.key." + i);
+                o.setPassword("password");
+                o.setSize(new Long(i * 2000));
+                list.add(o);
+            }
+        } else if (clazz.equals(ComplexClass2.class.getName())) {
+            try {
+                List<?> childs = PresentationManager.getPm().getEntity("simpleclass").getList(new PMContext(), null);
+                list = new ArrayList<Object>();
+                int top = random(5, 30);
+                for (int i = 0; i < top; i++) {
+                    ComplexClass2 o = new ComplexClass2();
+                    o.setId(new Long(i));
+                    o.setDescription(String.format("Complex Class II %d", i));
+                    o.setSimpleClass((SimpleClass) childs.get(random(0, childs.size() - 1)));
+                    o.setSimpleClass2((SimpleClass) childs.get(random(0, childs.size() - 1)));
+                    o.setSimpleClasses(new ArrayList<SimpleClass>());
+                    int x = random(1, childs.size() - 2);
+                    for (int j = x - 1; j < x + 1; j++) {
+                        o.getSimpleClasses().add((SimpleClass) childs.get(j));
+                    }
+                    list.add(o);
+                }
+            } catch (PMException ex) {
+                PresentationManager.getPm().error(ex);
+            }
+        } else if (clazz.equals(ParentClass.class.getName())) {
+            int top = random(5, 30);
+            for (int i = 0; i < top; i++) {
+                ParentClass o = new ParentClass();
+                o.setId(new Long(i));
+                o.setDescription(String.format("Parent Class %d", i));
+                o.setWeaks(new ArrayList<WeakClass>());
+                int x = random(1, 10);
+                for (int j = 0; j < x + 1; j++) {
+                    WeakClass weak = new WeakClass();
+                    weak.setParent(o);
+                    weak.setDescription("Weak " + j + " of " + o.getId());
+                    o.getWeaks().add(weak);
+                }
+                list.add(o);
+            }
+        }
+    }
 
     protected int random(int from, int to) {
         return from + (int) (Math.random() * (to - from) + 0.5);
@@ -34,7 +97,7 @@ public abstract class DataAccessTest extends AbstractDataAccess {
     @Override
     public List<?> list(PMContext ctx, EntityFilter filter, ListFilter lfilter, ListSort sort, Integer from, Integer count) throws PMException {
         if (list == null) {
-            fill();
+            fill(ctx);
         }
         List result = new ArrayList(list);
         if (sort != null) {
