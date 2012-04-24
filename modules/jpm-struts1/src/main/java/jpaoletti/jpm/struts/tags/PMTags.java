@@ -46,7 +46,7 @@ public class PMTags extends TagSupport {
      *
      * @return ready to use url
      */
-    public static String url(PMSession session, String url, boolean confirm) {
+    public static String url(PMSession session, String url, Boolean confirm) {
         return url(session, url, confirm, "javascript:");
     }
 
@@ -128,8 +128,12 @@ public class PMTags extends TagSupport {
                             final String idValue = id.getValue();
                             furl = itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + idValue;
                         }
-                        sb.append("<a class='ui-list-icon-container' class=''href=\"");
-                        sb.append(url(ctx.getPmsession(), furl, itemOperation.getConfirm(), "javascript:"));
+                        sb.append("<a class='ui-list-icon-container' href=\"");
+                        if (itemOperation.getPopup()) {
+                            sb.append("javascript:popup('").append(plainUrl(ctx.getPmsession(), furl)).append("')");
+                        } else {
+                            sb.append(url(ctx.getPmsession(), furl, itemOperation.getConfirm(), "javascript:"));
+                        }
                         sb.append("\" id='operation");
                         sb.append(itemOperation.getId());
                         sb.append("' title='");
@@ -223,11 +227,11 @@ public class PMTags extends TagSupport {
     public static Field getField(Entity entity, String fieldId) {
         return entity.getFieldById(fieldId);
     }
-    
+
     /**
      * Display an internationalized message
      */
-    public static String message(String key){
+    public static String message(String key) {
         return PresentationManager.getMessage(key);
     }
 }

@@ -43,6 +43,7 @@
                     </c:if>
                 </div>
             </div>
+            <div id="jpm-popup"><div id="jpm-popup-ajax"></div></div>
             <%@include file="/WEB-INF/jsp/confirm-dialog.jsp" %>
             <%@include file="/WEB-INF/jsp/basic-javascript.jsp" %>
         </body>

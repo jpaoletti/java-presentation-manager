@@ -18,6 +18,20 @@ function loadPage(url){
     window.location = url;
 }
 
+function popup(url){
+    loadPage(url);
+    /*$("#jpm-popup-ajax").load(url, function(){
+        $( "#jpm-popup" ).dialog({
+            modal: true, 
+            resizable: true,
+            bgiframe: true,
+            width: 600,
+            height: 400,
+            autoOpen: true
+        });
+    });*/
+}
+
 /**
  * Loads a page on main frame asking first
  **/

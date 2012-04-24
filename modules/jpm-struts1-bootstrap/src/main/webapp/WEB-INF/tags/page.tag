@@ -58,6 +58,7 @@
             <%@include file="/WEB-INF/jsp/confirm-dialog.jsp" %>
             <%@include file="/WEB-INF/jsp/basic-javascript.jsp" %>
             <%@include file="/WEB-INF/jsp/footer.jsp" %>
+            <%@include file="/WEB-INF/jsp/popup.jsp" %>
         </body>
     </html>
 </c:if>

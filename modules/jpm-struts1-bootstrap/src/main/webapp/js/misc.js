@@ -5,7 +5,7 @@ String.prototype.trim = function() {
 }
 
 /**
- * Register a function to excecut on page load
+ * Register a function to excecute on page load
  */
 function PM_register(func){
     PM_onLoadFunctions.push(func);
@@ -19,17 +19,28 @@ function loadPage(url){
 }
 
 function popup(url){
-    /*$("#jpm-popup-ajax").load(url, function(){
-        $( "#jpm-popup" ).dialog({
-            modal: true, 
-            resizable: true,
-            bgiframe: true,
-            width: 600,
-            height: 400,
-            autoOpen: true
-        });
-    });*/
-    loadPage(url);
+    $("#popup-load-iframe").attr("src", url);
+    var $this = $("#popup-load-iframe");
+    var modal = $('#popup-modal');
+    var text = modal.find(".modal-header > .loading-text").html();
+    modal.find(".modal-header > h3").html(text);
+    modal.find(".modal-body").html("<div class='center'><img alt='"+text+"' src='loading.gif' /></div>");
+    modal.modal('show');
+    setTimeout(function(){
+        var body = $this.contents().find('body');
+        body.find("#popup-load-iframe").remove();
+        body.find("hr:last").remove();
+        body.find("footer").remove();
+        body.find("#confirmation-dlg").remove();
+        body.find("#navigation_bar").remove();
+        body.find("#operations_bar").parent().remove();
+        modal.find(".modal-header > h3").html(body.find("h2.title").html());
+        body.find("h2.title").remove();
+        body.find("script").remove();
+        body.find(".btn-danger").attr("data-dismiss","modal").attr("onclick","");
+        $("#modal-body").html(body.html());
+    }, 2000);
+//loadPage(url);
 }
 
 /**
