@@ -33,6 +33,7 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
             final PMStrutsContext ctx = initJPMContext(req, (HttpServletResponse) response);
             try {
                 if (ctx != null) {
+                    ctx.getPersistenceManager().init(ctx.getPersistenceManager().newConnection());
                     chain.doFilter(request, response);
                 }
             } catch (ServletException e) {
