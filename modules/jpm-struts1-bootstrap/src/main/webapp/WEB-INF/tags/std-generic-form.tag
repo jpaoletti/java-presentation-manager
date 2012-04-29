@@ -13,7 +13,7 @@
             <fieldset>
                 <jsp:doBody />
                 <div class="form-actions">
-                    <button class="btn btn-danger" id="${entity.id}_cancel" onclick="history:back(1);"><i class="icon-remove"></i>&nbsp;<pmfn:message key="pm.struts.form.cancel"/></button>
+                    <button class="btn btn-danger" id="${entity.id}_cancel" onclick="history.back();"><i class="icon-remove"></i>&nbsp;<pmfn:message key="pm.struts.form.cancel"/></button>
                     <c:if test="${resetable}">
                         <button class="btn btn-warning" type="submit" id="${entity.id}_reset"><i class="icon-fire"></i>&nbsp;<pmfn:message key="pm.struts.form.reset"/></button>
                     </c:if>                    
