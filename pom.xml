@@ -48,6 +48,7 @@
         <module>modules/jpm-struts1</module>
         <module>modules/jpm-struts1-bootstrap</module>
         <module>modules/jpm-test</module>
+        <module>modules/jpm-test-resources</module>
     </modules>
     
     <build>

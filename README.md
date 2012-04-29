@@ -31,6 +31,12 @@ with a custom MVC system. To use it you need to use the following maven plugin:
           <artifactId>${jpm.impl}</artifactId>
           <version>${jpm.version}</version>
           <type>war</type>
+          <exclusions>
+            <exclusion>
+              <groupId>com.github.jpaoletti</groupId>
+              <artifactId>jpm-test-resources</artifactId>
+            </exclusion>
+          </exclusions>
       </dependency>
       <dependency>
           <groupId>com.github.jpaoletti</groupId>

@@ -16,13 +16,19 @@
 
     <properties>
         <cfg>cfg-struts1</cfg>
-        <jpm.version>1.3.1-SNAPSHOT</jpm.version>
+        <jpm.version>${project.version}</jpm.version>
         <jpm.impl>jpm-struts1</jpm.impl>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jpm-test-resources</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
