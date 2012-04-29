@@ -54,7 +54,8 @@
     
     <field id="groups" display="show add edit list">
         <converters>
-            <econverter id="show-group-list" operations="show list" />
+            <econverter id="list-group-list" operations="list" />
+            <econverter id="show-group-list" operations="show" />
             <econverter id="edit-group-list" operations="add edit" />
         </converters>
     </field>
