@@ -14,19 +14,9 @@
             $("button.submit").click(function(){
                 this.form.submit();
             });
-            $("button.submit").button({
-                icons: {
-                    primary: "ui-icon-check"
-                }
-            });
             $("button.reset").click(function(){
                 this.form.reset();
                 return false;
-            });
-            $("button.reset").button({
-                icons: {
-                    primary: "ui-icon-arrowreturnthick-1-w"
-                }
             });
             jQuery.each(PM_onLoadFunctions, function(){
                 try{
