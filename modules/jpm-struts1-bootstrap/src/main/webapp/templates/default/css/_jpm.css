@@ -18,3 +18,4 @@ img{vertical-align:middle;}
 td, th{vertical-align: middle !important;}
 .sorted-up{background: url("../img/arrow-up.gif") left center no-repeat; text-indent: 10px;}
 .sorted-down{background: url("../img/arrow-down.gif") left center no-repeat; text-indent: 10px;}
+.login-error{padding: 4px !important; break-after: avoid}

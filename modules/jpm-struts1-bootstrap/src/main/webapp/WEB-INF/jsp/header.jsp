@@ -50,6 +50,7 @@
                 <c:if test="${empty ctx.pmsession}">
                     <div class="pull-right login-box">
                         <form class="form-inline" action="${es.context_path}/login.do" method="POST">
+                            <span class="message_container hide login-error"></span>
                             <input id="username" name="username" type="text" class="input-small" placeholder="<pmfn:message key='login.username' />">
                             <input id="password" name="password" type="password" class="input-small" placeholder="<pmfn:message key='login.password' />">
                             <button type="submit" class="btn"><pmfn:message key='login.sign.in' />&nbsp;<i class="icon-arrow-right"></i></button>

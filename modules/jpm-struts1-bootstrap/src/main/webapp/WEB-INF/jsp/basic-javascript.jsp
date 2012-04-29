@@ -28,7 +28,8 @@
                     
             jQuery.each(msg_system, function(){
                 var cl = ".message_container";
-                jQuery(cl).addClass("pm_message_"+this.type);
+                jQuery(cl).addClass("alert alert-"+this.type.toLowerCase());
+                jQuery(cl).removeClass("hide");
                 jQuery(cl).html(this.text);
             });
 
