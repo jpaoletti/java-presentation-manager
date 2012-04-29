@@ -13,7 +13,9 @@
     </div>
 </div>
 <script type="text/javascript">
-    $('#confirmation-dlg').modal({
-        show: false
+    PM_register(function(){
+        $('#confirmation-dlg').modal({
+            show: false
+        });
     })
 </script>
