@@ -3,7 +3,8 @@ package jpaoletti.jpm.struts.converter;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.PMContext;
 
-/**Converter for integer <br>
+/**
+ * Converter for integer <br>
  * <pre>
  * {@code
  * <converter class="jpaoletti.jpm.converter.EditIntegerConverter">
@@ -11,14 +12,24 @@ import jpaoletti.jpm.core.PMContext;
  * </converter>
  * }
  * </pre>
+ *
  * @author jpaoletti
- * */
+ *
+ */
 public class EditIntegerConverter extends DefaultStrutsConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
         try {
-            return Integer.parseInt((String) ctx.getFieldValue());
+            final String v = (String) ctx.getFieldValue();
+            if ((v == null || "".equals(v.trim()))) {
+                if (getConfig("not-null", "false").equals("true")) {
+                    throw new ConverterException("pm.struts.converter.invalid.null.int");
+                } else {
+                    return null;
+                }
+            }
+            return Integer.parseInt(v);
         } catch (NumberFormatException e) {
             throw new ConverterException("pm.struts.converter.invalid.int");
         }
