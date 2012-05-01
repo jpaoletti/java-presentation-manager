@@ -13,9 +13,9 @@
                 'on_success': function (data){
                     var cleanup = ${monitor.cleanup};
                     if(data.trim().length > 0){
-                        var res =  "<pre style='WHITE-SPACE: pre'>";
+                        var res =  "";
                         if(!cleanup) res = res+$("#line_container").html();
-                        res=res+data+"</pre>";
+                        res=res+data;
                         $("#line_container").html(res);
                     }
                     $.scrollTo("max",1000);

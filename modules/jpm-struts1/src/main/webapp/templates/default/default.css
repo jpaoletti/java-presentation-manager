@@ -3,6 +3,7 @@ html{margin: 0;padding: 0;}
 body,table,td,th,p,div,form,label,caption,a{font-size: 12px;}
 body {margin: 0;padding: 0;background: #F7F7F7;color: #111;}
 .boxed{padding: 5px;}
+#line_container{white-space: pre; padding: 5px; font-family: monospace;}
 
 input, select, textarea, option{
     padding: 0.30em;
