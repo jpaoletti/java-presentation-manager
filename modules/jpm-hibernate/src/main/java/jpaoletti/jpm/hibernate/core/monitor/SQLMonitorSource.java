@@ -16,7 +16,7 @@ public class SQLMonitorSource extends MonitorSource {
     private String query;
     private String lastLineQuery;
     private Integer idColumn;
-    
+
     @Override
     public void init() {
         setQuery(getConfig("query"));
@@ -34,22 +34,27 @@ public class SQLMonitorSource extends MonitorSource {
             sql = getLastLineQuery().trim();
         }
         sql = sql.replaceAll("\\$actual", (actual == null) ? "" : actual.toString());
-        final SQLQuery c = ((Session) getPersistenceManager().getConnection()).createSQLQuery(sql);
-        final List<?> l = c.list();
-        for (Iterator<?> iterator = l.iterator(); iterator.hasNext();) {
-            final Object item = iterator.next();
-            final MonitorLine line = new MonitorLine();
+        getPersistenceManager().init(getPersistenceManager().newConnection());
+        try {
+            final SQLQuery c = ((Session) getPersistenceManager().getConnection()).createSQLQuery(sql);
+            final List<?> l = c.list();
+            for (Iterator<?> iterator = l.iterator(); iterator.hasNext();) {
+                final Object item = iterator.next();
+                final MonitorLine line = new MonitorLine();
 
-            if (item instanceof Object[]) {
-                final Object[] objects = (Object[]) item;
-                line.setId(objects[getIdColumn()]);
-                line.setValue(objects);
-            } else {
-                line.setId(item);
-                final Object[] objects = {item};
-                line.setValue(objects);
+                if (item instanceof Object[]) {
+                    final Object[] objects = (Object[]) item;
+                    line.setId(objects[getIdColumn()]);
+                    line.setValue(objects);
+                } else {
+                    line.setId(item);
+                    final Object[] objects = {item};
+                    line.setValue(objects);
+                }
+                result.add(line);
             }
-            result.add(line);
+        } finally {
+            getPersistenceManager().finish(null);
         }
         return result;
     }
@@ -57,20 +62,23 @@ public class SQLMonitorSource extends MonitorSource {
     @Override
     public MonitorLine getLastLine() throws Exception {
         final MonitorLine result = new MonitorLine();
-
-        final SQLQuery c = ((Session) getPersistenceManager().getConnection()).createSQLQuery(getLastLineQuery().trim());
-        c.setMaxResults(1);
-        final Object item = c.uniqueResult();
-        if (item instanceof Object[]) {
-            final Object[] objects = (Object[]) item;
-            result.setId(objects[getIdColumn()]);
-            result.setValue(objects);
-        } else {
-            result.setId(item);
-            final Object[] objects = {item};
-            result.setValue(objects);
+        getPersistenceManager().init(getPersistenceManager().newConnection());
+        try {
+            final SQLQuery c = ((Session) getPersistenceManager().getConnection()).createSQLQuery(getLastLineQuery().trim());
+            c.setMaxResults(1);
+            final Object item = c.uniqueResult();
+            if (item instanceof Object[]) {
+                final Object[] objects = (Object[]) item;
+                result.setId(objects[getIdColumn()]);
+                result.setValue(objects);
+            } else {
+                result.setId(item);
+                final Object[] objects = {item};
+                result.setValue(objects);
+            }
+        } finally {
+            getPersistenceManager().finish(null);
         }
-
         return result;
     }
 
