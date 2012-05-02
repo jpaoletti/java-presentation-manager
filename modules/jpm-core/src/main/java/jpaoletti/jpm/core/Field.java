@@ -344,11 +344,17 @@ public class Field extends PMCoreObject {
     public Converter getConverter(String operation) {
         final Converter c = getConverters().getConverterForOperation(operation);
         if (c == null) {
+            final String _property = getProperty();
             try {
-                final String className = Class.forName(getEntity().getClazz()).getDeclaredField(getProperty()).getType().getName();
+                final String[] _properties = _property.split("[.]");
+                Class<?> clazz = Class.forName(getEntity().getClazz());
+                for (int i = 0; i < _properties.length - 1; i++) {
+                    clazz = clazz.getDeclaredField(_properties[i]).getType();
+                }
+                final String className = clazz.getDeclaredField(_properties[_properties.length - 1]).getType().getName();
                 return getPm().getClassConverters().getConverter(operation, className);
             } catch (Exception ex) {
-                getPm().warn(String.format("Unable to introspect field '%s' on entity '%s'", getProperty(), getEntity().getId()));
+                getPm().warn(String.format("Unable to introspect field '%s' on entity '%s'", _property, getEntity().getId()));
                 return null;
             }
         }
