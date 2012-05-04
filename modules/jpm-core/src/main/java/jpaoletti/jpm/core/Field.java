@@ -7,6 +7,7 @@ import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.converter.Converters;
 import jpaoletti.jpm.converter.GenericConverter;
 import jpaoletti.jpm.validator.Validator;
+import org.apache.commons.lang.reflect.FieldUtils;
 
 /**
  * A Field represents a property of the represented entity.
@@ -349,9 +350,9 @@ public class Field extends PMCoreObject {
                 final String[] _properties = _property.split("[.]");
                 Class<?> clazz = Class.forName(getEntity().getClazz());
                 for (int i = 0; i < _properties.length - 1; i++) {
-                    clazz = clazz.getDeclaredField(_properties[i]).getType();
+                    clazz = FieldUtils.getField(clazz, _properties[i], true).getType();
                 }
-                final String className = clazz.getDeclaredField(_properties[_properties.length - 1]).getType().getName();
+                final String className = FieldUtils.getField(clazz, _properties[_properties.length - 1], true).getType().getName();
                 return getPm().getClassConverters().getConverter(operation, className);
             } catch (Exception ex) {
                 getPm().warn(String.format("Unable to introspect field '%s' on entity '%s'", _property, getEntity().getId()));

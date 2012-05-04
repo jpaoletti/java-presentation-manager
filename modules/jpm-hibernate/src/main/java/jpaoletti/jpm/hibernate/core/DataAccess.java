@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.core.exception.EntityClassNotFoundException;
+import org.apache.commons.lang.reflect.FieldUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
@@ -35,7 +36,7 @@ public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
             c.setMaxResults(1);
             Criterion criterion = null;
             try {
-                final Field f = clazz.getDeclaredField(property);
+                final Field f = FieldUtils.getField(clazz, property, true);
                 final Class<?> declaringClass = f.getType();
                 if (declaringClass.equals(Long.class)) {
                     criterion = Restrictions.eq(property, Long.parseLong(value));
@@ -46,7 +47,7 @@ public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
                 } else if (declaringClass.equals(Boolean.class)) {
                     criterion = Restrictions.eq(property, Boolean.parseBoolean(value));
                 }
-            } catch (NoSuchFieldException e) {
+            } catch (Exception e) {
                 criterion = Restrictions.sqlRestriction(property + "=" + value);
             }
             if (criterion == null) {
