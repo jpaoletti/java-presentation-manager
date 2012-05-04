@@ -1,0 +1,19 @@
+
+<archetype xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0 http://maven.apache.org/xsd/archetype-1.0.0.xsd">
+    <id>${artifactId}</id>
+    <resources>
+        <resource>src/main/resources/hibernate.cfg.xml</resource>
+        <resource>src/main/resources/jpm-config.xml</resource>
+
+        <resource>src/main/resources/jpm/jpm-class-converters.xml</resource>
+        <resource>src/main/resources/jpm/jpm-econverters.xml</resource>
+        <resource>src/main/resources/jpm/jpm-locations.xml</resource>
+        <resource>src/main/resources/jpm/jpm-menu.xml</resource>
+
+        <resource>src/main/resources/entities/simpleclass.xml</resource>
+        <resource>src/main/resources/monitors/file.xml</resource>
+
+        <resource>src/main/webapp/WEB-INF/jsp/welcome.jsp</resource>
+    </resources>
+</archetype>

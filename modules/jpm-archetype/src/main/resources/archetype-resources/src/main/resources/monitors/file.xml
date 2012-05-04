@@ -1,0 +1,11 @@
+<?xml version='1.0' ?>
+<monitor id="file">
+    <source class="jpaoletti.jpm.core.monitor.FileMonitorSource" >
+        <properties>
+            <property name="filename" value="/var/log/syslog.log" />
+        </properties>
+    </source>
+    <formatter class="jpaoletti.jpm.core.monitor.MonitorFormatter" />
+    <delay>3000</delay>
+    <max>100</max>
+</monitor>

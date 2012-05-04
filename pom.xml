@@ -49,6 +49,7 @@
         <module>modules/jpm-struts1-bootstrap</module>
         <module>modules/jpm-test</module>
         <module>modules/jpm-test-resources</module>
+        <module>modules/jpm-archetype</module>
     </modules>
     
     <build>

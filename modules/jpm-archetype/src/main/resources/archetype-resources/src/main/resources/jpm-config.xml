@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presentation-manager>
+    <property name="debug" value="true"/>
+    <property name="appversion" value="1.0.0"/>
+    <property name="template" value="default"/>
+    <property name="persistence-manager"
+              value="jpaoletti.jpm.hibernate.core.PersistenceManager"/>
+
+    <property name="default-data-access"
+              value="jpaoletti.jpm.hibernate.core.DataAccess"/>
+
+    <property name="default-converter"
+              value="jpaoletti.jpm.struts.converter.DefaultStrutsConverter"/>
+
+    <property name="security-connector"
+              value="jpaoletti.jpm.hibernate.security.db.PMSecurityDBConnector"/>
+
+    <!-- Menu -->
+    <property name="menu" value="${jpm.cfg}/jpm-menu.xml"/>
+
+    <!-- locations -->
+    <property name="locations" value="${jpm.cfg}/jpm-locations.xml"/>
+
+    <!-- External Converters -->
+    <property name="external-converters" value="${jpm.cfg}/jpm-econverters.xml"/>
+
+    <!-- Class Converters -->
+    <property name="class-converters" value="${jpm.cfg}/jpm-class-converters.xml"/>
+
+    <!-- Busissnes Entities -->
+
+    <property name="entity" value="entities/simpleclass.xml"/>
+    <!-- ... -->
+
+    <!-- Security Entities-->
+    <property name="entity" value="entities/entitycontainer.xml"/>
+    <property name="entity" value="entities/pmsession.xml"/>
+    <property name="entity" value="entities/secperm.xml"/>
+    <property name="entity" value="entities/secuser.xml"/>
+    <property name="entity" value="entities/secusergroup.xml"/>
+
+    <!-- Monitors -->
+    <property name="monitor" value="monitors/file.xml"/>
+</presentation-manager>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+    <menu-list text="pm.menu.list.monitor" perm="">
+        <menu-item text="pm.monitor.file" perm="">
+            <location id="pmstruts" value="monitor.do?pmid=file" />
+        </menu-item>
+    </menu-list>
+
+    <menu-list text="pm.menu.list.business" perm="">
+    </menu-list>
+
+    <menu-list text="pm.menu.list.security" perm="">
+        <menu-item text="pm.menu.item.secuser" perm="">
+            <location id="list" value="secuser" />
+        </menu-item>
+        <menu-item text="pm.menu.item.secusergroup" perm="">
+            <location id="list" value="secusergroup" />
+        </menu-item>
+        <menu-item text="pm.menu.item.secperm" perm="">
+            <location id="list" value="secperm" />
+        </menu-item>
+        <menu-item text="pm.menu.item.pmsession" perm="">
+            <location id="list" value="pmsession" />
+        </menu-item>
+    </menu-list>
+</menu>

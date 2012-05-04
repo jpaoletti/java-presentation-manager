@@ -1,0 +1,89 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
+    <version>${version}</version>
+    <packaging>war</packaging>
+    <name>A custom jPM project</name>
+    <properties>
+        <jpm.version>${project.version}</jpm.version>
+        <jpm.cfg>jpm</jpm.cfg>
+    </properties>
+
+    <profiles>
+        <profile>
+            <!-- Development profile -->
+            <id>Development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <connection.url>jdbc:mysql://localhost:3306/jpm_test?autoReconnect=true</connection.url>
+                <connection.username>root</connection.username>
+                <connection.password></connection.password>
+            </properties>
+        </profile>
+        <profile>
+            <!-- Production profile -->
+            <id>Production</id>
+            <properties>
+                <connection.url>jdbc:mysql://localhost:3306/jpm_test?autoReconnect=true</connection.url>
+                <connection.username>root</connection.username>
+                <connection.password></connection.password>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.jpaoletti</groupId>
+            <artifactId>jpm-struts1-bootstrap</artifactId>
+            <version>${jpm.version}</version>
+            <type>war</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.github.jpaoletti</groupId>
+                    <artifactId>jpm-test-resources</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jpaoletti</groupId>
+            <artifactId>jpm-struts1</artifactId>
+            <version>${jpm.version}</version>
+            <type>jar</type>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jpaoletti</groupId>
+            <artifactId>jpm-hibernate</artifactId>
+            <version>${jpm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.1.1</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
+    </build>
+</project>

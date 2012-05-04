@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<entity id="simpleclass" clazz="jpaoletti.jpm.test.SimpleClass">
+    <idField>id</idField>
+    <operations>
+        <operation id="list" scope="general" display="all" >
+            <properties>
+                <property name="operation-column-width" value="120px" />
+                <property name="sort-field" value="description" />
+                <property name="sort-direction" value="desc" />
+            </properties>
+        </operation>
+        <operation id="show" scope="item" display="edit list" popup="true" />
+        <operation id="add" scope="general" display="all" popup="true" follows="list" />
+        <operation id="edit" scope="item" display="edit show list" popup="true" follows="list"/>
+        <operation id="delete" scope="item" display="edit show list" confirm="true"/>
+        <operation id="multidelete" scope="selected" display="list" confirm="true"/>
+        <operation id="sort" scope="general" display="list" />
+    </operations>
+
+    <field id="id" property="id" width="30" display="add edit show list sort">
+        <converters>
+            <econverter id="edit-long" operations="add" />
+        </converters>
+    </field>
+    <field id="description">
+        <validator class="jpaoletti.jpm.validator.LengthValidator">
+            <properties>
+                <property name="min-length" value="4" />
+            </properties>
+        </validator>
+    </field>
+</entity>

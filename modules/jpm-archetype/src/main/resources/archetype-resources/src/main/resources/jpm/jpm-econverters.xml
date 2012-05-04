@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<external-converters>
+    <external-converter id="to-string">
+        <converter class="jpaoletti.jpm.converter.ToStringConverter" operations="list show export" />
+    </external-converter>
+    <external-converter id="local-string">
+        <converter class="jpaoletti.jpm.converter.ShowLocalizedStringConverter" operations="show list export" />
+    </external-converter>
+    <external-converter id="edit-big-string">
+        <converter class="jpaoletti.jpm.struts.converter.EditBigStringConverter" operations="add edit">
+            <properties>
+                <property name="with-null" value="true" />
+                <property name="rows" value="10" />
+                <property name="cols" value="40" />
+            </properties>
+        </converter>
+    </external-converter>
+    <external-converter id="edit-name">
+        <converter class="jpaoletti.jpm.struts.converter.EditStringConverter" operations="add edit">
+            <properties>
+                <property name="max-length" value="50" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="show-bool">
+        <converter class="jpaoletti.jpm.converter.ShowBooleanConverter" operations="list show export" />
+    </external-converter>
+
+    <external-converter id="edit-bool">
+        <converter class="jpaoletti.jpm.struts.converter.EditBooleanConverter" operations="edit add" />
+    </external-converter>
+
+    <external-converter id="password">
+        <converter class="jpaoletti.jpm.struts.converter.EditPasswordConverter" operations="add" />
+    </external-converter>
+
+    <external-converter id="edit-mail">
+        <converter class="jpaoletti.jpm.struts.converter.EditStringConverter" operations="add edit">
+            <properties>
+                <property name="max-length" value="200" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="edit-group-list">
+        <converter class="jpaoletti.jpm.struts.converter.EditCollectionConverter" operations="add edit">
+            <properties>
+                <property name="entity" value="secusergroup" />
+                <property name="collection-class" value="java.util.ArrayList" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="edit-permission-list">
+        <converter class="jpaoletti.jpm.struts.converter.EditCollectionConverter" operations="add edit">
+            <properties>
+                <property name="entity" value="secperm" />
+                <property name="collection-class" value="java.util.ArrayList" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="show-containers">
+        <converter class="jpaoletti.jpm.struts.converter.WeakConverter" operations="show" >
+            <properties>
+                <property name="weak-entity" value="entitycontainer" />
+                <property name="show-modify" value="false" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="edit-50-string">
+        <converter class="jpaoletti.jpm.struts.converter.EditStringConverter" operations="add edit">
+            <properties>
+                <property name="max-length" value="50" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="edit-long">
+        <converter class="jpaoletti.jpm.struts.converter.EditLongConverter" operations="add" />
+    </external-converter>
+
+    <external-converter id="show-cash">
+        <converter class="jpaoletti.jpm.converter.GenericConverter" operations="show list export" >
+            <properties>
+                <property name="filename" value="converters/show.decimal.converter" />
+                <property name="prefix" value="U$S " />
+                <property name="suffix" value=" .-" />
+                <property name="format" value="#0.##" />
+            </properties>
+        </converter>
+    </external-converter>
+    <external-converter id="edit-date">
+        <converter class="jpaoletti.jpm.struts.converter.EditDateConverter" operations="add edit">
+            <properties>
+                <property name="format" value="dd/MM/yyyy" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="show-date">
+        <converter class="jpaoletti.jpm.converter.GenericConverter" operations="list show export" >
+            <properties>
+                <property name="filename" value="converters/show.date.converter" />
+                <property name="format" value="dd/MM/yyyy" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="show-datetime">
+        <converter class="jpaoletti.jpm.converter.GenericConverter" operations="all" >
+            <properties>
+                <property name="filename" value="converters/show.date.converter" />
+                <property name="format" value="dd/MM/yyyy HH:mm:ss" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="show-cm">
+        <converter class="jpaoletti.jpm.converter.GenericConverter" operations="show list export" >
+            <properties>
+                <property name="filename" value="converters/show.tostring.converter" />
+                <property name="suffix" value=" cm" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="simpleclasses-show">
+        <converter class="jpaoletti.jpm.struts.converter.CollectionConverter" operations="show">
+            <properties>
+                <property name="entity" value="simpleclass" />
+                <property name="display" value="{description}" />
+            </properties>            
+        </converter>
+    </external-converter>
+
+    <external-converter id="simpleclasses-edit">
+        <converter class="jpaoletti.jpm.struts.converter.CollectionConverter" operations="add edit">
+            <properties>
+                <property name="entity" value="simpleclass" />
+                <property name="display" value="{description}" />
+                <property name="readonly" value="false" />
+                <property name="collection-class" value="java.util.ArrayList" />
+            </properties>
+        </converter>        
+    </external-converter>
+</external-converters>

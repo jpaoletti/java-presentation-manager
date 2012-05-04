@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-converters>
+    <class-converter
+        class-name="java.lang.String"
+        operations="list show export"
+        econverter="to-string"/>
+
+    <class-converter
+        class-name="java.lang.String"
+        operations="add edit"
+        econverter="edit-50-string"/>
+</class-converters>
