@@ -2,21 +2,24 @@
 
 Home page: http://jpaoletti.github.com/java-presentation-manager/
 
-Java Presentation Manager is a CRUD system with extended tools to fast build an administrative and
-monitoring web site based in xml definition files, with data source and interface independece so
-you can define your model in xml terms and choose the data sources and visualization that you like most.
-
-This project take its ideas from jPOS Presentation Manager project and is a generalization of the idea 
-to be used in any web project and not only in jPOS based projects.
+Java Presentation Manager is a CRUD system with extended tools to fast build an
+administrative and monitoring web site based in xml definition files, with data
+source and interface independece so you can define your model in xml terms and
+choose the data sources and visualization that you like most.
 
 ## How to use
 
-This is a maven based project with several modules. A main core module contain the main functionality and 
-definition tools. The other modules are implementations of some of the core aspect, normally the view or
-the data access.
+This is a maven based project with several modules. A main core module contain
+the main functionality and definition tools. The other modules are
+implementations of some of the core aspect, normally the view or the data
+access.
 
-The default visual implementation is based on Struts 1. This is going to change soon to a pure jsp implementation
-with a custom MVC system. To use it you need to use the following maven plugin:
+The default visual implementation is based on Struts 1. You can use the provided
+archetype and customize it as needed.
+
+mvn archetype:generate -DarchetypeGroupId=com.github.jpaoletti -DarchetypeArtifactId=jpm-archetype -DarchetypeVersion=1.3.1-SNAPSHOT
+
+You can also configure your pom.xml using the following dependencies.
 
 ```xml
 
