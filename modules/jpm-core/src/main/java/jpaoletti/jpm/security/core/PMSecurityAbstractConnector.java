@@ -83,7 +83,12 @@ public abstract class PMSecurityAbstractConnector implements PMSecurityConnector
         updateUser(user);
     }
 
-    private boolean isLoggedIn(PMSecurityUser user) {
+    /**
+     * Verifies if the user is already logged in
+     *
+     * @param user User to check
+     */
+    protected boolean isLoggedIn(PMSecurityUser user) {
         return PresentationManager.getPm().getSessionByUser(user.getUsername()) != null;
     }
 }
