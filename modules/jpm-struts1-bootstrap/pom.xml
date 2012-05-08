@@ -7,6 +7,7 @@
     <artifactId>jpm-struts1-bootstrap</artifactId>
     <packaging>war</packaging>    
     <description>Struts1 web module for jpm</description>
+    <name>jpm-struts1-bootstrap</name>
     <parent>
         <groupId>com.github.jpaoletti</groupId>
         <artifactId>java-presentation-manager</artifactId>
