@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locations>
-       <location id="pmstruts" class="jpaoletti.jpm.struts.MenuItemLocationStruts"  />
-       <location id="list"     class="jpaoletti.jpm.struts.MenuItemLocationList"    />
-       <location id="external" class="jpaoletti.jpm.struts.MenuItemLocationExternal"/>
+       <location id="pmstruts"  class="jpaoletti.jpm.struts.MenuItemLocationStruts"  />
+       <location id="list"      class="jpaoletti.jpm.struts.MenuItemLocationList"    />
+       <location id="external"  class="jpaoletti.jpm.struts.MenuItemLocationExternal"/>
+       <location id="separator" class="jpaoletti.jpm.struts.MenuItemLocationSeparator"/>
 </locations>
