@@ -67,12 +67,20 @@ public class MenuBuilder extends DefaultHandler {
      */
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        String s = attributes.getValue("text");
-        String s2 = attributes.getValue("perm");
+        final String text = attributes.getValue("text");
+        final String perm = attributes.getValue("perm");
+        final String _location = attributes.getValue("location");
+        final String _locationValue = attributes.getValue("locationValue");
         if (qName.compareTo("menu-list") == 0) {
-            processList(s, s2);
+            processList(text, perm);
         } else if (qName.compareTo("menu-item") == 0) {
-            processItem(s, s2);
+            processItem(text, perm);
+            if (_location != null) {
+                item.setLocation(PresentationManager.getPm().getLocation(_location));
+            }
+            if (_locationValue != null) {
+                item.setLocationValue(_locationValue);
+            }
         }
         if (qName.compareTo("location") == 0) {
             item.parseLocation(attributes.getValue("id"), attributes.getValue("value"));
