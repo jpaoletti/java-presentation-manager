@@ -11,7 +11,7 @@
     <property name="audit-level" value="10"/>
     
     <property name="logger-class"    value="jpaoletti.jpm.core.log.Log4jLogger"/>
-    <property name="logger-name"     value="jpm"/>
+    <property name="logger-name"     value="jPM"/>
     <property name="hideable-header" value="true"/>
 
     <property name="default-data-access"
