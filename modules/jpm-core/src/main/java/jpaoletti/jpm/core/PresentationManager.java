@@ -5,6 +5,7 @@ import jpaoletti.jpm.converter.ClassConverterList;
 import jpaoletti.jpm.converter.Converter;
 import jpaoletti.jpm.converter.ConverterWrapper;
 import jpaoletti.jpm.converter.ExternalConverters;
+import jpaoletti.jpm.core.audit.AuditService;
 import jpaoletti.jpm.core.log.JPMLogger;
 import jpaoletti.jpm.core.monitor.Monitor;
 import jpaoletti.jpm.menu.MenuItemLocation;
@@ -41,6 +42,7 @@ public class PresentationManager extends Observable {
     private final Map<String, PMSession> sessions = new HashMap<String, PMSession>();
     private Timer sessionChecker;
     private PMSecurityConnector securityConnector;
+    private AuditService auditService;
     private String cfgFilename;
 
     /**
@@ -834,5 +836,16 @@ public class PresentationManager extends Observable {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns audit service
+     */
+    public AuditService getAuditService() {
+        if (auditService == null) {
+            auditService = (AuditService) newInstance(cfg.getProperty("audit-service", "jpaoletti.jpm.core.audit.SimpleAudit"));
+            auditService.setLevel(cfg.getInt("audit-level", -1));
+        }
+        return auditService;
     }
 }

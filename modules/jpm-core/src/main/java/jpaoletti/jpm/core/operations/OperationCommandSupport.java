@@ -26,20 +26,17 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
     public static final String OPERATIONS = "operations";
     public static final String PM_ITEM = "item";
     private String operationId;
+    private Integer auditLevel;
     private Operation operation;
 
     public OperationCommandSupport(String operationId) {
         this.operationId = operationId;
+        this.auditLevel = 2;
     }
 
-    protected InstanceId buildInstanceId(Entity entity, final String item) throws NumberFormatException {
-        InstanceId instanceId;
-        if (entity.isIdentified()) {
-            instanceId = new InstanceId(item);
-        } else {
-            instanceId = new InstanceId(Integer.parseInt(item));
-        }
-        return instanceId;
+    public OperationCommandSupport(String operationId, Integer auditLevel) {
+        this.operationId = operationId;
+        this.auditLevel = auditLevel;
     }
 
     protected boolean prepare(PMContext ctx) throws PMException {
@@ -106,11 +103,14 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
                 ctx.getPresentationManager().error(e);
                 throw new PMException("pm_core.cannot.commit.txn");
             }
+            ctx.getPresentationManager().getAuditService().register(ctx, getAuditLevel(), getOperationId(), "Success");
             tx = null;
         } catch (PMException e) {
+            ctx.getPresentationManager().getAuditService().register(ctx, getAuditLevel(), getOperationId(), "Error: " + e.getMessage());
             throw e;
         } catch (Exception e) {
             ctx.getPresentationManager().error(e);
+            ctx.getPresentationManager().getAuditService().register(ctx, getAuditLevel(), getOperationId(), "Unespected Error: " + e.getMessage());
             throw new PMException(UNESPECTED_ERROR, e);
         } finally {
             if (tx != null) {
@@ -165,27 +165,9 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         //If we get item param, we change the selected item on the container.
         //This may be either an identification field value or an index depending
         //on entity.isIdentified value
-        final String item = ctx.getString(PM_ITEM);
-        if (item != null && !item.trim().equals("")) {
-            final Object instance = ctx.getDataAccess().getItem(ctx, buildInstanceId(ctx.getEntity(), item));
-            ctx.getEntityContainer().setSelected(new EntityInstanceWrapper(instance));
-        } else {
-            final String identified = (String) ctx.getParameter("identified");
-            if (identified != null && identified.trim().compareTo("") != 0) {
-                ctx.getPresentationManager().debug(this, "Getting row identified by: " + identified);
-                String[] ss = identified.split(":");
-                if (ss.length == 2) {
-                    final String prop = ss[0];
-                    final String value = ss[1];
-                    final Object object = ctx.getEntity().getDataAccess().getItem(ctx, prop, value);
-                    if (object != null) {
-                        final EntityInstanceWrapper wrapper = new EntityInstanceWrapper(object);
-                        ctx.getEntityContainer().setSelected(wrapper);
-                    }
-                }
-            } else {
-                ctx.getPresentationManager().debug(this, "Row Selection ignored");
-            }
+        final Object instance = getSelectedInstance(ctx);
+        if (instance != null) {
+            ctx.getEntityContainer().setSelected(ctx.buildInstanceWrapper(instance));
         }
         refreshSelectedObject(ctx, null);
         if (ctx.getOperation() != null && ctx.getOperation().getContext() != null) {
@@ -231,17 +213,18 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
 
         if (origin != null) {
             if (!entityContainer.isSelectedNew()) {
-                Object o;
+                Object instance;
                 try {
-                    o = ctx.getEntity().getDataAccess().refresh(ctx, origin.getInstance());
+                    instance = ctx.getEntity().getDataAccess().refresh(ctx, origin.getInstance());
                 } catch (Exception e) {
-                    o = null;
+                    instance = null;
                 }
-                entityContainer.setSelected(new EntityInstanceWrapper(o));
-                if (o == null) {
+                if (instance == null) {
                     ctx.getPresentationManager().warn("Fresh instance is null while origin was '" + origin.getInstance() + "'");
+                } else {
+                    entityContainer.setSelected(ctx.buildInstanceWrapper(instance));
                 }
-                return o;
+                return instance;
             } else {
                 return origin.getInstance();
             }
@@ -447,6 +430,46 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
     protected void assertTrue(boolean b, String msgkey) throws PMException {
         if (!b) {
             throw new PMException(msgkey);
+        }
+    }
+
+    protected InstanceId buildInstanceId(Entity entity, final String item) throws NumberFormatException {
+        InstanceId instanceId;
+        if (entity.isIdentified()) {
+            instanceId = new InstanceId(item);
+        } else {
+            instanceId = new InstanceId(Integer.parseInt(item));
+        }
+        return instanceId;
+    }
+
+    protected Object getSelectedInstance(PMContext ctx) throws NumberFormatException, PMException {
+        final String item = ctx.getString(PM_ITEM);
+        Object instance = null;
+        if (item != null && !item.trim().equals("")) {
+            instance = ctx.getDataAccess().getItem(ctx, buildInstanceId(ctx.getEntity(), item));
+        } else {
+            final String identified = (String) ctx.getParameter("identified");
+            if (identified != null && identified.trim().compareTo("") != 0) {
+                ctx.getPresentationManager().debug(this, "Getting row identified by: " + identified);
+                String[] ss = identified.split(":");
+                if (ss.length == 2) {
+                    final String prop = ss[0];
+                    final String value = ss[1];
+                    instance = ctx.getEntity().getDataAccess().getItem(ctx, prop, value);
+                }
+            } else {
+                ctx.getPresentationManager().debug(this, "Row Selection ignored");
+            }
+        }
+        return instance;
+    }
+
+    public Integer getAuditLevel() {
+        if (operation != null && operation.getAuditLevel() != null) {
+            return operation.getAuditLevel();
+        } else {
+            return auditLevel;
         }
     }
 }

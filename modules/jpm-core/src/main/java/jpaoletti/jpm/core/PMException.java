@@ -4,7 +4,7 @@ import jpaoletti.jpm.core.message.Message;
 
 /**
  * A generic expection for Presentation Manager engine.
- * 
+ *
  * @author jpaoletti
  */
 public class PMException extends Exception {
@@ -69,5 +69,16 @@ public class PMException extends Exception {
 
     public void setMsg(Message msg) {
         this.msg = msg;
+    }
+
+    @Override
+    public String getMessage() {
+        if (getMsg() != null) {
+            return PresentationManager.getMessage(getMsg().getKey(), getMsg().getArgs());
+        } else if (getKey() != null) {
+            return PresentationManager.getMessage(getKey());
+        } else {
+            return super.getMessage();
+        }
     }
 }

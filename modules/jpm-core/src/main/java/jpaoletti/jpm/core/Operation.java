@@ -77,6 +77,7 @@ public class Operation extends PMCoreObject {
     private Boolean compact; //Default: false
     //Display operation in a "popup" visualization instead of redirecting it
     private Boolean popup; //Default: false
+    private Integer auditLevel;//Overrides default audit level for operation
 
     public OperationCondition getCondition() {
         return condition;
@@ -331,5 +332,13 @@ public class Operation extends PMCoreObject {
 
     public void setPopup(Boolean popup) {
         this.popup = popup;
+    }
+
+    public Integer getAuditLevel() {
+        return auditLevel;
+    }
+
+    public void setAuditLevel(Integer auditLevel) {
+        this.auditLevel = auditLevel;
     }
 }

@@ -41,6 +41,7 @@ public class EntityParser extends ParserSupport {
         getXstream().alias("operations", Operations.class);
         getXstream().alias("operation", Operation.class);
 
+        getXstream().aliasField("audit-level", Operation.class, "auditLevel");
         getXstream().useAttributeFor(Operation.class, "id");
         getXstream().useAttributeFor(Operation.class, "enabled");
         getXstream().useAttributeFor(Operation.class, "scope");
@@ -50,6 +51,7 @@ public class EntityParser extends ParserSupport {
         getXstream().useAttributeFor(Operation.class, "follows");
         getXstream().useAttributeFor(Operation.class, "compact");
         getXstream().useAttributeFor(Operation.class, "popup");
+        getXstream().useAttributeFor(Operation.class, "auditLevel");
 
         getXstream().alias("owner", EntityOwner.class);
         getXstream().alias("highlights", Highlights.class);

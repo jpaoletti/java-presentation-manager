@@ -471,4 +471,15 @@ public class PMContext {
     public Map<String, Object> getMap() {
         return contents;
     }
+
+    /**
+     * Creates a new instance wrapper with the instance and the instanceId.
+     */
+    public EntityInstanceWrapper buildInstanceWrapper(final Object instance) throws PMException {
+        final EntityInstanceWrapper wrapper = new EntityInstanceWrapper(instance);
+        if (hasEntity() && !getEntityContainer().isSelectedNew()) {
+            wrapper.setInstanceId(getDataAccess().getInstanceId(this, wrapper));
+        }
+        return wrapper;
+    }
 }

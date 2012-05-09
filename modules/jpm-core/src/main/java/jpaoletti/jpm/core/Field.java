@@ -76,7 +76,7 @@ public class Field extends PMCoreObject {
                 c = getDefaultConverter();
             }
             final Object instance = ctx.getEntityInstance();
-            ctx.setEntityInstanceWrapper(new EntityInstanceWrapper(instance));
+            ctx.setEntityInstanceWrapper(ctx.buildInstanceWrapper(instance));
             ctx.setField(this);
             // We only set the field value if instance is not null.
             // Some operations may use this value without an instance.
