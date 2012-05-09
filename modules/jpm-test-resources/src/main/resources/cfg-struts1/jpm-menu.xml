@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu>
-    <menu-item text="pm.menu.item.git" perm="" location="external" locationValue="https://github.com/jpaoletti/java-presentation-manager" />
+    <menu-item text="pm.menu.item.git" perm="" location="external" location-value="https://github.com/jpaoletti/java-presentation-manager" />
     <menu-list text="pm.menu.list.monitor" perm="">
-        <menu-item text="pm.monitor.file" perm="" location="pmstruts" locationValue="monitor.do?pmid=file" />
+        <menu-item text="pm.monitor.file" perm="" location="pmstruts" location-value="monitor.do?pmid=file" />
     </menu-list>
 
     <menu-list text="pm.menu.list.business" perm="">
-        <menu-item text="pm.menu.item.simpleclass"   perm="" location="list" locationValue="simpleclass" />
-        <menu-item text="pm.menu.item.complexclass1" perm="" location="list" locationValue="complexclass1" />
-        <menu-item text="pm.menu.item.complexclass2" perm="" location="list" locationValue="complexclass2" />
-        <menu-item text="pm.menu.item.parentclass"   perm="" location="list" locationValue="parentclass" />
+        <menu-item text="pm.menu.item.simpleclass"   perm="" location="list" location-value="simpleclass" />
+        <menu-item text="pm.menu.item.complexclass1" perm="" location="list" location-value="complexclass1" />
+        <menu-item text="pm.menu.item.complexclass2" perm="" location="list" location-value="complexclass2" />
+        <menu-item text="pm.menu.item.parentclass"   perm="" location="list" location-value="parentclass" />
     </menu-list>
     
     <menu-list text="pm.menu.list.security" perm="">

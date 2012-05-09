@@ -70,7 +70,7 @@ public class MenuBuilder extends DefaultHandler {
         final String text = attributes.getValue("text");
         final String perm = attributes.getValue("perm");
         final String _location = attributes.getValue("location");
-        final String _locationValue = attributes.getValue("locationValue");
+        final String _locationValue = attributes.getValue("location-value");
         if (qName.compareTo("menu-list") == 0) {
             processList(text, perm);
         } else if (qName.compareTo("menu-item") == 0) {
