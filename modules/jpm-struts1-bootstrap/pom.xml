@@ -59,7 +59,7 @@
             </resource>
             <resource>
                 <!-- Test resources for simplier development-->
-                <directory>../jpm-test/src/main/resources</directory>
+                <directory>../jpm-test-resources/src/main/resources</directory>
                  <excludes>
                     <exclude>jpm-config.xml</exclude>
                 </excludes>
