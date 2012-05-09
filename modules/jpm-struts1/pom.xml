@@ -93,13 +93,6 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
-            <resource>
-                <!-- Test resources for simplier development-->
-                <directory>../jpm-test/src/main/resources</directory>
-                <excludes>
-                    <exclude>jpm-config.xml</exclude>
-                </excludes>
-            </resource>
         </resources>
         <plugins>
             <plugin>
