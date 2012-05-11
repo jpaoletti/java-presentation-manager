@@ -40,7 +40,7 @@ public class ConvertedItemTag extends PMTags {
                     if (!visualize.toString().contains(".jsp")) {
                         println(visualize);
                     } else {
-                        pageContext.include("../converters/"
+                        pageContext.include("/converters/"
                                 + visualize
                                 + "&f=" + fieldId);
                     }
