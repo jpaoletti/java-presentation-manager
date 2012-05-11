@@ -7,8 +7,10 @@ import java.util.Date;
  *
  * @author jpaoletti
  */
-public class ComplexClass1 extends SimpleClass {
+public class ComplexClass1 {
 
+    private Long id;
+    private String description;
     private BigDecimal amount;
     private Date date;
     private Date datetime;
@@ -17,6 +19,22 @@ public class ComplexClass1 extends SimpleClass {
     private String key;
     private Long size;
     private String bigstring;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Boolean getActive() {
         return active;
