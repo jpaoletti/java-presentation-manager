@@ -88,7 +88,7 @@
                 <property name="filename" value="converters/show.decimal.converter" />
                 <property name="prefix" value="U$S " />
                 <property name="suffix" value=" .-" />
-                <property name="format" value="#0.##" />
+                <property name="format" value="#0.00" />
             </properties>
         </converter>
     </external-converter>
