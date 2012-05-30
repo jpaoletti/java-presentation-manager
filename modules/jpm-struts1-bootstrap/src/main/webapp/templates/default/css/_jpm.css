@@ -19,3 +19,10 @@ td, th{vertical-align: middle !important;}
 .sorted-up{background: url("../img/arrow-up.gif") left center no-repeat; text-indent: 10px;}
 .sorted-down{background: url("../img/arrow-down.gif") left center no-repeat; text-indent: 10px;}
 .login-error{padding: 4px !important; break-after: avoid}
+
+.pwdwidgetdiv{	width:185px; height: 30px;}
+.pwdopsdiv{display: block;float: left;margin-right:6px;}
+.pwdopsdiv a{font-family : Arial, Helvetica, sans-serif;font-size : 10px; }
+.pwdstrengthbar{float:right;background:#cccccc;height:4px;margin:0;}
+.pwdstrength{float:right; height:20px;width:70px;margin-top:3px;}
+.pwdstrengthstr{float:right;clear:both;height:14px;margin-top:0px;font-family : Arial, Helvetica, sans-serif;font-size : 10px; }
