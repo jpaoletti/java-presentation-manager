@@ -43,24 +43,6 @@
         </converter>
     </external-converter>
 
-    <external-converter id="edit-group-list">
-        <converter class="jpaoletti.jpm.struts.converter.EditCollectionConverter" operations="add edit">
-            <properties>
-                <property name="entity" value="secusergroup" />
-                <property name="collection-class" value="java.util.ArrayList" />
-            </properties>
-        </converter>
-    </external-converter>
-
-    <external-converter id="edit-permission-list">
-        <converter class="jpaoletti.jpm.struts.converter.EditCollectionConverter" operations="add edit">
-            <properties>
-                <property name="entity" value="secperm" />
-                <property name="collection-class" value="java.util.ArrayList" />
-            </properties>
-        </converter>
-    </external-converter>
-
     <external-converter id="show-containers">
         <converter class="jpaoletti.jpm.struts.converter.WeakConverter" operations="show" >
             <properties>
@@ -132,7 +114,7 @@
             <properties>
                 <property name="entity" value="simpleclass" />
                 <property name="display" value="{description}" />
-            </properties>            
+            </properties>
         </converter>
     </external-converter>
 
@@ -144,6 +126,6 @@
                 <property name="readonly" value="false" />
                 <property name="collection-class" value="java.util.ArrayList" />
             </properties>
-        </converter>        
+        </converter>
     </external-converter>
 </external-converters>

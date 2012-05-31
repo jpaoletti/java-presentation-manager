@@ -23,6 +23,7 @@
 
     <!-- External Converters -->
     <property name="external-converters" value="${jpm.cfg}/jpm-econverters.xml"/>
+    <property name="external-converters" value="${jpm.cfg}/jpm-econverters-sec.xml"/>
 
     <!-- Class Converters -->
     <property name="class-converters" value="${jpm.cfg}/jpm-class-converters.xml"/>

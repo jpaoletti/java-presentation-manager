@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<external-converters>
+    <external-converter id="edit-permission-list">
+        <converter class="jpaoletti.jpm.struts.converter.CollectionConverter" operations="add edit">
+            <properties>
+                <property name="entity" value="secperm" />
+                <property name="readonly" value="false" />
+                <property name="display" value="{description}" />
+                <property name="collection-class" value="java.util.ArrayList" />
+            </properties>
+        </converter>
+    </external-converter>
+    
+    <external-converter id="show-permission-list">
+        <converter class="jpaoletti.jpm.struts.converter.CollectionConverter" operations="show">
+            <properties>
+                <property name="entity" value="secperm" />
+                <property name="display" value="{description}" />
+            </properties>
+        </converter>
+    </external-converter>
+    
+    <external-converter id="edit-group-list">
+        <converter class="jpaoletti.jpm.struts.converter.CollectionConverter" operations="add edit">
+            <properties>
+                <property name="entity" value="secusergroup" />
+                <property name="readonly" value="false" />
+                <property name="display" value="{description}" />
+                <property name="collection-class" value="java.util.ArrayList" />
+            </properties>
+        </converter>
+    </external-converter>
+
+    <external-converter id="show-group-list">
+        <converter class="jpaoletti.jpm.struts.converter.CollectionConverter" operations="show">
+            <properties>
+                <property name="entity" value="secusergroup" />
+                <property name="display" value="{description}" />
+            </properties>
+        </converter>
+    </external-converter>    
+</external-converters>
