@@ -20,7 +20,7 @@ function loadPage(url){
 
 function popup(url){
     loadPage(url);
-    /*$("#jpm-popup-ajax").load(url, function(){
+/*$("#jpm-popup-ajax").load(url, function(){
         $( "#jpm-popup" ).dialog({
             modal: true, 
             resizable: true,
@@ -59,6 +59,21 @@ function enable_disable(inputid, v){
         f.attr('disabled', 'disabled');
     }else{
         f.removeAttr('disabled');
+    }
+}
+
+function validatePassword(entity, param){
+    var f = $("#f_"+param+"_id").val();
+    var d = $("#d_"+param);
+    var sub = $("#"+entity+"_submit");
+    if( f != $("#r_"+param).val()){
+        d.addClass("error");
+        d.find(".help-inline").show();
+        sub.attr('disabled', 'disabled');
+    }else{
+        d.removeClass("error");
+        d.find(".help-inline").hide();
+        sub.attr('disabled', '');
     }
 }
 
