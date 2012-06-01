@@ -17,19 +17,25 @@
                 $("#f_${param.f}").get(0)[j]= new Option("","-1", false, false); j++;
             }
             if(filter.length >= ${ctx.map._min_search_size}){
-                jQuery.getJSON("${pmfn:plainUrl(ctx.pmsession, '/get_list.do'
-                                  .concat('?entity=').concat(ctx.map._entity)
-                                  .concat('&filter_class=').concat(ctx.map._filter)
-                                  .concat('&id=').concat(ctx.map._id)
-                                  .concat('&display=').concat(ctx.map._display)
-                                  .concat('&sortField=').concat(ctx.map._sortField)
-                                  .concat('&sortDir=').concat(ctx.map._sortDir))}?filter=" + filter, function(list){
-                    jQuery.each(list, function (i, item){                    
-                        $("#f_${param.f}").get(0)[j]= new Option(list[i].value, list[i].key, false, "${ctx.map._selected_id}"==list[i].key); j++;
-                    });
-                    $("#loading_${param.f}").hide();
-                    $("#done_${param.f}").show();
-                });
+                    jQuery.getJSON("${pmfn:plainUrl(ctx.pmsession, '/get_list.do'
+                      .concat('?entity=').concat(ctx.map._entity)
+                      .concat('&filter_class=').concat(ctx.map._filter)
+                      .concat('&id=').concat(ctx.map._id)
+                      .concat('&display=').concat(ctx.map._display)
+                      .concat('&sortField=').concat(ctx.map._sortField)
+                      .concat('&originalEntity=').concat(ctx.entity.id)
+                      .concat('&originalOperation=').concat(ctx.operation.id)
+                      .concat('&relatedFieldName=').concat(param.related)
+                      .concat('&sortDir=').concat(ctx.map._sortDir))}"
+                                          +"?filter=" + filter
+                                          +"&relatedFieldValue=" + $("#f_${param.related}").val()
+                                      ,function(list){
+                                          jQuery.each(list, function (i, item){
+                                              $("#f_${param.f}").get(0)[j]= new Option(list[i].value, list[i].key, false, "${ctx.map._selected_id}"==list[i].key); j++;
+                                          });
+                                          $("#loading_${param.f}").hide();
+                                          $("#done_${param.f}").show();
+                                      });
             }else{
                 $("#loading_${param.f}").hide();
                 $("#done_${param.f}").show();
@@ -41,12 +47,19 @@
     <input type="hidden" id="search_${param.f}" value="" />
 </c:if>
 <c:if test="${ctx.map._min_search_size > 0 }">
-    <input type="text" id="search_${param.f}" size="7" class="object-converter-search"/>
+    <input type="text" id="search_${param.f}" size="7" class="object-converter-search span1"/>
     <script type="text/javascript">
         PM_register(function(){
             $("#search_${param.f}").keyup(function() {
                 delay(sacupds["${param.f}"], 1000 );
             });
+        });
+    </script>
+</c:if>
+<c:if test="${not empty param.related}">
+    <script type="text/javascript">
+        PM_register(function(){
+            $("#f_${param.related}").live('change', sacupds["${param.f}"]);
         });
     </script>
 </c:if>

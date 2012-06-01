@@ -34,11 +34,23 @@ public class GetListAction extends ActionSupport {
             if (entity == null) {
                 throw new ConverterException("Cannot find entity " + entity);
             }
+
+            final String originalEntity = (String) ctx.getParameter("originalEntity","");
+            final String originalOp = (String) ctx.getParameter("originalOperation","");
+            final String relatedFieldName = (String) ctx.getParameter("relatedFieldName","");
+            final String _relatedFieldValue = (String) ctx.getParameter("relatedFieldValue","");
+            ctx.setFieldValue(_relatedFieldValue);
+            Object object = null;
+            if (!"".equals(originalEntity) && !"".equals(originalOp) && !"".equals(relatedFieldName) && !"".equals(_relatedFieldValue)) {
+                object = ctx.getPresentationManager().getEntity(originalEntity).getFieldById(relatedFieldName).getConverter(originalOp).build(ctx);
+            }
+
             final List<KeyValue> finalist = helper.getFullList(ctx, entity,
                     (String) ctx.getParameter("filter_class"),
                     (String) ctx.getParameter("filter"),
                     (String) ctx.getParameter("sortField"),
-                    (String) ctx.getParameter("sortDir"));
+                    (String) ctx.getParameter("sortDir"), relatedFieldName,
+                    object);
             try {
                 ctx.getResponse().getWriter().print(gson.toJson(finalist));
             } catch (IOException ex) {
