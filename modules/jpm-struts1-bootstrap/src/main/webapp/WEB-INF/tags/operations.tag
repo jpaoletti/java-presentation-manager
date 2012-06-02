@@ -8,7 +8,10 @@
     <c:forEach var="operation" items="${(not empty operations.operations)?operations.operations:ctx.map.operations.operations}">
         <pmfn:checkPerm perm="${operation.perm}">
             <c:if test="${empty operation.url}">
-                <a id="operation${operation.id}" class="btn" href="${pmfn:urlc(ctx.pmsession, operation.id.concat('.do?pmid=').concat(ctx.entity.id).concat((not empty ctx.map.item)?'&item='.concat(ctx.map.item):''), operation.confirm)}">
+                <a id="operation${operation.id}" class="btn" 
+                   href="${(operation.popup)
+                           ?"javascript:popup('".concat(pmfn:plainUrl(ctx.pmsession, operation.id.concat('.do?pmid=').concat(ctx.entity.id).concat((not empty ctx.map.item)?'&item='.concat(ctx.map.item):''))).concat("')")
+                           :pmfn:urlc(ctx.pmsession, operation.id.concat('.do?pmid=').concat(ctx.entity.id).concat((not empty ctx.map.item)?'&item='.concat(ctx.map.item):''), operation.confirm)}">
                     <i class="ui-icon ui-icon-operation-${operation.id}"></i>
                     <c:if test="${!operation.compact}">${operation.title}</c:if>
                 </a>
