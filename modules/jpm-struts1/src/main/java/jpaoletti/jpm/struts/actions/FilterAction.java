@@ -11,6 +11,7 @@ public class FilterAction extends ActionSupport {
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         final boolean finish = ctx.getParameter("finish") != null;
         ctx.put("validate", false);
+        ctx.put("editable", true);
 
         PMFilterOperation op = new PMFilterOperation("filter");
         op.execute(ctx);

@@ -29,3 +29,4 @@ td, th{vertical-align: middle !important;}
 .pwdstrengthbar{float:right;background:#cccccc;height:4px;margin:0;}
 .pwdstrength{float:right; height:20px;width:70px;margin-top:3px;}
 .pwdstrengthstr{float:right;clear:both;height:14px;margin-top:0px;font-family : Arial, Helvetica, sans-serif;font-size : 10px; }
+.filter-operation{float: left !important}

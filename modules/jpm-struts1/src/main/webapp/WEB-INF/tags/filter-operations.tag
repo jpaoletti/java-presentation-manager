@@ -4,7 +4,7 @@
 <%@attribute name = "filter" required="true"  type="jpaoletti.jpm.core.EntityFilter" %>
 <%@ taglib uri="/WEB-INF/tld/struts-bean.tld" prefix="bean" %>
 <bean:define id="selected" value="<%= filter.getFilterOperation(field_id).toString() %>" />
-<select id="filter_oper_f_${field_id}" name="filter_oper_f_${field_id}" style="float:left;">
+<select id="filter_oper_f_${field_id}" name="filter_oper_f_${field_id}" class="filter-operation span1">
     <option value="2" ${selected=='LIKE' ? 'selected' : ''} ><pmfn:message key="pm.struts.filter.like" /></option>
     <option value="0" ${selected=='EQ' ? 'selected' : ''} ><pmfn:message key="pm.struts.filter.eq" /></option>
     <option value="1" ${selected=='NE' ? 'selected' : ''} ><pmfn:message key="pm.struts.filter.ne" /></option>
