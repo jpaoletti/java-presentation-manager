@@ -73,12 +73,11 @@ public class ObjectConverter extends StrutsEditConverter {
         ctx.put("_entity", _entity);
         ctx.put("_display", getConfig("display"));
         ctx.put("_filter", getConfig("filter"));
-        ctx.put("_filter", getConfig("filter"));
         ctx.put("_sortField", getConfig("sort-field"));
         final String sd = getConfig("sort-direction");
         if (sd != null && !"".equals(sd.trim()) && "desc".equalsIgnoreCase(sd)) {
             ctx.put("_sortDir", "1");
         }
-        return super.visualize("object_converter.jsp?");
+        return super.visualize("object_converter.jsp?related=" + getConfig("related", ""));
     }
 }

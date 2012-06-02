@@ -57,7 +57,9 @@ public class CollectionHelper {
             String listFilter,
             String stringFilter,
             String sortField,
-            String sortd) throws ConverterException {
+            String sortd,
+            String relatedFieldName,
+            Object relatedFieldValue) throws ConverterException {
 
         final ListSort sort = new ListSort(sortField, (sortd != null) ? ListSort.SortDirection.ASC : ListSort.SortDirection.DESC);
 
@@ -68,8 +70,8 @@ public class CollectionHelper {
         final List<KeyValue> result = new ArrayList<KeyValue>();
         try {
             final List<?> list;
+            final EntityFilter filter = entity.getDataAccess().createFilter(ctx);
             if (stringFilter != null && getDisplay() != null) {
-                final EntityFilter filter = entity.getDataAccess().createFilter(ctx);
                 filter.setBehavior(FilterBehavior.OR);
                 final Matcher matcher = DISPLAY_PATTERN.matcher(getDisplay());
                 while (matcher.find()) {
@@ -77,10 +79,14 @@ public class CollectionHelper {
                     filter.addFilter(_display_field, stringFilter, FilterOperation.LIKE);
                 }
                 filter.process(entity);
-                list = entity.getDataAccess().list(ctx, filter, lfilter, sort, null, null);
-            } else {
-                list = entity.getDataAccess().list(ctx, null, lfilter, sort, null, null);
             }
+            if (relatedFieldName != null && relatedFieldValue != null) {
+                //If we have a related object, search is with "AND" behaviour 
+                //and will break any multi field display search.
+                filter.setBehavior(FilterBehavior.AND);
+                filter.addFilter(relatedFieldName, relatedFieldValue, FilterOperation.EQ);
+            }
+            list = entity.getDataAccess().list(ctx, filter, lfilter, sort, null, null);
             if (list == null) {
                 return null;
             }
