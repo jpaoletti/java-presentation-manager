@@ -3,8 +3,8 @@ package jpaoletti.jpm.struts.converter;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.PMContext;
 
-/**Converter for long <br>
- * Properties: currency and format
+/**
+ * Converter for long <br> Properties: currency and format
  * <pre>
  * {@code
  * <converter class="jpaoletti.jpm.converter.EditLongConverter">
@@ -12,14 +12,24 @@ import jpaoletti.jpm.core.PMContext;
  * </converter>
  * }
  * </pre>
+ *
  * @author jpaoletti
- * */
+ *
+ */
 public class EditLongConverter extends DefaultStrutsConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
         try {
-            return Long.parseLong((String) ctx.getFieldValue());
+            final String v = (String) ctx.getFieldValue();
+            if ((v == null || "".equals(v.trim()))) {
+                if (getConfig("not-null", "false").equals("true")) {
+                    throw new ConverterException("pm.struts.converter.invalid.null.long");
+                } else {
+                    return null;
+                }
+            }
+            return Long.parseLong(v);
         } catch (NumberFormatException e) {
             throw new ConverterException("pm.struts.converter.invalid.long");
         }
