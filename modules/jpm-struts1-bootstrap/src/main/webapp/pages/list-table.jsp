@@ -12,7 +12,7 @@
             <tr class="${pmfn:highlight(entity,null,item,null)}">
                 <c:if test="${ctx.entityContainer.list.showRowNumber}"><th class="row-number-col">${pmfn:rowNumber(ctx.entityContainer.list, contents,item)}</th></c:if>
                 <th scope="row" class="jpm-list-operation-bar">
-                    <label class="${(ctx.entityContainer.list.hasSelectedScope)?'checkbox':''} inline">
+                    <label class="${(ctx.entityContainer.list.hasSelectedScope)?'checkbox':''} inline clearfix">
                         ${pmfn:itemCheckbox(ctx,contents,item)}
                         <div class='btn-group'>
                         ${pmfn:listItemOperations(ctx, contents, item)}

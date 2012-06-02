@@ -1,6 +1,9 @@
 body.outer-index{position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; padding-top: 60px; padding-bottom: 40px;}
 img{vertical-align:middle;}
-
+.clearfix:after {content: ".";display: block;clear: both;visibility: hidden;line-height: 0;	height: 0;}
+.clearfix {display: inline-block;} 
+html[xmlns] .clearfix {	display: block;}
+* html .clearfix {height: 1%;}
 
 .mainLoading{position: fixed; top: 50%; left: 50%; margin-top: -64px; margin-left: -64px;}
 .brand{background-image: url("../img/logo.png"); background-repeat: no-repeat; background-position: left center; background-size: 30px; text-indent: 40px; margin-left: -10px !important;}
@@ -9,7 +12,7 @@ img{vertical-align:middle;}
 .avatar{margin-top: 5px; float: right; margin-left: 5px;}
 .user-box{margin-top: 5px !important;}
 .jpm-list-operation-bar label{padding-top: 0px !important; margin-bottom: 0 !important;}
-.jpm-list-operation-bar{white-space: nowrap; table-layout: fixed;}
+.jpm-list-operation-bar{white-space: nowrap; table-layout: fixed; }
 .sortable{cursor: pointer}
 .center{text-align: center !important}
 .std-header{margin-bottom: 10px;}
