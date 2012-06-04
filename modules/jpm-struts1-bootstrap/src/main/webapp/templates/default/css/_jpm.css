@@ -1,4 +1,8 @@
-body.outer-index{position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; padding-top: 60px; padding-bottom: 40px;}
+body.outer-index{padding-top: 60px;}
+@media (max-width: 768px){
+    body.outer-index{padding-top: 0;}
+}
+
 img{vertical-align:middle;}
 .clearfix:after {content: ".";display: block;clear: both;visibility: hidden;line-height: 0;	height: 0;}
 .clearfix {display: inline-block;} 

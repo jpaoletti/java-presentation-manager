@@ -17,6 +17,7 @@
             <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
             <script type="text/javascript" src="${es.context_path}/js/misc.js"></script>
             <script src="${es.context_path}/js/bootstrap-plugins/bootstrap-modal.js"></script>
+            <script src="${es.context_path}/js/bootstrap-plugins/bootstrap-collapse.js"></script>
         </head>
         <body class="${bodyClass} outer-index">
             <%@include file="/WEB-INF/jsp/loading.jsp" %>
