@@ -4,6 +4,7 @@ import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.core.message.MessageFactory;
 import jpaoletti.jpm.struts.CollectionHelper;
+import jpaoletti.jpm.struts.tags.PMTags;
 
 /**
  * Converter for integer <br>
@@ -47,6 +48,10 @@ public class ObjectConverter extends StrutsEditConverter {
     @Override
     public Object visualize(PMContext ctx) throws ConverterException {
         final String _entity = getConfig("entity");
+        final StringBuilder url = new StringBuilder("object_converter.jsp");
+        url.append("?related=").append(getConfig("related", ""));
+        url.append("&oentity=").append(_entity);
+
         final Entity entity = ctx.getPresentationManager().getEntity(_entity);
         if (entity == null) {
             throw new ConverterException("object.converter.entity.cannot.be.null");
@@ -70,14 +75,27 @@ public class ObjectConverter extends StrutsEditConverter {
             }
         }
         ctx.put("_min_search_size", getConfig("min-search-size", "0"));
-        ctx.put("_entity", _entity);
-        ctx.put("_display", getConfig("display"));
-        ctx.put("_filter", getConfig("filter"));
-        ctx.put("_sortField", getConfig("sort-field"));
+        final StringBuilder sb = new StringBuilder("/get_list.do");
+        sb.append("?entity=").append(_entity);
+        sb.append("&filter_class=").append(getConfig("filter"));
+        sb.append("&id=").append("");
+        sb.append("&display=").append(getConfig("display"));
+        sb.append("&sortField=").append(getConfig("sort-field"));
+        sb.append("&originalEntity=").append(ctx.getEntity().getId());
+        sb.append("&originalOperation=").append(ctx.getOperation().getId());
+        sb.append("&relatedFieldName=").append(getConfig("related", ""));
         final String sd = getConfig("sort-direction");
         if (sd != null && !"".equals(sd.trim()) && "desc".equalsIgnoreCase(sd)) {
-            ctx.put("_sortDir", "1");
+            sb.append("&sortDir=").append("1");
         }
-        return super.visualize("object_converter.jsp?related=" + getConfig("related", ""));
+        ctx.put("jsonUrl", PMTags.plainUrl(ctx.getPmsession(), sb.toString()));
+
+        //works only for bootstrap version
+        if ("true".equals(getConfig("add", "false"))) {
+            if (entity.getOperations().getOperation("add") != null) {
+                url.append("&add=").append(PMTags.plainUrl(ctx.getPmsession(), "add.do?pmid=" + _entity));
+            }
+        }
+        return super.visualize(url.toString());
     }
 }

@@ -3,42 +3,31 @@
     if(typeof sacupds == "undefined") var sacupds = new Array();
     PM_register(function(){
         sacupds["${param.f}"] = function(){
+            var field = "${param.f}";
             var selectedOption = new Option("${ctx.map._selected_value}", "${ctx.map._selected_id}", false, true);
-            $("#done_${param.f}").hide();
-            $("#loading_${param.f}").show();
-            $("#f_${param.f}").contents().each(function(){$(this).remove()});
+            $("#done_"+field).hide();
+            $("#loading_"+field).show();
+            $("#f_"+field).contents().each(function(){$(this).remove()});
             var j = 0;
-            var filter = $("#search_${param.f}").val();
-            <c:if test="${ctx.map._min_search_size > 0 }">
-            $("#f_${param.f}").get(0)[j]= selectedOption; j++;
-            $($("#f_${param.f}").get(0)).append("<option disabled='disabled'>-------------------------</option>"); j++;
-            </c:if>
+            var filter = $("#search_"+field).val();
+            //<c:if test="${ctx.map._min_search_size > 0 }">
+            $("#f_"+field).get(0)[j]= selectedOption; j++;
+            $($("#f_"+field).get(0)).append("<option disabled='disabled'>-------------------------</option>"); j++;
+            //</c:if>
             if(${ctx.map._with_null}){
-                $("#f_${param.f}").get(0)[j]= new Option("","-1", false, false); j++;
+                $("#f_"+field).get(0)[j]= new Option("","-1", false, false); j++;
             }
             if(filter.length >= ${ctx.map._min_search_size}){
-                    jQuery.getJSON("${pmfn:plainUrl(ctx.pmsession, '/get_list.do'
-                      .concat('?entity=').concat(ctx.map._entity)
-                      .concat('&filter_class=').concat(ctx.map._filter)
-                      .concat('&id=').concat(ctx.map._id)
-                      .concat('&display=').concat(ctx.map._display)
-                      .concat('&sortField=').concat(ctx.map._sortField)
-                      .concat('&originalEntity=').concat(ctx.entity.id)
-                      .concat('&originalOperation=').concat(ctx.operation.id)
-                      .concat('&relatedFieldName=').concat(param.related)
-                      .concat('&sortDir=').concat(ctx.map._sortDir))}"
-                                          +"?filter=" + filter
-                                          +"&relatedFieldValue=" + $("#f_${param.related}").val()
-                                      ,function(list){
-                                          jQuery.each(list, function (i, item){
-                                              $("#f_${param.f}").get(0)[j]= new Option(list[i].value, list[i].key, false, "${ctx.map._selected_id}"==list[i].key); j++;
-                                          });
-                                          $("#loading_${param.f}").hide();
-                                          $("#done_${param.f}").show();
-                                      });
+                jQuery.getJSON("${ctx.map.jsonUrl}?filter=" + filter + "&relatedFieldValue=" + $("#f_${param.related}").val(),function(list){
+                    jQuery.each(list, function (i, item){
+                        $("#f_"+field).get(0)[j]= new Option(list[i].value, list[i].key, false, "${ctx.map._selected_id}"==list[i].key); j++;
+                    });
+                    $("#loading_"+field).hide();
+                    $("#done_"+field).show();
+                });
             }else{
-                $("#loading_${param.f}").hide();
-                $("#done_${param.f}").show();
+                $("#loading_"+field).hide();
+                $("#done_"+field).show();
             }
         }
     });
@@ -66,9 +55,24 @@
 <div id="loading_${param.f}" class="object-converter-loading"><img alt="..." src="${es.templatePath}/images/loading.gif"/></div>
 <span id="done_${param.f}" style="display: none;">
     <select size="1" id="f_${param.f}" name="f_${param.f}" class="object-converter-select object-converter-select-${ctx.map._min_search_size}"></select>
+    <c:if test="${not empty param.add}">
+        <script type="text/javascript" src="${es.context_path}/js/jquery/jquery.form.js"></script>
+        <button id='object-converter-add-btn-${param.f}' type='button' class='btn object-converter-add-btn'><i class="ui-icon ui-icon-operation-add"></i></button>
+    </c:if>
 </span>
 <script type="text/javascript">
     PM_register(function(){
         sacupds["${param.f}"]();
+        //<c:if test="${not empty param.add}">
+        $("#object-converter-add-btn-${param.f}").click(function(){
+            popup("${param.add}");
+            setTimeout(function(){
+                $("#form_${param.oentity}_add").ajaxForm(function(){
+                    $('#popup-modal').modal('hide');
+                    sacupds["${param.f}"]();
+                });
+            }, 2100);
+        });
+        //</c:if>
     });
 </script>

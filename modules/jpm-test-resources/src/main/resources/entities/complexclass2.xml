@@ -37,9 +37,10 @@
             <converter class="jpaoletti.jpm.struts.converter.ObjectConverter" operations="add edit">
                 <properties>
                     <property name="entity"          value="simpleclass" />
-                    <property name="display"         value="[{id}]description" />
+                    <property name="display"         value="[{id}]{description}" />
                     <property name="with-null"       value="false" />
                     <property name="min-search-size" value="0" />
+                    <property name="add"             value="true" />
                 </properties>
             </converter>
         </converters>
