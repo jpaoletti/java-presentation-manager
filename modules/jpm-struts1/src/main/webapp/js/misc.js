@@ -19,6 +19,7 @@ function loadPage(url){
 }
 
 function popup(url){
+    alert("Popup not implemented! Redirecting");
     loadPage(url);
 /*$("#jpm-popup-ajax").load(url, function(){
         $( "#jpm-popup" ).dialog({
