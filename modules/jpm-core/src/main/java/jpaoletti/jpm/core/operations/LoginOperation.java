@@ -6,13 +6,7 @@ import jpaoletti.jpm.core.PMSession;
 import jpaoletti.jpm.core.PresentationManager;
 import jpaoletti.jpm.menu.Menu;
 import jpaoletti.jpm.menu.MenuSupport;
-import jpaoletti.jpm.security.core.InvalidPasswordException;
-import jpaoletti.jpm.security.core.InvalidUserException;
-import jpaoletti.jpm.security.core.PMSecurityConnector;
-import jpaoletti.jpm.security.core.PMSecurityException;
-import jpaoletti.jpm.security.core.PMSecurityUser;
-import jpaoletti.jpm.security.core.UserAlreadyLogged;
-import jpaoletti.jpm.security.core.UserNotFoundException;
+import jpaoletti.jpm.security.core.*;
 
 /**
  *
@@ -48,6 +42,9 @@ public class LoginOperation extends OperationCommandSupport {
             } catch (InvalidPasswordException e) {
                 pm.removeSession(session.getId());
                 throw new PMException("pm_security.password.invalid");
+            } catch (UserNotActiveException e) {
+                pm.removeSession(session.getId());
+                throw new PMException("pm_security.user.inactive");
             } catch (PMException e) {
                 pm.removeSession(session.getId());
                 throw e;
