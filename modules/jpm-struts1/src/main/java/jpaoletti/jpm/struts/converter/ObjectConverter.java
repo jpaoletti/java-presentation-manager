@@ -60,12 +60,13 @@ public class ObjectConverter extends StrutsEditConverter {
             throw new ConverterException("object.converter.id.cannot.be.null");
         }
         final Object fieldValue = ctx.getFieldValue();
+        final String _display = getConfig("display");
         if (fieldValue == null) {
             ctx.put("_selected_value", "");
             ctx.put("_selected_id", "-1");
             ctx.put("_with_null", getConfig("with-null", "false")); //false because selected is already null
         } else {
-            final CollectionHelper helper = new CollectionHelper(getConfig("display"));
+            final CollectionHelper helper = new CollectionHelper(_display);
             try {
                 ctx.put("_selected_value", helper.getObjectDisplay(fieldValue));
                 ctx.put("_selected_id", entity.getDataAccess().getInstanceId(ctx, new EntityInstanceWrapper(fieldValue)).getValue());
@@ -79,7 +80,9 @@ public class ObjectConverter extends StrutsEditConverter {
         sb.append("?entity=").append(_entity);
         sb.append("&filter_class=").append(getConfig("filter"));
         sb.append("&id=").append("");
-        sb.append("&display=").append(getConfig("display"));
+        if (_display != null) {
+            sb.append("&display=").append(_display);
+        }
         sb.append("&sortField=").append(getConfig("sort-field"));
         sb.append("&originalEntity=").append(ctx.getEntity().getId());
         sb.append("&originalOperation=").append(ctx.getOperation().getId());
