@@ -74,7 +74,7 @@ function validatePassword(entity, param){
     }else{
         d.removeClass("error");
         d.find(".help-inline").hide();
-        sub.attr('disabled', '');
+        sub.removeAttr('disabled');
     }
 }
 
