@@ -61,7 +61,7 @@ public class CollectionHelper {
             String relatedFieldName,
             Object relatedFieldValue) throws ConverterException {
 
-        final ListSort sort = new ListSort(sortField, (sortd != null) ? ListSort.SortDirection.ASC : ListSort.SortDirection.DESC);
+        final ListSort sort = new ListSort(sortField, (sortd == null) ? ListSort.SortDirection.ASC : ListSort.SortDirection.DESC);
 
         ListFilter lfilter = null;
         if (listFilter != null && listFilter.compareTo("null") != 0 && listFilter.compareTo("") != 0) {
