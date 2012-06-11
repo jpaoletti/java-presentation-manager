@@ -2,6 +2,7 @@ package jpaoletti.jpm.struts.actions;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.Entity;
@@ -35,26 +36,33 @@ public class GetListAction extends ActionSupport {
                 throw new ConverterException("Cannot find entity " + entity);
             }
 
-            final String originalEntity = (String) ctx.getParameter("originalEntity","");
-            final String originalOp = (String) ctx.getParameter("originalOperation","");
-            final String relatedFieldName = (String) ctx.getParameter("relatedFieldName","");
-            final String _relatedFieldValue = (String) ctx.getParameter("relatedFieldValue","");
+            final String originalEntity = (String) ctx.getParameter("originalEntity", "");
+            final String originalOp = (String) ctx.getParameter("originalOperation", "");
+            final String relatedFieldName = (String) ctx.getParameter("relatedFieldName", "");
+            final String _relatedFieldValue = (String) ctx.getParameter("relatedFieldValue", "");
             ctx.setFieldValue(_relatedFieldValue);
             Object object = null;
             if (!"".equals(originalEntity) && !"".equals(originalOp) && !"".equals(relatedFieldName) && !"".equals(_relatedFieldValue)) {
                 object = ctx.getPresentationManager().getEntity(originalEntity).getFieldById(relatedFieldName).getConverter(originalOp).build(ctx);
             }
-
-            final List<KeyValue> finalist = helper.getFullList(ctx, entity,
-                    (String) ctx.getParameter("filter_class"),
-                    (String) ctx.getParameter("filter"),
-                    (String) ctx.getParameter("sortField"),
-                    (String) ctx.getParameter("sortDir"), relatedFieldName,
-                    object);
-            try {
-                ctx.getResponse().getWriter().print(gson.toJson(finalist));
-            } catch (IOException ex) {
+            if (object == null && "true".equals(ctx.getParameter("relatedRequired", "false"))) {
+                try {
+                    ctx.getResponse().getWriter().print(gson.toJson(new ArrayList<KeyValue>()));
+                } catch (IOException ex) {
+                }
+            } else {
+                final List<KeyValue> finalist = helper.getFullList(ctx, entity,
+                        (String) ctx.getParameter("filter_class"),
+                        (String) ctx.getParameter("filter"),
+                        (String) ctx.getParameter("sortField"),
+                        (String) ctx.getParameter("sortDir"), relatedFieldName,
+                        object);
+                try {
+                    ctx.getResponse().getWriter().print(gson.toJson(finalist));
+                } catch (IOException ex) {
+                }
             }
+
         } catch (Exception ex) {
             ctx.getPresentationManager().error(ex);
         }

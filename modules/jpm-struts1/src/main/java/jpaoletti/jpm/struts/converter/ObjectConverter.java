@@ -87,6 +87,7 @@ public class ObjectConverter extends StrutsEditConverter {
         sb.append("&originalEntity=").append(ctx.getEntity().getId());
         sb.append("&originalOperation=").append(ctx.getOperation().getId());
         sb.append("&relatedFieldName=").append(getConfig("related", ""));
+        sb.append("&relatedRequired=").append(getConfig("related-required", "false"));
         final String sd = getConfig("sort-direction");
         if (sd != null && !"".equals(sd.trim()) && "desc".equalsIgnoreCase(sd)) {
             sb.append("&sortDir=").append("1");
