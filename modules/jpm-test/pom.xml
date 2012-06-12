@@ -31,7 +31,6 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <jpm.version>${project.version}</jpm.version>
                 <jpm.impl>jpm-struts1</jpm.impl>
                 <cfg>cfg-struts1</cfg>
             </properties>
@@ -39,7 +38,6 @@
         <profile>
             <id>struts1-bootstrap</id>
             <properties>
-                <jpm.version>${project.version}</jpm.version>
                 <jpm.impl>jpm-struts1-bootstrap</jpm.impl>
                 <cfg>cfg-struts1</cfg>
             </properties>
@@ -50,18 +48,18 @@
         <dependency>
             <groupId>com.github.jpaoletti</groupId>
             <artifactId>jpm-hibernate</artifactId>
-            <version>${jpm.version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.jpaoletti</groupId>
             <artifactId>${jpm.impl}</artifactId>
-            <version>${jpm.version}</version>
+            <version>${project.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
             <groupId>com.github.jpaoletti</groupId>
             <artifactId>${jpm.impl}</artifactId>
-            <version>${jpm.version}</version>
+            <version>${project.version}</version>
             <type>jar</type>
             <classifier>classes</classifier>
         </dependency>
