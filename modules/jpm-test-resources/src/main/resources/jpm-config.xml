@@ -4,7 +4,10 @@
     <property name="appversion" value="1.0.0"/>
     <property name="template" value="default"/>
     <property name="audit-level" value="10"/>
-    
+
+    <property name="audit-service"
+              value="jpaoletti.jpm.hibernate.audit.AuditService"/>
+
     <property name="persistence-manager" 
               value="jpaoletti.jpm.hibernate.core.PersistenceManager"/>
     
