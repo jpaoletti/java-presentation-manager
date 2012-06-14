@@ -17,7 +17,7 @@ access.
 The default visual implementation is based on Struts 1. You can use the provided
 archetype and customize it as needed.
 
-mvn archetype:generate -DarchetypeGroupId=com.github.jpaoletti -DarchetypeArtifactId=jpm-archetype -DarchetypeVersion=1.3.1-SNAPSHOT
+mvn archetype:generate -DarchetypeGroupId=com.github.jpaoletti -DarchetypeArtifactId=jpm-archetype -DarchetypeVersion=1.4.1-SNAPSHOT
 
 You can also configure your pom.xml using the following dependencies.
 
