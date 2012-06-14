@@ -1,33 +1,42 @@
 package jpaoletti.jpm.struts.converter;
 
 import java.math.BigDecimal;
-
 import java.math.RoundingMode;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.PMContext;
 
-/**Converter for integer <br>
- * Properties: currency and format
+/**
+ * Converter for big decimals <br> Properties: separator, decimals and not-null
  * <pre>
  * {@code
  * <converter class="jpaoletti.jpm.converter.EditDecimalConverter">
  *     <properties>
  *         <property name="separator" value="." />
  *         <property name="decimals" value="2" />
- *         <property name="with-null" value="false" />
+ *         <property name="not-null" value="false" />
  *     </properties>
  * </converter>
  * }
  * </pre>
+ *
  * @author jpaoletti
- * */
+ *
+ */
 public class EditDecimalConverter extends DefaultStrutsConverter {
 
     @Override
     public Object build(PMContext ctx) throws ConverterException {
         try {
             final String separator = getConfig("separator", ".");
-            return new BigDecimal(((String) ctx.getFieldValue()).replace(separator, "."));
+            final String v = (String) ctx.getFieldValue();
+            if ((v == null || "".equals(v.trim()))) {
+                if (getConfig("not-null", "false").equals("true")) {
+                    throw new ConverterException("pm.struts.converter.invalid.null.decimal");
+                } else {
+                    return null;
+                }
+            }
+            return new BigDecimal(v.replace(separator, "."));
         } catch (Exception e) {
             throw new ConverterException("pm.struts.converter.invalid.decimal");
         }
