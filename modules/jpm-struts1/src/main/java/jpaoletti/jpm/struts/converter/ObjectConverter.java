@@ -36,7 +36,7 @@ public class ObjectConverter extends StrutsEditConverter {
             final String _entity = getConfig("entity");
             final Entity entity = ctx.getPresentationManager().getEntity(_entity);
             final String newFieldValue = (String) ctx.getFieldValue();
-            if (newFieldValue == null || newFieldValue.trim().compareTo("-1") == 0) {
+            if (newFieldValue == null || newFieldValue.trim().equals("-1") || "".equals(newFieldValue)) {
                 return null;
             }
             return entity.getDataAccess().getItem(ctx, new InstanceId(newFieldValue));
