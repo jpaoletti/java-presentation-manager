@@ -47,7 +47,7 @@ public class GetListAction extends ActionSupport {
             }
             if (object == null && "true".equals(ctx.getParameter("relatedRequired", "false"))) {
                 try {
-                    ctx.getResponse().getWriter().print(gson.toJson(new ArrayList<KeyValue>()));
+                    ctx.getResponse().getOutputStream().print(gson.toJson(new ArrayList<KeyValue>()));
                 } catch (IOException ex) {
                 }
             } else {
@@ -58,8 +58,10 @@ public class GetListAction extends ActionSupport {
                         (String) ctx.getParameter("sortDir"), relatedFieldName,
                         object);
                 try {
-                    ctx.getResponse().getWriter().print(gson.toJson(finalist));
+                    ctx.getResponse().getOutputStream().print(gson.toJson(finalist));
+                    ctx.getResponse().getOutputStream().close();
                 } catch (IOException ex) {
+                    ctx.getPresentationManager().error(ex);
                 }
             }
 
