@@ -6,7 +6,7 @@ import jpaoletti.jpm.util.DisplacedList;
 
 /**
  * This list represents a list with a paged representation.
- * 
+ *
  * @author jpaoletti
  */
 public class PaginatedList {
@@ -30,7 +30,7 @@ public class PaginatedList {
 
     /**
      * Returns a list with the existing pages index
-     * 
+     *
      * @return
      */
     public List<Integer> getPageRange() {
@@ -43,6 +43,7 @@ public class PaginatedList {
 
     /**
      * String representation of the list
+     *
      * @return
      */
     @Override
@@ -62,7 +63,7 @@ public class PaginatedList {
 
     /**
      * Constructor with contents and total
-     * 
+     *
      * @param contents
      * @param total
      */
@@ -81,6 +82,9 @@ public class PaginatedList {
      * @param rowsPerPage
      */
     public void setRowsPerPage(Integer rowsPerPage) {
+        if (rowsPerPage != this.rowsPerPage) {
+            this.page = 1;
+        }
         this.rowsPerPage = rowsPerPage;
         setTotal(total);
     }
@@ -240,6 +244,7 @@ public class PaginatedList {
 
     /**
      * Returns the starting index of the list
+     *
      * @return
      */
     public Integer from() {
@@ -248,6 +253,7 @@ public class PaginatedList {
 
     /**
      * Return the page size of the list (or de Row Per Page value)
+     *
      * @return
      */
     public Integer rpp() {
