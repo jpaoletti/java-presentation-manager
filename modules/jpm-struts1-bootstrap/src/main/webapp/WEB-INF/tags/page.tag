@@ -14,10 +14,11 @@
             <title><pmfn:message key="${pm.title}"/> - <pmfn:message key="${title}"/></title>
             <link href="${es.templatePath}/all.css" rel="stylesheet" type="text/css" />
             <link rel="shortcut icon" href="${es.templatePath}/img/favicon.ico" />
+            <!--[if lt IE 9]><script type="text/javascript" src="${es.context_path}/js/html5.js"></script><![endif]-->
             <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
             <script type="text/javascript" src="${es.context_path}/js/misc.js"></script>
-            <script src="${es.context_path}/js/bootstrap-plugins/bootstrap-modal.js"></script>
-            <script src="${es.context_path}/js/bootstrap-plugins/bootstrap-collapse.js"></script>
+            <script type="text/javascript" src="${es.context_path}/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="${es.context_path}/js/custom.js"></script>
         </head>
         <body class="${bodyClass} outer-index">
             <%@include file="/WEB-INF/jsp/loading.jsp" %>
@@ -33,9 +34,6 @@
                     <c:if test="${not empty ctx.pmsession}">
                         <% try {%>
                         <jsp:doBody />
-                        <script src="${es.context_path}/js/bootstrap-plugins/bootstrap-alert.js"></script>
-                        <script src="${es.context_path}/js/bootstrap-plugins/bootstrap-dropdown.js"></script>
-                        <script src="${es.context_path}/js/bootstrap-plugins/bootstrap-button.js"></script>
                         <% } catch (Exception e) {
                             jpaoletti.jpm.core.PresentationManager.getPm().error(e);
                         %>
