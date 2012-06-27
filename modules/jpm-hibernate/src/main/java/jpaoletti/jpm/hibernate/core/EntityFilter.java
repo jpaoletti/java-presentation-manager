@@ -7,7 +7,6 @@ import jpaoletti.jpm.core.Entity;
 import jpaoletti.jpm.core.Field;
 import jpaoletti.jpm.core.PMException;
 import org.hibernate.Criteria;
-
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
@@ -71,7 +70,7 @@ public class EntityFilter extends jpaoletti.jpm.core.EntityFilter {
                 throw new PMException("Undefined field " + entry.getKey());
             }
             final List<Object> values = entry.getValue();
-            if (values.get(0) != null) {
+            if (!values.isEmpty() && values.get(0) != null) {
                 final String[] splitorder = field.getProperty().split("[.]");
                 for (int i = 0; i < splitorder.length - 1; i++) {
                     final String s = splitorder[i];
@@ -94,7 +93,7 @@ public class EntityFilter extends jpaoletti.jpm.core.EntityFilter {
         for (Entry<String, List<Object>> entry : getFilterValues().entrySet()) {
             final Field field = entity.getFieldById(entry.getKey());
             final List<Object> values = entry.getValue();
-            if (values.get(0) != null) {
+            if (!values.isEmpty() && values.get(0) != null) {
                 c.add(getCompareCriterion(field.getId(), field.getProperty(), values));
             }
         }
