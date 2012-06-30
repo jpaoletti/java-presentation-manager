@@ -12,13 +12,13 @@
             <meta http-equiv="content-type" content="text/html; charset=utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1"> 
             <title><pmfn:message key="${pm.title}"/> - <pmfn:message key="${title}"/></title>
-            <link href="${es.templatePath}/all.css" rel="stylesheet" type="text/css" />
+            <link href="${es.templatePath}all.css?v=${es.appversion}" rel="stylesheet" type="text/css" />
             <link rel="shortcut icon" href="${es.templatePath}/img/favicon.ico" />
             <!--[if lt IE 9]><script type="text/javascript" src="${es.context_path}/js/html5.js"></script><![endif]-->
             <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
-            <script type="text/javascript" src="${es.context_path}/js/misc.js"></script>
-            <script type="text/javascript" src="${es.context_path}/js/bootstrap.min.js"></script>
-            <script type="text/javascript" src="${es.context_path}/js/custom.js"></script>
+            <script type="text/javascript" src="${es.context_path}/js/misc.js?v=${es.appversion}"></script>
+            <script type="text/javascript" src="${es.context_path}/js/bootstrap.min.js?v=${es.appversion}"></script>
+            <script type="text/javascript" src="${es.context_path}/js/custom.js?v=${es.appversion}"></script>
         </head>
         <body class="${bodyClass} outer-index">
             <%@include file="/WEB-INF/jsp/loading.jsp" %>
