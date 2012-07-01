@@ -13,7 +13,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1"> 
             <title><pmfn:message key="${pm.title}"/> - <pmfn:message key="${title}"/></title>
             <link href="${es.templatePath}all.css?v=${es.pm.appversion}" rel="stylesheet" type="text/css" />
-            <link href="${es.templatePath}img/favicon.ico" rel="shortcut icon" />
+            <link href="${es.templatePath}img/favicon.ico?v=${es.pm.appversion}" rel="shortcut icon" />
             <!--[if lt IE 9]><script type="text/javascript" src="${es.context_path}/js/html5.js"></script><![endif]-->
             <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
             <script type="text/javascript" src="${es.context_path}/js/bootstrap.min.js?v=${es.pm.appversion}"></script>
