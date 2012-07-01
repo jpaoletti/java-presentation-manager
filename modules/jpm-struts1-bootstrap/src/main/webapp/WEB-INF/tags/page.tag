@@ -12,13 +12,13 @@
             <meta http-equiv="content-type" content="text/html; charset=utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1"> 
             <title><pmfn:message key="${pm.title}"/> - <pmfn:message key="${title}"/></title>
-            <link href="${es.templatePath}all.css?v=${es.appversion}" rel="stylesheet" type="text/css" />
-            <link rel="shortcut icon" href="${es.templatePath}/img/favicon.ico" />
+            <link href="${es.templatePath}all.css?v=${es.pm.appversion}" rel="stylesheet" type="text/css" />
+            <link href="${es.templatePath}img/favicon.ico" rel="shortcut icon" />
             <!--[if lt IE 9]><script type="text/javascript" src="${es.context_path}/js/html5.js"></script><![endif]-->
             <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
-            <script type="text/javascript" src="${es.context_path}/js/misc.js?v=${es.appversion}"></script>
-            <script type="text/javascript" src="${es.context_path}/js/bootstrap.min.js?v=${es.appversion}"></script>
-            <script type="text/javascript" src="${es.context_path}/js/custom.js?v=${es.appversion}"></script>
+            <script type="text/javascript" src="${es.context_path}/js/bootstrap.min.js?v=${es.pm.appversion}"></script>
+            <script type="text/javascript" src="${es.context_path}/js/jpm.js?v=${es.pm.appversion}"></script>
+            <script type="text/javascript" src="${es.context_path}/js/custom.js?v=${es.pm.appversion}"></script>
         </head>
         <body class="${bodyClass} outer-index">
             <%@include file="/WEB-INF/jsp/loading.jsp" %>
@@ -42,18 +42,6 @@
                     </c:if>
                 </div>
             </div>
-            <script type="text/javascript">
-                PM_register(function(){
-                    $(".form-horizontal").find(".cell").each(function(){
-                        var text = $(this).html();
-                        if(text.indexOf("<") == -1){
-                            if(!$(this).parent().is("td")){
-                                $(this).html("<input type='text' disabled='disabled' value='"+text+"'/>");
-                            }
-                        }
-                    });
-                });
-            </script>
             <%@include file="/WEB-INF/jsp/confirm-dialog.jsp" %>
             <%@include file="/WEB-INF/jsp/basic-javascript.jsp" %>
             <%@include file="/WEB-INF/jsp/footer.jsp" %>

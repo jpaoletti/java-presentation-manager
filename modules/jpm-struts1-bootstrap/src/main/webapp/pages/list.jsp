@@ -3,6 +3,7 @@
 <bean:define id="PMLIST"    name="ctx" property="entityContainer.list" toScope="request"/>
 <bean:define id="contents"  name="ctx" property="map.listContents" type="java.util.List<Object>" toScope="request"/>
 <pm:page title="titles.list">
+    <script type="text/javascript" src="${es.context_path}/js/jquery.dataTables.js"></script>
     <pm:std-header ctx="${ctx}" operations="${ctx.entityContainer.list.operations}" />
     <form action="${pmfn:plainUrl(ctx.pmsession, 'list.do')}" method="GET" class="listform" id="listform">
         <input type="hidden" name="pmid"  value="${entity.id}" />
