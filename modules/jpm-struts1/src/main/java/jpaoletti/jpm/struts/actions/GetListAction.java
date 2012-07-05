@@ -29,6 +29,7 @@ public class GetListAction extends ActionSupport {
         final CollectionHelper helper = new CollectionHelper((String) ctx.getParameter("display"));
         final Gson gson = new Gson();
         ctx.getResponse().setContentType("application/json");
+        ctx.getResponse().setCharacterEncoding("UTF-8");
         try {
             final String _entity = (String) ctx.getParameter("entity");
             final Entity entity = ctx.getPresentationManager().getEntity(_entity);
