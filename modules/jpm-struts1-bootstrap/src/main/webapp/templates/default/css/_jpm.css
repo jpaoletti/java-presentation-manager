@@ -11,7 +11,7 @@ html[xmlns] .clearfix {	display: block;}
 
 .mainLoading{position: fixed; top: 50%; left: 50%; margin-top: -64px; margin-left: -64px;}
 .brand{background-image: url("../img/logo.png"); background-repeat: no-repeat; background-position: left center; background-size: 30px; text-indent: 40px; margin-left: -10px !important;}
-.login-box{padding-top: 10px; height: 35px;}
+.login-box{padding-top: 7px; height: 35px;}
 .login-box button{margin: 0px !important;}
 .avatar{margin-top: 5px; float: right; margin-left: 5px;}
 .user-box{margin-top: 5px !important;}
