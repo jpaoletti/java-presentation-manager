@@ -24,8 +24,9 @@
                 <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
                     <th>
                         <input type="text" 
-                               name="search_<pm:field-name field="${field}" />" 
-                               value="<pmfn:message key="list.input.search"/>" class="search_init"
+                               name="search_${field.title}" 
+                               placeholder="${pmfn:message('list.input.search')}"
+                               class="search_init"
                                />
                     </th>
                 </c:forEach>
