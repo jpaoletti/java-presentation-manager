@@ -7,4 +7,5 @@
 </c:if>
 <input class="string-converter" type="text" maxlength="${param.ml}"
        ${ (param.isNull and param.withNull) ? 'disabled=disabled' : ''}
-       value="${ctx.fieldValue}" id="f_${param.f}" name="f_${param.f}" />
+       value="${ctx.fieldValue}" id="f_${param.f}" name="f_${param.f}" 
+       placeholder="${ctx.field.title}"/>

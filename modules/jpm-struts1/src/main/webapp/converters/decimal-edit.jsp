@@ -7,7 +7,8 @@
 </c:if>
 <input class="decimal-converter" alt="${param.f}mask" type="text" maxlength="${param.ml}" 
        ${ (param.isNull and param.withNull) ? 'disabled=disabled' : ''} 
-       value="${ctx.fieldValue}" id="f_${param.f}" name="f_${param.f}" />
+       value="${ctx.fieldValue}" id="f_${param.f}" name="f_${param.f}" 
+       placeholder="${ctx.field.title}"/>
 <script type="text/javascript" src="${es.context_path}/js/jquery.caret.min.js"></script>
 <script type="text/javascript" src="${es.context_path}/js/jquery.decimalMask.1.1.1.min.js"></script>
 <script type="text/javascript">
