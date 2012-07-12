@@ -17,6 +17,7 @@
             <link rel="shortcut icon" href="${es.templatePath}/img/favicon.ico" />
             <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
             <script type="text/javascript" src="${es.context_path}/js/misc.js"></script>
+            <script type="text/javascript" src="${es.context_path}/js/jquery/jquery-object-converter.js"></script>
         </head>
         <body class="${bodyClass}">
             <%@include file="/WEB-INF/jsp/loading.jsp" %>

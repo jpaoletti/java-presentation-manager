@@ -1,5 +1,6 @@
 package jpaoletti.jpm.struts.actions;
 
+import com.google.gson.Gson;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jpaoletti.jpm.core.PMCoreConstants;
@@ -108,7 +109,7 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
     protected void success(PMStrutsContext ctx, String url, boolean redirect) throws PMForwardException {
         if (ctx.getOperation() != null && ctx.getOperation().getFollows() != null) {
             final String plainUrl = PMTags.plainUrl(
-                    ctx.getPmsession(), 
+                    ctx.getPmsession(),
                     "/" + ctx.getOperation().getFollows() + ".do").substring(getContextPath().length());
             throw new PMForwardException(new ActionRedirect(plainUrl));
         } else {
@@ -130,5 +131,16 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
      */
     protected void noAction() throws PMForwardException {
         throw new PMForwardException("none");
+    }
+
+    /**
+     * Just a helper to return a serialized object with jSON.
+     * 
+     * Specially useful dealing with encoding problems
+     */
+    protected void jSONSuccess(PMStrutsContext ctx, Object object) throws PMForwardException {
+        final String toJson = new Gson().toJson(object);
+        ctx.put(PM_VOID_TEXT, toJson);
+        success(ctx, "converters/void.jsp", false);
     }
 }

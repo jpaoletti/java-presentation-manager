@@ -388,9 +388,10 @@ a.pagination span.ui-button-text{
 }
 .ui-autocomplete { max-height: 200px; overflow-y: auto; overflow-x: hidden; padding-right: 20px; background: #F7F7F7 !important; }
 
-.object-converter-select{height: 26px;width: 200px;}
-.object-converter-search{height: 18px;width: 100px;float: left;}
-.object-converter-select-0{width: 302px;}
+.object-converter-select{width: 200px; float: left}
+.object-converter-add-btn{float: left}
+.object-converter-search{width: 100px;float: left; margin-right: 3px;}
+.object-converter-select-0{width: 310px;}
 .object-converter-select option{border: none;border-bottom: grey solid thin; }
 .object-converter-loading{float: left;}
 

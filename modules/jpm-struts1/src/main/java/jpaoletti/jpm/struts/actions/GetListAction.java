@@ -1,7 +1,6 @@
 package jpaoletti.jpm.struts.actions;
 
 import com.google.gson.Gson;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import jpaoletti.jpm.converter.ConverterException;
@@ -28,15 +27,12 @@ public class GetListAction extends ActionSupport {
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         final CollectionHelper helper = new CollectionHelper((String) ctx.getParameter("display"));
         final Gson gson = new Gson();
-        ctx.getResponse().setContentType("application/json");
-        ctx.getResponse().setCharacterEncoding("UTF-8");
         try {
             final String _entity = (String) ctx.getParameter("entity");
             final Entity entity = ctx.getPresentationManager().getEntity(_entity);
             if (entity == null) {
                 throw new ConverterException("Cannot find entity " + entity);
             }
-
             final String originalEntity = (String) ctx.getParameter("originalEntity", "");
             final String originalOp = (String) ctx.getParameter("originalOperation", "");
             final String relatedFieldName = (String) ctx.getParameter("relatedFieldName", "");
@@ -47,10 +43,7 @@ public class GetListAction extends ActionSupport {
                 object = ctx.getPresentationManager().getEntity(originalEntity).getFieldById(relatedFieldName).getConverter(originalOp).build(ctx);
             }
             if (object == null && "true".equals(ctx.getParameter("relatedRequired", "false"))) {
-                try {
-                    ctx.getResponse().getOutputStream().print(gson.toJson(new ArrayList<KeyValue>()));
-                } catch (IOException ex) {
-                }
+                jSONSuccess(ctx, gson.toJson(new ArrayList<KeyValue>()));
             } else {
                 final List<KeyValue> finalist = helper.getFullList(ctx, entity,
                         (String) ctx.getParameter("filter_class"),
@@ -58,17 +51,13 @@ public class GetListAction extends ActionSupport {
                         (String) ctx.getParameter("sortField"),
                         (String) ctx.getParameter("sortDir"), relatedFieldName,
                         object);
-                try {
-                    ctx.getResponse().getOutputStream().print(gson.toJson(finalist));
-                    ctx.getResponse().getOutputStream().close();
-                } catch (IOException ex) {
-                    ctx.getPresentationManager().error(ex);
-                }
+                jSONSuccess(ctx, finalist);
             }
-
+        } catch (PMException ex) {
+            throw ex;
         } catch (Exception ex) {
             ctx.getPresentationManager().error(ex);
+            jSONSuccess(ctx, ex.getMessage());
         }
-        noAction();
     }
 }

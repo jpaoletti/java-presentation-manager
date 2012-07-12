@@ -18,6 +18,7 @@
             <!--[if lt IE 9]><script type="text/javascript" src="${es.context_path}/js/html5.js"></script><![endif]-->
             <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
             <script type="text/javascript" src="${es.context_path}/js/bootstrap.min.js?v=${es.pm.appversion}"></script>
+            <script type="text/javascript" src="${es.context_path}/js/jquery/jquery-object-converter.js?v=${es.pm.appversion}"></script>
             <script type="text/javascript" src="${es.context_path}/js/jpm.js?v=${es.pm.appversion}"></script>
             <script type="text/javascript" src="${es.context_path}/js/custom.js?v=${es.pm.appversion}"></script>
         </head>

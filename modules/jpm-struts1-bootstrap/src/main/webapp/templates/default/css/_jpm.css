@@ -37,3 +37,5 @@ td, th{vertical-align: middle !important;}
 .CodeMirror{border: 1px solid #CCC;}
 .pagination{margin: 0px;}
 .navbar .btn-group{padding: 0px !important;}
+.object-converter-search{width: 71px}
+select.with-add{width: 180px!important;}
