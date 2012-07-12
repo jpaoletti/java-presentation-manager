@@ -234,4 +234,8 @@ public class PMTags extends TagSupport {
     public static String message(String key) {
         return PresentationManager.getMessage(key);
     }
+
+    public static Operation operation(Entity entity, String operationId) {
+        return entity.getOperations().getOperation(operationId);
+    }
 }
