@@ -3,7 +3,7 @@
 <div id="object-converter-${param.f}">
     <div class="object-converter-loading"><img alt="..." src="${es.templatePath}/images/loading.gif"/></div>
     <div class="object-converter-items">
-        <input type="text" class="object-converter-search"/>
+        <input type="text" class="object-converter-search" placeholder="${pmfn:message('pm.struts.object.converter.filter')}" />
         <select id="f_${param.f}" name="f_${param.f}" class="object-converter-select object-converter-select-${ctx.map._min_search_size}"></select>
         <button type='button' class='btn object-converter-add-btn'><i class="ui-icon ui-icon-operation-add"></i></button>
     </div>
