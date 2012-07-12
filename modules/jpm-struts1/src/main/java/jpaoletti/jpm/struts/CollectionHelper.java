@@ -36,11 +36,11 @@ public class CollectionHelper {
         final Matcher matcher = DISPLAY_PATTERN.matcher(getDisplay());
         while (matcher.find()) {
             final String _display_field = matcher.group().replaceAll("\\{", "").replaceAll("\\}", "");
-            replaces.put("\\{" + _display_field + "\\}", PresentationManager.getPm().getAsString(object, _display_field));
+            replaces.put("{" + _display_field + "}", PresentationManager.getPm().getAsString(object, _display_field));
         }
         String result = getDisplay();
         for (Map.Entry<String, String> entry : replaces.entrySet()) {
-            result = result.replaceFirst(entry.getKey(), entry.getValue());
+            result = result.replace(entry.getKey(), entry.getValue());
         }
         return result;
     }
