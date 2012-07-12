@@ -93,18 +93,23 @@ public class OperationsTag extends PMTags {
             if (operation.getUrl() != null) {
                 script.append("loadPage('").append(operation.getUrl()).append("')");
             } else {
-                script.append(PMTags.url(getPmsession(), hreff, operation.getConfirm(), null));
+                if (operation.getPopup()) {
+                    script.append("popup('").append(PMTags.plainUrl(getPmsession(), hreff)).append("')");
+                } else {
+                    script.append(PMTags.url(getPmsession(), hreff, operation.getConfirm(), null));
+                }
+
             }
             script.append(";");
         } else {
             script.append("alert('").append(PresentationManager.getMessage("operation.not.available", operation.getTitle())).append("');");
         }
-        script.append("}).button({ "); 
-        if(operation.getCompact()){
+        script.append("}).button({ ");
+        if (operation.getCompact()) {
             script.append("text: false, ");
         }
         script.append("icons: { primary:'ui-icon-operation-").append(opid).append("' }});\n");
-        print("<button class='button",(operation.getCompact())?" compact-button":"","' id='operation" + opid + "'>&nbsp;");
+        print("<button class='button", (operation.getCompact()) ? " compact-button" : "", "' id='operation" + opid + "'>&nbsp;");
         if (isLabels()) {
             print(operation.getTitle());
         }
