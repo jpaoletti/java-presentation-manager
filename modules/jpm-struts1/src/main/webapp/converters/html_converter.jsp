@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <link rel="stylesheet" href="${es.context_path}/js/codemirror/lib/codemirror.css"/>
 <link rel="stylesheet" href="${es.context_path}/js/codemirror/theme/default.css"/>
 <script src="${es.context_path}/js/codemirror/lib/codemirror.js"></script>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <%@ tag description="This tag encapsulates a standard html page" pageEncoding="UTF-8" %>
 <%@ taglib uri="/WEB-INF/tld/c.tld" prefix="c" %>
 <%@ taglib uri="/WEB-INF/tld/pmfn.tld" prefix="pmfn" %>
@@ -9,7 +10,7 @@
 <c:if test="${not empty pm}">
     <html>
         <head>
-            <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+            <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1"> 
             <title><pmfn:message key="${pm.title}"/> - <pmfn:message key="${title}"/></title>
             <link href="${es.templatePath}all.css?v=${es.pm.appversion}" rel="stylesheet" type="text/css" />

@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/tag-libs.jsp" %>
 <script type="text/javascript" src="${es.context_path}/js/pwdwidget.js"></script>
 <div class='pwdwidgetdiv' id='thepwddiv${param.f}'></div>

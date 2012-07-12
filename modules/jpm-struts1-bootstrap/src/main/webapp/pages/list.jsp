@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/inc-full.jsp" %>
 <bean:define id="operation" name="ctx" property="operation" toScope="request"/>
 <bean:define id="PMLIST"    name="ctx" property="entityContainer.list" toScope="request"/>

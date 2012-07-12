@@ -1,4 +1,4 @@
-<%@page contentType="application/x-javascript" %>
+<%@page pageEncoding="UTF-8" contentType="application/x-javascript; charset=UTF-8"%>
 <%@include file="../inc/tag-libs.jsp" %>
 var pmid = "${param.pmid}";
 var searchable = "${param.searchable}" == "true";

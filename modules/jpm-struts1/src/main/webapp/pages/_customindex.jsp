@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/tag-libs.jsp" %>
 <pm:page title="titles.welcome">
     <h2 class="title"><pmfn:message key="index.custom.welcome" arg0="${pmsession.user.name}"/></h2>

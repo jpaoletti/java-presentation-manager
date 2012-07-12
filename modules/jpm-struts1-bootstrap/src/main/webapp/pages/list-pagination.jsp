@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/tag-libs.jsp" %>
 <c:if test="${PMLIST.paginable}">
     <div class="pagination-values pull-left">

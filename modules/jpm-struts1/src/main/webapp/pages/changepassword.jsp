@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/inc-full.jsp"  %>
 <%-- Standard display page for an entity instance item --%>
 <pm:page title="titles.${ctx.operation.id}">

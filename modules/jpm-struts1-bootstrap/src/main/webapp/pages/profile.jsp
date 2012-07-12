@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/inc-full.jsp"  %>
 <pm:page title="titles.${ctx.operation.id}">
     <script type="text/javascript" src="${es.context_path}/js/pwdwidget.js"></script>

@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/tag-libs.jsp" %>
 <script type="text/javascript">
     PM_register(function(){

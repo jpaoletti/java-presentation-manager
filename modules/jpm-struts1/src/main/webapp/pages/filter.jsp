@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/inc-full.jsp" %>
 <pm:page title="titles.filter">
     <pm:std-header ctx="${ctx}" />

@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/tag-libs.jsp" %>
 <input type="text" value="${param.value}" id="f_${param.f}" name="f_${param.f}" size="10"/>
 <script type='text/javascript'>

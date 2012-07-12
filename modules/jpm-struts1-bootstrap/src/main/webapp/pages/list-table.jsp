@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/inc-full.jsp" %>
 <table class="table table-bordered table-condensed table-striped">
     <thead>

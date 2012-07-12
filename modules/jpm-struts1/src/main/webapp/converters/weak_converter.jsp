@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/inc-full.jsp" %>
 <c:if test="${param.showbutton}">
     <button id="weak${param.f}" class="button"><pmfn:message key="${param.buttontext}" /></button>
