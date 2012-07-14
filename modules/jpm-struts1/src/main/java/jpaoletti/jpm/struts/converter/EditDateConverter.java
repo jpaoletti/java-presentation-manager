@@ -8,7 +8,8 @@ import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.message.MessageFactory;
 
-/**Converter for date.<br>
+/**
+ * Converter for date.<br>
  * <pre>
  * {@code
  * <converter class="jpaoletti.jpm.converter.EditDateConverter">
@@ -19,8 +20,10 @@ import jpaoletti.jpm.core.message.MessageFactory;
  * </converter>
  * }
  * </pre>
+ *
  * @author jpaoletti
- * */
+ *
+ */
 public class EditDateConverter extends EditStringConverter {
 
     @Override
@@ -32,8 +35,8 @@ public class EditDateConverter extends EditStringConverter {
             }
         } catch (ParseException e) {
             throw new ConverterException(MessageFactory.error(
-                    ctx.getEntity(), 
-                    ctx.getField(), 
+                    ctx.getEntity(),
+                    ctx.getField(),
                     "date.converter.invalid.value"));
         }
         return null;
@@ -43,14 +46,15 @@ public class EditDateConverter extends EditStringConverter {
     public String visualize(PMContext ctx) throws ConverterException {
         try {
             final Date o = (Date) ctx.getFieldValue();
-            return super.visualize("date_converter.jsp?format=" + normalize(javaToJavascriptDateFormat(getFormatString())) + "&value=" + getDateFormat().format(o));
+            return super.visualize("date_converter.jsp?lang=" + getConfig("lang", "en") + "&format=" + normalize(javaToJavascriptDateFormat(getFormatString())) + "&value=" + getDateFormat().format(o));
         } catch (Exception e) {
-            return super.visualize("date_converter.jsp?format=" + normalize(javaToJavascriptDateFormat(getFormatString())) + "&value=");
+            return super.visualize("date_converter.jsp?lang=" + getConfig("lang", "en") + "&format=" + normalize(javaToJavascriptDateFormat(getFormatString())) + "&value=" + getDateFormat().format(new Date()));
         }
     }
 
     /**
      * Return the format object of the date
+     *
      * @return The format
      */
     public DateFormat getDateFormat() {
@@ -62,20 +66,14 @@ public class EditDateConverter extends EditStringConverter {
         return getConfig("format", "MM/dd/yyyy");
     }
 
+    /*
+     * The format can be combinations of the following: d - day of month (no
+     * leading zero) dd - day of month (two digit) D - day name short DD - day
+     * name long m - month of year (no leading zero) mm - month of year (two
+     * digit) M - month name short MM - month name long y - year (two digit) yy
+     * - year (four digit)
+     */
     private String javaToJavascriptDateFormat(String s) {
-        /*
-         * The format can be combinations of the following:
-         * d - day of month (no leading zero)
-         * dd - day of month (two digit)
-         * D - day name short
-         * DD - day name long
-         * m - month of year (no leading zero)
-         * mm - month of year (two digit)
-         * M - month name short
-         * MM - month name long
-         * y - year (two digit)
-         * yy - year (four digit)
-         */
         return s.replaceAll("yy", "y").replace('M', 'm');
     }
 }
