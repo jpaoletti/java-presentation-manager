@@ -6,11 +6,16 @@ if(typeof updateObjectConverter == "undefined"){
         select.contents().remove();
         var finishSelect = function(){
             var sid = settings["selected_id"];
-            if(select.find("option[value='"+sid+"']").length==0){
-                select.prepend("<option value='"+sid+"'>"+settings["selected_value"]+"</option>");
+            var noSelected = select.find("option[value='"+sid+"']").length==0;
+            var nullable = settings["with_null"];
+            var nullValue = sid == "-1";
+            if(noSelected){
+                if((!nullable && !nullValue) || nullable){
+                    select.prepend("<option value='"+sid+"'>"+settings["selected_value"]+"</option>");                    
+                }
             }
             select.val(sid);
-            if(settings["with_null"] && sid != "-1"){
+            if(nullable && !nullValue){
                 select.prepend("<option value='-1'></option>");
             }
             select.find("option[value='undefined']").remove();
