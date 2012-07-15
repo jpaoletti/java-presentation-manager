@@ -9,10 +9,7 @@ import jpaoletti.jpm.core.exception.NotAuthenticatedException;
 import jpaoletti.jpm.core.exception.NotAuthorizedException;
 import jpaoletti.jpm.core.message.MessageFactory;
 import jpaoletti.jpm.core.operations.OperationCommandSupport;
-import jpaoletti.jpm.struts.PMEntitySupport;
-import jpaoletti.jpm.struts.PMForwardException;
-import jpaoletti.jpm.struts.PMStrutsConstants;
-import jpaoletti.jpm.struts.PMStrutsContext;
+import jpaoletti.jpm.struts.*;
 import jpaoletti.jpm.struts.tags.PMTags;
 import org.apache.struts.action.*;
 
@@ -66,6 +63,8 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
                 excecute(ctx);
             }
             return mapping.findForward(SUCCESS);
+        } catch (NoActionForward e) { //For direct writing
+            return null;
         } catch (PMForwardException e) {
             if (e.getActionForward() != null) {
                 return e.getActionForward();
@@ -130,12 +129,12 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
      * @throws PMForwardException always
      */
     protected void noAction() throws PMForwardException {
-        throw new PMForwardException("none");
+        throw new NoActionForward();
     }
 
     /**
      * Just a helper to return a serialized object with jSON.
-     * 
+     *
      * Specially useful dealing with encoding problems
      */
     protected void jSONSuccess(PMStrutsContext ctx, Object object) throws PMForwardException {
