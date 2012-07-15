@@ -76,6 +76,7 @@ public class ObjectConverter extends StrutsEditConverter {
             }
         }
         ctx.put("_min_search_size", getConfig("min-search-size", "0"));
+        ctx.put("_search", getConfig("search", "false"));
         final StringBuilder sb = new StringBuilder("/get_list.do");
         sb.append("?entity=").append(_entity);
         sb.append("&filter_class=").append(getConfig("filter"));
