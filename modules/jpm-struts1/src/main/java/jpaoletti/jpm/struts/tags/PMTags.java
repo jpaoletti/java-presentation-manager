@@ -120,19 +120,18 @@ public class PMTags extends TagSupport {
                 if (ctx.getPmsession().getUser().hasPermission(itemOperation.getPerm())) {
                     //if operation is at item scope
                     if (OperationScope.ITEM.is(itemOperation.getScope())) {
-                        String furl = "";
+                        sb.append("<a class='ui-list-icon-container' href=\"");
                         if (itemOperation.getUrl() != null) {
-                            furl = itemOperation.getUrl();
+                            sb.append(itemOperation.getUrl());
                         } else {
                             final InstanceId id = ctx.getDataAccess().getInstanceId(ctx, new EntityInstanceWrapper(item));
                             final String idValue = id.getValue();
-                            furl = itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + idValue;
-                        }
-                        sb.append("<a class='ui-list-icon-container' href=\"");
-                        if (itemOperation.getPopup()) {
-                            sb.append("javascript:popup('").append(plainUrl(ctx.getPmsession(), furl)).append("')");
-                        } else {
-                            sb.append(url(ctx.getPmsession(), furl, itemOperation.getConfirm(), "javascript:"));
+                            final String furl = itemOperation.getId() + ".do?pmid=" + ctx.getEntity().getId() + "&item=" + idValue;
+                            if (itemOperation.getPopup()) {
+                                sb.append("javascript:popup('").append(plainUrl(ctx.getPmsession(), furl)).append("')");
+                            } else {
+                                sb.append(url(ctx.getPmsession(), furl, itemOperation.getConfirm(), "javascript:"));
+                            }
                         }
                         sb.append("\" id='operation");
                         sb.append(itemOperation.getId());
