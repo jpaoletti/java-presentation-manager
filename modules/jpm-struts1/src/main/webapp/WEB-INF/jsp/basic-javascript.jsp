@@ -6,9 +6,10 @@
 <script type="text/javascript" src="${es.context_path}/js/expand.js"></script>
 <script type="text/javascript" src="${es.context_path}/js/jquery.cookie.js"></script>
 <script type="text/javascript">
-    var msg_system = new Array();
-    var msg_entity = new Array();
-                var msg_field = new Array();
+        var msg_system = new Array();
+        var msg_entity = new Array();
+        var msg_field = new Array();
+        var contextPath = "${es.context_path}";
         <c:forEach var="message" items="${ctx.messages}">
         <c:if test="${message.systemScoped}"> msg_system.push(<pm:pm-message message="${message}"/>);</c:if>
         <c:if test="${message.entityScoped}"> msg_entity.push(<pm:pm-message message="${message}"/>);</c:if>
