@@ -38,7 +38,7 @@
     PM_register(function(){
         $(".ui-list-icon-container").each(function(){
             $(this)
-            .addClass("btn")
+            .addClass("btn btn-small")
             .removeClass("ui-list-icon-container");
         });
     });
