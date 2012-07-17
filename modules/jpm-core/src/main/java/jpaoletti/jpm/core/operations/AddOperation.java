@@ -20,7 +20,7 @@ public class AddOperation extends OperationCommandSupport {
             return false;
         } else {
             if (ctx.getSelected() == null) {
-                throw new PMException("pm.instance.not.found");
+                initBean(ctx); //Auto init bean
             }
             for (Field f : ctx.getEntity().getAllFields()) {
                 if (f.shouldDisplay(ctx.getOperation().getId())) {
