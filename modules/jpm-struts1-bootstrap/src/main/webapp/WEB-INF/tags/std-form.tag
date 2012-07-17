@@ -19,7 +19,7 @@
                     <c:if test="${resetable}">
                         <button class="btn btn-warning" type="reset" id="${entity.id}_reset"><i class="icon-fire"></i>&nbsp;<pmfn:message key="pm.struts.form.reset"/></button>
                     </c:if>                    
-                    <button class="btn btn-primary" type="submit" id="${entity.id}_submit"><i class="icon-ok"></i>&nbsp;<pmfn:message key="pm.struts.form.submit"/></button>
+                    <button class="btn btn-success" type="submit" id="${entity.id}_submit"><i class="icon-ok"></i>&nbsp;<pmfn:message key="pm.struts.form.submit"/></button>
                 </div>
             </fieldset>
         </form>
