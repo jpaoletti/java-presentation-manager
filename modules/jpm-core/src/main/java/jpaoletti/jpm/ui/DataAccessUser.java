@@ -2,7 +2,8 @@ package jpaoletti.jpm.ui;
 
 import java.util.List;
 import jpaoletti.jpm.core.*;
-import jpaoletti.jpm.security.core.*;
+import jpaoletti.jpm.security.core.PMSecurityConnector;
+import jpaoletti.jpm.security.core.PMSecurityUser;
 
 public class DataAccessUser extends AbstractDataAccess {
 
@@ -27,7 +28,7 @@ public class DataAccessUser extends AbstractDataAccess {
         return getConnector(ctx).getUser(value);
     }
 
-    private PMSecurityConnector getConnector(PMContext ctx) {
+    protected PMSecurityConnector getConnector(PMContext ctx) {
         return PresentationManager.getPm().getSecurityConnector(ctx);
     }
 
