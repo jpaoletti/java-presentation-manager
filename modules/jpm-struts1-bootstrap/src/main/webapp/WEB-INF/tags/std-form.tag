@@ -25,10 +25,10 @@
         </form>
     </c:if>
     <c:if test="${not editable}">
-        <form action="#" class="form-horizontal">
+        <div class="form-horizontal" id="form_${ctx.entity.id}_${operation.id}">
             <fieldset>
                 <jsp:doBody />
             </fieldset>
-        </form>
+        </div>
     </c:if>
 </div>
