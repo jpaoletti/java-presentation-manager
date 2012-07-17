@@ -2,7 +2,7 @@
 <%@include file="../inc/tag-libs.jsp" %>
 <script type="text/javascript">
     PM_register(function(){
-        var form = $("#control-group-${param.f}").parents("form");
+        var form = $("#form_${ctx.entity.id}_${ctx.operation.id}");
         var row = jQuery('<div/>').appendTo(form).addClass("row-fluid");
         var row2 = jQuery('<div/>').appendTo(form).addClass("row-fluid");
         var div1 = jQuery('<div/>').appendTo(row).addClass("${param.class1}");
