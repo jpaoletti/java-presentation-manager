@@ -41,7 +41,7 @@
                     <div class="control-group">
                         <label class="control-label"><pmfn:message key="profile.edit.picture" /></label>
                         <div class="controls">
-                            <a href="http://gravatar.com"><pmfn:message key="profile.change.picture"/></a>
+                            <a href="http://gravatar.com" target="_blank"><pmfn:message key="profile.change.picture"/></a>
                         </div>
                     </div>
                 </fieldset>
