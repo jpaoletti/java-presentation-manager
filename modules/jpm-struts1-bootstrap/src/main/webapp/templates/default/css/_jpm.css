@@ -39,3 +39,6 @@ td, th{vertical-align: middle !important;}
 .navbar .btn-group{padding: 0px !important;}
 .object-converter-search{width: 71px}
 select.with-add{width: 180px!important;}
+.align- .cell, .align-left .cell{text-align: left;}
+.align-center .cell{text-align: center;}
+.align-right .cell{text-align: right}

@@ -20,7 +20,7 @@
             </div>
         </label>
     </th>
-    <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><td align="${field.align}"><pmfn:converted-item ctx="${ctx}" operation="${operation}" item="${item}" field="${field}" /></td>
+    <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><td class="align-${field.align}"><pmfn:converted-item ctx="${ctx}" operation="${operation}" item="${item}" field="${field}" /></td>
     </c:forEach>
     </tr>
 </c:forEach>
