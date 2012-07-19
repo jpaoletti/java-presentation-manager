@@ -14,6 +14,7 @@
         <forward name="login" path="/index.jsp"/>
     </global-forwards>
     <action-mappings>
+        <action path="/weakList" type="jpaoletti.jpm.struts.actions.WeakListAction" />
         <action path="/get_list" type="jpaoletti.jpm.struts.actions.GetListAction" />
         <action path="/list" type="jpaoletti.jpm.struts.actions.ListAction">
             <forward name="success" path="/pages/list.jsp"/>

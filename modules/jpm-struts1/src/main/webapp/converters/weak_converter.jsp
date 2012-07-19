@@ -13,24 +13,10 @@
     </script>
 </c:if>
 <c:if test="${param.showlist}">
-    <table id="list" class="display" >
-        <thead>
-            <tr>
-                <c:forEach var="field" items="${pmfn:displayedFields(ctx.map.weak, 'list')}">
-                    <th scope="col" style="width:${field.width}px;" ><pm:field-name field="${field}" /></th>
-                </c:forEach>
-            </tr>
-        </thead>
-        <tbody id="list_body" >
-            <c:forEach var="item" items="${ctx.fieldValue}" >
-                <tr>
-                    <c:forEach var="field" items="${pmfn:displayedFields(ctx.map.weak, 'list')}">
-                        <td align="text-align:${field.align};">
-                            <pmfn:converted-item ctx="${ctx}" field="${field}" item="${item}" operation="${ctx.map.woperation}" entityContainer="${ctx.map.weakContainer}" />
-                        </td>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+    <div id="weak${param.f}-list"></div>
+    <script type="text/javascript">
+        PM_register(function(){
+            ("#weak${param.f}-list").load("${pmfn:plainUrl(ctx.pmsession,'weakList.do?weakid='.concat(param.weakid).concat("&entityId=").concat(ctx.entity.id).concat("&field=").concat(param.f))}");
+        });
+    </script>
 </c:if>
