@@ -21,6 +21,7 @@ public class PMSession extends PMContext {
     private Date lastAccess;
     private PMChatLog chatLog;
     private StringEncrypter stringEncrypter;
+    private NavigationList navigationList;
 
     public PMSession(String id) {
         this.sessionId = id;
@@ -79,7 +80,7 @@ public class PMSession extends PMContext {
 
     /**
      * Getter for the string encripter for this session
-     * 
+     *
      * @return enripter
      */
     public StringEncrypter getStringEncrypter() {
@@ -88,5 +89,12 @@ public class PMSession extends PMContext {
 
     public void setStringEncrypter(StringEncrypter stringEncrypter) {
         this.stringEncrypter = stringEncrypter;
+    }
+
+    public NavigationList getNavigationList() {
+        if (navigationList == null) {
+            navigationList = new NavigationList();
+        }
+        return navigationList;
     }
 }

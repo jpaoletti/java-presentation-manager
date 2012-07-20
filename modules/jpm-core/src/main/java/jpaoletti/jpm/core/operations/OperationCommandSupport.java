@@ -56,6 +56,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         }
         //Try to refresh selected object, if there is one
         refreshSelectedObject(ctx, null);
+        ctx.getPmsession().getNavigationList().update(ctx.getEntityContainer(), operation);
         return true;
     }
 
@@ -70,9 +71,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
 
     protected void internalExecute(PMContext ctx) throws PMException {
         ctx.getPresentationManager().debug(this, "Executing operation " + getOperationId());
-        /*
-         * Validate de operation
-         */
+        // Validates de operation
         if (ctx.getSelected() != null) {
             validate(ctx);
         }

@@ -33,6 +33,9 @@ import jpaoletti.jpm.validator.Validator;
  *
  */
 public class Operation extends PMCoreObject {
+    public static final String SCOPE_ITEM = "item";
+    public static final String SCOPE_GENERAL = "general";
+    public static final String SCOPE_SELECTED = "selected";
 
     //The operation Id. Must be unique and only one word
     private String id;
@@ -151,7 +154,7 @@ public class Operation extends PMCoreObject {
      */
     public String getScope() {
         if (scope == null || scope.trim().compareTo("") == 0) {
-            return "item";
+            return SCOPE_ITEM;
         }
         return scope;
     }

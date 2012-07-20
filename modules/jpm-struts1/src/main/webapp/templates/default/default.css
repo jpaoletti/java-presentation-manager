@@ -412,3 +412,4 @@ a.pagination span.ui-button-text{
 .align- .cell, .align-left .cell{text-align: left;}
 .align-center .cell{text-align: center;}
 .align-right .cell{text-align: right;}
+#navigation_bar .active {font-size: 1.2em}
