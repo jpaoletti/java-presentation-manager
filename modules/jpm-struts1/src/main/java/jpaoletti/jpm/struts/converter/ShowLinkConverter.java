@@ -19,7 +19,7 @@ import jpaoletti.jpm.struts.PMEntitySupport;
  *         <property name="property"  value="other-entity-id" />
  *         <property name="display"   value="other-entity-showable-prop" />
  *         <property name="operation" value="some-operation-of-other-entity" />
- *     <properties>
+ *     </properties>
  * </converter>
  * }
  * </pre>
