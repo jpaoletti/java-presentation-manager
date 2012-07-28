@@ -9,10 +9,7 @@ import jpaoletti.jpm.core.exception.EntityClassNotFoundException;
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
 
 /**
  * Data access using an hibernate session
@@ -115,7 +112,7 @@ public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
         } catch (ClassNotFoundException e) {
             throw new EntityClassNotFoundException();
         }
-
+        c.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         final String order = (sort != null && sort.isSorted() && entity.getFieldById(sort.getFieldId()) != null) ? entity.getFieldById(sort.getFieldId()).getProperty() : null;
         final boolean asc = (sort == null) ? true : sort.getDirection().equals(ListSort.SortDirection.ASC);
         if (order != null) {
