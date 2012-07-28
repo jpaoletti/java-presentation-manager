@@ -13,7 +13,7 @@ import jpaoletti.jpm.struts.PMEntitySupport;
  * <br>
  * <pre>
  * {@code
- * <converter class="jpaoletti.jpm.converter.ShowLinkConverter" operations="show list">
+ * <converter class="jpaoletti.jpm.struts.converter.ShowLinkConverter" operations="show list">
  *     <properties>
  *         <property name="entity"    value="other-entity" />
  *         <property name="property"  value="other-entity-id" />
