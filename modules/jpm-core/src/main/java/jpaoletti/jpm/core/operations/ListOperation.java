@@ -26,7 +26,7 @@ public class ListOperation extends OperationCommandSupport {
 
         PaginatedList pmlist = ctx.getList();
         if (pmlist == null) {
-            pmlist = listManager.initList(ctx, operations);
+            pmlist = listManager.initList(ctx);
         }
 
         configureOrder(ctx, pmlist);

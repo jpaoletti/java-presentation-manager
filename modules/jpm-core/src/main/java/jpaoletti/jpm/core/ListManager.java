@@ -10,7 +10,7 @@ import jpaoletti.jpm.util.DisplacedList;
  */
 public class ListManager {
 
-    public PaginatedList initList(PMContext ctx, Operations operations) throws PMException {
+    public PaginatedList initList(PMContext ctx) throws PMException {
         final PaginatedList pmlist = new PaginatedList();
         //Initial values
         final String _listfilter = ctx.getOperation().getConfig("listfilter");
@@ -27,7 +27,6 @@ public class ListManager {
         pmlist.setRowsPerPage(Integer.parseInt(ctx.getOperation().getConfig("rows-per-page", "10")));
 
         pmlist.setEntity(ctx.getEntity());
-        pmlist.setOperations(operations.getOperationsForScope(OperationScope.GENERAL, OperationScope.SELECTED));
         String sortfield = ctx.getOperation().getConfig("sort-field");
         String sortdirection = ctx.getOperation().getConfig("sort-direction");
         if (sortfield != null) {
@@ -66,6 +65,7 @@ public class ListManager {
         pmlist.setContents(new DisplacedList<Object>(contents));
         pmlist.setTotal(total);
         pmlist.setRowsPerPage(pmlist.rpp());
+        pmlist.setOperations(operations.getOperationsForScope(OperationScope.GENERAL, OperationScope.SELECTED));
         prepareParameters(ctx, operations);
     }
 

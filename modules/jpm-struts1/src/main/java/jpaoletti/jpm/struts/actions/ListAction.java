@@ -12,7 +12,7 @@ public class ListAction extends ActionSupport {
         ctx.put("desc", ctx.getParameter("desc") != null && ctx.getParameter("order").equals("true"));
         ctx.put("page", (ctx.getParameter("page") == null) ? null : Integer.parseInt((String) ctx.getParameter("page")));
         ctx.put("rowsPerPage", (ctx.getParameter("rowsPerPage") == null) ? null : Integer.parseInt((String) ctx.getParameter("rowsPerPage")));
-        ListOperation op = new ListOperation("list");
+        final ListOperation op = new ListOperation("list");
         op.execute(ctx);
     }
 }
