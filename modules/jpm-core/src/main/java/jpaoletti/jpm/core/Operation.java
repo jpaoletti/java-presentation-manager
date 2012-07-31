@@ -22,6 +22,7 @@ import jpaoletti.jpm.validator.Validator;
  *    <follows>other_operation_id</follows>
  *    <compact>true</compact>
  *    <popup>true</popup>
+ *    <navigable>true/false</navigable>
  *    <context class="some.operation.Context" />
  *    <validator class="some.validator.Validator1" />
  *    <validator class="some.validator.Validator2" />
@@ -33,10 +34,10 @@ import jpaoletti.jpm.validator.Validator;
  *
  */
 public class Operation extends PMCoreObject {
+
     public static final String SCOPE_ITEM = "item";
     public static final String SCOPE_GENERAL = "general";
     public static final String SCOPE_SELECTED = "selected";
-
     //The operation Id. Must be unique and only one word
     private String id;
     //Determine if the operation is enabled or not.
@@ -81,6 +82,7 @@ public class Operation extends PMCoreObject {
     //Display operation in a "popup" visualization instead of redirecting it
     private Boolean popup; //Default: false
     private Integer auditLevel;//Overrides default audit level for operation
+    private Boolean navigable; //Default: true, if navigable, impacts on NavigationList
 
     public OperationCondition getCondition() {
         return condition;
@@ -343,5 +345,16 @@ public class Operation extends PMCoreObject {
 
     public void setAuditLevel(Integer auditLevel) {
         this.auditLevel = auditLevel;
+    }
+
+    public boolean isNavigable() {
+        if (navigable == null) {
+            return true;
+        }
+        return navigable;
+    }
+
+    public void setNavigable(Boolean navigable) {
+        this.navigable = navigable;
     }
 }

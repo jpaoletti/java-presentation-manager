@@ -15,7 +15,7 @@ public class NavigationList extends ArrayList<NavigationListItem> {
     }
     
     public void update(EntityContainer entityContainer, Operation operation) {
-        if (operation != null) {
+        if (operation != null && operation.isNavigable()) {
             cut(entityContainer.getId(), operation.getId());
             EntityContainer e = entityContainer;
             boolean reset = true;
