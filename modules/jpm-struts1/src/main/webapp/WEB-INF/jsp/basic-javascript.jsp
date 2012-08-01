@@ -10,6 +10,7 @@
         var msg_entity = new Array();
         var msg_field = new Array();
         var contextPath = "${es.context_path}";
+        var templatePath = "${es.templatePath}";
         <c:forEach var="message" items="${ctx.messages}">
         <c:if test="${message.systemScoped}"> msg_system.push(<pm:pm-message message="${message}"/>);</c:if>
         <c:if test="${message.entityScoped}"> msg_entity.push(<pm:pm-message message="${message}"/>);</c:if>
