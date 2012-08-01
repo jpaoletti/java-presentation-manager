@@ -79,6 +79,8 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
             ctx.getPresentationManager().debug(this, e);
             if (e.getKey() != null) {
                 ctx.addMessage(MessageFactory.error(e.getKey()));
+            } else if (e.getMsg() != null) {
+                ctx.addMessage(e.getMsg());
             }
             return mapping.findForward(FAILURE);
         }

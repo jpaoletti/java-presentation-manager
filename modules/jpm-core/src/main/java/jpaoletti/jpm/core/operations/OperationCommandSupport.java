@@ -98,6 +98,8 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
                     ctx.getPresentationManager().debug(this, "Commiting Transaction " + tx);
                     ctx.getPersistenceManager().commit(ctx, tx);
                 }
+            } catch (PMException e) {
+                throw e;
             } catch (Exception e) {
                 ctx.getPresentationManager().error(e);
                 throw new PMException("pm_core.cannot.commit.txn");

@@ -3,9 +3,11 @@ package jpaoletti.jpm.hibernate.core;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMException;
 import jpaoletti.jpm.core.PresentationManager;
+import jpaoletti.jpm.core.message.MessageFactory;
 import jpaoletti.jpm.hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 
 public class PersistenceManager implements jpaoletti.jpm.core.PersistenceManager<Session> {
 
@@ -13,7 +15,11 @@ public class PersistenceManager implements jpaoletti.jpm.core.PersistenceManager
 
     @Override
     public void commit(PMContext ctx, Object transaction) throws Exception {
-        ((Transaction) transaction).commit();
+        try {
+            ((Transaction) transaction).commit();
+        } catch (ConstraintViolationException e) {
+            throw new PMException(MessageFactory.error("constraint.violation.exception", ctx.getEntity().getTitle(), ctx.getOperation().getTitle()));
+        }
     }
 
     @Override

@@ -38,17 +38,9 @@
             <forward name="failure" path="/pages/std-display.jsp"/>
         </action>
 
-        <action path="/delete" type="jpaoletti.jpm.struts.actions.DeleteAction">
-            <forward name="failure" path="/pages/list.jsp" />
-        </action>
-
-        <action path="/multidelete" type="jpaoletti.jpm.struts.actions.MultiDeleteAction">
-            <forward name="failure" path="/pages/list.jsp" />
-        </action>
-
-        <action path="/clearfilter" type="jpaoletti.jpm.struts.actions.ClearFilterAction">
-            <forward name="failure" path="/pages/list.jsp" />
-        </action>
+        <action path="/delete" type="jpaoletti.jpm.struts.actions.DeleteAction"/>
+        <action path="/multidelete" type="jpaoletti.jpm.struts.actions.MultiDeleteAction"/>
+        <action path="/clearfilter" type="jpaoletti.jpm.struts.actions.ClearFilterAction" />
 
         <action path="/login" type="jpaoletti.jpm.struts.actions.LoginAction">
             <forward name="success" redirect="true" path="/index.jsp"/>
