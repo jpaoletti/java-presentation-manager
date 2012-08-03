@@ -23,19 +23,19 @@
                     <div class="control-group">
                         <label class="control-label" for="input01"><pmfn:message key="profile.edit.username" /></label>
                         <div class="controls">
-                            <input value="${pmsession.user.username}" disabled="disabled"/>
+                            <input type="text" value="${pmsession.user.username}" disabled="disabled"/>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="name"><pmfn:message key="profile.edit.name" /></label>
                         <div class="controls">
-                            <input name="name" value="${pmsession.user.name}" />
+                            <input type="text" name="name" value="${pmsession.user.name}" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="email"><pmfn:message key="profile.edit.mail"/></label>
                         <div class="controls">
-                            <input name="email" value="${pmsession.user.email}" placeholder="${pmfn:message('profile.edit.mail')}" />
+                            <input type="text" name="email" value="${pmsession.user.email}" placeholder="${pmfn:message('profile.edit.mail')}" />
                         </div>
                     </div>
                     <div class="control-group">
