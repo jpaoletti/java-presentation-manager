@@ -26,6 +26,7 @@ public class WeakListAction extends ActionSupport {
         ctx.put("weakContainer", weakContainer);
         ctx.put("weak", weak);
         ctx.put("list", list);
+        ctx.put("addInstanceId", (String) ctx.getParameter("addInstanceId"));
         ctx.put("woperation", weak.getOperations().getOperation("list"));
         success(ctx, "/WEB-INF/jsp/weaklist.jsp", false);
     }

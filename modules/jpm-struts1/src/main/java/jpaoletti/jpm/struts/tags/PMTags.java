@@ -112,6 +112,11 @@ public class PMTags extends TagSupport {
         }
     }
 
+    public static String instanceId(PMStrutsContext ctx, Entity entity, Object item) throws PMException {
+        final InstanceId id = entity.getDataAccess().getInstanceId(ctx, new EntityInstanceWrapper(item));
+        return id.getValue();
+    }
+
     public static String listItemOperations(PMStrutsContext ctx, DisplacedList list, Object item) {
         try {
             final StringBuilder sb = new StringBuilder();

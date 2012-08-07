@@ -158,6 +158,15 @@
             jpaoletti.jpm.core.Operation operation(jpaoletti.jpm.core.Entity, java.lang.String);
         </function-signature>
     </function>
+
+    <function>
+        <description>Returns the instance id of an item</description>
+        <name>instanceId</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            String instanceId(jpaoletti.jpm.struts.PMStrutsContext, jpaoletti.jpm.core.Entity, java.lang.Object);
+        </function-signature>
+    </function>
     <tag>
         <description>Display an internationalized message</description>
         <name>message</name>

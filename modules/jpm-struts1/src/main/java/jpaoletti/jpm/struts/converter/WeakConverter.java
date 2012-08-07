@@ -32,6 +32,8 @@ public class WeakConverter extends StrutsEditConverter {
             sb.append(weakEntityId);
             sb.append("&showlist=");
             sb.append(getConfig("show-list", "true"));
+            sb.append("&addInstanceId=");
+            sb.append(getConfig("add-instance-id", "false"));
             sb.append("&showbutton=");
             sb.append(getConfig("show-modify", "true"));
             sb.append("&property=");

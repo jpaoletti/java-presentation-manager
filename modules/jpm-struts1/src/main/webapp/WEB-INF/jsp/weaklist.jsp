@@ -10,7 +10,7 @@
     </thead>
     <tbody id="list_body" >
         <c:forEach var="item" items="${ctx.map.list}" >
-            <tr>
+            <tr ${(ctx.map.addInstanceId=='true')?"instance-id='".concat(pmfn:instanceId(ctx, ctx.map.weak, item)).concat("'"):""}>
                 <c:forEach var="field" items="${pmfn:displayedFields(ctx.map.weak, 'list')}">
                     <td class="align-${field.align}">
                         <pmfn:converted-item ctx="${ctx}" field="${field}" item="${item}" operation="${ctx.map.woperation}" entityContainer="${ctx.map.weakContainer}" />
