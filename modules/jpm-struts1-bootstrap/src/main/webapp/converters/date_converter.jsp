@@ -8,7 +8,8 @@
     PM_register(function(){
         $('#f_${param.f}').parent().datepicker({
             format: '${param.format}'.replace(/\y/g, 'yy'),
-            language: '${param.lang}'
+            language: '${param.lang}',
+            autoclose: true
         });
     });
 </script>
