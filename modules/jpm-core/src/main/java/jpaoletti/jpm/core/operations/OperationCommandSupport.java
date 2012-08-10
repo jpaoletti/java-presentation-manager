@@ -56,7 +56,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         }
         //Try to refresh selected object, if there is one
         refreshSelectedObject(ctx, null);
-        ctx.getPmsession().getNavigationList().update(ctx.getEntityContainer(true), operation);
+        ctx.getPmsession().getNavigationList().update(ctx.getEntityContainer(true), this, operation);
         return true;
     }
 

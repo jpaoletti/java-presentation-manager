@@ -9,13 +9,13 @@ import jpaoletti.jpm.core.NavigationList.NavigationListItem;
  * @author jpaoletti
  */
 public class NavigationList extends ArrayList<NavigationListItem> {
-    
+
     public void reset() {
         this.clear();
     }
-    
-    public void update(EntityContainer entityContainer, Operation operation) {
-        if (operation != null && operation.isNavigable()) {
+
+    public void update(EntityContainer entityContainer, OperationCommand opCmd, Operation operation) {
+        if (operation != null) {
             cut(entityContainer.getId(), operation.getId());
             EntityContainer e = entityContainer;
             boolean reset = true;
@@ -29,7 +29,7 @@ public class NavigationList extends ArrayList<NavigationListItem> {
             if (reset) {
                 reset();
             }
-            if (operation.getScope().equals(Operation.SCOPE_GENERAL)) {
+            if (isGeneralScoped(operation)) {
                 addItem(entityContainer, operation, PresentationManager.getMessage("pm.core.navigationlist.general",
                         entityContainer.getEntity().getTitle(),
                         operation.getTitle()));
@@ -45,7 +45,11 @@ public class NavigationList extends ArrayList<NavigationListItem> {
             }
         }
     }
-    
+
+    protected boolean isGeneralScoped(Operation operation) {
+        return operation.getScope().equals(Operation.SCOPE_GENERAL);
+    }
+
     protected void cut(String entityId, String operationId) {
         int idx = -1;
         for (NavigationListItem item : this) {
@@ -58,7 +62,7 @@ public class NavigationList extends ArrayList<NavigationListItem> {
             removeRange(idx, size());
         }
     }
-    
+
     protected boolean includesEntity(String entityId) {
         for (NavigationListItem item : this) {
             if (item.getEntityContainer().getId().equals(entityId)) {
@@ -67,54 +71,70 @@ public class NavigationList extends ArrayList<NavigationListItem> {
         }
         return false;
     }
-    
+
     public NavigationListItem addItem(EntityContainer entityContainer, Operation operation, String title) {
+        //The new item replaces any item scoped operation that is not owner ot the new one.
         final NavigationListItem item = new NavigationListItem(entityContainer, operation, title);
+        final NavigationListItem lastItem = getLastItem();
+        if (lastItem != null && !isGeneralScoped(lastItem.getOperation())) {
+            if (entityContainer.getOwner() == null || !lastItem.getEntityContainer().equals(entityContainer.getOwner())) {
+                this.remove(lastItem);
+            }
+        }
         this.add(item);
         return item;
     }
-    
+
+    public NavigationListItem getLastItem() {
+        try {
+            return get(size() - 1);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static class NavigationListItem {
-        
+
         private EntityContainer entityContainer;
         private Operation operation;
         private InstanceId selectedId;
         private String title;
-        
+
         public NavigationListItem(EntityContainer entityContainer, Operation operation, String title) {
             this.entityContainer = entityContainer;
+
             this.operation = operation;
             this.title = title;
         }
-        
+
         public InstanceId getSelectedId() {
             return selectedId;
         }
-        
+
         public void setSelectedId(InstanceId selectedId) {
             this.selectedId = selectedId;
         }
-        
+
         public EntityContainer getEntityContainer() {
             return entityContainer;
         }
-        
+
         public void setEntityContainer(EntityContainer entityContainer) {
             this.entityContainer = entityContainer;
         }
-        
+
         public Operation getOperation() {
             return operation;
         }
-        
+
         public void setOperation(Operation operation) {
             this.operation = operation;
         }
-        
+
         public String getTitle() {
             return title;
         }
-        
+
         public void setTitle(String title) {
             this.title = title;
         }
