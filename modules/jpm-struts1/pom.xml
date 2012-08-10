@@ -86,11 +86,21 @@
             <artifactId>jpm-test-resources</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>jpm-hibernate</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <!-- Test resources for simplier development-->
+                <directory>../jpm-test-resources/src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
