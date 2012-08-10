@@ -76,8 +76,8 @@ public class NavigationList extends ArrayList<NavigationListItem> {
         //The new item replaces any item scoped operation that is not owner ot the new one.
         final NavigationListItem item = new NavigationListItem(entityContainer, operation, title);
         final NavigationListItem lastItem = getLastItem();
-        if (lastItem != null && !isGeneralScoped(lastItem.getOperation())) {
-            if (entityContainer.getOwner() == null || !lastItem.getEntityContainer().equals(entityContainer.getOwner())) {
+        if (lastItem != null) {
+            if (!lastItem.getOperation().isNavigable() || (!isGeneralScoped(lastItem.getOperation()) && (entityContainer.getOwner() == null || !lastItem.getEntityContainer().equals(entityContainer.getOwner())))) {
                 this.remove(lastItem);
             }
         }

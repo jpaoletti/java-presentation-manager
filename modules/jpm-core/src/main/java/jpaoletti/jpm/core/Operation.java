@@ -347,7 +347,10 @@ public class Operation extends PMCoreObject {
         this.auditLevel = auditLevel;
     }
 
-    public Boolean isNavigable() {
+    public boolean isNavigable() {
+        if (navigable == null) {
+            return true;
+        }
         return navigable;
     }
 
