@@ -28,7 +28,7 @@ public class NotNull extends ValidatorSupport {
         if (!res.isSuccessful()) {
             res.getMessages().add(MessageFactory.error(
                     ctx.getEntity(), ctx.getField(),
-                    get("msg", "void"),
+                    get("msg", "pm.validator.not.null"),
                     ctx.getField().getId()));
         }
         return res;
