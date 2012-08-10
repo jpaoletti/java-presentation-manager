@@ -36,6 +36,7 @@ td, th{vertical-align: middle !important;}
 .filter-operation{float: left !important}
 .CodeMirror{border: 1px solid #CCC;}
 .pagination{margin: 0px;}
+.pagination input{width: 36px;float: left;height: 34px;padding: 0px;text-align: center;}
 .navbar .btn-group{padding: 0px !important;}
 .object-converter-search{width: 71px}
 select.with-add{width: 180px!important;}

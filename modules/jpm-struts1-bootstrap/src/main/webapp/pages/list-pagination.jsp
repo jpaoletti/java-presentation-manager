@@ -20,7 +20,7 @@
             <c:if test="${PMLIST.total != null}">
                 <c:if test="${PMLIST.pages > 20}">
                     <pm:list-pagination-link i="${1}" />
-                    <input name="page" value="${PMLIST.page}" id="page" size="5" style="width:25px;" /> |
+                    <input name="page" value="${PMLIST.page}" id="page" size="5" type="text" />
                     <pm:list-pagination-link i="${PMLIST.pages}" />
                 </c:if>
                 <c:if test="${PMLIST.pages <= 20}">
@@ -32,7 +32,7 @@
             </c:if>
             <c:if test="${empty PMLIST.total}">
                 <pm:list-pagination-link i="${1}" />
-                <input name="page" value="${PMLIST.page}" id="page" size="5" style="width:25px;" /> |
+                <input name="page" value="${PMLIST.page}" id="page" size="5" type="text" />
                 <input type="hidden" value="${PMLIST.page}" id="page" name="page"/>
             </c:if>
             <li ${(empty PMLIST.total || PMLIST.page < PMLIST.pages)?'':"class='disabled'"}>
