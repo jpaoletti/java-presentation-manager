@@ -111,7 +111,7 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
         if (ctx.getOperation() != null && ctx.getOperation().getFollows() != null) {
             final String plainUrl = PMTags.plainUrl(
                     ctx.getPmsession(),
-                    "/" + ctx.getOperation().getFollows() + ".do").substring(getContextPath().length());
+                    "/" + ctx.getOperation().getFollows() + ".do?pmid="+ctx.getEntity().getId()).substring(getContextPath().length());
             throw new PMForwardException(new ActionRedirect(plainUrl));
         } else {
             final String plainUrl = PMTags.plainUrl(ctx.getPmsession(), url).substring(getContextPath().length());
