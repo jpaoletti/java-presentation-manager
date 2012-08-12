@@ -7,7 +7,7 @@
         <entityCollectionClass>java.util.Collection</entityCollectionClass>
     </owner>
     <operations>
-        <operation id="list" enabled="true" scope="item" display="all">
+        <operation id="list" enabled="true" scope="general" display="all">
             <properties>
                 <property name="operation-column-width" value="100px" />
             </properties>

@@ -3,7 +3,7 @@
     <idField>name</idField>
     <dataAccess class="jpaoletti.jpm.ui.DataAccessPerm" />
     <operations>
-        <operation id="list" />
+        <operation id="list" scope="general" />
     </operations>
     <field id="name" width="150"/>
     <field id="description" />

@@ -2,7 +2,7 @@
 <entity id="pmsession" clazz="jpaoletti.jpm.core.PMSession">
     <dataAccess class="jpaoletti.jpm.ui.DataAccessPMSession" />
     <operations>
-        <operation id="list" enabled="true" scope="item" display="all">
+        <operation id="list" enabled="true" scope="general" display="all">
             <properties>
                 <property name="operation-column-width" value="100px" />
             </properties>
