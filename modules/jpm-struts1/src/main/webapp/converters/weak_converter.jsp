@@ -16,7 +16,7 @@
     <div id="weak${param.f}-list"></div>
     <script type="text/javascript">
         PM_register(function(){
-            ("#weak${param.f}-list").load("${pmfn:plainUrl(ctx.pmsession,'weakList.do?weakid='.concat(param.weakid).concat("&entityId=").concat(ctx.entity.id).concat("&field=").concat(param.f).concat("&addInstanceId=").concat(param.addInstanceId))}");
+            $("#weak${param.f}-list").load("${pmfn:plainUrl(ctx.pmsession,'weakList.do?weakid='.concat(param.weakid).concat("&entityId=").concat(ctx.entity.id).concat("&field=").concat(param.f).concat("&addInstanceId=").concat(param.addInstanceId))}");
         });
     </script>
 </c:if>
