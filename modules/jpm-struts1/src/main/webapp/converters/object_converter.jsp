@@ -15,7 +15,7 @@
             "field"             : "${param.f}",
             'url'               : "${ctx.map.jsonUrl}",
             'selected_value'    : "${ctx.map._selected_value}",
-            "selected_id"       : ${ctx.map._selected_id},
+            "selected_id"       : "${ctx.map._selected_id}",
             "related"           : "${param.related}",
             "related_entity"    : "${param.oentity}",
             "search"            : "${ctx.map._search}"=="true"?true:false,
