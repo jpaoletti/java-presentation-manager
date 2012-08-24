@@ -42,7 +42,7 @@
                     alert("Error: "+e);
                 }
             });
-                    
+            $("input[type='file']").closest("form").attr("enctype","multipart/form-data");
             jQuery.each(msg_system, function(){
                 var cl = ".message_container";
                 jQuery(cl).addClass("pm_message_"+this.type);

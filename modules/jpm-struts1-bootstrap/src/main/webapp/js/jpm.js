@@ -145,6 +145,7 @@ $().ready(function() {
             }
         });
         $("#username").focus();
+        $("input[type='file']").closest("form").attr("enctype","multipart/form-data");
         //Message Initialization
         jQuery.each(msg_system, function(){
             var cl = ".message_container";

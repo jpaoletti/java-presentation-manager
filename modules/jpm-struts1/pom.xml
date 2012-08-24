@@ -91,6 +91,12 @@
             <artifactId>jpm-hibernate</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <resources>

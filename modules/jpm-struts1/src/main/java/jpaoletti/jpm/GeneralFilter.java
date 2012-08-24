@@ -7,12 +7,18 @@ import java.util.Map;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMCoreConstants;
 import jpaoletti.jpm.core.PMSession;
 import jpaoletti.jpm.core.PresentationManager;
 import jpaoletti.jpm.struts.PMEntitySupport;
 import jpaoletti.jpm.struts.PMStrutsConstants;
 import jpaoletti.jpm.struts.PMStrutsContext;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants {
 
@@ -116,11 +122,32 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
         ctx.setRequest(request);
         ctx.setResponse((HttpServletResponse) response);
         ctx.getRequest().setAttribute(PM_CONTEXT, ctx);
-
-        for (Object object : request.getParameterMap().entrySet()) {
-            Map.Entry entry = (Map.Entry) object;
-            ctx.put("param_" + entry.getKey(), entry.getValue());
-        }
+        parseParameters(request, ctx);
         return ctx;
+    }
+
+    protected void parseParameters(HttpServletRequest request, final PMStrutsContext ctx) {
+        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        if (!isMultipart) {
+            for (Object object : request.getParameterMap().entrySet()) {
+                Map.Entry entry = (Map.Entry) object;
+                ctx.put(PMContext.PARAM_PREFIX + entry.getKey(), entry.getValue());
+            }
+        } else {
+            final FileItemFactory factory = new DiskFileItemFactory();
+            final ServletFileUpload upload = new ServletFileUpload(factory);
+            try {
+                final List<FileItem> items = upload.parseRequest(request);
+                for (FileItem item : items) {
+                    if (item.isFormField()) {
+                        ctx.put(PMContext.PARAM_PREFIX + item.getFieldName(), item.getString());
+                    } else {
+                        ctx.put(PMContext.PARAM_PREFIX + item.getFieldName(), item);
+                    }
+                }
+            } catch (FileUploadException ex) {
+                ctx.getPresentationManager().error(ex);
+            }
+        }
     }
 }

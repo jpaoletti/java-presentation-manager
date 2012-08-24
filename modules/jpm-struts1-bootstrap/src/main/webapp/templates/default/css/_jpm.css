@@ -44,3 +44,6 @@ select.with-add{width: 180px!important;}
 .align-center .cell{text-align: center;}
 .align-right .cell{text-align: right}
 #navigation_bar .active {font-size: 1.2em}
+.file-converter{display: block !important}
+.file-converter-chechbox input{margin: 0px!important;}
+.file-text, .file-converter-chechbox{font-size: 0.8em; color: gray}

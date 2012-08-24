@@ -13,6 +13,7 @@ import jpaoletti.jpm.security.core.PMSecurityUser;
  */
 public class PMContext {
 
+    public static final String PARAM_PREFIX = "param_";
     private Map<String, Object> contents = new HashMap<String, Object>();
     private String sessionId;
     private PersistenceManager persistenceManager;
@@ -248,7 +249,7 @@ public class PMContext {
      * @return parameter value
      */
     public Object getParameter(String paramid) {
-        final Object v = get("param_" + paramid);
+        final Object v = get(PARAM_PREFIX + paramid);
         if (v == null) {
             return null;
         } else {

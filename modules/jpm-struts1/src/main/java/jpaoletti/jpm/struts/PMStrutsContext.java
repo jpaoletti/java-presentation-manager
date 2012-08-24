@@ -4,16 +4,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 import jpaoletti.jpm.core.PMContext;
 import jpaoletti.jpm.core.PMCoreConstants;
 import jpaoletti.jpm.core.PMException;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
-/**An extension of the jpaoletti.jpm.core.PMContext class with some helpers
- * for PMStruts.*/
+/**
+ * An extension of the jpaoletti.jpm.core.PMContext class with some helpers for
+ * PMStruts.
+ */
 public class PMStrutsContext extends PMContext implements PMCoreConstants, PMStrutsConstants {
 
     private HttpServletRequest request;
@@ -60,6 +61,7 @@ public class PMStrutsContext extends PMContext implements PMCoreConstants, PMStr
     /* ActionForwards Helpers */
     /**
      * Helper for success action forward
+     *
      * @return success action forward
      */
     public ActionForward successful() {
@@ -68,6 +70,7 @@ public class PMStrutsContext extends PMContext implements PMCoreConstants, PMStr
 
     /**
      * Helper for continue action forward
+     *
      * @return continue action forward
      */
     public ActionForward go() {
@@ -76,6 +79,7 @@ public class PMStrutsContext extends PMContext implements PMCoreConstants, PMStr
 
     /**
      * Helper for fwdDeny action forward
+     *
      * @return fwdDeny action forward
      */
     public ActionForward fwdDeny() {
@@ -84,6 +88,7 @@ public class PMStrutsContext extends PMContext implements PMCoreConstants, PMStr
 
     /**
      * Helper for login action forward
+     *
      * @return fwdDeny action forward
      */
     public ActionForward fwdLogin() {
@@ -92,6 +97,7 @@ public class PMStrutsContext extends PMContext implements PMCoreConstants, PMStr
 
     /**
      * Retrieve the http session
+     *
      * @return The session
      */
     public HttpSession getSession() {
@@ -100,6 +106,7 @@ public class PMStrutsContext extends PMContext implements PMCoreConstants, PMStr
 
     /**
      * Getter for the entity support helper object
+     *
      * @return The entity support
      */
     public PMEntitySupport getEntitySupport() {
