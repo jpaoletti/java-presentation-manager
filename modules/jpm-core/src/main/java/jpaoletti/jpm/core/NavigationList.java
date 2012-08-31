@@ -15,34 +15,38 @@ public class NavigationList extends ArrayList<NavigationListItem> {
     }
 
     public void update(EntityContainer entityContainer, OperationCommand opCmd, Operation operation) {
-        if (operation != null) {
-            cut(entityContainer.getId(), operation.getId());
-            EntityContainer e = entityContainer;
-            boolean reset = true;
-            while (e != null) {
-                if (includesEntity(e.getId())) {
-                    reset = false;
-                    break;
+        try {
+            if (operation != null) {
+                cut(entityContainer.getId(), operation.getId());
+                EntityContainer e = entityContainer;
+                boolean reset = true;
+                while (e != null) {
+                    if (includesEntity(e.getId())) {
+                        reset = false;
+                        break;
+                    }
+                    e = e.getOwner();
                 }
-                e = e.getOwner();
-            }
-            if (reset) {
-                reset();
-            }
-            if (isGeneralScoped(operation)) {
-                addItem(entityContainer, operation, PresentationManager.getMessage("pm.core.navigationlist.general",
-                        entityContainer.getEntity().getTitle(),
-                        operation.getTitle()));
-            } else {
-                final Object i = entityContainer.getSelected().getInstance();
-                final NavigationListItem item = addItem(entityContainer, operation, PresentationManager.getMessage("pm.core.navigationlist.item",
-                        entityContainer.getEntity().getTitle(),
-                        operation.getTitle(),
-                        i != null ? i.toString() : "?"));
-                if (i != null) {
-                    item.setSelectedId(entityContainer.getSelected().getInstanceId());
+                if (reset) {
+                    reset();
+                }
+                if (isGeneralScoped(operation)) {
+                    addItem(entityContainer, operation, PresentationManager.getMessage("pm.core.navigationlist.general",
+                            entityContainer.getEntity().getTitle(),
+                            operation.getTitle()));
+                } else {
+                    final Object i = entityContainer.getSelected().getInstance();
+                    final NavigationListItem item = addItem(entityContainer, operation, PresentationManager.getMessage("pm.core.navigationlist.item",
+                            entityContainer.getEntity().getTitle(),
+                            operation.getTitle(),
+                            i != null ? i.toString() : "?"));
+                    if (i != null) {
+                        item.setSelectedId(entityContainer.getSelected().getInstanceId());
+                    }
                 }
             }
+        } catch (Exception ex) {
+            PresentationManager.getPm().warn(ex);
         }
     }
 
