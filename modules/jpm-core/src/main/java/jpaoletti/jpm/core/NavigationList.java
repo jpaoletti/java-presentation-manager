@@ -34,7 +34,7 @@ public class NavigationList extends ArrayList<NavigationListItem> {
                     addItem(entityContainer, operation, PresentationManager.getMessage("pm.core.navigationlist.general",
                             entityContainer.getEntity().getTitle(),
                             operation.getTitle()));
-                } else {
+                } else if (isItemScoped(operation)) {
                     final Object i = entityContainer.getSelected().getInstance();
                     final NavigationListItem item = addItem(entityContainer, operation, PresentationManager.getMessage("pm.core.navigationlist.item",
                             entityContainer.getEntity().getTitle(),
@@ -52,6 +52,10 @@ public class NavigationList extends ArrayList<NavigationListItem> {
 
     protected boolean isGeneralScoped(Operation operation) {
         return operation.getScope().equals(Operation.SCOPE_GENERAL);
+    }
+
+    protected boolean isItemScoped(Operation operation) {
+        return operation.getScope().equals(Operation.SCOPE_ITEM);
     }
 
     protected void cut(String entityId, String operationId) {
