@@ -1,40 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="show_sql">true</property>
-        <property name="format_sql">false</property>
-        <property name="use_sql_comments">false</property>
-        <property name="generate_statistics">false</property>
-        <property name="max_fetch_depth">2</property>
-        <property name="default_batch_fetch_size">16</property>
-        <property name="use_streams_for_binary">true</property>
-        <property name="connection.isolation">2</property>
-        <property name="hibernate.transaction.flush_before_completion">true</property>
-
-        <property name="hibernate.c3p0.min_size">2</property>
-        <property name="hibernate.c3p0.max_size">20</property>
-        <property name="hibernate.c3p0.timeout">300</property>
-        <property name="hibernate.c3p0.max_statements">300</property>
-        <property name="hibernate.c3p0.idle_test_period">300</property>
-        <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
-
-        <property name="hibernate.cache.use_structured_entries">true</property>
-        <property name="hibernate.cache.use_query_cache">true</property>
-        <property name="hibernate.cache.use_second_level_cache">true</property>
-        <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
-
-        <!-- Database connection settings -->
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jpm_test</property>
-        <property name="hibernate.connection.username">jpm</property>
-        <property name="hibernate.connection.password">jpm</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
-
-        <mapping resource="hbm/SimpleClass.hbm.xml"/>
-        <mapping resource="hbm/ComplexClass1.hbm.xml"/>
-
-        <mapping class="jpaoletti.jpm.hibernate.audit.AuditRecord" />
-    </session-factory>
+  <session-factory>
+    <property name="show_sql">true</property>
+    <property name="format_sql">false</property>
+    <property name="use_sql_comments">false</property>
+    <property name="generate_statistics">false</property>
+    <property name="max_fetch_depth">2</property>
+    <property name="default_batch_fetch_size">16</property>
+    <property name="use_streams_for_binary">true</property>
+    <property name="connection.isolation">2</property>
+    <property name="hibernate.transaction.flush_before_completion">true</property>
+    <property name="hibernate.c3p0.min_size">2</property>
+    <property name="hibernate.c3p0.max_size">20</property>
+    <property name="hibernate.c3p0.timeout">300</property>
+    <property name="hibernate.c3p0.max_statements">300</property>
+    <property name="hibernate.c3p0.idle_test_period">300</property>
+    <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+    <property name="hibernate.cache.use_structured_entries">true</property>
+    <property name="hibernate.cache.use_query_cache">true</property>
+    <property name="hibernate.cache.use_second_level_cache">true</property>
+    <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+    <!-- Database connection settings -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/jpm_test</property>
+    <property name="hibernate.connection.username">jpm</property>
+    <property name="hibernate.connection.password">jpm</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping resource="hbm/SimpleClass.hbm.xml"/>
+    <mapping resource="hbm/ComplexClass1.hbm.xml"/>
+    <mapping class="jpaoletti.jpm.hibernate.audit.AuditRecord"/>
+  </session-factory>
 </hibernate-configuration>

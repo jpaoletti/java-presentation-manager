@@ -9,8 +9,8 @@
         <property name="active" type="yes_no"/>
         <property name="amount" type="big_decimal" length="10" precision="2" />
         <property name="bigstring" type="text" />
-        <property name="date" type="date" />
-        <property name="datetime" type="timestamp" />
+        <property name="date" column="`date`" type="date" />
+        <property name="datetime" column="`datetime`" type="timestamp" />
         <property name="key" type="string" />
         <property name="password" type="string" />
         <property name="size" type="long" />
