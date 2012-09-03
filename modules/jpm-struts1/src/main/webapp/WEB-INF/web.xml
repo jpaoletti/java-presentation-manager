@@ -5,6 +5,9 @@
     <listener>
         <listener-class>jpaoletti.jpm.JPMContextListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>jpaoletti.jpm.LessCssContextListener</listener-class>
+    </listener>
     <filter>
         <filter-name>GeneralFilter</filter-name>
         <filter-class>jpaoletti.jpm.GeneralFilter</filter-class>

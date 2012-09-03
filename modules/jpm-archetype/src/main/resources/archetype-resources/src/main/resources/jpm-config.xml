@@ -3,6 +3,7 @@
     <property name="debug" value="true"/>
     <property name="appversion" value="1.0.0"/>
     <property name="template" value="default"/>
+    <property name="css" value="${bootstrap.css}"/>
     <property name="persistence-manager"
               value="jpaoletti.jpm.hibernate.core.PersistenceManager"/>
 

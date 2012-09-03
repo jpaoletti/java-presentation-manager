@@ -3,7 +3,6 @@ package jpaoletti.jpm.struts;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-
 import jpaoletti.jpm.core.EntitySupport;
 import jpaoletti.jpm.core.Field;
 import jpaoletti.jpm.core.PMContext;
@@ -13,7 +12,7 @@ import jpaoletti.jpm.core.PresentationManager;
 
 /**
  * Helper class for internal use.
- * 
+ *
  * @author jpaoletti
  * @see EntitySupport
  */
@@ -48,6 +47,7 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
 
     /**
      * Singleton getter
+     *
      * @return The PMEntitySupport
      */
     public synchronized static PMEntitySupport getInstance() {
@@ -75,7 +75,7 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
 
     /**
      * Getter for context path
-     * 
+     *
      * @return The context_path
      */
     public String getContext_path() {
@@ -137,5 +137,9 @@ public class PMEntitySupport extends EntitySupport implements PMCoreConstants, P
      */
     public String getTemplatePath() {
         return getContext_path() + "/templates/" + PresentationManager.getPm().getTemplate() + "/";
+    }
+
+    public String getCssMode() {
+        return getPm().getCfg().getProperty("css", "css");
     }
 }

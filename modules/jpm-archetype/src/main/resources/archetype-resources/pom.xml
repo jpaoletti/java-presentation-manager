@@ -21,6 +21,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+                <bootstrap.css>less</bootstrap.css>
                 <connection.url>jdbc:mysql://localhost:3306/jpm_test?autoReconnect=true</connection.url>
                 <connection.username>root</connection.username>
                 <connection.password></connection.password>
@@ -30,6 +31,7 @@
             <!-- Production profile -->
             <id>Production</id>
             <properties>
+                <bootstrap.css>css</bootstrap.css>
                 <connection.url>jdbc:mysql://localhost:3306/jpm_test?autoReconnect=true</connection.url>
                 <connection.username>root</connection.username>
                 <connection.password></connection.password>

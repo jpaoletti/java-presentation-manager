@@ -1,13 +1,7 @@
-body.outer-index{padding-top: 60px;}
-@media (max-width: 768px){
-    body.outer-index{padding-top: 0;}
-}
+@media (max-width: @navbarCollapseWidth){body.outer-index{padding-top: 0!important;}}
+body.outer-index{padding-top: @navbarHeight+20;}
 
 img{vertical-align:middle;}
-.clearfix:after {content: ".";display: block;clear: both;visibility: hidden;line-height: 0;	height: 0;}
-.clearfix {display: inline-block;} 
-html[xmlns] .clearfix {	display: block;}
-* html .clearfix {height: 1%;}
 
 .mainLoading{position: fixed; top: 50%; left: 50%; margin-top: -64px; margin-left: -64px;}
 .brand{background-image: url("../img/logo.png"); background-repeat: no-repeat; background-position: left center; background-size: 30px; text-indent: 40px; margin-left: -10px !important;}

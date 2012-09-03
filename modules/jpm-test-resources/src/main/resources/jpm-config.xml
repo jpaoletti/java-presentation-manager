@@ -4,6 +4,8 @@
     <property name="appversion" value="1.0.0"/>
     <property name="template" value="default"/>
     <property name="audit-level" value="10"/>
+    <!-- Bootstrap version only -->
+    <property name="css" value="less"/> <!-- change to css in production -->
 
     <property name="audit-service"
               value="jpaoletti.jpm.hibernate.audit.AuditService"/>
