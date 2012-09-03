@@ -158,6 +158,7 @@ public class PresentationManager extends Observable {
             loadClassConverters();
             loadLocations();
             createSessionChecker();
+            customLoad();
         } catch (Exception exception) {
             error(exception);
             error = true;
@@ -688,7 +689,6 @@ public class PresentationManager extends Observable {
         }
         sessionChecker = new Timer();
         sessionChecker.scheduleAtFixedRate(new TimerTask() {
-
             @Override
             public void run() {
                 synchronized (sessions) {
@@ -847,5 +847,26 @@ public class PresentationManager extends Observable {
             auditService.setLevel(cfg.getInt("audit-level", -1));
         }
         return auditService;
+    }
+
+    /**
+     * Executes a custom loader.
+     */
+    private void customLoad() {
+        final String s = getCfg().getProperty("custom-loader");
+        if (s != null) {
+            try {
+                final CustomLoader customLoader = (CustomLoader) Class.forName(s).newInstance();
+                logItem("Custom Loader", s, "*");
+                customLoader.execute(this);
+            } catch (ClassNotFoundException e) {
+                error = true;
+                logItem("Custom Loader", s, "?");
+            } catch (Exception e) {
+                error = true;
+                error(e);
+                logItem("Custom Loader Failed", s, "!");
+            }
+        }
     }
 }
