@@ -15,10 +15,10 @@
             <title><pmfn:message key="${pm.title}"/> - <pmfn:message key="${title}"/></title>
             <link href="${es.templatePath}img/favicon.ico?v=${es.pm.appversion}" rel="shortcut icon" />
             <c:if test="${es.cssMode=='css'}">
-                <link href="${es.templatePath}all.css?v=${es.pm.appversion}" rel="stylesheet" type="text/css" />
+                <link href="${es.templatePath}css/all.css?v=${es.pm.appversion}" rel="stylesheet" type="text/css" />
             </c:if>
             <c:if test="${es.cssMode=='less'}">
-                <link href="${es.templatePath}all.less?v=${es.pm.appversion}" rel="stylesheet" type="text/less" />
+                <link href="${es.templatePath}less/all.less?v=${es.pm.appversion}" rel="stylesheet" type="text/less" />
                 <script type="text/javascript" src="${es.context_path}/js/less.min.js"></script>
             </c:if>
             <!--[if lt IE 9]><script type="text/javascript" src="${es.context_path}/js/html5.js"></script><![endif]-->
