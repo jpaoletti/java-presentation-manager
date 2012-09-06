@@ -86,7 +86,7 @@
                 <artifactId>lesscss-maven-plugin</artifactId>
                 <version>1.3.0</version>
                 <configuration>
-                    <sourceDirectory>${project.basedir}/src/main/webapp/templates/${template}/less</sourceDirectory>
+                    <sourceDirectory>${project.build.directory}/${project.build.finalName}/templates/${template}/less</sourceDirectory>
                     <outputDirectory>${project.build.directory}/${project.build.finalName}/templates/${template}/css</outputDirectory>
                     <compress>true</compress>
                     <includes>
@@ -95,6 +95,7 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <phase>package</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>
