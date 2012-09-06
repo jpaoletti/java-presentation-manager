@@ -20,6 +20,8 @@ import org.apache.struts.action.*;
  */
 public abstract class ActionSupport extends Action implements PMCoreConstants, PMStrutsConstants {
 
+    public static final String ACTION_NAME = "action_name";
+
     protected abstract void doExecute(PMStrutsContext ctx) throws PMException;
 
     /**
@@ -111,7 +113,7 @@ public abstract class ActionSupport extends Action implements PMCoreConstants, P
         if (ctx.getOperation() != null && ctx.getOperation().getFollows() != null) {
             final String plainUrl = PMTags.plainUrl(
                     ctx.getPmsession(),
-                    "/" + ctx.getOperation().getFollows() + ".do?pmid="+ctx.getEntity().getId()).substring(getContextPath().length());
+                    "/" + ctx.getOperation().getFollows() + ".do?pmid=" + ctx.getEntity().getId()).substring(getContextPath().length());
             throw new PMForwardException(new ActionRedirect(plainUrl));
         } else {
             final String plainUrl = PMTags.plainUrl(ctx.getPmsession(), url).substring(getContextPath().length());

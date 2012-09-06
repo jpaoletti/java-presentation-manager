@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jpaoletti.jpm.core.PMCoreConstants;
 import jpaoletti.jpm.core.PMSession;
+import jpaoletti.jpm.struts.actions.ActionSupport;
 
 /**
  * This servlet decrypt *.jpm urls based on session encripter and dispatch them
@@ -35,6 +36,10 @@ public class EncryptedURLServlet extends HttpServlet {
                     final String[] parameter = _parameter.split("=");
                     ctx.put("param_" + parameter[0], getParameterValue(ctx, parameter[0], (parameter.length == 2) ? parameter[1] : ""));
                 }
+            }
+            try {
+                ctx.put(ActionSupport.ACTION_NAME, url.substring(0, url.indexOf(".do")));
+            } catch (Exception e) {
             }
             req.getRequestDispatcher(url).forward(req, resp);
         }
