@@ -27,6 +27,7 @@ public class PaginatedList {
     private boolean showRowNumber;
     private String operationColWidth;
     private boolean hasSelectedScope;
+    private boolean compactedOperations;
 
     /**
      * Returns a list with the existing pages index
@@ -344,5 +345,16 @@ public class PaginatedList {
 
     public void setListFilter(ListFilter listFilter) {
         this.listFilter = listFilter;
+    }
+
+    /**
+     * @return true if list operations are compacted
+     */
+    public boolean isCompactedOperations() {
+        return compactedOperations;
+    }
+
+    public void setCompactedOperations(boolean compactedOperations) {
+        this.compactedOperations = compactedOperations;
     }
 }

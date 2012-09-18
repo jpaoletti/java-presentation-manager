@@ -74,14 +74,13 @@ public class ListManager {
     }
 
     private void prepareParameters(PMContext ctx, Operations operations) throws PMException {
-        boolean searchable = ctx.getOperation().getConfig("searchable", "true").compareTo("true") == 0;
-        Boolean showRowNumber = ctx.getOperation().getConfig("show-row-number", "false").compareTo("true") == 0;
-        String operationColWidth = ctx.getOperation().getConfig("operation-column-width", "50px");
+        final String operationColWidth = ctx.getOperation().getConfig("operation-column-width", "50px");
 
-        ctx.getList().setSearchable(searchable);
+        ctx.getList().setSearchable(ctx.getOperation().getConfig("searchable", "true").equalsIgnoreCase("true"));
         ctx.getList().setPaginable(isPaginable(ctx));
-        ctx.getList().setShowRowNumber(showRowNumber);
+        ctx.getList().setShowRowNumber(ctx.getOperation().getConfig("show-row-number", "false").equalsIgnoreCase("true"));
         ctx.getList().setOperationColWidth(operationColWidth);
         ctx.getList().setHasSelectedScope(operations.getOperationsForScope(OperationScope.SELECTED).count() > 0);
+        ctx.getList().setCompactedOperations(ctx.getOperation().getConfig("compacted-operations", "false").equalsIgnoreCase("true"));
     }
 }

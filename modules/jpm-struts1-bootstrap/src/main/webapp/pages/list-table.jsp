@@ -16,7 +16,16 @@
         <label class="${(ctx.entityContainer.list.hasSelectedScope)?'checkbox':''} inline clearfix">
             ${pmfn:itemCheckbox(ctx,contents,item)}
             <div class='btn-group'>
+                <c:if test="${ctx.entityContainer.list.compactedOperations}">
+                    <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-cog"></i> &nbsp;<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu operation-dropdown-menu">
+                </c:if>
                 ${pmfn:listItemOperations(ctx, contents, item)}
+                <c:if test="${ctx.entityContainer.list.compactedOperations}">
+                    </ul>
+                </c:if>
             </div>
         </label>
     </th>
@@ -36,10 +45,13 @@
 </table>
 <script type="text/javascript">
     PM_register(function(){
-        $(".ui-list-icon-container").each(function(){
-            $(this)
-            .addClass("btn btn-small")
-            .removeClass("ui-list-icon-container");
-        });
+        if(${ctx.entityContainer.list.compactedOperations}){
+            $(".ui-list-icon-container").each(function(){
+                $(this).append("&nbsp;"+$(this).attr("title")).wrap('<li />')
+            })
+        }else{
+            $(".ui-list-icon-container").addClass("btn btn-small");
+        }
+        $(".ui-list-icon-container").removeClass("ui-list-icon-container");
     });
 </script>
