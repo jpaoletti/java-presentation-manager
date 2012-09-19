@@ -45,8 +45,8 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
             throw new NotAuthenticatedException();
         }
         configureEntityContainer(ctx);
-        configureSelected(ctx);
         operation = configureOperations(ctx);
+        configureSelected(ctx);
         if (checkOperation() && operation == null) {
             throw new NotAuthorizedException();
         }
