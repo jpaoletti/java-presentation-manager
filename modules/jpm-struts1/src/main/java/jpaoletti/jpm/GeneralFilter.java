@@ -1,9 +1,12 @@
 package jpaoletti.jpm;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -140,7 +143,11 @@ public class GeneralFilter implements Filter, PMCoreConstants, PMStrutsConstants
                 final List<FileItem> items = upload.parseRequest(request);
                 for (FileItem item : items) {
                     if (item.isFormField()) {
-                        ctx.put(PMContext.PARAM_PREFIX + item.getFieldName(), item.getString());
+                        try {
+                            ctx.put(PMContext.PARAM_PREFIX + item.getFieldName(), item.getString("UTF-8"));
+                        } catch (UnsupportedEncodingException ex) {
+                            ctx.put(PMContext.PARAM_PREFIX + item.getFieldName(), item.getString());
+                        }
                     } else {
                         ctx.put(PMContext.PARAM_PREFIX + item.getFieldName(), item);
                     }
