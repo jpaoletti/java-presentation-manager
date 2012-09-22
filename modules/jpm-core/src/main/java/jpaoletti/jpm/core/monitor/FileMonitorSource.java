@@ -44,10 +44,7 @@ public class FileMonitorSource extends MonitorSource {
             //read until endLine
             line = in.readLine();
             while (line != null) {
-                MonitorLine l = new MonitorLine();
-                l.setId(currentLineNo);
-                l.setValue(line);
-                result.add(l);
+                result.add(new MonitorLine(currentLineNo, line));
                 currentLineNo++;
                 line = in.readLine();
             }
@@ -69,17 +66,16 @@ public class FileMonitorSource extends MonitorSource {
      * @throws Exception
      */
     @Override
-    public MonitorLine getLastLine() throws Exception {
-        String line = null;
-        MonitorLine result = new MonitorLine();
+    public List<MonitorLine> getLastLine(Integer count) throws Exception {
+        String line;
+        final List<MonitorLine> result = new ArrayList<MonitorLine>();
         BufferedReader in = null;
         try {
             in = new BufferedReader(new FileReader(getFilename()));
             int i = 0;
             line = in.readLine();
             while (line != null) {
-                result.setId(i);
-                result.setValue(line);
+                result.add(new MonitorLine(i, line));
                 i++;
                 line = in.readLine();
             }
@@ -91,7 +87,11 @@ public class FileMonitorSource extends MonitorSource {
             } catch (IOException ignore) {
             }
         }
-        return result;
+        if (result.size() <= count) {
+            return result;
+        } else {
+            return result.subList(result.size() - count, result.size());
+        }
     }
 
     /**

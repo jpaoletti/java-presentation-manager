@@ -1,10 +1,10 @@
 package jpaoletti.jpm.core.monitor;
 
-/** 
+/**
  * A monitor line. Its composed by an id to identificate the line and a content.
- * 
- * @author jpaoletti 
- * 
+ *
+ * @author jpaoletti
+ *
  *
  */
 public class MonitorLine {
@@ -12,8 +12,14 @@ public class MonitorLine {
     private Object id;
     private Object value;
 
+    public MonitorLine(Object id, Object value) {
+        this.id = id;
+        this.value = value;
+    }
+
     /**
      * setter for the id
+     *
      * @param id
      */
     public void setId(Object id) {
@@ -22,6 +28,7 @@ public class MonitorLine {
 
     /**
      * getter for the id
+     *
      * @return The id
      */
     public Object getId() {
@@ -30,6 +37,7 @@ public class MonitorLine {
 
     /**
      * setter for the value
+     *
      * @param value
      */
     public void setValue(Object value) {
@@ -38,6 +46,7 @@ public class MonitorLine {
 
     /**
      * getter for the value
+     *
      * @return The value
      */
     public Object getValue() {

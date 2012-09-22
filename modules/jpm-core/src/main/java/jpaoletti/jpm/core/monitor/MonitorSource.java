@@ -50,7 +50,7 @@ public abstract class MonitorSource {
      * @return The line
      * @throws Exception
      */
-    public abstract MonitorLine getLastLine() throws Exception;
+    public abstract List<MonitorLine> getLastLine(Integer count) throws Exception;
 
     /**
      * Setter for properties

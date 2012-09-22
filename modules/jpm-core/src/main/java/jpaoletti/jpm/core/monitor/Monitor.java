@@ -25,6 +25,8 @@ public class Monitor extends Observable implements Runnable {
     private Integer delay;
     //Maximum number of lines displayed at a time
     private Integer max;
+    //Initial number of lines loaded
+    private Integer initialCount;
     //Clean up after each refresh
     private Boolean cleanup;
     // Ignore actual and always get everything
@@ -83,11 +85,9 @@ public class Monitor extends Observable implements Runnable {
      */
     public void startWatching() {
         try {
-            MonitorLine line = getSource().getLastLine();
-            actual = (line != null) ? line.getId() : null;
-            if (line != null) {
-                notifyObservers(getFormatter().format(line));
-            }
+            final List<MonitorLine> lines = getSource().getLastLine(getInitialCount());
+            actual = null;
+            updateLines(lines);
         } catch (Exception e) {
             notifyObservers(e);
         }
@@ -97,7 +97,6 @@ public class Monitor extends Observable implements Runnable {
      * Looks for new lines
      */
     public void getNewLines() {
-        List<String> result = new ArrayList<String>();
         try {
             List<MonitorLine> lines;
             if (getAll()) {
@@ -105,14 +104,7 @@ public class Monitor extends Observable implements Runnable {
             } else {
                 lines = getSource().getLinesFrom(actual);
             }
-            if (lines.size() > 0) {
-                for (MonitorLine line : lines) {
-                    result.add(getFormatter().format(line));
-                }
-                actual = lines.get(lines.size() - 1).getId();
-                setChanged();
-                notifyObservers(result);
-            }
+            updateLines(lines);
         } catch (Exception e) {
             notifyObservers(e);
         }
@@ -247,5 +239,28 @@ public class Monitor extends Observable implements Runnable {
      */
     public String getTitle() {
         return pm.message("pm.monitor." + getId());
+    }
+
+    public Integer getInitialCount() {
+        if (initialCount == null) {
+            return 1;
+        }
+        return initialCount;
+    }
+
+    public void setInitialCount(Integer initialCount) {
+        this.initialCount = initialCount;
+    }
+
+    protected void updateLines(List<MonitorLine> lines) {
+        final List<String> result = new ArrayList<String>();
+        if (lines.size() > 0) {
+            for (MonitorLine line : lines) {
+                result.add(getFormatter().format(line));
+            }
+            actual = lines.get(lines.size() - 1).getId();
+            setChanged();
+            notifyObservers(result);
+        }
     }
 }

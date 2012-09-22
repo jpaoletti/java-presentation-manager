@@ -75,7 +75,7 @@ public class MonitorObserver implements Observer {
      * @return the lines and clear them for next time
      */
     public List<String> getLines() {
-        List<String> res = new ArrayList<String>();
+        final List<String> res = new ArrayList<String>();
         res.addAll(lines);
         lines.clear();
         return res;
