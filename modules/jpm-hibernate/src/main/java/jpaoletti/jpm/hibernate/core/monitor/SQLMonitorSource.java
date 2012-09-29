@@ -40,18 +40,13 @@ public class SQLMonitorSource extends MonitorSource {
             final List<?> l = c.list();
             for (Iterator<?> iterator = l.iterator(); iterator.hasNext();) {
                 final Object item = iterator.next();
-                final MonitorLine line = new MonitorLine();
-
                 if (item instanceof Object[]) {
                     final Object[] objects = (Object[]) item;
-                    line.setId(objects[getIdColumn()]);
-                    line.setValue(objects);
+                    result.add(new MonitorLine(objects[getIdColumn()], objects));
                 } else {
-                    line.setId(item);
                     final Object[] objects = {item};
-                    line.setValue(objects);
+                    result.add(new MonitorLine(item, objects));
                 }
-                result.add(line);
             }
         } finally {
             getPersistenceManager().finish(null);
@@ -60,8 +55,8 @@ public class SQLMonitorSource extends MonitorSource {
     }
 
     @Override
-    public MonitorLine getLastLine() throws Exception {
-        final MonitorLine result = new MonitorLine();
+    public List<MonitorLine> getLastLine(Integer count) throws Exception {
+        final List<MonitorLine> result = new ArrayList<MonitorLine>();
         getPersistenceManager().init(getPersistenceManager().newConnection());
         try {
             final SQLQuery c = ((Session) getPersistenceManager().getConnection()).createSQLQuery(getLastLineQuery().trim());
@@ -69,12 +64,10 @@ public class SQLMonitorSource extends MonitorSource {
             final Object item = c.uniqueResult();
             if (item instanceof Object[]) {
                 final Object[] objects = (Object[]) item;
-                result.setId(objects[getIdColumn()]);
-                result.setValue(objects);
+                result.add(new MonitorLine(objects[getIdColumn()], objects));
             } else {
-                result.setId(item);
                 final Object[] objects = {item};
-                result.setValue(objects);
+                result.add(new MonitorLine(item, objects));
             }
         } finally {
             getPersistenceManager().finish(null);
