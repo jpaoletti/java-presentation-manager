@@ -11,7 +11,7 @@
         <input type="hidden" name="order" value="${ctx.entityContainer.list.sort.fieldId}" />
         <input type="hidden" name="desc"  value="${ctx.entityContainer.list.sort.desc}" />
         <div id="list-container">
-            <div id="example_wrapper" class="dataTables_wrapper">
+            <div id="list-operation-main-list">
                 <jsp:include page="list-table.jsp" />
                 <jsp:include page="list-sort.jsp" />
             </div>

@@ -154,9 +154,13 @@ public class PMTags extends TagSupport {
     }
 
     public static String highlight(Entity entity, Field field, Object item, Object field_value) {
-        final Highlight highlight = entity.getHighlight(field, item);
-        if (highlight != null) {
-            return highlight.getStyle();
+        final List<Highlight> highlights = entity.getHighlights(field, item);
+        if (highlights != null) {
+            final StringBuilder sb = new StringBuilder();
+            for (Highlight highlight : highlights) {
+                sb.append(highlight.getStyle()).append(" ");
+            }
+            return sb.toString();
         } else {
             return "";
         }

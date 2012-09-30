@@ -74,7 +74,8 @@ public class Entity extends PMCoreObject {
     private Map<String, Field> fieldsbyid;
     /**
      * Operations of the entity. Standard operations are "add", "edit",
-     * "delete", "show", "list" but the programmer can define whatever he wants. <br/>{@code <operations>...</operations>}
+     * "delete", "show", "list" but the programmer can define whatever he wants.
+     * <br/>{@code <operations>...</operations>}
      *
      * @see Operations
      * @see Operation
@@ -547,6 +548,20 @@ public class Entity extends PMCoreObject {
             return null;
         }
         return getHighlights().getHighlight(this, field, instance);
+    }
+
+    /**
+     * Looks for all the apropiate highlight for this field+instance
+     *
+     * @param field
+     * @param instance
+     * @return the highlight
+     */
+    public List<Highlight> getHighlights(Field field, Object instance) {
+        if (getHighlights() == null) {
+            return null;
+        }
+        return getHighlights().getHighlights(this, field, instance);
     }
 
     /**

@@ -1,10 +1,11 @@
 package jpaoletti.jpm.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Encapsulate a list of highlights
- * 
+ *
  * @author jpaoletti
  */
 public class Highlights extends PMCoreObject {
@@ -14,6 +15,7 @@ public class Highlights extends PMCoreObject {
 
     /**
      * Return the index of the given hightlight in the list
+     *
      * @param highlight The highlight
      * @return The indec
      */
@@ -22,9 +24,9 @@ public class Highlights extends PMCoreObject {
     }
 
     /**
-     * Return the first highlight that matches the given instance in the given field
-     * of the given entity
-     * 
+     * Return the first highlight that matches the given instance in the given
+     * field of the given entity
+     *
      * @param entity The entity
      * @param field The field
      * @param instance The instance
@@ -42,6 +44,30 @@ public class Highlights extends PMCoreObject {
             }
         }
         return null;
+    }
+
+    /**
+     * Return all the highlights that matches the given instance in the given
+     * field of the given entity
+     *
+     * @param entity The entity
+     * @param field The field
+     * @param instance The instance
+     * @return The highlight
+     */
+    public List<Highlight> getHighlights(Entity entity, Field field, Object instance) {
+        if (field == null) {
+            return getHighlights(entity, instance);
+        }
+        final List<Highlight> result = new ArrayList<Highlight>();
+        for (Highlight highlight : highlights) {
+            if (!highlight.getScope().equals(INSTANCE)) {
+                if (match(instance, field, highlight)) {
+                    result.add(highlight);
+                }
+            }
+        }
+        return result;
     }
 
     /**
@@ -63,6 +89,28 @@ public class Highlights extends PMCoreObject {
             }
         }
         return null;
+    }
+
+    /**
+     * Return all the highlights that match in any value of this instance with
+     * some of the highlights values.
+     *
+     * @param entity The entity
+     * @param instance The instance
+     * @return The Highlinght
+     */
+    public List<Highlight> getHighlights(Entity entity, Object instance) {
+        final List<Highlight> result = new ArrayList<Highlight>();
+        for (Highlight highlight : highlights) {
+            if (highlight.getScope().equals(INSTANCE)) {
+                for (Field field : entity.getOrderedFields()) {
+                    if (match(instance, field, highlight)) {
+                        result.add(highlight);
+                    }
+                }
+            }
+        }
+        return result;
     }
 
     /**
