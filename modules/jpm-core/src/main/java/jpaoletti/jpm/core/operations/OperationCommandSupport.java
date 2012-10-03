@@ -45,8 +45,8 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
             throw new NotAuthenticatedException();
         }
         configureEntityContainer(ctx);
-        operation = configureOperations(ctx);
         configureSelected(ctx);
+        operation = configureOperations(ctx);
         if (checkOperation() && operation == null) {
             throw new NotAuthorizedException();
         }
@@ -56,6 +56,7 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
         }
         //Try to refresh selected object, if there is one
         refreshSelectedObject(ctx, null);
+        preConversion(ctx);
         ctx.getPmsession().getNavigationList().update(ctx.getEntityContainer(true), this, operation);
         return true;
     }
@@ -171,12 +172,6 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
             ctx.getEntityContainer().setSelected(ctx.buildInstanceWrapper(instance));
         }
         refreshSelectedObject(ctx, null);
-        if (ctx.getOperation() != null && ctx.getOperation().getContext() != null) {
-            ctx.getOperation().getContext().preConversion(ctx);
-        }
-        if (checkSelected() && ctx.getEntityContainer().getSelected() == null) {
-            ctx.addMessage(MessageFactory.error(ctx.getEntity(), "unknow.item"));
-        }
     }
 
     public Operation configureOperations(PMContext ctx) throws PMException {
@@ -471,6 +466,15 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
             return operation.getAuditLevel();
         } else {
             return auditLevel;
+        }
+    }
+
+    protected void preConversion(PMContext ctx) throws PMException {
+        if (ctx.getOperation() != null && ctx.getOperation().getContext() != null) {
+            ctx.getOperation().getContext().preConversion(ctx);
+        }
+        if (checkSelected() && ctx.getEntityContainer().getSelected() == null) {
+            ctx.addMessage(MessageFactory.error(ctx.getEntity(), "unknow.item"));
         }
     }
 }
