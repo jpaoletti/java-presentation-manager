@@ -732,7 +732,7 @@ public class PresentationManager extends Observable {
             return null;
         }
         try {
-            String string = getResourceBundle().getString(key);
+            String string = (getResourceBundle().containsKey(key)) ? getResourceBundle().getString(key) : key;
             if (params != null) {
                 for (int i = 0; i < params.length; i++) {
                     String param = (params[i] == null) ? "" : params[i].toString();
