@@ -14,5 +14,6 @@ public class ResetPasswordAction extends ActionSupport {
     protected void doExecute(PMStrutsContext ctx) throws PMException {
         final ResetPassword op = new ResetPassword("resetpsw");
         op.execute(ctx);
+        success(ctx, "pages/resetpsw.jsp", false);
     }
 }
