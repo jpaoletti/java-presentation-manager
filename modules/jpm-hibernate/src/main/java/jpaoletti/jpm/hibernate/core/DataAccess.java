@@ -10,6 +10,7 @@ import org.apache.commons.lang.reflect.FieldUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  * Data access using an hibernate session
@@ -91,8 +92,11 @@ public class DataAccess extends AbstractDataAccess implements PMCoreConstants {
     public void add(PMContext ctx, Object object) throws PMException {
         try {
             getDb(ctx).save(object);
-        } catch (org.hibernate.exception.ConstraintViolationException e) {
+        } catch (ConstraintViolationException e) {
             throw new PMException("constraint.violation.exception", e);
+        } catch (Exception e) {
+            ctx.getPresentationManager().error(e);
+            throw new PMException("pm_core.unespected.error");
         }
     }
 
