@@ -128,17 +128,23 @@ public class OperationCommandSupport extends PMCoreObject implements OperationCo
     }
 
     protected void rollback(PMContext ctx) throws PMException {
-        final EntityContainer c = ctx.getEntityContainer(true);
-        //We need to remove reference of new objects
-        if (c != null) {
-            if (ctx.getSelected() != null && ctx.getEntityContainer().isSelectedNew()) {
-                if (c.getOwner() != null) {
-                    final Object object = ctx.getEntityContainer().getOwner().getSelected().getInstance();
-                    final Collection<Object> collection = (Collection<Object>) ctx.getPresentationManager().get(object, ctx.getEntity().getOwner().getEntityProperty());
-                    collection.remove(ctx.getSelected().getInstance());
+        try {
+            final EntityContainer c = ctx.getEntityContainer(true);
+            //We need to remove reference of new objects
+            if (c != null) {
+                if (ctx.getSelected() != null && ctx.getEntityContainer().isSelectedNew()) {
+                    if (c.getOwner() != null) {
+                        final Object object = ctx.getEntityContainer().getOwner().getSelected().getInstance();
+                        final Collection<Object> collection = (Collection<Object>) ctx.getPresentationManager().get(object, ctx.getEntity().getOwner().getEntityProperty());
+                        collection.remove(ctx.getSelected().getInstance());
+                    }
+                    ctx.getEntityContainer().setSelected(null);
                 }
-                ctx.getEntityContainer().setSelected(null);
             }
+        } catch (PMException e) {
+            throw e;
+        } catch (Exception e) {
+            ctx.getPresentationManager().warn(e.getMessage());
         }
     }
 
