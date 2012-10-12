@@ -14,6 +14,8 @@ import jpaoletti.jpm.core.message.MessageFactory;
  * <b>weak-entity</b> Id of the weak entity
  * <b>show-list</b> If true (default) show the list of items
  * <b>show-modify</b> If true (default) show a button to edit screen
+ * <b>button-text</b> Key for button text
+ * <b>button-style</b> Button Style
  *
  * @author jpaoletti
  */
@@ -40,6 +42,8 @@ public class WeakConverter extends StrutsEditConverter {
             sb.append(ctx.getField().getProperty());
             sb.append("&buttontext=");
             sb.append(getConfig("button-text", "pm.struts.weak.converter.edit"));
+            sb.append("&buttonstyle=");
+            sb.append(getConfig("button-style", "icon-th-list"));
 
             ctx.put("weakContainer", weakContainer);
             ctx.put("weak", weak);

@@ -1,6 +1,6 @@
 <%@include file="../inc/inc-full.jsp" %>
 <c:if test="${param.showbutton}">
-    <a id="weak${param.f}" class="btn" href="${pmfn:url(ctx.pmsession, 'list.do?pmid='.concat(param.weakid))}"><i class="icon-th-list"></i>&nbsp;<pmfn:message key="${param.buttontext}" /></a><br/>
+    <a id="weak${param.f}" class="btn" href="${pmfn:url(ctx.pmsession, 'list.do?pmid='.concat(param.weakid))}"><i class=" ${param.buttonstyle}"></i>&nbsp;<pmfn:message key="${param.buttontext}" /></a><br/>
 </c:if>
 <c:if test="${param.showlist}">
     <div id="weak${param.f}-list">
