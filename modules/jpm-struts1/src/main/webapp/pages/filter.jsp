@@ -5,7 +5,7 @@
     <pm:std-form contextPath="${es.context_path}" entity="${ctx.entity}" operation="${ctx.operation}" editable="true" resetable="true">
         <table class="std-table">
             <tbody id="list_body" >
-                <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
+                <c:forEach var="field" items="${pmfn:displayedFields(ctx.user, entity, ctx.operation.id)}">
                     <tr>
                         <th scope="row">
                             <pm:field-name field="${field}" />

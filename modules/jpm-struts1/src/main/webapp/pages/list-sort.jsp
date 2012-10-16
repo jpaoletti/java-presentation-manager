@@ -5,7 +5,7 @@
         $('#operationsort').remove();
         $("#col_${ctx.entityContainer.list.sort.fieldId}")
         .append("<img alt='' src=\"${es.templatePath}img/arrow-${(ctx.entityContainer.list.sort.desc)?'down':'up'}.gif\" />");
-        //<c:forEach var="field" items="${pmfn:displayedFields(entity, 'sort')}">
+        //<c:forEach var="field" items="${pmfn:displayedFields(ctx.user, entity, 'sort')}">
         $("#col_${field.id}").addClass('sortable').click(function(){
             $("input[name='order']").val('${field.id}');
             $("input[name='desc']").val(($("input[name='desc']").val()=='true')?'false':'true');

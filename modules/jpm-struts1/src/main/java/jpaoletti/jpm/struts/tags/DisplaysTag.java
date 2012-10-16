@@ -3,10 +3,11 @@ package jpaoletti.jpm.struts.tags;
 import javax.servlet.jsp.JspException;
 import jpaoletti.jpm.core.Field;
 import jpaoletti.jpm.core.Operation;
+import jpaoletti.jpm.struts.PMStrutsContext;
 
 /**
  * Tag that execute the body only if the field is displayed on the operation
- * 
+ *
  * @author jpaoletti
  */
 public class DisplaysTag extends PMTags {
@@ -17,8 +18,8 @@ public class DisplaysTag extends PMTags {
 
     @Override
     public int doStartTag() throws JspException {
-        final String display = getField().getDisplay();
-        if (display.contains(getOperationId()) || "all".equalsIgnoreCase(display)) {
+        final PMStrutsContext ctx = (PMStrutsContext) pageContext.getRequest().getAttribute("ctx");
+        if (getField().shouldDisplay(getOperationId(), ctx.getUser())) {
             return EVAL_BODY_INCLUDE;
         } else {
             return SKIP_BODY;

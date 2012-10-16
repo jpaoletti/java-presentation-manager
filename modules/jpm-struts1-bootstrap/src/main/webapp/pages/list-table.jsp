@@ -5,7 +5,7 @@
         <tr>
     <c:if test="${ctx.entityContainer.list.showRowNumber}"><th class="row-number-col">#</th></c:if>
     <th scope="col" class="jpm-list-operation-col center" style="width:${ctx.entityContainer.list.operationColWidth}"><i class="icon-cog"></i></th>
-    <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><c:if test="${not empty field.width}"><th scope="col" id="col_${field.id}" style='width:${field.width}px;'></c:if><c:if test="${empty field.width}"><th scope="col" id="col_${field.id}" ></c:if><pm:field-name field="${field}" tooltip="false" /></th></c:forEach>
+    <c:forEach var="field" items="${pmfn:displayedFields(ctx.user, entity, ctx.operation.id)}"><c:if test="${not empty field.width}"><th scope="col" id="col_${field.id}" style='width:${field.width}px;'></c:if><c:if test="${empty field.width}"><th scope="col" id="col_${field.id}" ></c:if><pm:field-name field="${field}" tooltip="false" /></th></c:forEach>
 </tr>
 </thead>
 <tbody id="list_body" >
@@ -29,7 +29,7 @@
             </div>
         </label>
     </th>
-    <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}"><td class="align-${field.align}"><pmfn:converted-item ctx="${ctx}" operation="${operation}" item="${item}" field="${field}" /></td>
+    <c:forEach var="field" items="${pmfn:displayedFields(ctx.user, entity, ctx.operation.id)}"><td class="align-${field.align}"><pmfn:converted-item ctx="${ctx}" operation="${operation}" item="${item}" field="${field}" /></td>
     </c:forEach>
     </tr>
 </c:forEach>
@@ -37,7 +37,7 @@
 <tfoot>
     <tr>
 <c:if test="${ctx.entityContainer.list.showRowNumber}"><th class="row-number-col"></th></c:if>
-<td colspan="${fn:length(pmfn:displayedFields(entity, ctx.operation.id))+1}">
+<td colspan="${fn:length(pmfn:displayedFields(ctx.user, entity, ctx.operation.id))+1}">
     <jsp:include page="list-pagination.jsp" />
 </td>
 </tr>

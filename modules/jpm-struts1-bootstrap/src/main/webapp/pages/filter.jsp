@@ -4,7 +4,7 @@
 <pm:page title="titles.${ctx.operation.id}">
     <pm:std-header ctx="${ctx}" />
     <pm:std-form contextPath="${es.context_path}" entity="${ctx.entity}" operation="${ctx.operation}" editable="${ctx.map.editable}" resetable="true">
-        <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
+        <c:forEach var="field" items="${pmfn:displayedFields(ctx.user, entity, ctx.operation.id)}">
             <div class="control-group">
                 <label class="control-label" for="f_${field.id}">${field.title}</label>
                 <div class="controls">

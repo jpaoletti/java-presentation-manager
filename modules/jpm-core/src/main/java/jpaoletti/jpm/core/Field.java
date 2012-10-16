@@ -1,11 +1,13 @@
 package jpaoletti.jpm.core;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import jpaoletti.jpm.converter.Converter;
 import jpaoletti.jpm.converter.ConverterException;
 import jpaoletti.jpm.converter.Converters;
 import jpaoletti.jpm.converter.GenericConverter;
+import jpaoletti.jpm.security.core.PMSecurityUser;
 import jpaoletti.jpm.validator.Validator;
 import org.apache.commons.lang.reflect.FieldUtils;
 
@@ -46,6 +48,7 @@ public class Field extends PMCoreObject {
     private String defaultValue;
     private String align; //left right center
     private Entity entity;
+    private List<FieldOperationConfig> configs;
 
     /**
      * Default constructor
@@ -172,6 +175,17 @@ public class Field extends PMCoreObject {
         this.display = display;
     }
 
+    public List<FieldOperationConfig> getConfigs() {
+        if (configs == null) {
+            configs = new ArrayList<FieldOperationConfig>();
+        }
+        return configs;
+    }
+
+    public void setConfigs(List<FieldOperationConfig> configs) {
+        this.configs = configs;
+    }
+
     /**
      * A (separated by blanks) list of operation ids where this field will be
      * displayed
@@ -179,7 +193,7 @@ public class Field extends PMCoreObject {
      * @return The list
      */
     public String getDisplay() {
-        if (display == null || display.trim().compareTo("") == 0) {
+        if (display == null || display.trim().equals("")) {
             return "all";
         }
         return display;
@@ -191,11 +205,28 @@ public class Field extends PMCoreObject {
      * @param operationId The Operation id
      * @return true if field is displayed on the operation
      */
-    public boolean shouldDisplay(String operationId) {
-        if (operationId == null || getDisplay() == null) {
+    public boolean shouldDisplay(String operationId, PMSecurityUser user) {
+        if (operationId == null) {
             return false;
         }
-        return "all".equalsIgnoreCase(getDisplay()) || getDisplay().indexOf(operationId) >= 0;
+        //First we check permissions
+        for (FieldOperationConfig config : getConfigs()) {
+            if (config.includes(operationId)) {
+                if (config.getPerm() != null && user != null && !user.hasPermission(config.getPerm())) {
+                    return false;
+                }
+            }
+        }
+        if (getDisplay().equalsIgnoreCase("all")) {
+            return true;
+        }
+        final String[] split = getDisplay().split("[ ]");
+        for (String string : split) {
+            if (string.equalsIgnoreCase(operationId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -343,8 +374,19 @@ public class Field extends PMCoreObject {
      * @return a converter
      */
     public Converter getConverter(String operation) {
-        final Converter c = getConverters().getConverterForOperation(operation);
+        //First we check "covnerters" list
+        Converter c = getConverters().getConverterForOperation(operation);
         if (c == null) {
+            // if not found, we check configs
+            for (FieldOperationConfig config : getConfigs()) {
+                if (config.includes(operation)) {
+                    c = getPm().findExternalConverter(config.getEconverter());
+                    break;
+                }
+            }
+        }
+        if (c == null) {
+            // If not found, we check class level converters
             final String _property = getProperty();
             try {
                 final String[] _properties = _property.split("[.]");
@@ -353,10 +395,9 @@ public class Field extends PMCoreObject {
                     clazz = FieldUtils.getField(clazz, _properties[i], true).getType();
                 }
                 final String className = FieldUtils.getField(clazz, _properties[_properties.length - 1], true).getType().getName();
-                return getPm().getClassConverters().getConverter(operation, className);
+                c = getPm().getClassConverters().getConverter(operation, className);
             } catch (Exception ex) {
-                getPm().warn(String.format("Unable to introspect field '%s' on entity '%s'", _property, getEntity().getId()));
-                return null;
+                getPm().info(String.format("Unable to introspect field '%s' on entity '%s'", _property, getEntity().getId()));
             }
         }
         return c;

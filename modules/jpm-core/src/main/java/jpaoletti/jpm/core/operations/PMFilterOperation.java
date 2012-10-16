@@ -33,7 +33,7 @@ public class PMFilterOperation extends OperationCommandSupport {
             final EntityFilter filter = ctx.getEntityContainer().getFilter();
             filter.clear();
             for (Field field : ctx.getEntity().getAllFields()) {
-                if (field.shouldDisplay(ctx.getOperation().getId())) {
+                if (field.shouldDisplay(ctx.getOperation().getId(), ctx.getUser())) {
                     filter.addFilter(field.getId(), getFilterValues(ctx, field), getFilterOperation(ctx, field));
                 }
             }

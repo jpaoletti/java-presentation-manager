@@ -23,7 +23,7 @@ public class AddOperation extends OperationCommandSupport {
                 initBean(ctx); //Auto init bean
             }
             for (Field f : ctx.getEntity().getAllFields()) {
-                if (f.shouldDisplay(ctx.getOperation().getId())) {
+                if (f.shouldDisplay(ctx.getOperation().getId(), ctx.getUser())) {
                     proccessField(ctx, f, ctx.getSelected());
                 }
             }

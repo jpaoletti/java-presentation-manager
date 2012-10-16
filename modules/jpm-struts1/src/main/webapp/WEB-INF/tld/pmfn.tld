@@ -128,7 +128,7 @@
         <name>displayedFields</name>
         <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
         <function-signature>
-            java.util.List displayedFields(jpaoletti.jpm.core.Entity, java.lang.String)
+            java.util.List displayedFields(jpaoletti.jpm.security.core.PMSecurityUser, jpaoletti.jpm.core.Entity, java.lang.String)
         </function-signature>
     </function>
 

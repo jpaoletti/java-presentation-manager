@@ -18,9 +18,8 @@
     </operations>
 
     <field id="id" property="id" width="30" display="add edit show list sort">
-        <converters>
-            <econverter id="edit-long" operations="add" />
-        </converters>
+        <field-config operations="add" econverter="edit-long" />
+        <field-config econverter="to-string" />
     </field>
     <field id="description">
         <validator class="jpaoletti.jpm.validator.LengthValidator">

@@ -29,12 +29,16 @@ public class EntityParser extends ParserSupport {
         getXstream().useAttributeFor(Entity.class, "cached");
 
         getXstream().alias("field", Field.class);
-
         getXstream().useAttributeFor(Field.class, "id");
         getXstream().useAttributeFor(Field.class, "display");
         getXstream().useAttributeFor(Field.class, "align");
         getXstream().useAttributeFor(Field.class, "width");
         getXstream().useAttributeFor(Field.class, "property");
+        
+        getXstream().alias("field-config", FieldOperationConfig.class);
+        getXstream().useAttributeFor(FieldOperationConfig.class, "operations");
+        getXstream().useAttributeFor(FieldOperationConfig.class, "perm");
+        getXstream().useAttributeFor(FieldOperationConfig.class, "econverter");
 
         getXstream().alias("field-validator", Validator.class);
         getXstream().alias("validator", Validator.class);
@@ -68,6 +72,7 @@ public class EntityParser extends ParserSupport {
 
         getXstream().addImplicitCollection(Entity.class, "fields", Field.class);
         getXstream().addImplicitCollection(Field.class, "validators", Validator.class);
+        getXstream().addImplicitCollection(Field.class, "configs", FieldOperationConfig.class);
 
         getXstream().addImplicitCollection(Operations.class, "operations", Operation.class);
         getXstream().addImplicitCollection(Highlights.class, "highlights", Highlight.class);

@@ -33,7 +33,7 @@
                         <pmfn:message key="operation.export.fields" />
                     </th>
                     <td>
-                        <c:forEach var="field" items="${pmfn:displayedFields(entity, ctx.operation.id)}">
+                        <c:forEach var="field" items="${pmfn:displayedFields(ctx.user, entity, ctx.operation.id)}">
                             <input type="checkbox" name="fields" checked="checked" value="${field.id}"/>
                             <pm:field-name field="${field}" /><br/>
                         </c:forEach>

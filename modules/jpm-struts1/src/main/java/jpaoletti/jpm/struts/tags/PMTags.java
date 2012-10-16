@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.jsp.tagext.TagSupport;
 import jpaoletti.jpm.core.*;
 import jpaoletti.jpm.core.operations.OperationScope;
+import jpaoletti.jpm.security.core.PMSecurityUser;
 import jpaoletti.jpm.struts.PMEntitySupport;
 import jpaoletti.jpm.struts.PMStrutsContext;
 import jpaoletti.jpm.util.DisplacedList;
@@ -189,11 +190,10 @@ public class PMTags extends TagSupport {
                 + getTemplate() + "/img/tooltip.gif' />";
     }
 
-    public static List<Field> displayedFields(Entity entity, String operationId) {
+    public static List<Field> displayedFields(PMSecurityUser user, Entity entity, String operationId) {
         final List<Field> displayedFields = new ArrayList<Field>();
         for (Field field : entity.getOrderedFields()) {
-            final String display = field.getDisplay();
-            if (display.contains(operationId) || "all".equalsIgnoreCase(display)) {
+            if (field.shouldDisplay(operationId, user)) {
                 displayedFields.add(field);
             }
         }
