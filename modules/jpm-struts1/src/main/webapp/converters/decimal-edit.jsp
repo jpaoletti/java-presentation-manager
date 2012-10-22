@@ -5,5 +5,5 @@
        placeholder="${ctx.field.title}"/>
 <script type="text/javascript" src="${es.context_path}/js/jquery/jquery.decimalmask.js"></script>
 <script type="text/javascript">
-    PM_register(function(){$("#f_${param.f}").decimalMask(Array(21).join("9")+"${param.separator}"+Array(${param.decimals}).join("9"));});
+    PM_register(function(){$("#f_${param.f}").decimalMask(Array(21).join("9")+"${param.separator}"+Array(${param.decimals}+1).join("9"));});
 </script>
