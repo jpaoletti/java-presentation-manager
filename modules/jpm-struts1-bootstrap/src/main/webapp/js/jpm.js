@@ -155,7 +155,7 @@ $().ready(function() {
         });
         jQuery.each(msg_entity, function(){
             var cl = ".entity_message_container_"+this.entity;
-            jQuery(cl).addClass("pm_message_"+this.type);
+            jQuery(cl).addClass("alert alert-"+this.type.toLowerCase());
             jQuery(cl).html(this.text);
         });
         jQuery.each(msg_field, function(){
