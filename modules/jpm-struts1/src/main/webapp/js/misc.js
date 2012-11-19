@@ -1,4 +1,5 @@
 var PM_onLoadFunctions = new Array();
+var ajaxRequests = [];
 
 String.prototype.trim = function() {
     return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"");

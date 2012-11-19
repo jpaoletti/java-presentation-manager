@@ -24,12 +24,13 @@ if(typeof updateObjectConverter == "undefined"){
         }
         var filter = $this.find("input").val();
         if(filter.length >= settings["min_search_size"]){
-            $.getJSON(settings["url"]+"?filter=" + filter + "&relatedFieldValue=" + $("#f_"+settings["related"]).val(),function(list){
+            var call = $.getJSON(settings["url"]+"?filter=" + filter + "&relatedFieldValue=" + $("#f_"+settings["related"]).val(),function(list){
                 $.each(list, function (i, item){
                     select.append("<option value='"+list[i].key+"'>"+list[i].value+"</option>");
                 });
                 finishSelect();
             });
+            ajaxRequests.push(call);
         }else{
             finishSelect();
         }
@@ -70,7 +71,7 @@ if(typeof updateObjectConverter == "undefined"){
                 }else{
                     $this.find("button").remove();
                 }
-                $this.find("input").keyup(function() {
+                $this.find("input").live("keyup", function() {
                     delay(function(){
                         updateObjectConverter($this, settings);
                     }, 1000 );

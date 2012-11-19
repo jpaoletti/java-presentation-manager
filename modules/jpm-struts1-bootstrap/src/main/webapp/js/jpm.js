@@ -2,6 +2,7 @@ var PM_onLoadFunctions = new Array();
 var msg_system = new Array();
 var msg_entity = new Array();
 var msg_field = new Array();
+var ajaxRequests = [];
 
 String.prototype.trim = function() {
     return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,"");
@@ -22,28 +23,13 @@ function loadPage(url){
 }
 
 function popup(url){
-    $("#popup-load-iframe").attr("src", url);
-    var $this = $("#popup-load-iframe");
+    $("#popup-load-iframe").attr("src", url + ((url.indexOf("?")!= -1)?"&":"?") + "popup=true");
     var modal = $('#popup-modal');
     var text = modal.find(".modal-header > .loading-text").html();
     modal.find(".modal-header > h3").html(text);
     modal.find(".modal-body").html("<div class='center'><img alt='"+text+"' src='loading.gif' /></div>");
     modal.modal('show');
-    setTimeout(function(){
-        var body = $this.contents().find('body');
-        body.find("#popup-load-iframe").remove();
-        body.find("hr:last").remove();
-        body.find("footer").remove();
-        body.find("#confirmation-dlg").remove();
-        body.find("#navigation_bar").remove();
-        body.find("#operations_bar").parent().remove();
-        modal.find(".modal-header > h3").html(body.find("h2.title").html());
-        body.find("h2.title").remove();
-        body.find("script").remove();
-        body.find(".btn-danger").attr("data-dismiss","modal").attr("onclick","");
-        $("#modal-body").html(body.html());
-    }, 2000);
-//loadPage(url);
+    modal.find(".modal-header > h3").html("");
 }
 
 /**
@@ -165,6 +151,28 @@ $().ready(function() {
             jQuery(cl).parents(".control-group").addClass(this.type.toLowerCase());
             jQuery(cl).html(this.text);
         });
+
+        if($(location).attr('href').indexOf("popup=true") != -1){
+            var defer = $.when.apply($, ajaxRequests);
+            defer.done(function(args){
+                var body = $('body');
+                var title = body.find("#navigation_bar > .breadcrumb > .active").html();
+                body.find("#popup-load-iframe").remove();
+                body.find("hr:last").remove();
+                body.find("footer").remove();
+                body.find("#confirmation-dlg").remove();
+                body.find("#navigation_bar").remove();
+                body.find("#operations_bar").parent().remove();
+                body.find("h2.title").remove();
+                body.find(".navbar").remove();
+                body.find("#loading-div").remove();
+                body.find("#page-container").show();
+                body.find(".btn-danger").attr("data-dismiss","modal").attr("onclick","");
+                var modal = $(top.parent.document).find("#popup-modal");
+                modal.find(".modal-header > h3").html(title);
+                modal.find(".modal-body").html(body.html());
+            });
+        }
     }finally{
         $("#loading-div").hide();
         $("#page-container").show();
