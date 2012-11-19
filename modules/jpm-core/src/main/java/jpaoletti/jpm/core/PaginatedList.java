@@ -357,4 +357,26 @@ public class PaginatedList {
     public void setCompactedOperations(boolean compactedOperations) {
         this.compactedOperations = compactedOperations;
     }
+
+    /**
+     * Next page. null if there is no such.
+     */
+    public Integer getNext() {
+        if (getTotal() == null || getPage() < getPages()) {
+            return getPage() + 1;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Previous page. null if there is no such.
+     */
+    public Integer getPrev() {
+        if (getTotal() == null || getPage() > 1) {
+            return getPage() - 1;
+        } else {
+            return null;
+        }
+    }
 }
