@@ -51,7 +51,7 @@ public class PaginatedList {
     public String toString() {
         return "PMList [entity=" + entity + ", page " + page + " of "
                 + pages + ", total=" + total + ", rowsPerPage=" + rowsPerPage
-                + ", order=" + sort.getFieldId() + ", direction=" + sort.getDirection() + "]";
+                + ((sort != null) ? ", order=" + sort.getFieldId() + ", direction=" + sort.getDirection() : "") + "]";
     }
 
     /**
