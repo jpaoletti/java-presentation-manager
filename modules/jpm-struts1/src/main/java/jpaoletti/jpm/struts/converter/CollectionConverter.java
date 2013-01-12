@@ -77,7 +77,7 @@ public class CollectionConverter extends DefaultStrutsConverter {
             ctx.put("collection", helper.getListOfTexts(fieldValue));
             return super.visualize("collection-show.jsp?");
         } else {
-            ctx.put("fullList", helper.getFullList(ctx, entity, getConfig("filter"), null, getConfig("sord-field"), getConfig("sord-direction"), null, null));
+            ctx.put("fullList", helper.getFullList(ctx, entity, getConfig("filter"), null, getConfig("sort-field"), getConfig("sort-direction"), null, null));
             final List<String> idList = new ArrayList<String>();
             if (fieldValue != null) {
                 try {
