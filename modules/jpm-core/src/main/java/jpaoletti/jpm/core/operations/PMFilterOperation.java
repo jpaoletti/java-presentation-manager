@@ -34,7 +34,10 @@ public class PMFilterOperation extends OperationCommandSupport {
             filter.clear();
             for (Field field : ctx.getEntity().getAllFields()) {
                 if (field.shouldDisplay(ctx.getOperation().getId(), ctx.getUser())) {
-                    filter.addFilter(field.getId(), getFilterValues(ctx, field), getFilterOperation(ctx, field));
+                    final List<Object> filterValues = getFilterValues(ctx, field);
+                    if (filterValues != null && !filterValues.isEmpty()) {
+                        filter.addFilter(field.getId(), filterValues, getFilterOperation(ctx, field));
+                    }
                 }
             }
             filter.process(ctx.getEntity());
@@ -100,7 +103,9 @@ public class PMFilterOperation extends OperationCommandSupport {
             try {
                 final Converter converter = field.getConverter(ctx.getOperation().getId());
                 Object converted = getConvertedValue(ctx, field, value, null, converter);
-                values.add(converted);
+                if (converted != null) {
+                    values.add(converted);
+                }
             } catch (IgnoreConvertionException e) {
                 //Do nothing, just ignore conversion.
             } catch (ConverterException e) {
@@ -112,7 +117,11 @@ public class PMFilterOperation extends OperationCommandSupport {
             }
             i++;
         }
-        return values;
+        if (values.isEmpty()) {
+            return null;
+        } else {
+            return values;
+        }
     }
 
     @Override
