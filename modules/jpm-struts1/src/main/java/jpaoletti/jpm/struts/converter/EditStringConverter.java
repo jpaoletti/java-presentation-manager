@@ -10,9 +10,7 @@ public class EditStringConverter extends StrutsEditConverter {
     public Object build(PMContext ctx) throws ConverterException {
         final PMStrutsContext c = (PMStrutsContext) ctx;
         final Object value = ctx.getFieldValue();
-        final String fid = ctx.getField().getId();
-        final boolean isNull = Boolean.valueOf((String) c.getParameter("f_" + fid + "_null"));
-        if (isNull) {
+        if (withNull() && (value == null || value.equals(""))) {
             return null;
         } else {
             return (value != null) ? value.toString() : null;
@@ -26,11 +24,8 @@ public class EditStringConverter extends StrutsEditConverter {
             p = getValue(ctx.getEntityInstance(), ctx.getField());
         }
         final String value = normalize((p == null) ? "" : p.toString());
-        ctx.setFieldValue( value);
-        return super.visualize("string_converter.jsp?"
-                + "ml=" + getConfig("max-length")
-                + "&isNull=" + (p == null)
-                + "&withNull=" + getConfig("with-null", "false"));
+        ctx.setFieldValue(value);
+        return super.visualize("string_converter.jsp?ml=" + getConfig("max-length"));
     }
 
     public String normalize(String s) {
@@ -50,9 +45,9 @@ public class EditStringConverter extends StrutsEditConverter {
                     str.append("&amp;");
                     break;
                 /*
-                case '"': 
-                str.append("&quot;");
-                break;
+                 case '"': 
+                 str.append("&quot;");
+                 break;
                  */
                 case '\'':
                     str.append("&apos;");
@@ -76,5 +71,9 @@ public class EditStringConverter extends StrutsEditConverter {
             }
         }
         return (str.toString());
+    }
+
+    protected boolean withNull() {
+        return getConfig("with-null", "false").equalsIgnoreCase("true");
     }
 }
