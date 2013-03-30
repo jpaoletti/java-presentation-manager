@@ -11,8 +11,8 @@
         <property name="bigstring" type="text" />
         <property name="date" column="`date`" type="date" />
         <property name="datetime" column="`datetime`" type="timestamp" />
-        <property name="key" type="string" />
+        <property name="key" column="`key`" type="string" />
         <property name="password" type="string" />
-        <property name="size" type="long" />
+        <property name="size" column="`size`" type="long" />
     </class>
 </hibernate-mapping>
