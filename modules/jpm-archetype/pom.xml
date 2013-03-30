@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.jpaoletti</groupId>
     <artifactId>jpm-archetype</artifactId>
-    <version>1.5.1-SNAPSHOT</version>
+    <version>1.5.2-SNAPSHOT</version>
     <packaging>maven-archetype</packaging>
     <name>jpm-archetype</name>
     <description>Archetype for a jpm-struts1-bootstrap project</description>
     <parent>
         <groupId>com.github.jpaoletti</groupId>
         <artifactId>java-presentation-manager</artifactId>
-        <version>1.5.1-SNAPSHOT</version>
+        <version>1.5.2-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <build>
