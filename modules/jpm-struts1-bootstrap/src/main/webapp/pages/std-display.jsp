@@ -46,6 +46,13 @@
                                 </div>
                             </c:forEach>
                         </div>
+                        <script type="text/javascript">
+                            PM_register(function() {
+                                //Removes empty widgets
+                                $(".widget-content:not(:has(div))").parent(".widget").parent().remove();
+                                $(".row-fluid:not(:has(div))").remove();
+                            });
+                        </script>
                     </c:forEach>
                 </c:if>
             </pm:std-form>
