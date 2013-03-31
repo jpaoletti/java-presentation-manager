@@ -17,6 +17,15 @@ import jpaoletti.jpm.core.operations.OperationScope;
  *     <operations>
  *     ...
  *     </operations>
+ *     <panels>
+ *         <panel-row>
+ *             <panel title="some.panel.title" fields="..." />
+ *             <panel title="some.panel.title" fields="..." />
+ *         </panel-row>
+ *         <panel-row>
+ *             <panel title="some.panel.title" fields="some fields" />
+ *         </panel-row>
+ *     </panels>
  *     <field>
  *     ...
  *     </field>
@@ -90,6 +99,7 @@ public class Entity extends PMCoreObject {
     private boolean cached;
     //Field id that represent the id of the entity.Optional
     private String idField;
+    private Panels panels;
     private PresentationManager pm;
 
     public Entity(PresentationManager pm) {
@@ -624,5 +634,13 @@ public class Entity extends PMCoreObject {
         } else {
             return false;
         }
+    }
+
+    public Panels getPanels() {
+        return panels;
+    }
+
+    public void setPanels(Panels panels) {
+        this.panels = panels;
     }
 }

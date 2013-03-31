@@ -57,6 +57,13 @@
     </function>
 
     <function>
+        <description>Floor function</description>
+        <name>floor</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>Long floor(java.lang.Double)</function-signature>
+    </function>
+
+    <function>
         <description>
           Return a css class name for a highlight
         </description>
@@ -129,6 +136,15 @@
         <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
         <function-signature>
             java.util.List displayedFields(jpaoletti.jpm.security.core.PMSecurityUser, jpaoletti.jpm.core.Entity, java.lang.String)
+        </function-signature>
+    </function>
+
+    <function>
+        <description>Return the list of fields for the entity that must be shown on the operation id, in the given panel</description>
+        <name>panelDisplayedFields</name>
+        <function-class>jpaoletti.jpm.struts.tags.PMTags</function-class>
+        <function-signature>
+            java.util.List displayedFields(jpaoletti.jpm.security.core.PMSecurityUser, jpaoletti.jpm.core.Entity, java.lang.String, jpaoletti.jpm.core.Panel)
         </function-signature>
     </function>
 

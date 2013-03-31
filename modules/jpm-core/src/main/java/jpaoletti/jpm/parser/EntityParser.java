@@ -34,7 +34,7 @@ public class EntityParser extends ParserSupport {
         getXstream().useAttributeFor(Field.class, "align");
         getXstream().useAttributeFor(Field.class, "width");
         getXstream().useAttributeFor(Field.class, "property");
-        
+
         getXstream().alias("field-config", FieldOperationConfig.class);
         getXstream().useAttributeFor(FieldOperationConfig.class, "operations");
         getXstream().useAttributeFor(FieldOperationConfig.class, "perm");
@@ -85,6 +85,17 @@ public class EntityParser extends ParserSupport {
         getXstream().alias("econverter", ExternalConverter.class);
         getXstream().useAttributeFor(ExternalConverter.class, "id");
         getXstream().useAttributeFor(ExternalConverter.class, "operations");
+
+        getXstream().alias("panels", Panels.class);
+        getXstream().addImplicitCollection(Panels.class, "rows", PanelRow.class);
+
+        getXstream().alias("panel-row", PanelRow.class);
+        getXstream().addImplicitCollection(PanelRow.class, "panels", Panel.class);
+
+        getXstream().alias("panel", Panel.class);
+        getXstream().useAttributeFor(Panel.class, "title");
+        getXstream().useAttributeFor(Panel.class, "fields");
+        getXstream().useAttributeFor(Panel.class, "icon");
 
         getXstream().registerConverter(new ConverterConverter());
     }

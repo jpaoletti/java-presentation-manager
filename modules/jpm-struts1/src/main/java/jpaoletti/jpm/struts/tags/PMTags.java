@@ -96,6 +96,10 @@ public class PMTags extends TagSupport {
         }
     }
 
+    public static Long floor(Double d) {
+        return d.longValue();
+    }
+
     public static String itemCheckbox(PMStrutsContext ctx, DisplacedList list, Object item) throws PMException {
         if (ctx.getEntityContainer().getList().isHasSelectedScope()) {
             final StringBuilder input = new StringBuilder();
@@ -198,6 +202,10 @@ public class PMTags extends TagSupport {
             }
         }
         return displayedFields;
+    }
+
+    public static List<Field> displayedFields(PMSecurityUser user, Entity entity, String operationId, Panel panel) {
+        return panel.getFields(entity, operationId, user);
     }
 
     /**

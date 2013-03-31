@@ -20,6 +20,15 @@
         <operation id="multidelete"  scope="selected" display="list" confirm="true"/>
         <operation id="sort" scope="general" display="list" />
     </operations>
+    <panels>
+        <panel-row>
+            <panel title="some.panel.title" fields="amount date datetime description" />
+            <panel title="some.panel.title" fields="active key size" />
+        </panel-row>
+        <panel-row>
+            <panel title="some.panel.title" fields="bigstring" />
+        </panel-row>
+    </panels>
 
     <field id="amount" width="100" display="all" align="right">
         <converters>
