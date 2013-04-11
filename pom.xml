@@ -4,7 +4,7 @@
     <groupId>com.github.jpaoletti</groupId>
     <artifactId>java-presentation-manager</artifactId>
     <packaging>pom</packaging>
-    <version>1.5.2-SNAPSHOT</version>
+    <version>1.5.2</version>
     <name>java-presentation-manager</name>
     <url>http://jpaoletti.github.com/java-presentation-manager/</url>
     <description>
