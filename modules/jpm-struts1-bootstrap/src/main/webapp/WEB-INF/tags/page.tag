@@ -22,7 +22,7 @@
                 <script type="text/javascript" src="${es.context_path}/js/less.min.js"></script>
             </c:if>
             <!--[if lt IE 9]><script type="text/javascript" src="${es.context_path}/js/html5.js"></script><![endif]-->
-            <script type="text/javascript" src="${es.context_path}/js/jquery-1.7.1.min.js"></script>
+            <script type="text/javascript" src="${es.context_path}/js/jquery.min.js?v=${es.pm.appversion}"></script>
             <script type="text/javascript" src="${es.context_path}/js/bootstrap.min.js?v=${es.pm.appversion}"></script>
             <script type="text/javascript" src="${es.context_path}/js/jquery/jquery.form.js?v=${es.pm.appversion}"></script>
             <script type="text/javascript" src="${es.context_path}/js/jquery/jquery-object-converter.js?v=${es.pm.appversion}"></script>
@@ -42,7 +42,9 @@
                     </c:if>
                     <c:if test="${not empty ctx.pmsession}">
                         <% try {%>
+                        <div id="jpm-internal-body" data-entity="${ctx.entity.id}" data-operation="${ctx.operation.id}">
                         <jsp:doBody />
+                        </div>
                         <% } catch (Exception e) {
                             jpaoletti.jpm.core.PresentationManager.getPm().error(e);
                         %>

@@ -14,7 +14,7 @@
 
         <operation id="show"    scope="item"    display="edit list" />
         <operation id="add"     scope="general" display="all" />
-        <operation id="edit"    scope="item"    display="edit show list" />
+        <operation id="edit"    scope="item"    display="edit show list" popup="true" />
         <operation id="delete"  scope="item"    display="edit show list"   confirm="true" />
         <operation id="export"  scope="general" display="list" />
         <operation id="multidelete"  scope="selected" display="list" confirm="true"/>

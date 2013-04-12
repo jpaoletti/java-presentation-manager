@@ -12,7 +12,7 @@
             </properties>
         </operation>
         <operation id="show" enabled="true" scope="item" display="edit list" />
-        <operation id="add" enabled="true" scope="general"/>
+        <operation id="add" enabled="true" scope="general"  popup="true" />
         <operation id="edit" enabled="true" scope="item" display="edit show list" />
         <operation id="delete" enabled="true" scope="item" display="edit show list" confirm="true"/>
         <operation id="multidelete" enabled="true" scope="selected" display="list" confirm="true"/>

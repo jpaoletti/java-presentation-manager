@@ -8,5 +8,6 @@
     <div class="modal-body" id="modal-body">
         <div class="center"><img alt="loading..." src="${es.context_path}/loading.gif" /></div>
     </div>
+    <div class="modal-footer">
+    </div>
 </div>
-<iframe id="popup-load-iframe" class="hide" ></iframe>

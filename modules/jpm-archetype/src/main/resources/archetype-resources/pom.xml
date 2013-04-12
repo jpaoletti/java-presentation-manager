@@ -10,7 +10,7 @@
     <name>A custom jPM project</name>
     <properties>
         <template>default</template>
-        <jpm.version>1.5.2-SNAPSHOT</jpm.version>
+        <jpm.version>1.5.4-SNAPSHOT</jpm.version>
         <jpm.cfg>jpm</jpm.cfg>
     </properties>
 

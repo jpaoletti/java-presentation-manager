@@ -12,8 +12,8 @@
             <input type="hidden" name="finish" value="yes" />
             <fieldset>
                 <jsp:doBody />
-                <div class="form-actions">
-                    <a class="btn btn-danger" id="${entity.id}_cancel" href="javascript:history.back();"><i class="icon-remove"></i>&nbsp;<pmfn:message key="pm.struts.form.cancel"/></a>
+                <div class="well well-small form-actions">
+                    <a class="btn btn-danger btn-cancel" id="${entity.id}_cancel" href="javascript:history.back();"><i class="icon-remove"></i>&nbsp;<pmfn:message key="pm.struts.form.cancel"/></a>
                     <c:if test="${resetable}">
                         <button class="btn btn-warning" type="reset" id="${entity.id}_reset"><i class="icon-fire"></i>&nbsp;<pmfn:message key="pm.struts.form.reset"/></button>
                     </c:if>                    
