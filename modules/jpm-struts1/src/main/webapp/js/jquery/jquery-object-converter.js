@@ -1,4 +1,4 @@
-if (typeof updateObjectConverter == "undefined") {
+if (typeof updateObjectConverter === "undefined") {
     var updateObjectConverter = function($this, settings) {
         $this.find(".object-converter-loading").show();
         $this.find(".object-converter-items").hide();
@@ -6,9 +6,9 @@ if (typeof updateObjectConverter == "undefined") {
         select.contents().remove();
         var finishSelect = function() {
             var sid = settings["selected_id"];
-            var noSelected = select.find("option[value='" + sid + "']").length == 0;
+            var noSelected = select.find("option[value='" + sid + "']").length === 0;
             var nullable = settings["with_null"];
-            var nullValue = sid == "-1";
+            var nullValue = sid === "-1";
             if (noSelected) {
                 if ((!nullable && !nullValue) || nullable) {
                     select.prepend("<option value='" + sid + "'>" + settings["selected_value"] + "</option>");
@@ -21,13 +21,15 @@ if (typeof updateObjectConverter == "undefined") {
             select.find("option[value='undefined']").remove();
             $this.find(".object-converter-loading").hide();
             $this.find(".object-converter-items").show();
-        }
+        };
         var filter = $this.find("input").val();
         if (filter.length >= settings["min_search_size"]) {
             var call = $.getJSON(settings["url"] + "?filter=" + filter + "&relatedFieldValue=" + $("#f_" + settings["related"]).val(), function(list) {
-                $.each(list, function(i, item) {
-                    select.append("<option value='" + list[i].key + "'>" + list[i].value + "</option>");
-                });
+                if ($.isArray(list)) {
+                    $.each(list, function(i, item) {
+                        select.append("<option value='" + list[i].key + "'>" + list[i].value + "</option>");
+                    });
+                }
                 finishSelect();
             });
             ajaxRequests.push(call);
@@ -54,10 +56,10 @@ if (typeof updateObjectConverter == "undefined") {
                     "add": "",
                     "with_null": true
                 }, options);
-                if (settings["min_search_size"] == 0 && !settings["search"]) {
+                if (settings["min_search_size"] === 0 && !settings["search"]) {
                     $this.find(".object-converter-search").hide();
                 }
-                if (settings["add"] != "") {
+                if (settings["add"] !== "") {
                     $this.find("select").addClass("with-add");
                     $this.find("button").click(function() {
                         popup(settings["add"]);
@@ -76,7 +78,7 @@ if (typeof updateObjectConverter == "undefined") {
                         updateObjectConverter($this, settings);
                     }, 1000);
                 });
-                if (settings["related"] != "") {
+                if (settings["related"] !== "") {
                     $("#f_" + settings["related"]).on('change', function() {
                         updateObjectConverter($this, settings);
                     });
