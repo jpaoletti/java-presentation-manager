@@ -13,7 +13,7 @@
                 dataType:"text",
                 context: document.body,
                 success: function(data){
-                    $("#weak${param.f}-list").html($(data)).find("table").removeClass().addClass("table table-bordered table-condensed table-striped");;
+                    $("#weak${param.f}-list").html(data).find("table").removeClass().addClass("table table-bordered table-condensed table-striped");;
                 }
             });
         });
