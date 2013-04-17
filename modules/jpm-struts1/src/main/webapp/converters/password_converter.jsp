@@ -16,10 +16,10 @@
     pwdwidget.txtMedium='${pmfn:message('pm.converter.password_converter.medium')}';
     pwdwidget.txtGood='${pmfn:message('pm.converter.password_converter.good')}';
     pwdwidget.MakePWDWidget();
-    $('#thepwddiv${param.f}').on('keyup', function(){
+    $(document).on('keyup', '#thepwddiv${param.f}', function(){
         validatePassword('${entity.id}', '${param.f}');
     });
-    $('#f_${param.f}_gen_anch').on('click', function(){
+    $(document).on('click', '#f_${param.f}_gen_anch', function(){
         validatePassword('${entity.id}', '${param.f}');
     });
 </script>
