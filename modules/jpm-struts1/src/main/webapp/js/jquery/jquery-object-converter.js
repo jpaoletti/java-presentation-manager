@@ -79,7 +79,7 @@ if (typeof updateObjectConverter === "undefined") {
                     }, 1000);
                 });
                 if (settings["related"] !== "") {
-                    $("#f_" + settings["related"]).on('change', function() {
+                    $(document).on('change', "#f_" + settings["related"], function() {
                         updateObjectConverter($this, settings);
                     });
                 }
