@@ -71,7 +71,7 @@ public class CollectionHelper {
         try {
             final List<?> list;
             final EntityFilter filter = entity.getDataAccess().createFilter(ctx);
-            if (stringFilter != null && getDisplay() != null) {
+            if (stringFilter != null && !"".equals(stringFilter.trim()) && getDisplay() != null) {
                 filter.setBehavior(FilterBehavior.OR);
                 final Matcher matcher = DISPLAY_PATTERN.matcher(getDisplay());
                 while (matcher.find()) {
