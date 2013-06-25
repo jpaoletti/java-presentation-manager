@@ -56,11 +56,23 @@ function popup(url) {
             d.find(".form-actions").remove();
             modal.find(".modal-header > h3").html(text);
             modal.find(".modal-body").html("<div class='hide to-show'>" + d.html() + "</div><div class='center to-hide'><img alt='" + text + "' src='loading.gif' /></div>");
-            modal.find(".modal-footer").html(footer).find("button[type='submit']").click(function(){modal.find(".modal-body").find("form").submit()})
-            modal.find(".modal-footer").find("button[type='reset']").click(function(){modal.find(".modal-body").find("form")[0].reset()});
-            modal.find(".btn-cancel").click(function(e){e.preventDefault();}).attr("data-dismiss", "modal");
+            modal.find(".modal-footer").html(footer).find("button[type='submit']").click(function() {
+                modal.find(".modal-body").find("form").submit()
+            })
+            modal.find(".modal-footer").find("button[type='reset']").click(function() {
+                modal.find(".modal-body").find("form")[0].reset()
+            });
+            modal.find(".btn-cancel").click(function(e) {
+                e.preventDefault();
+            }).attr("data-dismiss", "modal");
+            modal.on("keydown", "input", function(e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    $(this).parents("form").submit();
+                }
+            });
             modal.modal('show');
-            ajaxRequests=[];
+            ajaxRequests = [];
             startupFunctions();
             modal.find(".to-hide").hide();
             modal.find(".to-show").show();
@@ -197,11 +209,16 @@ $().ready(function() {
             jQuery(cl).parents(".control-group").addClass(this.type.toLowerCase());
             jQuery(cl).html(this.text);
         });
-
-        if ($(location).attr('href').indexOf("popup=true") != -1) {
+        if ($(location).attr('href').indexOf("popup=true") !== -1) {
             var defer = $.when.apply($, ajaxRequests);
             defer.done(function(args) {
                 var body = $('body');
+                body.on("keydown", "input", function(e) {
+                    if (e.which === 13) {
+                        e.preventDefault();
+                        $(this).parents("form").submit();
+                    }
+                });
                 var title = body.find("#navigation_bar > .breadcrumb > .active").html();
                 body.find("#popup-load-iframe").remove();
                 body.find("hr:last").remove();
