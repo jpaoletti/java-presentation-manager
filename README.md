@@ -4,7 +4,7 @@ Home page: http://jpaoletti.github.com/java-presentation-manager/
 
 Java Presentation Manager is a CRUD system with extended tools to fast build an
 administrative and monitoring web site based in xml definition files, with data
-source and interface independece so you can define your model in xml terms and
+source and interface independence so you can define your model in xml terms and
 choose the data sources and visualization that you like most.
 
 ## How to use
